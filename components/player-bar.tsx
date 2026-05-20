@@ -5,22 +5,19 @@ import Image from 'next/image';
 import { useRef } from 'react';
 import { usePlayer } from '@/lib/player-context';
 import { getProject, fmtTime } from '@/lib/projects';
-import {
-  ShuffleIcon,
-  PrevIcon,
-  NextIcon,
-  RepeatIcon,
-  PlayIcon,
-  PauseIcon,
-  HeartIcon,
-  VolumeIcon,
-} from './icons';
 
+/**
+ * New player bar:
+ * - Single thin horizontal strip, no border between sections
+ * - Cover + title on the left
+ * - Hairline progress bar at the very bottom (touches the floor)
+ * - Controls cluster on the right
+ * - Mono metadata feels like a transmission readout, not an app
+ */
 export function PlayerBar() {
-  const { state, togglePlay, prev, next, toggleShuffle, toggleRepeat, seek, setVol, toggleLike } =
+  const { state, togglePlay, prev, next, toggleShuffle, toggleRepeat, seek, toggleLike } =
     usePlayer();
   const barRef = useRef<HTMLDivElement>(null);
-  const volRef = useRef<HTMLDivElement>(null);
 
   const p = getProject(state.id);
   if (!p) return null;
@@ -31,132 +28,127 @@ export function PlayerBar() {
     seek((e.clientX - r.left) / r.width);
   };
 
-  const handleVol = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!volRef.current) return;
-    const r = volRef.current.getBoundingClientRect();
-    setVol((e.clientX - r.left) / r.width);
-  };
-
   const liked = !!state.liked[state.id];
 
   return (
-    <footer className="col-span-2 row-start-2 grid grid-cols-[1fr_2fr_1fr] sm:grid-cols-[1fr_auto] lg:grid-cols-[1fr_2fr_1fr] items-center px-3 sm:px-4 gap-3 sm:gap-4">
-      {/* Now Playing */}
-      <div className="flex items-center gap-[14px] min-w-0">
-        <Link
-          href={`/work/${state.id}`}
-          className="w-[46px] h-[46px] sm:w-[58px] sm:h-[58px] rounded-md flex-none overflow-hidden bg-panel-2 shadow-[0_5px_14px_-4px_rgba(0,0,0,0.6)] relative cursor-pointer"
+    <footer className="relative bg-ink text-paper border-t border-ink/40 z-30">
+      {/* Hairline progress bar at the absolute floor */}
+      <div
+        ref={barRef}
+        onClick={handleSeek}
+        className="absolute top-0 left-0 right-0 h-[3px] bg-ink-2 cursor-pointer group hover:h-[5px] transition-[height]"
+      >
+        <div
+          className="h-full bg-coral relative"
+          style={{ width: `${state.progress * 100}%` }}
         >
-          <Image src={p.cover} alt="" fill sizes="58px" className="object-cover" />
-        </Link>
-        <div className="min-w-0">
-          <Link
-            href={`/work/${state.id}`}
-            className="block font-bold text-[14px] truncate hover:underline"
-          >
-            {p.title}
-          </Link>
-          <div className="text-[11.5px] text-muted truncate mt-[2px]">{p.tags.join(' · ')}</div>
+          <span className="absolute -right-1 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-coral opacity-0 group-hover:opacity-100 transition-opacity" />
         </div>
-        <button
-          onClick={() => toggleLike()}
-          className={`transition-transform hover:scale-[1.15] flex-none ${
-            liked ? 'text-accent' : 'text-muted'
-          }`}
-          aria-label="Like"
-        >
-          <HeartIcon
-            className="w-[18px] h-[18px]"
-            fill={liked ? 'currentColor' : 'none'}
-            stroke={liked ? 'currentColor' : 'currentColor'}
-          />
-        </button>
       </div>
 
-      {/* Controls */}
-      <div className="flex flex-col items-center gap-2">
-        <div className="flex items-center gap-5">
+      <div className="grid grid-cols-[1fr_auto] sm:grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-6 px-3 sm:px-6 py-3">
+        {/* Now playing — cover + title + tags */}
+        <div className="flex items-center gap-3 min-w-0">
+          <Link
+            href={`/work/${state.id}`}
+            className="w-12 h-12 sm:w-14 sm:h-14 flex-none overflow-hidden bg-paper-3 relative group"
+          >
+            <Image src={p.cover} alt="" fill sizes="56px" className="object-cover" />
+          </Link>
+          <div className="min-w-0">
+            <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-coral mb-0.5">
+              {state.playing ? '◉ NOW PLAYING' : '◯ ON DECK'}
+            </div>
+            <Link
+              href={`/work/${state.id}`}
+              className="font-display font-bold text-[15px] sm:text-[17px] tracking-[-0.01em] leading-tight truncate hover:text-coral transition-colors block"
+            >
+              {p.title}
+            </Link>
+            <div className="font-mono text-[10px] text-muted-2 truncate mt-0.5 hidden sm:block">
+              {p.tags.join(' · ').toUpperCase()}
+            </div>
+          </div>
+        </div>
+
+        {/* Controls — center */}
+        <div className="flex items-center gap-2 sm:gap-4">
           <button
             onClick={toggleShuffle}
-            className={`hidden sm:block transition-all hover:scale-[1.1] ${
-              state.shuffle ? 'text-accent' : 'text-muted hover:text-text'
+            className={`hidden sm:flex w-7 h-7 items-center justify-center transition-colors ${
+              state.shuffle ? 'text-coral' : 'text-muted-2 hover:text-paper'
             }`}
             aria-label="Shuffle"
           >
-            <ShuffleIcon className="w-[18px] h-[18px]" />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+              <path d="M3 5h4l10 14h4M3 19h4l3-4M21 5h-4l-3 4M18 2l3 3-3 3M18 16l3 3-3 3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
           <button
             onClick={prev}
-            className="text-muted hover:text-text transition-all hover:scale-[1.1]"
+            className="text-muted-2 hover:text-paper transition-colors"
             aria-label="Previous"
           >
-            <PrevIcon className="w-[18px] h-[18px]" />
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+              <path d="M7 6v12H5V6zm2 6 10 6V6z" />
+            </svg>
           </button>
           <button
             onClick={togglePlay}
-            className="w-[38px] h-[38px] rounded-full bg-text flex items-center justify-center flex-none transition-transform hover:scale-[1.08] active:scale-[0.93]"
-            aria-label="Play"
+            className="w-11 h-11 rounded-full bg-coral hover:bg-coral-deep transition-all hover:scale-105 active:scale-95 flex items-center justify-center flex-none text-paper"
+            aria-label={state.playing ? 'Pause' : 'Play'}
           >
             {state.playing ? (
-              <PauseIcon className="w-[17px] h-[17px] fill-[#0a0a0a]" />
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                <path d="M7 5h4v14H7zm6 0h4v14h-4z" />
+              </svg>
             ) : (
-              <PlayIcon className="w-[17px] h-[17px] fill-[#0a0a0a]" />
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 translate-x-px">
+                <path d="M8 5v14l11-7z" />
+              </svg>
             )}
           </button>
           <button
             onClick={next}
-            className="text-muted hover:text-text transition-all hover:scale-[1.1]"
+            className="text-muted-2 hover:text-paper transition-colors"
             aria-label="Next"
           >
-            <NextIcon className="w-[18px] h-[18px]" />
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+              <path d="M17 6v12h2V6zm-2 6L5 6v12z" />
+            </svg>
           </button>
           <button
             onClick={toggleRepeat}
-            className={`hidden sm:block transition-all hover:scale-[1.1] ${
-              state.repeat ? 'text-accent' : 'text-muted hover:text-text'
+            className={`hidden sm:flex w-7 h-7 items-center justify-center transition-colors ${
+              state.repeat ? 'text-coral' : 'text-muted-2 hover:text-paper'
             }`}
             aria-label="Repeat"
           >
-            <RepeatIcon className="w-[18px] h-[18px]" />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+              <path d="M17 3l3 3-3 3M3 11V9a4 4 0 0 1 4-4h13M7 21l-3-3 3-3M21 13v2a4 4 0 0 1-4 4H4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
         </div>
-        <div className="hidden sm:flex items-center gap-[11px] w-full max-w-[600px]">
-          <span className="text-[11px] text-muted tabular-nums w-[34px]">
-            {fmtTime(state.progress * p.len)}
-          </span>
-          <div
-            ref={barRef}
-            onClick={handleSeek}
-            className="flex-1 h-[5px] bg-[#4a4a4e] rounded cursor-pointer relative group"
-          >
-            <div
-              className="h-full bg-text rounded relative group-hover:bg-accent transition-colors"
-              style={{ width: `${state.progress * 100}%` }}
-            >
-              <span className="absolute -right-[6px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-text opacity-0 group-hover:opacity-100 transition-opacity" />
-            </div>
-          </div>
-          <span className="text-[11px] text-muted tabular-nums w-[34px]">{fmtTime(p.len)}</span>
-        </div>
-      </div>
 
-      {/* Right side */}
-      <div className="hidden lg:flex items-center justify-end gap-[14px]">
-        <span className={`eq ${state.playing ? 'run' : ''}`}>
-          <span /><span /><span /><span />
-        </span>
-        <button className="text-muted hover:text-text transition-colors" aria-label="Volume">
-          <VolumeIcon className="w-[17px] h-[17px]" />
-        </button>
-        <div
-          ref={volRef}
-          onClick={handleVol}
-          className="w-[92px] h-[5px] bg-[#4a4a4e] rounded cursor-pointer relative group"
-        >
-          <div
-            className="h-full bg-text rounded group-hover:bg-accent transition-colors"
-            style={{ width: `${state.vol * 100}%` }}
-          />
+        {/* Right cluster — timecode, eq, like */}
+        <div className="hidden sm:flex items-center justify-end gap-4">
+          <span className="font-mono text-[11px] tabular-nums text-muted-2">
+            {fmtTime(state.progress * p.len)} / {fmtTime(p.len)}
+          </span>
+          <span className={`eq ${state.playing ? 'run' : ''} text-coral`}>
+            <span /><span /><span /><span /><span />
+          </span>
+          <button
+            onClick={() => toggleLike()}
+            className={`transition-all hover:scale-110 ${
+              liked ? 'text-coral' : 'text-muted-2 hover:text-paper'
+            }`}
+            aria-label="Like"
+          >
+            <svg viewBox="0 0 24 24" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+              <path d="M12 20s-7-4.4-9.2-9C1.3 8 3 4.5 6.4 4.5c2.2 0 3.7 1.4 4.6 3 .9-1.6 2.4-3 4.6-3 3.4 0 5.1 3.5 3.6 6.5C19 15.6 12 20 12 20Z" />
+            </svg>
+          </button>
         </div>
       </div>
     </footer>

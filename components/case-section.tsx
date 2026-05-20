@@ -5,37 +5,56 @@ import { useRef, useState } from 'react';
 import type { Section, Media } from '@/lib/projects';
 import { useLightbox } from '@/lib/lightbox-context';
 
-export function CaseSection({ section }: { section: Section }) {
+export function CaseSection({
+  section,
+  index,
+  total,
+}: {
+  section: Section;
+  index: number;
+  total: number;
+}) {
   const { show } = useLightbox();
-
-  // Build list of all media in this section for lightbox navigation
   const allMedia: Media[] = section.media;
+  const sectionNumber = String(index + 1).padStart(2, '0');
 
   return (
-    <section className="py-[18px] pb-9 border-b border-line mb-9 last:border-b-0 last:mb-0">
-      {section.eyebrow && (
-        <div className="text-[11px] tracking-[0.16em] uppercase text-accent font-bold mb-[10px]">
-          {section.eyebrow}
+    <section className="py-10 lg:py-16 border-b border-ink/15 last:border-b-0">
+      {/* Section header — editorial layout */}
+      <div className="grid lg:grid-cols-12 gap-4 lg:gap-10 mb-10">
+        <div className="lg:col-span-3">
+          <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted">
+            <span className="text-coral">●</span> Section {sectionNumber} / {String(total).padStart(2, '0')}
+          </div>
+          {section.eyebrow && (
+            <div className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted mt-3">
+              {section.eyebrow}
+            </div>
+          )}
         </div>
-      )}
-      <h2 className="font-display font-extrabold text-[28px] sm:text-[34px] lg:text-[42px] tracking-[-0.025em] leading-[1.04] mb-[18px]">
-        {section.title}
-      </h2>
-      {section.body && (
-        <p className="text-[15.5px] leading-[1.66] text-[#cfcdc7] max-w-[780px] mb-[14px] whitespace-pre-line">
-          {section.body}
-        </p>
-      )}
+        <div className="lg:col-span-9">
+          <h2 className="font-display font-light text-[36px] sm:text-[48px] lg:text-[64px] tracking-[-0.025em] leading-[0.96] mb-4">
+            {section.title}
+          </h2>
+          {section.body && (
+            <p className="text-[15px] lg:text-[16px] leading-[1.62] text-ink-3 max-w-[780px] whitespace-pre-line">
+              {section.body}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Media grid */}
       {section.media.length > 0 && (
         <div
-          className={`mt-6 grid gap-[10px] ${
+          className={`grid gap-2 lg:gap-3 ${
             section.cols === 1
               ? 'grid-cols-1'
               : section.cols === 2
                 ? 'grid-cols-1 sm:grid-cols-2'
                 : section.cols === 3
                   ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3'
-                  : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+                  : 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
           }`}
         >
           {section.media.map((m, i) => (
@@ -64,7 +83,7 @@ function MediaTile({
   if (media.type === 'video') {
     return (
       <div
-        className={`cs-tile relative rounded-lg overflow-hidden bg-panel-2 cursor-pointer hover:-translate-y-0.5 transition-transform aspect-video ${
+        className={`cs-tile relative overflow-hidden bg-ink cursor-pointer hover:scale-[1.01] transition-transform aspect-video ${
           playing ? 'playing-inline' : ''
         }`}
         onClick={() => {
@@ -87,7 +106,7 @@ function MediaTile({
           loop
           muted
           onEnded={() => setPlaying(false)}
-          className="w-full h-full object-cover bg-black"
+          className="w-full h-full object-cover"
         />
         <div className="play-overlay" />
       </div>
@@ -96,7 +115,7 @@ function MediaTile({
 
   return (
     <div
-      className="cs-tile is-image relative rounded-lg overflow-hidden bg-panel-2 cursor-zoom-in hover:-translate-y-0.5 transition-transform"
+      className="cs-tile is-image relative overflow-hidden bg-paper-3 cursor-zoom-in hover:scale-[1.01] transition-transform group"
       onClick={() => onLightbox(all, index)}
     >
       <Image
@@ -104,7 +123,7 @@ function MediaTile({
         alt=""
         width={1600}
         height={1000}
-        sizes="(max-width:600px) 100vw, (max-width:1200px) 50vw, 33vw"
+        sizes="(max-width:600px) 50vw, (max-width:1200px) 33vw, 25vw"
         className="w-full h-auto object-cover"
         unoptimized
       />

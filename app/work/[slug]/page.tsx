@@ -25,118 +25,139 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const idx = PROJECTS.findIndex((x) => x.id === p.id);
   const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
+  const trackNumber = String(idx + 1).padStart(2, '0');
 
   return (
     <div>
-      {/* Hero */}
-      <header
-        className="flex flex-col lg:flex-row items-start lg:items-end gap-[18px] lg:gap-[26px] px-5 lg:px-8 pt-[74px] lg:pt-[80px] pb-[26px]"
+      {/* HERO — editorial layout */}
+      <section
+        className="relative px-4 lg:px-8 pt-20 lg:pt-24 pb-12 lg:pb-16 overflow-hidden"
         style={{
-          background: `linear-gradient(180deg,${p.themeColor}aa,transparent 240px)`,
+          background: `linear-gradient(180deg, ${p.themeColor}26 0%, transparent 60%)`,
         }}
       >
-        <div className="w-[170px] h-[170px] lg:w-[226px] lg:h-[226px] flex-none rounded-lg overflow-hidden shadow-[0_24px_50px_-14px_rgba(0,0,0,0.8)] bg-panel-2 relative">
-          <Image src={p.cover} alt={`${p.title} cover`} fill sizes="226px" className="object-cover" priority />
-        </div>
-        <div className="min-w-0 pb-[6px] flex-1">
-          <div className="text-[12px] font-bold tracking-[0.05em] uppercase">
-            Case Study · {p.tags[0]}
-          </div>
-          <h1 className="font-display font-extrabold leading-[0.96] tracking-[-0.03em] my-[14px] text-[38px] sm:text-[56px] lg:text-[76px]">
-            {p.title}
-          </h1>
-          <div className="flex items-center gap-[7px] flex-wrap text-[13.5px] font-medium">
-            <span className="font-bold">{ARTIST}</span>
-            <span className="w-1 h-1 rounded-full bg-muted inline-block" />
-            <span>{p.blurb}</span>
-            <span className="w-1 h-1 rounded-full bg-muted inline-block" />
-            <span className="text-muted">{p.year}</span>
-            <span className="w-1 h-1 rounded-full bg-muted inline-block" />
-            <span className="text-muted">
-              {p.sections.length} section{p.sections.length !== 1 ? 's' : ''}
-            </span>
-          </div>
-        </div>
-      </header>
-
-      <div className="px-5 lg:px-8 pb-[30px]">
-        <ProjectActions id={p.id} />
-
-        <p className="text-[17px] leading-[1.62] text-[#e2dfd6] max-w-[760px] py-2 pb-7 whitespace-pre-line">
-          {p.desc}
-        </p>
-
-        {/* Meta strip */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 py-[18px] pb-6 border-b border-line mb-9">
-          <div>
-            <div className="text-[11px] tracking-[0.12em] uppercase text-muted-2 mb-[6px]">
-              Client
-            </div>
-            <div className="font-display font-bold text-[18px] tracking-[-0.01em]">{p.client}</div>
-          </div>
-          <div>
-            <div className="text-[11px] tracking-[0.12em] uppercase text-muted-2 mb-[6px]">
-              Date
-            </div>
-            <div className="font-display font-bold text-[18px] tracking-[-0.01em]">{p.date}</div>
-          </div>
-          <div>
-            <div className="text-[11px] tracking-[0.12em] uppercase text-muted-2 mb-[6px]">
-              Role
-            </div>
-            <div className="font-display font-bold text-[18px] tracking-[-0.01em]">{p.role}</div>
-          </div>
+        <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted flex items-center gap-3 mb-6">
+          <span>TRACK {trackNumber}</span>
+          <span>·</span>
+          <span>{p.client.toUpperCase()}</span>
+          <span>·</span>
+          <span>{p.date}</span>
         </div>
 
-        {/* Case study sections */}
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-end">
+          {/* Big title */}
+          <div className="lg:col-span-8 order-2 lg:order-1">
+            <h1 className="display-bleed font-display font-light tracking-[-0.035em] leading-[0.88] text-[56px] sm:text-[88px] lg:text-[120px] xl:text-[140px]">
+              {p.title}
+            </h1>
+            <div className="mt-6 max-w-2xl text-[15px] lg:text-[17px] leading-[1.55] text-ink-3 whitespace-pre-line">
+              {p.desc}
+            </div>
+          </div>
+
+          {/* Cover + actions */}
+          <div className="lg:col-span-4 order-1 lg:order-2 flex flex-col items-start lg:items-end gap-4">
+            <div className="w-full max-w-[280px] aspect-[4/5] relative overflow-hidden bg-paper-3 shadow-[0_20px_60px_-20px_rgba(26,20,16,0.4)]">
+              <Image
+                src={p.cover}
+                alt={`${p.title} cover`}
+                fill
+                sizes="280px"
+                priority
+                className="object-cover"
+              />
+            </div>
+            <ProjectActions id={p.id} />
+          </div>
+        </div>
+      </section>
+
+      {/* META STRIP — like vinyl liner notes */}
+      <section className="px-4 lg:px-8 border-y border-ink/15 bg-paper-2">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8 py-6">
+          <MetaItem label="Client" value={p.client} />
+          <MetaItem label="Date" value={p.date} />
+          <MetaItem label="Role" value={p.role} />
+          <MetaItem label="Disciplines" value={p.tags.join(' / ')} />
+        </div>
+      </section>
+
+      {/* CASE STUDY SECTIONS */}
+      <div className="px-4 lg:px-8 pt-12 pb-12">
         {p.sections.map((sec, i) => (
-          <CaseSection key={i} section={sec} />
+          <CaseSection key={i} section={sec} index={i} total={p.sections.length} />
         ))}
+      </div>
 
-        {/* Prev / Next */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-10">
+      {/* PREV / NEXT */}
+      <section className="px-4 lg:px-8 pb-12">
+        <div className="border-t border-ink/15 grid grid-cols-1 sm:grid-cols-2 gap-px bg-ink/15">
           <Link
             href={`/work/${prev.id}`}
-            className="bg-panel rounded-[9px] px-5 py-[18px] flex items-center gap-[14px] hover:bg-elev transition-colors"
+            className="bg-paper hover:bg-paper-2 transition-colors p-6 group"
           >
-            <div className="w-[60px] h-[60px] rounded-[5px] overflow-hidden flex-none bg-panel-2 relative">
-              <Image src={prev.cover} alt="" fill sizes="60px" className="object-cover" />
+            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted mb-3">
+              ← Previous
             </div>
-            <div>
-              <div className="text-[11px] tracking-[0.1em] uppercase text-muted-2">
-                Previous Project
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-20 flex-none overflow-hidden bg-paper-3 relative">
+                <Image src={prev.cover} alt="" fill sizes="64px" className="object-cover" />
               </div>
-              <div className="font-display font-bold text-[17px] tracking-[-0.01em] mt-[3px]">
-                {prev.title}
+              <div className="min-w-0">
+                <div className="font-display font-bold text-[20px] tracking-[-0.01em] leading-tight truncate group-hover:text-coral transition-colors">
+                  {prev.title}
+                </div>
+                <div className="font-mono text-[10px] tracking-[0.1em] uppercase text-muted mt-1">
+                  {prev.tags[0]}
+                </div>
               </div>
             </div>
           </Link>
           <Link
             href={`/work/${next.id}`}
-            className="bg-panel rounded-[9px] px-5 py-[18px] flex items-center gap-[14px] hover:bg-elev transition-colors sm:flex-row-reverse sm:text-right"
+            className="bg-paper hover:bg-paper-2 transition-colors p-6 group sm:text-right"
           >
-            <div className="w-[60px] h-[60px] rounded-[5px] overflow-hidden flex-none bg-panel-2 relative">
-              <Image src={next.cover} alt="" fill sizes="60px" className="object-cover" />
+            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted mb-3">
+              Next →
             </div>
-            <div>
-              <div className="text-[11px] tracking-[0.1em] uppercase text-muted-2">
-                Next Project
+            <div className="flex items-center gap-4 sm:flex-row-reverse">
+              <div className="w-16 h-20 flex-none overflow-hidden bg-paper-3 relative">
+                <Image src={next.cover} alt="" fill sizes="64px" className="object-cover" />
               </div>
-              <div className="font-display font-bold text-[17px] tracking-[-0.01em] mt-[3px]">
-                {next.title}
+              <div className="min-w-0">
+                <div className="font-display font-bold text-[20px] tracking-[-0.01em] leading-tight truncate group-hover:text-coral transition-colors">
+                  {next.title}
+                </div>
+                <div className="font-mono text-[10px] tracking-[0.1em] uppercase text-muted mt-1">
+                  {next.tags[0]}
+                </div>
               </div>
             </div>
           </Link>
         </div>
+      </section>
 
-        <div className="text-center pt-10 pb-5">
-          <Link
-            href="/"
-            className="font-bold text-[13px] tracking-[0.04em] uppercase border-[1.5px] border-[#5a5a5e] hover:border-text rounded-[30px] px-[18px] py-[9px] hover:scale-[1.04] inline-block transition-all"
-          >
-            ← Back to All Works
-          </Link>
-        </div>
+      {/* Back to catalog */}
+      <div className="text-center pb-12">
+        <Link
+          href="/"
+          className="inline-block font-mono text-[11px] tracking-[0.2em] uppercase link-underline"
+        >
+          ← Back to catalog
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function MetaItem({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted mb-2">
+        {label}
+      </div>
+      <div className="font-display font-medium text-[16px] lg:text-[18px] tracking-[-0.01em] leading-tight">
+        {value}
       </div>
     </div>
   );
