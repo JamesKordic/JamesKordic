@@ -30,14 +30,34 @@ export function Sidebar({
     >
       {/* Brand */}
       <div className="bg-panel rounded-[11px] px-[18px] py-[20px] pb-[18px]">
-        <Link href="/" onClick={onClose} className="flex items-center gap-[9px]">
-          <span className={`brand-disc ${state.playing ? 'spinning' : ''}`} />
+        <Link href="/" onClick={onClose} className="flex items-center gap-[10px] group">
+          {/* Custom logo — replaces the spinning disc.
+              On hover, gets a soft gradient glow.
+              When player is playing, gets a subtle pulse. */}
+          <span className="relative w-9 h-9 flex-none flex items-center justify-center">
+            <span
+              className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md ${state.playing ? 'opacity-60' : ''}`}
+              style={{
+                background:
+                  'conic-gradient(from 0deg, #c8f135, #22d3ee, #ff2d8a, #c8f135)',
+              }}
+              aria-hidden
+            />
+            <Image
+              src="/logo.png"
+              alt="James Kordic logo"
+              width={36}
+              height={36}
+              className="relative w-9 h-9 object-contain"
+              priority
+            />
+          </span>
           <span>
             <span className="block font-display font-extrabold text-[15px] tracking-[-0.02em] leading-none">
               {ARTIST}
             </span>
             <span className="block text-[10px] tracking-[0.22em] uppercase text-muted-2 mt-[3px]">
-              Design Records
+              Graphic Design
             </span>
           </span>
         </Link>
@@ -46,7 +66,12 @@ export function Sidebar({
       {/* Nav */}
       <div className="bg-panel rounded-[11px]">
         <nav className="px-[10px] pt-[6px] pb-3">
-          <NavItem href="/" icon={<HomeIcon className="w-[21px] h-[21px]" />} active={isActive('/')} onClick={onClose}>
+          <NavItem
+            href="/"
+            icon={<HomeIcon className="w-[21px] h-[21px]" />}
+            active={isActive('/')}
+            onClick={onClose}
+          >
             Home
           </NavItem>
           <NavItem
@@ -80,32 +105,58 @@ export function Sidebar({
           </span>
         </div>
         <div className="overflow-y-auto flex-1 px-[6px] pb-[6px] scrollbar-thin">
-          {PROJECTS.map((p) => (
-            <Link
-              key={p.id}
-              href={`/work/${p.id}`}
-              onClick={onClose}
-              className={`flex items-center gap-[11px] w-full text-left p-2 rounded-lg transition-colors hover:bg-elev ${
-                state.id === p.id && state.playing ? 'text-accent' : ''
-              }`}
-            >
-              <div className="w-[46px] h-[46px] rounded-[5px] flex-none overflow-hidden bg-panel-2 relative">
-                <Image src={p.cover} alt="" fill sizes="46px" className="object-cover" />
-              </div>
-              <div className="min-w-0">
-                <div className="font-semibold text-[13.5px] truncate">{p.title}</div>
-                <div className="text-[11.5px] text-muted-2 truncate mt-[2px]">
-                  Project · {ARTIST}
+          {PROJECTS.map((p) => {
+            const isPlayingThis = state.id === p.id && state.playing;
+            const isOnThisPage = pathname === `/work/${p.id}`;
+            return (
+              <Link
+                key={p.id}
+                href={`/work/${p.id}`}
+                onClick={onClose}
+                className={`flex items-center gap-[11px] w-full text-left p-2 rounded-lg transition-colors ${
+                  isOnThisPage ? 'bg-elev' : 'hover:bg-elev'
+                }`}
+              >
+                <div className="w-[46px] h-[46px] rounded-[5px] flex-none overflow-hidden bg-panel-2 relative">
+                  <Image src={p.cover} alt="" fill sizes="46px" className="object-cover" />
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div className="min-w-0">
+                  <div
+                    className={`font-semibold text-[13.5px] truncate ${
+                      isOnThisPage
+                        ? 'gradient-text-static'
+                        : isPlayingThis
+                          ? 'text-accent'
+                          : ''
+                    }`}
+                  >
+                    {p.title}
+                  </div>
+                  <div className="text-[11.5px] text-muted-2 truncate mt-[2px]">
+                    Project · {ARTIST}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </aside>
   );
 }
 
+/**
+ * Sidebar nav item.
+ *
+ * When active (the current page):
+ *  - A vertical gradient bar appears on the left edge
+ *  - The text uses gradient-text-static (lime → cyan → magenta)
+ *  - A subtle background pill highlights the row
+ *
+ * When inactive:
+ *  - Muted grey text
+ *  - On hover, brightens to full white
+ */
 function NavItem({
   href,
   icon,
@@ -123,12 +174,23 @@ function NavItem({
     <Link
       href={href}
       onClick={onClick}
-      className={`flex items-center gap-[15px] w-full px-3 py-[11px] rounded-lg font-bold text-[14px] transition-colors ${
-        active ? 'text-text' : 'text-muted hover:text-text'
+      className={`relative flex items-center gap-[15px] w-full px-3 py-[11px] rounded-lg font-bold text-[14px] transition-all ${
+        active ? 'bg-elev/60' : 'text-muted hover:text-text hover:bg-elev/30'
       }`}
     >
-      <span className={active ? '[&_.ic-fill]:fill-accent' : ''}>{icon}</span>
-      {children}
+      {/* Active-state indicator bar on the left edge */}
+      {active && (
+        <span
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[18px] rounded-full"
+          style={{
+            background:
+              'linear-gradient(180deg, #c8f135 0%, #22d3ee 50%, #ff2d8a 100%)',
+          }}
+          aria-hidden
+        />
+      )}
+      <span className={active ? 'text-accent' : ''}>{icon}</span>
+      <span className={active ? 'gradient-text-static' : ''}>{children}</span>
     </Link>
   );
 }
