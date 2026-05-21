@@ -103,26 +103,139 @@ export default function HomePage() {
         projects={sideB}
       />
 
-      {/* Closing strip */}
-      <section className="px-5 lg:px-8 pt-12 pb-12">
-        <Link
-          href="/about"
-          className="block bg-panel hover:bg-elev rounded-xl p-6 lg:p-8 transition-colors"
-        >
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div>
-              <h3 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em] mb-1">
-                Want to make something?
-              </h3>
-              <p className="text-[14px] text-muted">
-                Available for freelance and full-time. Drop a line.
-              </p>
+      {/* CALL TO ACTION — full-energy panel that pops out of the page */}
+      <section className="px-5 lg:px-8 pt-14 pb-12">
+        <div className="relative bg-accent text-accent-ink rounded-2xl overflow-hidden">
+          {/* Background equalizer pattern */}
+          <div className="absolute inset-0 pointer-events-none opacity-[0.08]" aria-hidden>
+            <div className="absolute inset-0 flex items-end justify-around gap-1 px-4">
+              {Array.from({ length: 32 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="flex-1 bg-accent-ink"
+                  style={{
+                    height: `${30 + ((i * 37) % 70)}%`,
+                  }}
+                />
+              ))}
             </div>
-            <span className="font-bold text-[13px] tracking-[0.04em] uppercase text-accent flex items-center gap-2">
-              Get in touch <span aria-hidden>→</span>
-            </span>
           </div>
-        </Link>
+
+          {/* Soft radial highlight in the corner */}
+          <div
+            className="absolute -top-32 -right-20 w-[420px] h-[420px] rounded-full pointer-events-none opacity-30"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%)',
+            }}
+            aria-hidden
+          />
+
+          <div className="relative px-6 py-10 lg:px-12 lg:py-14">
+            {/* Availability status pill */}
+            <div className="inline-flex items-center gap-2 bg-accent-ink text-accent font-bold text-[11px] tracking-[0.14em] uppercase px-3 py-1.5 rounded-full mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+              </span>
+              Open for work · 2026
+            </div>
+
+            {/* Headline */}
+            <h2 className="font-display font-extrabold tracking-[-0.035em] leading-[0.92] text-[44px] sm:text-[64px] lg:text-[88px] mb-3 max-w-3xl">
+              Let&apos;s make something{' '}
+              <em className="not-italic underline decoration-[6px] underline-offset-[6px]">
+                loud.
+              </em>
+            </h2>
+
+            {/* Subhead */}
+            <p className="text-[15px] lg:text-[17px] font-medium leading-[1.5] max-w-xl mb-8 opacity-90">
+              Available for freelance and full-time design work — motion, brand, advertising, anything that needs to move and feel.
+            </p>
+
+            {/* Primary + secondary actions */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+              <a
+                href="mailto:Jkordic@me.com"
+                className="group inline-flex items-center justify-between gap-4 bg-accent-ink text-accent rounded-full pl-6 pr-3 py-3 font-bold text-[15px] hover:scale-[1.03] active:scale-[0.97] transition-transform shadow-[0_8px_24px_-6px_rgba(0,0,0,0.4)]"
+              >
+                <span className="flex items-center gap-3">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                    <rect x="3" y="5" width="18" height="14" rx="2.5" />
+                    <path d="m3.5 7 8.5 6 8.5-6" strokeLinecap="round" />
+                  </svg>
+                  Jkordic@me.com
+                </span>
+                <span className="w-9 h-9 rounded-full bg-accent text-accent-ink flex items-center justify-center font-bold text-[18px] group-hover:rotate-[-12deg] transition-transform">
+                  →
+                </span>
+              </a>
+
+              <a
+                href="https://drive.google.com/file/d/10fG8m5VriZOOSDyXZnowGsIqEZaRUp6Y/view"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 border-2 border-accent-ink text-accent-ink font-bold text-[14px] tracking-[0.02em] rounded-full px-5 py-3 hover:bg-accent-ink hover:text-accent transition-colors"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                  <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Download résumé
+              </a>
+
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 font-bold text-[13px] tracking-[0.05em] uppercase text-accent-ink hover:opacity-70 transition-opacity sm:ml-auto"
+              >
+                Full about / contact
+                <span aria-hidden>→</span>
+              </Link>
+            </div>
+
+            {/* Bottom row — quick stats / social */}
+            <div className="mt-10 pt-6 border-t border-accent-ink/20 flex flex-wrap items-center gap-x-8 gap-y-3 text-[12px] font-semibold">
+              <span className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-ink" />
+                Based in New York
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-ink" />
+                Replies within 24 hours
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-ink" />
+                Remote · onsite · hybrid
+              </span>
+              <div className="sm:ml-auto flex items-center gap-3">
+                <a
+                  href="https://www.linkedin.com/in/jameskordic/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-60 transition-opacity"
+                  aria-label="LinkedIn"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                    <path d="M4.5 3.5A2 2 0 1 1 4.5 7a2 2 0 0 1 0-3.5ZM3 9h3v12H3zm6 0h3v1.7c.6-1 1.9-2 3.8-2 3 0 4.2 2 4.2 5.2V21h-3v-6.4c0-1.6-.6-2.6-2-2.6s-2.3 1-2.3 2.6V21H9z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com/jameskordic/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-60 transition-opacity"
+                  aria-label="Instagram"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                    <rect x="3" y="3" width="18" height="18" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
