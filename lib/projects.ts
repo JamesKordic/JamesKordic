@@ -132,13 +132,17 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Records',
         title: 'Last Gang Records',
         body: "Social media posts created for Last Gang Records, spotlighting music placements in video games, film, and other media, designed to drive engagement and showcase the label's cultural reach.",
-        // 3 vertical items in a single row: image | video (center) | image
+        // 3 vertical items in a single row, each in its native aspect:
+        // image (4:5) | video (9:16) | image (4:5). Heights won't match
+        // exactly but no cropping — original proportions preserved.
         media: [
-          { type: 'image', src: img('wLWX3ICDe3WN8RjmJIxv26KSk', 1400) },
+          { type: 'image', src: img('wLWX3ICDe3WN8RjmJIxv26KSk', 1400), aspect: '4/5' },
           { type: 'video', src: vid('IzzjPLgg8Yw88u4F4XjG4RHjyA'), aspect: '9/16' },
-          { type: 'image', src: img('QR1zQdH6QNFmHzn0PT4PEGPCRM', 1400) },
+          { type: 'image', src: img('QR1zQdH6QNFmHzn0PT4PEGPCRM', 1400), aspect: '4/5' },
         ],
-        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
+        // Per-item aspects override the row aspect, so the row aspect
+        // here only acts as a fallback (it isn't used since every item has its own).
+        layout: { type: 'uniform', cols: 3, aspect: '4/5' },
       },
       {
         eyebrow: 'Conference',
@@ -525,14 +529,13 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Series',
         title: 'Release Promo Stories',
-        // 4 vertical 9:16 story templates
+        // 3 vertical 9:16 story templates
         media: [
           { type: 'image', src: img('9UI8emR67MioNNc1UoERq8vMz0', 800) },
           { type: 'image', src: img('SgEyMzySbt9AZN27bElzAGXEmE', 800) },
           { type: 'image', src: img('apktAu1lcj3lC6YY3hUbyyvyLw', 800) },
-          { type: 'image', src: img('Rd92Lba8D84FH3MGc4kcfvfVjXU', 800) },
         ],
-        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
+        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
       {
         eyebrow: 'Artist Spotlight',
@@ -542,7 +545,7 @@ export const PROJECTS: Project[] = [
         media: [
           { type: 'image', src: img('NMFZUWif8OdwlGY2I1fN82EFbM', 800) },
           { type: 'video', src: vid('FK55AYBGIvyG941MP5Y6r210WQ'), aspect: '9/16' },
-          { type: 'image', src: img('ehNHhSGMI7HnTwITsjX9yhvXU4', 1000) },
+          { type: 'image', src: img('Rd92Lba8D84FH3MGc4kcfvfVjXU', 800) },
         ],
         layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
@@ -550,13 +553,14 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Series',
         title: 'Album Releases',
         body: 'Portrait album release announcements for various artists on the MNRK Heavy roster.',
-        // 3 album release portraits at 4:5
+        // 4 album release portraits at 4:5
         media: [
+          { type: 'image', src: img('ehNHhSGMI7HnTwITsjX9yhvXU4', 1000) },
           { type: 'image', src: img('HMVx8iZd2TefUWO8Vz6jRNfXXY', 1000) },
           { type: 'image', src: img('yPZFXNjclLlWDlt68KG5yKV8tLA', 1000) },
           { type: 'image', src: img('PPdTtg6dUObxX4DSpZNpuvop8', 1000) },
         ],
-        layout: { type: 'uniform', cols: 3, aspect: '4/5' },
+        layout: { type: 'uniform', cols: 4, aspect: '4/5' },
       },
       {
         eyebrow: 'Banners',

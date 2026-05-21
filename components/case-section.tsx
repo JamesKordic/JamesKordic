@@ -151,7 +151,7 @@ function UniformLayout({
   }
 
   return (
-    <div className={`grid gap-3 lg:gap-4 ${colClasses(cols)}`}>
+    <div className={`grid gap-3 lg:gap-4 items-start ${colClasses(cols)}`}>
       {media.map((m, i) => (
         <MediaTile
           key={i}
@@ -197,7 +197,7 @@ function MixedLayout({
         }
 
         return (
-          <div key={i} className={`grid gap-3 lg:gap-4 ${colClasses(row.cols)}`}>
+          <div key={i} className={`grid gap-3 lg:gap-4 items-start ${colClasses(row.cols)}`}>
             {row.media.map((m, j) => (
               <MediaTile
                 key={j}
@@ -227,7 +227,7 @@ function LegacyLayout({
   indexOf: (m: Media) => number;
 }) {
   return (
-    <div className={`grid gap-3 lg:gap-4 ${colClasses(cols)}`}>
+    <div className={`grid gap-3 lg:gap-4 items-start ${colClasses(cols)}`}>
       {media.map((m, i) => (
         <MediaTile
           key={i}
