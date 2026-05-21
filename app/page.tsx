@@ -9,14 +9,18 @@ import { PlayIcon, ShuffleIcon, VerifiedIcon } from '@/components/icons';
 export default function HomePage() {
   const { playFrom, shufflePlay } = usePlayer();
 
-  // The 3 projects we want above the fold as the showcase
+  // Featured row stays the same — first 3 from POPULAR
   const featured = POPULAR.slice(0, 3)
     .map((id) => getProject(id))
     .filter((p): p is NonNullable<ReturnType<typeof getProject>> => !!p);
 
+  // Split catalog into Side A (professional) and Side B (personal)
+  const sideA = PROJECTS.filter((p) => p.kind === 'professional');
+  const sideB = PROJECTS.filter((p) => p.kind === 'personal');
+
   return (
     <div>
-      {/* COMPACT ARTIST STRIP — about 1/3 the height of the old hero */}
+      {/* COMPACT ARTIST STRIP */}
       <header
         className="relative px-5 lg:px-8 pt-20 pb-6 flex items-end"
         style={{
@@ -38,7 +42,6 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Action buttons — moved into the artist strip to save vertical space */}
           <div className="flex items-center gap-4 flex-none">
             <button
               onClick={() => playFrom(POPULAR[0])}
@@ -64,7 +67,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* FEATURED PROJECTS — 3 large thumbnails with full info, above the fold */}
+      {/* FEATURED WORK */}
       <section className="px-5 lg:px-8 pt-6 pb-2">
         <div className="flex items-baseline justify-between mb-4">
           <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em]">
@@ -84,25 +87,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CATALOG — every other project as a bigger card */}
-      <section className="px-5 lg:px-8 pt-10 pb-4">
-        <div className="flex items-baseline justify-between mb-4">
-          <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em]">
-            Full catalog
-          </h2>
-          <span className="text-[11.5px] font-bold tracking-[0.07em] uppercase text-muted-2">
-            {PROJECTS.length} releases
-          </span>
-        </div>
-        <p className="text-[13px] text-muted mb-5 max-w-xl">
-          Click any cover for the full case study with all the images, videos, and process work.
-        </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 lg:gap-4">
-          {PROJECTS.map((p, i) => (
-            <AlbumCard key={p.id} p={p} i={i} />
-          ))}
-        </div>
-      </section>
+      {/* SIDE A — PROFESSIONAL CLIENT WORK */}
+      <CatalogSide
+        label="Side A"
+        title="Professional client work"
+        sub="Commissioned work for music, entertainment, food, and tech brands."
+        projects={sideA}
+      />
+
+      {/* SIDE B — PERSONAL WORK */}
+      <CatalogSide
+        label="Side B"
+        title="Personal work"
+        sub="Concepts, capstones, and self-initiated explorations."
+        projects={sideB}
+      />
 
       {/* Closing strip */}
       <section className="px-5 lg:px-8 pt-12 pb-12">
@@ -126,5 +125,47 @@ export default function HomePage() {
         </Link>
       </section>
     </div>
+  );
+}
+
+/**
+ * Catalog "side" — A or B. Mimics the visual rhythm of a vinyl record:
+ * a small tag label ("Side A"), a real heading, and the grid below.
+ */
+function CatalogSide({
+  label,
+  title,
+  sub,
+  projects,
+}: {
+  label: string;
+  title: string;
+  sub: string;
+  projects: typeof PROJECTS;
+}) {
+  return (
+    <section className="px-5 lg:px-8 pt-10 pb-4">
+      <div className="flex items-end justify-between gap-4 mb-4">
+        <div>
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="text-[10px] font-bold tracking-[0.18em] uppercase bg-accent text-accent-ink px-2 py-1 rounded-sm">
+              {label}
+            </span>
+            <span className="text-[10.5px] font-bold tracking-[0.07em] uppercase text-muted-2">
+              {projects.length} {projects.length === 1 ? 'release' : 'releases'}
+            </span>
+          </div>
+          <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em]">
+            {title}
+          </h2>
+          <p className="text-[13px] text-muted mt-1 max-w-xl">{sub}</p>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 lg:gap-4">
+        {projects.map((p, i) => (
+          <AlbumCard key={p.id} p={p} i={i} />
+        ))}
+      </div>
+    </section>
   );
 }

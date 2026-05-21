@@ -13,8 +13,11 @@ export type Section = {
   cols: 1 | 2 | 3 | 4;
 };
 
+export type ProjectKind = 'professional' | 'personal';
+
 export type Project = {
   id: string;
+  kind: ProjectKind;
   title: string;
   cover: string;
   themeColor: string;
@@ -38,6 +41,7 @@ const vid = (id: string) => `${FRAMER}/assets/${id}.mp4`;
 export const PROJECTS: Project[] = [
   {
     id: 'the-syndicate',
+    kind: 'professional',
     title: 'The Syndicate',
     cover: img('WJoqOnXjeHEhfNWLt27wGXvkTwg', 800),
     themeColor: '#3c3a4a',
@@ -115,6 +119,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'wwimf',
+    kind: 'personal',
     title: 'World Wide Interactive Music Festival',
     cover: img('UUebmgTykuRmwaxxSRK1LIPuAk', 800),
     themeColor: '#1d2f7a',
@@ -232,6 +237,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'taco-bell',
+    kind: 'professional',
     title: 'Taco Bell',
     cover: img('WJoqOnXjeHEhfNWLt27wGXvkTwg', 800),
     themeColor: '#7a2e8a',
@@ -353,6 +359,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'mnrk-heavy',
+    kind: 'professional',
     title: 'MNRK Heavy',
     cover: img('9XqPreXztmx0ZFPcME8FfCynnVA', 800),
     themeColor: '#7a0e0e',
@@ -418,6 +425,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'consensus',
+    kind: 'professional',
     title: 'Consensus by CoinDesk',
     cover: img('bfBUPwtLvvm6QWSoaVBGhuEezw', 800),
     themeColor: '#0e2e7a',
@@ -467,6 +475,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'adults',
+    kind: 'professional',
     title: 'Adults on FX',
     cover: img('sKtr7uRzmThZzKQB0Y4tvdWaAkY', 800),
     themeColor: '#7a1a14',
@@ -555,6 +564,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'voltage',
+    kind: 'personal',
     title: 'Voltage',
     cover: img('JE4wdFyL0g8XA0wKwjzvL7Fr6Kw', 800),
     themeColor: '#7a6a0e',
@@ -657,6 +667,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'nike',
+    kind: 'personal',
     title: 'Nike',
     cover: jpg('j8y8xAfZOZidHy4aAQmt91XtGvI', 800),
     themeColor: '#7a2e14',
@@ -728,6 +739,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'music-art-collection',
+    kind: 'personal',
     title: 'Music Art Collection',
     cover: img('9P1kIkp3kJPTZTEPTKrKWUyRk', 800),
     themeColor: '#6a3a14',
