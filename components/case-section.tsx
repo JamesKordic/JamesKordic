@@ -97,6 +97,26 @@ export function CaseSection({ section }: { section: Section }) {
 
 /* ============ LAYOUTS ============ */
 
+/** Returns the appropriate max-width for a centered, constrained single item
+ *  based on its aspect ratio. Used when a uniform layout has only one media
+ *  item but multiple columns — avoids huge full-width vertical media. */
+function singleItemMaxWidth(aspect: AspectRatio): string {
+  switch (aspect) {
+    case '9/16':
+    case '1/2':
+      return 'max-w-[280px] lg:max-w-[340px]'; // tall vertical
+    case '2/3':
+    case '3/4':
+      return 'max-w-[420px] lg:max-w-[520px]'; // portrait
+    case '1/1':
+      return 'max-w-[480px] lg:max-w-[600px]'; // square
+    case '4/5':
+      return 'max-w-[420px] lg:max-w-[500px]'; // 4:5
+    default:
+      return 'max-w-full'; // landscape — let it breathe
+  }
+}
+
 function UniformLayout({
   cols,
   aspect,
@@ -112,6 +132,22 @@ function UniformLayout({
   onLightbox: (items: Media[], i: number) => void;
   indexOf: (m: Media) => number;
 }) {
+  // Special case: single item — center it with a sensible max width
+  // so vertical content doesn't blow up to full screen width on desktop
+  if (media.length === 1) {
+    return (
+      <div className="flex justify-center">
+        <div className={`w-full ${singleItemMaxWidth(aspect)}`}>
+          <MediaTile
+            media={media[0]}
+            aspect={aspect}
+            onLightbox={() => onLightbox(allImages, Math.max(0, indexOf(media[0])))}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`grid gap-3 lg:gap-4 ${colClasses(cols)}`}>
       {media.map((m, i) => (
@@ -139,18 +175,38 @@ function MixedLayout({
 }) {
   return (
     <div className="space-y-3 lg:space-y-4">
-      {rows.map((row, i) => (
-        <div key={i} className={`grid gap-3 lg:gap-4 ${colClasses(row.cols)}`}>
-          {row.media.map((m, j) => (
-            <MediaTile
-              key={j}
-              media={m}
-              aspect={row.aspect}
-              onLightbox={() => onLightbox(allImages, Math.max(0, indexOf(m)))}
-            />
-          ))}
-        </div>
-      ))}
+      {rows.map((row, i) => {
+        // Single item in a multi-col row → center with max width constraint,
+        // same logic as UniformLayout to avoid huge vertical media on desktop
+        if (row.media.length === 1) {
+          return (
+            <div key={i} className="flex justify-center">
+              <div className={`w-full ${singleItemMaxWidth(row.aspect)}`}>
+                <MediaTile
+                  media={row.media[0]}
+                  aspect={row.aspect}
+                  onLightbox={() =>
+                    onLightbox(allImages, Math.max(0, indexOf(row.media[0])))
+                  }
+                />
+              </div>
+            </div>
+          );
+        }
+
+        return (
+          <div key={i} className={`grid gap-3 lg:gap-4 ${colClasses(row.cols)}`}>
+            {row.media.map((m, j) => (
+              <MediaTile
+                key={j}
+                media={m}
+                aspect={row.aspect}
+                onLightbox={() => onLightbox(allImages, Math.max(0, indexOf(m)))}
+              />
+            ))}
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -9,6 +9,9 @@ export type Media =
 
 /* Allowed aspect ratios — keeps the visual rhythm controllable */
 export type AspectRatio =
+  | '21/9'
+  | '3/1'
+  | '2/1'
   | '16/9'
   | '4/3'
   | '3/2'
@@ -17,7 +20,7 @@ export type AspectRatio =
   | '2/3'
   | '3/4'
   | '9/16'
-  | '21/9';
+  | '1/2';
 
 /* ============ SECTION LAYOUTS ============ */
 
@@ -96,62 +99,112 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Music',
         title: "Guns N' Roses",
         body: "Instagram Reels created for Guns N' Roses, featuring dynamic visuals and music-driven edits to promote tours, music, and fan engagement.",
+        // 3 vertical Reels — keep them small, 3 across
         media: [
-          { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs') },
-          { type: 'video', src: vid('c5CmANQj9sWEtQAUdOy0dVCRan8') },
-          { type: 'video', src: vid('m4aBld36mXRoGXa41tRbBPqFMs') },
+          { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'), aspect: '9/16' },
+          { type: 'video', src: vid('c5CmANQj9sWEtQAUdOy0dVCRan8'), aspect: '9/16' },
+          { type: 'video', src: vid('m4aBld36mXRoGXa41tRbBPqFMs'), aspect: '9/16' },
         ],
-        cols: 3,
+        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
       {
         eyebrow: 'Records',
         title: 'Killphonic Records',
         body: 'Promotional video created for Killphonic Records to showcase Heart of Gold: The Songs of Neil Young Vol. 1. The video highlights featured artists and promotes pre-order availability across multiple digital platforms.',
-        media: [{ type: 'video', src: vid('1bkwSiwMean5Ugrcj5THWu5rK8c') }],
-        cols: 1,
+        // Vertical promo video — centered, modest width
+        media: [{ type: 'video', src: vid('1bkwSiwMean5Ugrcj5THWu5rK8c'), aspect: '9/16' }],
+        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
       {
         eyebrow: 'Comedy',
         title: 'Craig Ferguson',
         body: 'Social media assets designed for Craig Ferguson, featuring curated show clips formatted for multiple digital platforms to highlight his comedic style and drive audience engagement.',
+        // 4 vertical social clips — 4 across on desktop
         media: [
-          { type: 'video', src: vid('AGvRC8ZeWglalhmRVoWrAenDbU') },
-          { type: 'video', src: vid('5jQZz12hg4ZlEN4oGGfwnJ2suU') },
-          { type: 'video', src: vid('taiJsfTcLbvOfzAFwxg20fxndg') },
-          { type: 'video', src: vid('pld0kHhyrFuCBme5omkjWKygY') },
+          { type: 'video', src: vid('AGvRC8ZeWglalhmRVoWrAenDbU'), aspect: '9/16' },
+          { type: 'video', src: vid('5jQZz12hg4ZlEN4oGGfwnJ2suU'), aspect: '9/16' },
+          { type: 'video', src: vid('taiJsfTcLbvOfzAFwxg20fxndg'), aspect: '9/16' },
+          { type: 'video', src: vid('pld0kHhyrFuCBme5omkjWKygY'), aspect: '9/16' },
         ],
-        cols: 4,
+        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
       {
         eyebrow: 'Records',
         title: 'Last Gang Records',
         body: "Social media posts created for Last Gang Records, spotlighting music placements in video games, film, and other media, designed to drive engagement and showcase the label's cultural reach.",
-        media: [
-          { type: 'image', src: img('wLWX3ICDe3WN8RjmJIxv26KSk') },
-          { type: 'video', src: vid('IzzjPLgg8Yw88u4F4XjG4RHjyA') },
-          { type: 'image', src: img('QR1zQdH6QNFmHzn0PT4PEGPCRM') },
-        ],
-        cols: 3,
+        // 2 images at 4:5 + 1 vertical video — group images together with 4:5,
+        // video separate at 9:16
+        media: [],
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 2,
+              aspect: '4/5',
+              media: [
+                { type: 'image', src: img('wLWX3ICDe3WN8RjmJIxv26KSk', 1400) },
+                { type: 'image', src: img('QR1zQdH6QNFmHzn0PT4PEGPCRM', 1400) },
+              ],
+            },
+            {
+              cols: 3,
+              aspect: '9/16',
+              media: [{ type: 'video', src: vid('IzzjPLgg8Yw88u4F4XjG4RHjyA'), aspect: '9/16' }],
+            },
+          ],
+        },
       },
       {
         eyebrow: 'Conference',
         title: 'Indie Week',
         body: 'Branded assets created for Indie Week to promote event speakers, key dates, and on-site signage. Designs supported both digital promotion and in-person visibility across the multi-day conference.',
-        media: [
-          { type: 'image', src: img('t9wBzTbxGRtzrWypXeSifrLDP5c', 1600) },
-          { type: 'image', src: img('Vk51fq3cm2OrBYLhmQSlqKq5z8', 1600) },
-          { type: 'image', src: img('aVZo4nkPsAAdNvYInRNp9p68A', 1600) },
-          { type: 'image', src: img('jFTELYHXnNn9HzhnAm9AiUK5dk', 1600) },
-          { type: 'image', src: img('LoQPSGaYQwziEdo7ydNpikCqoQ') },
-          { type: 'image', src: img('oqbLVKzEb16nGxMiUuEI1Fo1U0') },
-          { type: 'image', src: img('bpHcCcSIeuecSinBTOQMj2IHLm0') },
-          { type: 'image', src: img('uF0VkAU6tFzbjXtqEMY4iFihFm8', 1600) },
-          { type: 'image', src: img('mcC9plXqXvGp1TUSOqiiCfCrig', 1600) },
-          { type: 'image', src: img('oBy0pJgzZloupGU62fc8PFXH5c') },
-          { type: 'image', src: img('fNABELlafPtUG70DuR50mudCTaw') },
-          { type: 'image', src: jpg('uUhmvQ8VocFRVIi9A401nWnuNc') },
-        ],
-        cols: 3,
+        media: [],
+        // Mixed aspects — group into:
+        //  Row 1: 4 squares (speaker cards, 1:1)
+        //  Row 2: 3 tall (1:2 dates)
+        //  Row 3: 2 ultra-wide banners (2:1)
+        //  Row 4: 4 mixed portraits (9:16, 2:3, 1:1)
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 4,
+              aspect: '1/1',
+              media: [
+                { type: 'image', src: img('t9wBzTbxGRtzrWypXeSifrLDP5c', 1200) },
+                { type: 'image', src: img('Vk51fq3cm2OrBYLhmQSlqKq5z8', 1200) },
+                { type: 'image', src: img('aVZo4nkPsAAdNvYInRNp9p68A', 1200) },
+                { type: 'image', src: img('jFTELYHXnNn9HzhnAm9AiUK5dk', 1200) },
+              ],
+            },
+            {
+              cols: 3,
+              aspect: '1/2',
+              media: [
+                { type: 'image', src: img('LoQPSGaYQwziEdo7ydNpikCqoQ', 800) },
+                { type: 'image', src: img('oqbLVKzEb16nGxMiUuEI1Fo1U0', 800) },
+                { type: 'image', src: img('bpHcCcSIeuecSinBTOQMj2IHLm0', 800) },
+              ],
+            },
+            {
+              cols: 1,
+              aspect: '2/1',
+              media: [
+                { type: 'image', src: img('uF0VkAU6tFzbjXtqEMY4iFihFm8', 2000) },
+                { type: 'image', src: img('mcC9plXqXvGp1TUSOqiiCfCrig', 2000) },
+              ],
+            },
+            {
+              cols: 3,
+              aspect: '2/3',
+              media: [
+                { type: 'image', src: img('oBy0pJgzZloupGU62fc8PFXH5c', 1000) },
+                { type: 'image', src: img('fNABELlafPtUG70DuR50mudCTaw', 1000) },
+                { type: 'image', src: jpg('uUhmvQ8VocFRVIi9A401nWnuNc', 1000) },
+              ],
+            },
+          ],
+        },
       },
     ],
   },
@@ -370,106 +423,120 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Feed The Beat',
         title: 'Social Campaign Set 01',
         body: "Social media content created for Taco Bell's Feed The Beat program, promoting emerging artists and bands through branded visuals.",
+        // 8 vertical social posts, 4 across
         media: [
-          { type: 'image', src: img('WJoqOnXjeHEhfNWLt27wGXvkTwg') },
-          { type: 'image', src: img('QinypJ6EZZl2PxsikGi8LxH7rI') },
-          { type: 'image', src: img('MIC8H4bXAQm2mNj9Y65agGW1Eg') },
-          { type: 'image', src: img('OTL7uPOcESMtqS94Z9Duez3zug') },
-          { type: 'image', src: img('KxxjaeQYhjNg9bmWNo37hm7Bk') },
-          { type: 'image', src: img('xULBx27t9CKcxctPJyrnOlQmZs') },
-          { type: 'image', src: img('dYZN9PqZAH7rsAjoNfm0X3Hy31s') },
-          { type: 'image', src: img('1L08UResr99bfGx0dyyscmyJSQ') },
+          { type: 'image', src: img('WJoqOnXjeHEhfNWLt27wGXvkTwg', 800) },
+          { type: 'image', src: img('QinypJ6EZZl2PxsikGi8LxH7rI', 800) },
+          { type: 'image', src: img('MIC8H4bXAQm2mNj9Y65agGW1Eg', 800) },
+          { type: 'image', src: img('OTL7uPOcESMtqS94Z9Duez3zug', 800) },
+          { type: 'image', src: img('KxxjaeQYhjNg9bmWNo37hm7Bk', 800) },
+          { type: 'image', src: img('xULBx27t9CKcxctPJyrnOlQmZs', 800) },
+          { type: 'image', src: img('dYZN9PqZAH7rsAjoNfm0X3Hy31s', 800) },
+          { type: 'image', src: img('1L08UResr99bfGx0dyyscmyJSQ', 800) },
         ],
-        cols: 4,
+        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
       {
         eyebrow: 'Feed The Beat',
         title: 'Social Campaign Set 02',
         media: [
-          { type: 'image', src: img('CpK6sL4Ca8n0g1rDyovBAbI7M4') },
-          { type: 'image', src: img('vNUDzO04xvQcoZ9krMjzUziqKw') },
-          { type: 'image', src: img('GTaoryMjDqdt31bStBwjD1VNDk') },
-          { type: 'image', src: img('Ix9O7siEQORLQAOyXkyevV4pQ') },
-          { type: 'image', src: img('lsqIP4Lmt9l3Aff7VWi3m2yfQUk') },
-          { type: 'image', src: img('A8EahCbmUoBL3FSikxxGMmScgYM') },
+          { type: 'image', src: img('CpK6sL4Ca8n0g1rDyovBAbI7M4', 800) },
+          { type: 'image', src: img('vNUDzO04xvQcoZ9krMjzUziqKw', 800) },
+          { type: 'image', src: img('GTaoryMjDqdt31bStBwjD1VNDk', 800) },
+          { type: 'image', src: img('Ix9O7siEQORLQAOyXkyevV4pQ', 800) },
+          { type: 'image', src: img('lsqIP4Lmt9l3Aff7VWi3m2yfQUk', 800) },
+          { type: 'image', src: img('A8EahCbmUoBL3FSikxxGMmScgYM', 800) },
         ],
-        cols: 3,
+        // 6 social posts — 3 across for taller, more readable presence
+        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
       {
         eyebrow: 'Feed The Beat',
         title: 'Social Campaign Set 03',
         media: [
-          { type: 'image', src: img('FaBFN1wAQD4SBQtyw4qBlTm9Vug') },
-          { type: 'image', src: img('LRzQBS1vj7Nk6N8NLk4DSVSDn8') },
-          { type: 'image', src: img('dcw5lrjVDnbGdfipQrRzEMWCM') },
-          { type: 'image', src: img('BJIBErSrjVqsJvO2oiPEZH3VVEY') },
-          { type: 'image', src: img('SAHMpheWMzMBJzFuYI2tV0KOQZg') },
-          { type: 'image', src: img('kI7MFEv683x0Cqh63prYiop0pdQ') },
-          { type: 'image', src: img('3zB4NalMAvLAnX4J7ij9b8HA') },
-          { type: 'image', src: img('KfcTXKzUHayaCDqEkz6XZwM3d4') },
+          { type: 'image', src: img('FaBFN1wAQD4SBQtyw4qBlTm9Vug', 800) },
+          { type: 'image', src: img('LRzQBS1vj7Nk6N8NLk4DSVSDn8', 800) },
+          { type: 'image', src: img('dcw5lrjVDnbGdfipQrRzEMWCM', 800) },
+          { type: 'image', src: img('BJIBErSrjVqsJvO2oiPEZH3VVEY', 800) },
+          { type: 'image', src: img('SAHMpheWMzMBJzFuYI2tV0KOQZg', 800) },
+          { type: 'image', src: img('kI7MFEv683x0Cqh63prYiop0pdQ', 800) },
+          { type: 'image', src: img('3zB4NalMAvLAnX4J7ij9b8HA', 800) },
+          { type: 'image', src: img('KfcTXKzUHayaCDqEkz6XZwM3d4', 800) },
         ],
-        cols: 4,
+        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
       {
         eyebrow: 'Motion',
         title: 'Motion Promo',
         body: 'Motion graphics extending the campaign across video formats.',
-        media: [
-          { type: 'image', src: jpg('o8quG272pFPMvf5cGvKIhFf76g') },
-          { type: 'video', src: vid('mapIVkLme38jlUiMsbxlEfisFBM') },
-          { type: 'image', src: jpg('jR0AhbZQNHyeAdnAvvlkDFuPdM') },
-        ],
-        cols: 3,
+        // Mixed: 2 images at 4:5 portrait + 1 video center
+        // Render as a 3-col 4:5 grid; the video uses its own aspect prop
+        media: [],
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 3,
+              aspect: '4/5',
+              media: [
+                { type: 'image', src: jpg('o8quG272pFPMvf5cGvKIhFf76g', 1000) },
+                { type: 'video', src: vid('mapIVkLme38jlUiMsbxlEfisFBM'), aspect: '4/5' },
+                { type: 'image', src: jpg('jR0AhbZQNHyeAdnAvvlkDFuPdM', 1000) },
+              ],
+            },
+          ],
+        },
       },
       {
         eyebrow: 'Feed The Beat',
         title: 'Social Campaign Set 04',
         media: [
-          { type: 'image', src: img('DTFgtKaf4W0ASJj3wRA6M0SAO2g') },
-          { type: 'image', src: img('RM0qw0GFu2HlsXykQ0S9SN817Y0') },
-          { type: 'image', src: img('4m7nvTUPJ5Peaoz12wByOsoPCpI') },
-          { type: 'image', src: img('J9KtP6tfhZVpKU7xrWzP9IPMqXc') },
-          { type: 'image', src: img('jKjWueHE4Qq4hrExfticcZtsbto') },
-          { type: 'image', src: img('L6HHywidixyksaKzUfdvPuuKt4') },
-          { type: 'image', src: img('nROXYm5aRxay6E93SF25CUAlluM') },
-          { type: 'image', src: img('dtArTiIFnI8H31tLKnOQdEs0Ukg') },
+          { type: 'image', src: img('DTFgtKaf4W0ASJj3wRA6M0SAO2g', 800) },
+          { type: 'image', src: img('RM0qw0GFu2HlsXykQ0S9SN817Y0', 800) },
+          { type: 'image', src: img('4m7nvTUPJ5Peaoz12wByOsoPCpI', 800) },
+          { type: 'image', src: img('J9KtP6tfhZVpKU7xrWzP9IPMqXc', 800) },
+          { type: 'image', src: img('jKjWueHE4Qq4hrExfticcZtsbto', 800) },
+          { type: 'image', src: img('L6HHywidixyksaKzUfdvPuuKt4', 800) },
+          { type: 'image', src: img('nROXYm5aRxay6E93SF25CUAlluM', 800) },
+          { type: 'image', src: img('dtArTiIFnI8H31tLKnOQdEs0Ukg', 800) },
         ],
-        cols: 4,
+        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
       {
         eyebrow: 'Feed The Beat',
         title: 'Social Campaign Set 05',
         media: [
-          { type: 'image', src: img('n50FkjKb5qEuOIoSihuzXUug9c') },
-          { type: 'image', src: img('PgLX3uOS9zFNRWIqAO3eKdOjDKQ') },
-          { type: 'image', src: img('U9yieMsonoNFbXxxRhdDD3nJU8') },
-          { type: 'image', src: img('E5LVEfeGnVTR9wVe7N25BPkGhjg') },
-          { type: 'image', src: img('cRemDfF3RljOX0QrmABTv0wWyM') },
-          { type: 'image', src: img('DiNhNyzDj4dRND3tzhRg2C1Qt4') },
-          { type: 'image', src: img('8cqX82V4hFSm3N8oshOdb4deG9I') },
+          { type: 'image', src: img('n50FkjKb5qEuOIoSihuzXUug9c', 800) },
+          { type: 'image', src: img('PgLX3uOS9zFNRWIqAO3eKdOjDKQ', 800) },
+          { type: 'image', src: img('U9yieMsonoNFbXxxRhdDD3nJU8', 800) },
+          { type: 'image', src: img('E5LVEfeGnVTR9wVe7N25BPkGhjg', 800) },
+          { type: 'image', src: img('cRemDfF3RljOX0QrmABTv0wWyM', 800) },
+          { type: 'image', src: img('DiNhNyzDj4dRND3tzhRg2C1Qt4', 800) },
+          { type: 'image', src: img('8cqX82V4hFSm3N8oshOdb4deG9I', 800) },
         ],
-        cols: 4,
+        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
       {
         eyebrow: 'Feed The Beat',
         title: 'Social Campaign Set 06',
         media: [
-          { type: 'image', src: img('xy2xZpnFgQQHFiIGVmxJrQYYfl0') },
-          { type: 'image', src: img('Kw7ngQ5sLaXnk71XhDg8wJrDbLg') },
-          { type: 'image', src: img('nCMHVbIk2Zmwp5NtxYsW2KOdou0') },
-          { type: 'image', src: img('oBBd5u58gvFVMkGlD2jLgyvESM') },
-          { type: 'image', src: img('RJfyF6atwlrtcti388DVw6QOF4') },
-          { type: 'image', src: img('y8EbHgYsErOqcRLp6PDoMOWZNh0') },
-          { type: 'image', src: img('qaZqsMfiEtGdHdHkQqxH0hAZnQk') },
-          { type: 'image', src: img('17gJFO5wLMLh4iHXnJCgkww8mw') },
+          { type: 'image', src: img('xy2xZpnFgQQHFiIGVmxJrQYYfl0', 800) },
+          { type: 'image', src: img('Kw7ngQ5sLaXnk71XhDg8wJrDbLg', 800) },
+          { type: 'image', src: img('nCMHVbIk2Zmwp5NtxYsW2KOdou0', 800) },
+          { type: 'image', src: img('oBBd5u58gvFVMkGlD2jLgyvESM', 800) },
+          { type: 'image', src: img('RJfyF6atwlrtcti388DVw6QOF4', 800) },
+          { type: 'image', src: img('y8EbHgYsErOqcRLp6PDoMOWZNh0', 800) },
+          { type: 'image', src: img('qaZqsMfiEtGdHdHkQqxH0hAZnQk', 800) },
+          { type: 'image', src: img('17gJFO5wLMLh4iHXnJCgkww8mw', 800) },
         ],
-        cols: 4,
+        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
       {
         eyebrow: 'Hero',
         title: 'Campaign Hero Shot',
-        media: [{ type: 'image', src: jpg('63aOXKIxowYxm2ZkN1iAs800E', 1800) }],
-        cols: 1,
+        // Full-bleed 16:9 photograph closing the project
+        media: [{ type: 'image', src: jpg('63aOXKIxowYxm2ZkN1iAs800E', 2000) }],
+        layout: { type: 'uniform', cols: 1, aspect: '16/9' },
       },
     ],
   },
@@ -491,51 +558,71 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Series',
         title: 'Anniversaries & Milestones',
+        // Three square 1:1 posts
         media: [
-          { type: 'image', src: img('9XqPreXztmx0ZFPcME8FfCynnVA') },
-          { type: 'image', src: img('7Qjm7UkhPslMPlb3HtRA64T1QE') },
-          { type: 'image', src: img('xA6rDRB3b4PRoj1L2MANFaoWVCo') },
+          { type: 'image', src: img('9XqPreXztmx0ZFPcME8FfCynnVA', 1080) },
+          { type: 'image', src: img('7Qjm7UkhPslMPlb3HtRA64T1QE', 1080) },
+          { type: 'image', src: img('xA6rDRB3b4PRoj1L2MANFaoWVCo', 1080) },
         ],
-        cols: 3,
+        layout: { type: 'uniform', cols: 3, aspect: '1/1' },
       },
       {
         eyebrow: 'Series',
         title: 'Release Promo Stories',
+        // 4 vertical 9:16 story templates
         media: [
-          { type: 'image', src: img('9UI8emR67MioNNc1UoERq8vMz0') },
-          { type: 'image', src: img('SgEyMzySbt9AZN27bElzAGXEmE') },
-          { type: 'image', src: img('apktAu1lcj3lC6YY3hUbyyvyLw') },
-          { type: 'image', src: img('Rd92Lba8D84FH3MGc4kcfvfVjXU') },
+          { type: 'image', src: img('9UI8emR67MioNNc1UoERq8vMz0', 800) },
+          { type: 'image', src: img('SgEyMzySbt9AZN27bElzAGXEmE', 800) },
+          { type: 'image', src: img('apktAu1lcj3lC6YY3hUbyyvyLw', 800) },
+          { type: 'image', src: img('Rd92Lba8D84FH3MGc4kcfvfVjXU', 800) },
         ],
-        cols: 4,
+        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
       {
         eyebrow: 'Motion',
         title: 'Animated Promo',
-        media: [{ type: 'video', src: vid('FK55AYBGIvyG941MP5Y6r210WQ') }],
-        cols: 1,
+        // Single animated promo — vertical story format
+        media: [{ type: 'video', src: vid('FK55AYBGIvyG941MP5Y6r210WQ'), aspect: '9/16' }],
+        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
       {
         eyebrow: 'Series',
         title: 'Artist & Album Highlights',
-        media: [
-          { type: 'image', src: img('NMFZUWif8OdwlGY2I1fN82EFbM') },
-          { type: 'image', src: img('ehNHhSGMI7HnTwITsjX9yhvXU4') },
-          { type: 'image', src: img('HMVx8iZd2TefUWO8Vz6jRNfXXY') },
-          { type: 'image', src: img('yPZFXNjclLlWDlt68KG5yKV8tLA') },
-          { type: 'image', src: img('PPdTtg6dUObxX4DSpZNpuvop8') },
-        ],
-        cols: 3,
+        // 1 vertical 9:16 + 4 portrait 4:5 — split into two rows
+        media: [],
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 3,
+              aspect: '9/16',
+              media: [
+                { type: 'image', src: img('NMFZUWif8OdwlGY2I1fN82EFbM', 800) },
+              ],
+            },
+            {
+              cols: 4,
+              aspect: '4/5',
+              media: [
+                { type: 'image', src: img('ehNHhSGMI7HnTwITsjX9yhvXU4', 1000) },
+                { type: 'image', src: img('HMVx8iZd2TefUWO8Vz6jRNfXXY', 1000) },
+                { type: 'image', src: img('yPZFXNjclLlWDlt68KG5yKV8tLA', 1000) },
+                { type: 'image', src: img('PPdTtg6dUObxX4DSpZNpuvop8', 1000) },
+              ],
+            },
+          ],
+        },
       },
       {
         eyebrow: 'Banners',
         title: 'Header Visuals',
         body: 'Cross-platform banner artwork supporting label-wide branding.',
+        // Two ultra-wide 3:1 banners — single column, full width
         media: [
-          { type: 'image', src: img('q67CSkcAjKBKwr5vmOJvUNJMvg', 1800) },
-          { type: 'image', src: img('r5HqxivM3ZGsL1vwlto2nKbRPMo', 1800) },
+          { type: 'image', src: img('q67CSkcAjKBKwr5vmOJvUNJMvg', 2000) },
+          { type: 'image', src: img('r5HqxivM3ZGsL1vwlto2nKbRPMo', 2000) },
         ],
-        cols: 1,
+        layout: { type: 'uniform', cols: 1, aspect: '3/1' },
       },
     ],
   },
@@ -558,34 +645,37 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Motion',
         title: 'Animated Conference Assets',
         body: 'A series of motion pieces created in the lead-up to Consensus, promoting speakers, key dates, and partner brands.',
+        // 5 conference promo videos at 16:9
         media: [
-          { type: 'video', src: vid('FGmZ7d1wogIeSBmBUxRHuAypA') },
-          { type: 'video', src: vid('EHi0hyhlfrDou6eTi3ve8ZqNehQ') },
-          { type: 'video', src: vid('JXI1YO5u54PI8cgTPim0MIRPWw') },
-          { type: 'video', src: vid('TmWj5VaGCOyES6xO7LWChbAUg') },
-          { type: 'video', src: vid('gew2hxLBzCIYTzlbMQidZYIcPig') },
+          { type: 'video', src: vid('FGmZ7d1wogIeSBmBUxRHuAypA'), aspect: '16/9' },
+          { type: 'video', src: vid('EHi0hyhlfrDou6eTi3ve8ZqNehQ'), aspect: '16/9' },
+          { type: 'video', src: vid('JXI1YO5u54PI8cgTPim0MIRPWw'), aspect: '16/9' },
+          { type: 'video', src: vid('TmWj5VaGCOyES6xO7LWChbAUg'), aspect: '16/9' },
+          { type: 'video', src: vid('gew2hxLBzCIYTzlbMQidZYIcPig'), aspect: '16/9' },
         ],
-        cols: 2,
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
         eyebrow: 'Stills',
         title: 'Speaker & Event Visuals',
+        // 4 conference stills at 16:9
         media: [
           { type: 'image', src: img('bfBUPwtLvvm6QWSoaVBGhuEezw', 1600) },
           { type: 'image', src: img('A9M3tgXxg68c2DqXVP5B7peoU0', 1600) },
           { type: 'image', src: img('dx1avfE7wpVXQcWyAoPMfs5VvtM', 1600) },
           { type: 'image', src: img('i3rhojTMqhgewbPs8LOR4Ewi9c', 1600) },
         ],
-        cols: 2,
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
         eyebrow: 'Partners',
         title: 'Brand Partner Cards',
+        // 2 square partner cards
         media: [
           { type: 'image', src: img('hccJPn12kNmnUnlQCi3wpIp7dUI', 1600) },
           { type: 'image', src: img('IGB6zWcaQxm6ReXNgvoF3LOt8', 1600) },
         ],
-        cols: 2,
+        layout: { type: 'uniform', cols: 2, aspect: '1/1' },
       },
     ],
   },
@@ -607,74 +697,97 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Motion',
         title: 'Trailers & Promos',
+        // 4 series trailers at 16:9 — 2 across for prominence
         media: [
-          { type: 'video', src: vid('Yw37NLO1xKxuLc3BFLZZzWkgQc') },
-          { type: 'video', src: vid('XaZegHDXqqcBixPkXhxX95UQzI') },
-          { type: 'video', src: vid('GloFwqsAum9l3DuM2l44DzuPqcQ') },
-          { type: 'video', src: vid('UVgNZoOfRtVKhXN11dlMQJP3Ck') },
+          { type: 'video', src: vid('Yw37NLO1xKxuLc3BFLZZzWkgQc'), aspect: '16/9' },
+          { type: 'video', src: vid('XaZegHDXqqcBixPkXhxX95UQzI'), aspect: '16/9' },
+          { type: 'video', src: vid('GloFwqsAum9l3DuM2l44DzuPqcQ'), aspect: '16/9' },
+          { type: 'video', src: vid('UVgNZoOfRtVKhXN11dlMQJP3Ck'), aspect: '16/9' },
         ],
-        cols: 2,
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
         eyebrow: 'Character Cards',
         title: 'Key Art',
+        // 6 character cards at ~4:5 portrait
         media: [
-          { type: 'image', src: img('sKtr7uRzmThZzKQB0Y4tvdWaAkY') },
-          { type: 'image', src: img('RsyuUFxNSyuC3LfDBe67S2O2l2U') },
-          { type: 'image', src: img('PeeDGfayS7QFYm02uJq5Z29l4U') },
-          { type: 'image', src: img('3rRkPKA1b3sV9QO6RmVXlnu2Spk') },
-          { type: 'image', src: img('Z8qmaK1cRwlqHtyDL8UBb368ozU') },
-          { type: 'image', src: img('hqH68JMyyN6H3h4uce2PGhBq04w') },
+          { type: 'image', src: img('sKtr7uRzmThZzKQB0Y4tvdWaAkY', 1000) },
+          { type: 'image', src: img('RsyuUFxNSyuC3LfDBe67S2O2l2U', 1000) },
+          { type: 'image', src: img('PeeDGfayS7QFYm02uJq5Z29l4U', 1000) },
+          { type: 'image', src: img('3rRkPKA1b3sV9QO6RmVXlnu2Spk', 1000) },
+          { type: 'image', src: img('Z8qmaK1cRwlqHtyDL8UBb368ozU', 1000) },
+          { type: 'image', src: img('hqH68JMyyN6H3h4uce2PGhBq04w', 1000) },
         ],
-        cols: 3,
+        layout: { type: 'uniform', cols: 3, aspect: '4/5' },
       },
       {
         eyebrow: 'Social',
         title: 'Social Assets',
+        // 6 social posts at 4:5
         media: [
-          { type: 'image', src: jpg('pAGwmQHK4M9NgVDsrOOtKUazUM') },
-          { type: 'image', src: jpg('BnguCFt7PUDPd5DTfJTRVwvEQY') },
-          { type: 'image', src: jpg('iUmjyP55AFisJnCTnYXBo0vL9hg') },
-          { type: 'image', src: jpg('BzCMNFj21LOzgOSGaxJ1qJWpEI') },
-          { type: 'image', src: jpg('7XqztdMWYiYeAl6SGvhg1NyaS4') },
-          { type: 'image', src: jpg('TfIIDZZnzqyKxG0VR93DdliRlA') },
+          { type: 'image', src: jpg('pAGwmQHK4M9NgVDsrOOtKUazUM', 1000) },
+          { type: 'image', src: jpg('BnguCFt7PUDPd5DTfJTRVwvEQY', 1000) },
+          { type: 'image', src: jpg('iUmjyP55AFisJnCTnYXBo0vL9hg', 1000) },
+          { type: 'image', src: jpg('BzCMNFj21LOzgOSGaxJ1qJWpEI', 1000) },
+          { type: 'image', src: jpg('7XqztdMWYiYeAl6SGvhg1NyaS4', 1000) },
+          { type: 'image', src: jpg('TfIIDZZnzqyKxG0VR93DdliRlA', 1000) },
         ],
-        cols: 3,
+        layout: { type: 'uniform', cols: 3, aspect: '4/5' },
       },
       {
         eyebrow: 'Print',
         title: 'Posters',
+        // 4 tall posters — they're 6600×8400 which is ~11:14, closer to 4:5
         media: [
-          { type: 'image', src: img('kWR3a7VWmOGOLt89uoLR3ik37hM', 1800) },
-          { type: 'image', src: img('CrPZChQ4g0OQ4xC6ksAsCyUKB2s', 1800) },
-          { type: 'image', src: img('ulIDLVuokoqOYdcaKpnA26UCk1Y', 1800) },
-          { type: 'image', src: img('5YQDoENbVCTRKFQd2BoJjFGHJWg', 1800) },
+          { type: 'image', src: img('kWR3a7VWmOGOLt89uoLR3ik37hM', 1500) },
+          { type: 'image', src: img('CrPZChQ4g0OQ4xC6ksAsCyUKB2s', 1500) },
+          { type: 'image', src: img('ulIDLVuokoqOYdcaKpnA26UCk1Y', 1500) },
+          { type: 'image', src: img('5YQDoENbVCTRKFQd2BoJjFGHJWg', 1500) },
         ],
-        cols: 2,
+        layout: { type: 'uniform', cols: 2, aspect: '4/5' },
       },
       {
         eyebrow: 'Out of Home',
         title: 'Banners & Placements',
-        media: [
-          { type: 'image', src: img('z0afQQwRMQKAw09abIdxjsfMb8', 1600) },
-          { type: 'image', src: img('sprEA0UyYz69wnpzHP7eaTwWd0', 1600) },
-          { type: 'image', src: img('bOjBtqPB9WtPirF6EOC9NiBYT8', 1600) },
-          { type: 'image', src: img('muOmxaxZ80jgcao1BHqovSS9J4', 1600) },
-          { type: 'image', src: img('1RlPb2BIqGyHycFXXRiRFrggqc', 1600) },
-          { type: 'image', src: img('c708fzNSRlPXXhM9CZyhxxAs72Y', 1600) },
-          { type: 'image', src: img('TClLg2aOR9Kwk0OOuXBiYS1x6I', 1600) },
-        ],
-        cols: 2,
+        body: 'Mixed-format out-of-home placements: ultra-wide horizontal banners and city panel placements.',
+        // Mixed: 3 ultra-wide banners (1200×460 ≈ 21/8 — use 3/1 close enough),
+        // then 3 nearly-4:3 (1450×1080) + 1 4:3 (1200×900) → mixed rows
+        media: [],
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 1,
+              aspect: '3/1',
+              media: [
+                { type: 'image', src: img('z0afQQwRMQKAw09abIdxjsfMb8', 2000) },
+                { type: 'image', src: img('sprEA0UyYz69wnpzHP7eaTwWd0', 2000) },
+                { type: 'image', src: img('bOjBtqPB9WtPirF6EOC9NiBYT8', 2000) },
+              ],
+            },
+            {
+              cols: 2,
+              aspect: '4/3',
+              media: [
+                { type: 'image', src: img('muOmxaxZ80jgcao1BHqovSS9J4', 1600) },
+                { type: 'image', src: img('1RlPb2BIqGyHycFXXRiRFrggqc', 1600) },
+                { type: 'image', src: img('c708fzNSRlPXXhM9CZyhxxAs72Y', 1600) },
+                { type: 'image', src: img('TClLg2aOR9Kwk0OOuXBiYS1x6I', 1600) },
+              ],
+            },
+          ],
+        },
       },
       {
         eyebrow: 'Stickers',
         title: 'Sticker Set',
+        // 3 stickers — 2 are 1:1, 1 is 600×659 (close enough to 1:1)
         media: [
-          { type: 'image', src: img('9ZD5RETiuyP0dfDMRgRfC00j9SQ') },
-          { type: 'image', src: img('6sWKyIr98rlHBt0xBlKoMOOM6c') },
-          { type: 'image', src: img('OA0jQ6JMkcnNBZOE1RFM7hN0E7M') },
+          { type: 'image', src: img('9ZD5RETiuyP0dfDMRgRfC00j9SQ', 800) },
+          { type: 'image', src: img('6sWKyIr98rlHBt0xBlKoMOOM6c', 800) },
+          { type: 'image', src: img('OA0jQ6JMkcnNBZOE1RFM7hN0E7M', 800) },
         ],
-        cols: 3,
+        layout: { type: 'uniform', cols: 3, aspect: '1/1' },
       },
     ],
   },
@@ -697,87 +810,110 @@ export const PROJECTS: Project[] = [
         eyebrow: '01',
         title: 'Visual Identity',
         body: "Voltage's visual identity is built to reflect the bold, high-energy personality of the drink itself. The logotype features heavy geometric letterforms with sharp angles and strong contrast, evoking power and clarity. The custom wordmark is paired with an electric bolt icon integrated into the letter \"L,\" a subtle nod to the energy theme and the lemon-powered origin of the brand.\n\nAzo Sans and Azo Sans Uber serve as the primary typefaces. A stylized circuit-board pattern reinforces the brand's core message: \"Shockingly Refreshing.\"",
+        // Tall 9:16 brand sheet — single column
         media: [{ type: 'image', src: img('JE4wdFyL0g8XA0wKwjzvL7Fr6Kw', 1800) }],
-        cols: 1,
+        layout: { type: 'uniform', cols: 1, aspect: '9/16' },
       },
       {
         eyebrow: '02',
         title: 'Can Labels',
         body: 'Each Voltage flavor features a fully custom label combining bold typography, vibrant color palettes, and an electrified theme rooted in energy and citrus power. Each flavor (Strawberry, Blueberry, Peach, and Lemon) is color-coded for instant recognition.',
+        // 4 labels at 4:3 landscape
         media: [
-          { type: 'image', src: img('b0RISJkOQ06NfekAq9PGK7niGY', 1800) },
-          { type: 'image', src: img('ugnmRQVWw3CWozlQbyR55DGsv0', 1800) },
-          { type: 'image', src: img('BlYdM6ZKjZiJsbZyeZctpvL0Uuo', 1800) },
-          { type: 'image', src: img('jcHMRddOVC9QjKlsc7tv0eFpeQ', 1800) },
+          { type: 'image', src: img('b0RISJkOQ06NfekAq9PGK7niGY', 1600) },
+          { type: 'image', src: img('ugnmRQVWw3CWozlQbyR55DGsv0', 1600) },
+          { type: 'image', src: img('BlYdM6ZKjZiJsbZyeZctpvL0Uuo', 1600) },
+          { type: 'image', src: img('jcHMRddOVC9QjKlsc7tv0eFpeQ', 1600) },
         ],
-        cols: 2,
+        layout: { type: 'uniform', cols: 2, aspect: '4/3' },
       },
       {
         eyebrow: '03',
         title: '3D Can Models',
         body: 'A full set of 3D can models built in Blender. Each render showcases a different flavor — Lemonade, Strawberry Lemonade, Blueberry Lemonade, and Peach Lemonade — highlighting the distinct color palette and unified circuit-inspired label design.',
+        // 4 Blender renders at 16:9
         media: [
           { type: 'image', src: img('DQoikkO2pmXgGZqK0C4JXpTXjY4', 1600) },
           { type: 'image', src: img('Ae5O0G0pqUGLMwDJwXCyFkWCIo', 1600) },
           { type: 'image', src: img('ixUsn96PqPUOQxPypggvH1hY2s', 1600) },
           { type: 'image', src: img('KVXSJK40riHyu7o3HrJWOc8no', 1600) },
         ],
-        cols: 2,
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
         eyebrow: '04',
         title: '3D Model Process',
         body: 'Inside-Blender screenshots showing visualization and process.',
+        // 4 Blender screenshots — 16:9 close enough (4064×2334 ≈ 16:9.2)
         media: [
           { type: 'image', src: img('KUvAzmVSKQrKSfNJ68gGGnY3W1g', 1800) },
           { type: 'image', src: img('beqAjn3BjrgHM8zEyckPaytyDzw', 1800) },
           { type: 'image', src: img('81whZzcoHGxIRSiltaiQzOwaKb0', 1800) },
           { type: 'image', src: img('9A34yn7ONpdUb0xICguoU7pQcc', 1800) },
         ],
-        cols: 2,
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
         eyebrow: '05',
         title: '3D Animations',
         body: 'Animated 3D can rotations built in Blender — looping showcases highlighting label detail, bold typography, and metallic finish.',
+        // 4 looping GIFs at 1:1
         media: [
           { type: 'image', src: gif('6idmvhzQMhJJb5FmolwQjv0Uk') },
           { type: 'image', src: gif('59FXvX8bHcz6aiYEV5VFhLsuMPc') },
           { type: 'image', src: gif('oZaJB5BOn9vdJrwj5dwKAAUg4') },
           { type: 'image', src: gif('dTUDXX9UJw9CA4Vr6hVEyPiFX6g') },
         ],
-        cols: 4,
+        layout: { type: 'uniform', cols: 4, aspect: '1/1' },
       },
       {
         eyebrow: '06',
         title: 'Marketing',
         body: 'Promotional posters built around 3D can renders layered over a custom circuit-board pattern.',
+        // 4 tall posters at 2:3 (3300×5100)
         media: [
-          { type: 'image', src: jpg('E8Yv14zoATUufB8yRHLhbxXD0', 1600) },
-          { type: 'image', src: jpg('EqdZfJalSYUE7xatLqGFI9E1yrw', 1600) },
-          { type: 'image', src: jpg('wuZV97Vl9FmsIR6e0nFmxrtuZwY', 1600) },
-          { type: 'image', src: jpg('X1ibuLh4fLYjxyDyBDOKk6dRAw', 1600) },
+          { type: 'image', src: jpg('E8Yv14zoATUufB8yRHLhbxXD0', 1400) },
+          { type: 'image', src: jpg('EqdZfJalSYUE7xatLqGFI9E1yrw', 1400) },
+          { type: 'image', src: jpg('wuZV97Vl9FmsIR6e0nFmxrtuZwY', 1400) },
+          { type: 'image', src: jpg('X1ibuLh4fLYjxyDyBDOKk6dRAw', 1400) },
         ],
-        cols: 4,
+        layout: { type: 'uniform', cols: 4, aspect: '2/3' },
       },
       {
         eyebrow: '07',
         title: 'Marketing Visualization',
         body: 'Mockups visualizing the Voltage campaign in real-world environments — sidewalks, subway stations, cafés, outdoor walls.',
-        media: [
-          { type: 'image', src: img('IpI82P0dP2tZgXSG9I6Mks1IJtE', 1600) },
-          { type: 'image', src: img('zbcLbTwFqnwn06TRxdXhryWLLo', 1600) },
-          { type: 'image', src: img('4GlJStWiYO5TRCWEog9C5UOq0', 1600) },
-          { type: 'image', src: img('B0dJI8FyWq9UYskJ7JsR3oWxVgI', 1800) },
-        ],
-        cols: 2,
+        // 3 mockups at 16:9 + 1 at 4:3 → mixed
+        media: [],
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 2,
+              aspect: '16/9',
+              media: [
+                { type: 'image', src: img('IpI82P0dP2tZgXSG9I6Mks1IJtE', 1600) },
+                { type: 'image', src: img('zbcLbTwFqnwn06TRxdXhryWLLo', 1600) },
+                { type: 'image', src: img('4GlJStWiYO5TRCWEog9C5UOq0', 1600) },
+              ],
+            },
+            {
+              cols: 1,
+              aspect: '4/3',
+              media: [
+                { type: 'image', src: img('B0dJI8FyWq9UYskJ7JsR3oWxVgI', 1800) },
+              ],
+            },
+          ],
+        },
       },
       {
         eyebrow: '08',
         title: 'Promotional Video',
         body: 'Short-form video introducing the Voltage brand with bold energy — 3D cans, kinetic typography, and a pulsing electronic soundtrack.',
-        media: [{ type: 'video', src: vid('lt6cuzs8UMkuQy4AWDxo3d5Djpo') }],
-        cols: 1,
+        // Promotional video at 16:9
+        media: [{ type: 'video', src: vid('lt6cuzs8UMkuQy4AWDxo3d5Djpo'), aspect: '16/9' }],
+        layout: { type: 'uniform', cols: 1, aspect: '16/9' },
       },
     ],
   },
@@ -800,37 +936,55 @@ export const PROJECTS: Project[] = [
         eyebrow: '01',
         title: 'Air Jordan 1',
         body: 'A personal 3D project recreating the classic Air Jordan 1 in Blender. Focused on realistic textures, accurate proportions, and brand-authentic details for use in product visualization and other assets.',
+        // 4 Blender renders at 16:9
         media: [
           { type: 'image', src: jpg('j8y8xAfZOZidHy4aAQmt91XtGvI', 1600) },
           { type: 'image', src: jpg('tpvT1204NNfrqGFeldX6NSly8k', 1600) },
           { type: 'image', src: jpg('ukz59voeVUcYhAHEotViWcxeRU', 1600) },
           { type: 'image', src: jpg('3NYPi1Ly6MIp21jM4cUIToSZSTc', 1600) },
         ],
-        cols: 2,
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
         eyebrow: '02',
         title: '3D Model Process',
         body: 'Inside-Blender screenshots showing visualization and process.',
+        // 4 Blender screenshots — 16:9 close enough
         media: [
           { type: 'image', src: img('cDhoWJ08o4OgQYnHNUuO8i1Otw', 1600) },
           { type: 'image', src: img('Wu9K2XarX7icedaH1nC33q1XmXw', 1600) },
           { type: 'image', src: img('9z7nH5jIOSAua7j4tov2b2zkK4c', 1600) },
           { type: 'image', src: img('2YfGqZHq8Y8qiGth2KktSlXHDRU', 1600) },
         ],
-        cols: 2,
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
         eyebrow: '03',
         title: 'Air Max Posters',
         body: 'A bold, stylized poster campaign celebrating the iconic Air Max silhouette. Each composition emphasizes a unique colorway with expressive typography, gritty textures, and retro-inspired energy.',
-        media: [
-          { type: 'image', src: jpg('A5Se6fUdCaMnLFO6jkdvMdiS23A', 1400) },
-          { type: 'image', src: jpg('zkXcQf10CivlKH176ChPC2biPI', 1400) },
-          { type: 'image', src: jpg('woPn8PRw8tjGw0aaU6zCjZt4oKo', 1400) },
-          { type: 'image', src: jpg('02d64IOjIvc0yd2SQnEAoNdjm8', 1800) },
-        ],
-        cols: 2,
+        // Mixed: 3 tall posters at 2:3 + 1 ultra-wide banner at 2:1
+        media: [],
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 3,
+              aspect: '2/3',
+              media: [
+                { type: 'image', src: jpg('A5Se6fUdCaMnLFO6jkdvMdiS23A', 1200) },
+                { type: 'image', src: jpg('zkXcQf10CivlKH176ChPC2biPI', 1200) },
+                { type: 'image', src: jpg('woPn8PRw8tjGw0aaU6zCjZt4oKo', 1200) },
+              ],
+            },
+            {
+              cols: 1,
+              aspect: '2/1',
+              media: [
+                { type: 'image', src: jpg('02d64IOjIvc0yd2SQnEAoNdjm8', 2000) },
+              ],
+            },
+          ],
+        },
       },
     ],
   },
