@@ -1,13 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { PROJECTS, POPULAR, getProject } from '@/lib/projects';
 import { usePlayer } from '@/lib/player-context';
 import { AlbumCard, FeaturedCard } from '@/components/album-card';
 import { PlayIcon, ShuffleIcon, VerifiedIcon } from '@/components/icons';
 
 export default function HomePage() {
-  const { playFrom, shufflePlay } = usePlayer();
+  const router = useRouter();
+  const { playFrom } = usePlayer();
 
   // Featured row stays the same — first 3 from POPULAR
   const featured = POPULAR.slice(0, 3)
@@ -17,6 +19,16 @@ export default function HomePage() {
   // Split catalog into Side A (professional) and Side B (personal)
   const sideA = PROJECTS.filter((p) => p.kind === 'professional');
   const sideB = PROJECTS.filter((p) => p.kind === 'personal');
+
+  // Click handlers — these update the player AND navigate to the project page
+  const goToProject = (id: string) => {
+    playFrom(id);
+    router.push(`/work/${id}`);
+  };
+  const goToRandomProject = () => {
+    const random = PROJECTS[Math.floor(Math.random() * PROJECTS.length)];
+    goToProject(random.id);
+  };
 
   return (
     <div>
@@ -52,16 +64,16 @@ export default function HomePage() {
 
           <div className="flex items-center gap-4 flex-none">
             <button
-              onClick={() => playFrom(POPULAR[0])}
+              onClick={() => goToProject(POPULAR[0])}
               className="w-[52px] h-[52px] rounded-full bg-gradient-to-br from-accent via-cyan to-magenta flex items-center justify-center flex-none shadow-[0_8px_24px_-6px_rgba(200,241,53,0.5)] hover:scale-[1.06] active:scale-[0.96] transition-transform"
-              aria-label="Play"
+              aria-label="Play featured project"
             >
               <PlayIcon className="w-[22px] h-[22px] fill-accent-ink" />
             </button>
             <button
-              onClick={shufflePlay}
+              onClick={goToRandomProject}
               className="text-muted hover:text-text hover:scale-[1.08] transition-all"
-              aria-label="Shuffle"
+              aria-label="Shuffle to a random project"
             >
               <ShuffleIcon className="w-7 h-7" />
             </button>

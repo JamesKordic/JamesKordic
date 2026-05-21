@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
 import { usePlayer } from '@/lib/player-context';
-import { getProject, fmtTime } from '@/lib/projects';
+import { PROJECTS, getProject, fmtTime } from '@/lib/projects';
 import {
   ShuffleIcon,
   PrevIcon,
@@ -17,13 +18,32 @@ import {
 } from './icons';
 
 export function PlayerBar() {
-  const { state, togglePlay, prev, next, toggleShuffle, toggleRepeat, seek, setVol, toggleLike } =
+  const router = useRouter();
+  const { state, togglePlay, toggleShuffle, toggleRepeat, seek, setVol, toggleLike, playFrom } =
     usePlayer();
   const barRef = useRef<HTMLDivElement>(null);
   const volRef = useRef<HTMLDivElement>(null);
 
   const p = getProject(state.id);
   if (!p) return null;
+
+  // Compute the prev/next project ids based on the current id's position in
+  // PROJECTS. Wraps around at the boundaries. These are used to BOTH update
+  // the player state and navigate the browser to that project's page.
+  const currentIdx = PROJECTS.findIndex((proj) => proj.id === state.id);
+  const prevIdx = (currentIdx - 1 + PROJECTS.length) % PROJECTS.length;
+  const nextIdx = (currentIdx + 1) % PROJECTS.length;
+  const prevId = PROJECTS[prevIdx].id;
+  const nextId = PROJECTS[nextIdx].id;
+
+  const goPrev = () => {
+    playFrom(prevId);
+    router.push(`/work/${prevId}`);
+  };
+  const goNext = () => {
+    playFrom(nextId);
+    router.push(`/work/${nextId}`);
+  };
 
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!barRef.current) return;
@@ -86,9 +106,9 @@ export function PlayerBar() {
             <ShuffleIcon className="w-[18px] h-[18px]" />
           </button>
           <button
-            onClick={prev}
+            onClick={goPrev}
             className="text-muted hover:text-text transition-all hover:scale-[1.1]"
-            aria-label="Previous"
+            aria-label="Previous project"
           >
             <PrevIcon className="w-[18px] h-[18px]" />
           </button>
@@ -104,9 +124,9 @@ export function PlayerBar() {
             )}
           </button>
           <button
-            onClick={next}
+            onClick={goNext}
             className="text-muted hover:text-text transition-all hover:scale-[1.1]"
-            aria-label="Next"
+            aria-label="Next project"
           >
             <NextIcon className="w-[18px] h-[18px]" />
           </button>

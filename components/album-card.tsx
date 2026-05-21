@@ -28,13 +28,14 @@ export function AlbumCard({ p, i = 0 }: { p: Project; i?: number }) {
             className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
           />
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
+            onClick={() => {
+              // Updates player state. We don't preventDefault or stopPropagation
+              // because we want the click to bubble up to the parent <Link>
+              // and trigger Next.js navigation to /work/[id].
               playFrom(p.id);
             }}
             className="absolute right-3 bottom-3 w-12 h-12 rounded-full bg-gradient-to-br from-accent via-cyan to-magenta flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-[0_8px_18px_-4px_rgba(0,0,0,0.5)] hover:scale-[1.07]"
-            aria-label={`Play ${p.title}`}
+            aria-label={`Open ${p.title}`}
           >
             <PlayIcon className="w-5 h-5 fill-accent-ink" />
           </button>
@@ -107,13 +108,14 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
             priority={i < 3}
           />
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
+            onClick={() => {
+              // Updates player state. We don't preventDefault or stopPropagation
+              // because we want the click to bubble up to the parent <Link>
+              // and trigger Next.js navigation to /work/[id].
               playFrom(p.id);
             }}
             className={`absolute right-4 bottom-4 w-14 h-14 rounded-full flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-[0_8px_18px_-4px_rgba(0,0,0,0.5)] hover:scale-[1.07] ${playGradient}`}
-            aria-label={`Play ${p.title}`}
+            aria-label={`Open ${p.title}`}
           >
             <PlayIcon className="w-6 h-6 fill-accent-ink" />
           </button>
