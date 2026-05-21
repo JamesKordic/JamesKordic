@@ -21,21 +21,29 @@ export default function HomePage() {
   return (
     <div>
       {/* COMPACT ARTIST STRIP */}
-      <header
-        className="relative px-5 lg:px-8 pt-20 pb-6 flex items-end"
-        style={{
-          background:
-            'radial-gradient(120% 150% at 12% 0%, rgba(200,241,53,0.22), transparent 55%), linear-gradient(180deg,#3b3d2e 0%, #1a1a1d 78%)',
-        }}
-      >
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 w-full">
+      <header className="relative px-5 lg:px-8 pt-20 pb-6 flex items-end overflow-hidden bg-bg">
+        {/* Animated mesh gradient backdrop */}
+        <div className="mesh-bg" aria-hidden>
+          <span className="blob" />
+        </div>
+        {/* Subtle dark vignette on top so text stays readable */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(8,8,12,0.55) 0%, rgba(8,8,12,0.3) 50%, rgba(8,8,12,0.85) 100%)',
+          }}
+          aria-hidden
+        />
+
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 w-full">
           <div>
             <div className="flex items-center gap-2 text-[12px] font-semibold mb-2">
               <VerifiedIcon className="w-[18px] h-[18px]" />
               <span>Verified Designer</span>
             </div>
             <h1 className="font-display font-extrabold leading-[0.95] tracking-[-0.03em] text-[44px] sm:text-[64px] lg:text-[80px]">
-              James <em className="not-italic text-accent">Kordic</em>
+              James <em className="not-italic gradient-text">Kordic</em>
             </h1>
             <p className="text-[14px] text-muted mt-2 max-w-md">
               New York-based Graphic & Motion Designer · {PROJECTS.length} projects · Work for Taco Bell, FX, MNRK Heavy, The Syndicate
@@ -45,7 +53,7 @@ export default function HomePage() {
           <div className="flex items-center gap-4 flex-none">
             <button
               onClick={() => playFrom(POPULAR[0])}
-              className="w-[52px] h-[52px] rounded-full bg-accent flex items-center justify-center flex-none shadow-[0_8px_24px_-6px_rgba(200,241,53,0.5)] hover:scale-[1.06] active:scale-[0.96] transition-transform"
+              className="w-[52px] h-[52px] rounded-full bg-gradient-to-br from-accent via-cyan to-magenta flex items-center justify-center flex-none shadow-[0_8px_24px_-6px_rgba(200,241,53,0.5)] hover:scale-[1.06] active:scale-[0.96] transition-transform"
               aria-label="Play"
             >
               <PlayIcon className="w-[22px] h-[22px] fill-accent-ink" />
@@ -93,6 +101,7 @@ export default function HomePage() {
         title="Professional client work"
         sub="Commissioned work for music, entertainment, food, and tech brands."
         projects={sideA}
+        theme="magenta"
       />
 
       {/* SIDE B — PERSONAL WORK */}
@@ -101,13 +110,43 @@ export default function HomePage() {
         title="Personal work"
         sub="Concepts, capstones, and self-initiated explorations."
         projects={sideB}
+        theme="cyan"
       />
 
       {/* CALL TO ACTION — full-energy panel that pops out of the page */}
       <section className="px-5 lg:px-8 pt-14 pb-12">
-        <div className="relative bg-accent text-accent-ink rounded-2xl overflow-hidden">
+        <div className="relative rounded-2xl overflow-hidden">
+          {/* Multi-color gradient base — slowly drifting */}
+          <div
+            className="absolute inset-0 animate-gradient-drift"
+            style={{
+              background:
+                'linear-gradient(120deg, #c8f135 0%, #22d3ee 35%, #8b5cf6 65%, #ff2d8a 100%)',
+              backgroundSize: '200% 200%',
+            }}
+            aria-hidden
+          />
+
+          {/* Layered radial highlights for depth */}
+          <div
+            className="absolute -top-32 -right-20 w-[420px] h-[420px] rounded-full pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%)',
+            }}
+            aria-hidden
+          />
+          <div
+            className="absolute -bottom-32 -left-20 w-[380px] h-[380px] rounded-full pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(255,184,74,0.4) 0%, transparent 70%)',
+            }}
+            aria-hidden
+          />
+
           {/* Background equalizer pattern */}
-          <div className="absolute inset-0 pointer-events-none opacity-[0.08]" aria-hidden>
+          <div className="absolute inset-0 pointer-events-none opacity-[0.10]" aria-hidden>
             <div className="absolute inset-0 flex items-end justify-around gap-1 px-4">
               {Array.from({ length: 32 }).map((_, i) => (
                 <span
@@ -121,17 +160,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Soft radial highlight in the corner */}
-          <div
-            className="absolute -top-32 -right-20 w-[420px] h-[420px] rounded-full pointer-events-none opacity-30"
-            style={{
-              background:
-                'radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%)',
-            }}
-            aria-hidden
-          />
-
-          <div className="relative px-6 py-10 lg:px-12 lg:py-14">
+          <div className="relative text-accent-ink px-6 py-10 lg:px-12 lg:py-14">
             {/* Availability status pill */}
             <div className="inline-flex items-center gap-2 bg-accent-ink text-accent font-bold text-[11px] tracking-[0.14em] uppercase px-3 py-1.5 rounded-full mb-6">
               <span className="relative flex h-2 w-2">
@@ -167,7 +196,7 @@ export default function HomePage() {
                   </svg>
                   Jkordic@me.com
                 </span>
-                <span className="w-9 h-9 rounded-full bg-accent text-accent-ink flex items-center justify-center font-bold text-[18px] group-hover:rotate-[-12deg] transition-transform">
+                <span className="w-9 h-9 rounded-full bg-gradient-to-br from-accent via-cyan to-magenta text-accent-ink flex items-center justify-center font-bold text-[18px] group-hover:rotate-[-12deg] transition-transform">
                   →
                 </span>
               </a>
@@ -244,27 +273,40 @@ export default function HomePage() {
 /**
  * Catalog "side" — A or B. Mimics the visual rhythm of a vinyl record:
  * a small tag label ("Side A"), a real heading, and the grid below.
+ * The theme prop tints the side label with a colored gradient.
  */
 function CatalogSide({
   label,
   title,
   sub,
   projects,
+  theme,
 }: {
   label: string;
   title: string;
   sub: string;
   projects: typeof PROJECTS;
+  theme: 'magenta' | 'cyan';
 }) {
+  const chipGradient =
+    theme === 'magenta'
+      ? 'bg-gradient-to-r from-magenta via-amber to-accent'
+      : 'bg-gradient-to-r from-cyan via-violet to-magenta';
+
+  const dotColor = theme === 'magenta' ? 'bg-magenta' : 'bg-cyan';
+
   return (
     <section className="px-5 lg:px-8 pt-10 pb-4">
       <div className="flex items-end justify-between gap-4 mb-4">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="text-[10px] font-bold tracking-[0.18em] uppercase bg-accent text-accent-ink px-2 py-1 rounded-sm">
+            <span
+              className={`text-[10px] font-bold tracking-[0.18em] uppercase text-accent-ink px-2.5 py-1 rounded-sm ${chipGradient}`}
+            >
               {label}
             </span>
-            <span className="text-[10.5px] font-bold tracking-[0.07em] uppercase text-muted-2">
+            <span className="flex items-center gap-1.5 text-[10.5px] font-bold tracking-[0.07em] uppercase text-muted-2">
+              <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`} />
               {projects.length} {projects.length === 1 ? 'release' : 'releases'}
             </span>
           </div>

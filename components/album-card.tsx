@@ -33,7 +33,7 @@ export function AlbumCard({ p, i = 0 }: { p: Project; i?: number }) {
               e.stopPropagation();
               playFrom(p.id);
             }}
-            className="absolute right-3 bottom-3 w-12 h-12 rounded-full bg-accent flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-[0_8px_18px_-4px_rgba(0,0,0,0.5)] hover:scale-[1.07]"
+            className="absolute right-3 bottom-3 w-12 h-12 rounded-full bg-gradient-to-br from-accent via-cyan to-magenta flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-[0_8px_18px_-4px_rgba(0,0,0,0.5)] hover:scale-[1.07]"
             aria-label={`Play ${p.title}`}
           >
             <PlayIcon className="w-5 h-5 fill-accent-ink" />
@@ -69,13 +69,34 @@ export function AlbumCard({ p, i = 0 }: { p: Project; i?: number }) {
  */
 export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
   const { playFrom } = usePlayer();
+  // Rotate the play-button gradient across the 3 featured cards so each feels distinct
+  const playGradient =
+    i === 0
+      ? 'bg-gradient-to-br from-accent via-cyan to-magenta'
+      : i === 1
+        ? 'bg-gradient-to-br from-magenta via-amber to-accent'
+        : 'bg-gradient-to-br from-cyan via-violet to-magenta';
 
   return (
     <div className="stagger" style={{ animationDelay: `${i * 70}ms` }}>
       <Link
         href={`/work/${p.id}`}
-        className="group block bg-panel hover:bg-elev rounded-xl p-4 lg:p-5 transition-colors"
+        className="group block bg-panel hover:bg-elev rounded-xl p-4 lg:p-5 transition-all relative"
       >
+        {/* Soft colored glow that appears on hover */}
+        <div
+          className="absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10 blur-2xl"
+          style={{
+            background:
+              i === 0
+                ? 'linear-gradient(135deg, rgba(200,241,53,0.4), rgba(34,211,238,0.4))'
+                : i === 1
+                  ? 'linear-gradient(135deg, rgba(255,45,138,0.4), rgba(255,184,74,0.4))'
+                  : 'linear-gradient(135deg, rgba(34,211,238,0.4), rgba(139,92,246,0.4))',
+          }}
+          aria-hidden
+        />
+
         <div className="relative mb-5 rounded-lg overflow-hidden shadow-[0_16px_40px_-12px_rgba(0,0,0,0.7)] aspect-square bg-panel-2">
           <Image
             src={p.cover}
@@ -91,12 +112,13 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
               e.stopPropagation();
               playFrom(p.id);
             }}
-            className="absolute right-4 bottom-4 w-14 h-14 rounded-full bg-accent flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-[0_8px_18px_-4px_rgba(0,0,0,0.5)] hover:scale-[1.07]"
+            className={`absolute right-4 bottom-4 w-14 h-14 rounded-full flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-[0_8px_18px_-4px_rgba(0,0,0,0.5)] hover:scale-[1.07] ${playGradient}`}
             aria-label={`Play ${p.title}`}
           >
             <PlayIcon className="w-6 h-6 fill-accent-ink" />
           </button>
-          <div className="absolute top-3 left-3 text-[10px] font-bold tracking-[0.14em] uppercase bg-accent text-accent-ink px-2 py-1 rounded-sm">
+          {/* Gradient FEATURED badge */}
+          <div className="absolute top-3 left-3 text-[10px] font-bold tracking-[0.14em] uppercase bg-gradient-to-r from-accent via-cyan to-magenta text-accent-ink px-2 py-1 rounded-sm">
             Featured
           </div>
         </div>
@@ -120,9 +142,9 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
               {tag}
             </span>
           ))}
-          <span className="ml-auto text-[11.5px] font-semibold text-accent flex items-center gap-1 group-hover:gap-2 transition-all">
+          <span className="ml-auto text-[11.5px] font-semibold gradient-text-static flex items-center gap-1 group-hover:gap-2 transition-all">
             View case study
-            <span aria-hidden>→</span>
+            <span aria-hidden className="text-accent">→</span>
           </span>
         </div>
       </Link>

@@ -29,16 +29,19 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   return (
     <div>
       {/* Hero */}
-      <header
-        className="flex flex-col lg:flex-row items-start lg:items-end gap-[18px] lg:gap-[26px] px-5 lg:px-8 pt-[74px] lg:pt-[80px] pb-[26px]"
-        style={{
-          background: `linear-gradient(180deg,${p.themeColor}aa,transparent 240px)`,
-        }}
-      >
-        <div className="w-[170px] h-[170px] lg:w-[226px] lg:h-[226px] flex-none rounded-lg overflow-hidden shadow-[0_24px_50px_-14px_rgba(0,0,0,0.8)] bg-panel-2 relative">
+      <header className="relative flex flex-col lg:flex-row items-start lg:items-end gap-[18px] lg:gap-[26px] px-5 lg:px-8 pt-[74px] lg:pt-[80px] pb-[26px] overflow-hidden">
+        {/* Per-project mesh gradient backdrop (uses themeColor) */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          aria-hidden
+          style={{
+            background: `radial-gradient(ellipse at 15% 20%, ${p.themeColor}77 0%, transparent 50%), radial-gradient(ellipse at 85% 30%, rgba(34,211,238,0.25) 0%, transparent 55%), radial-gradient(ellipse at 50% 100%, rgba(139,92,246,0.20) 0%, transparent 60%), linear-gradient(180deg, ${p.themeColor}22 0%, transparent 80%)`,
+          }}
+        />
+        <div className="relative z-10 w-[170px] h-[170px] lg:w-[226px] lg:h-[226px] flex-none rounded-lg overflow-hidden shadow-[0_24px_50px_-14px_rgba(0,0,0,0.8)] bg-panel-2">
           <Image src={p.cover} alt={`${p.title} cover`} fill sizes="226px" className="object-cover" priority />
         </div>
-        <div className="min-w-0 pb-[6px] flex-1">
+        <div className="relative z-10 min-w-0 pb-[6px] flex-1">
           <div className="text-[12px] font-bold tracking-[0.05em] uppercase">
             Case Study · {p.tags[0]}
           </div>
