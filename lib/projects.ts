@@ -1,16 +1,54 @@
 // All project content sourced from jameskordic.com
 // Assets are served from Framer's CDN; swap to local paths if you self-host.
 
+/* ============ MEDIA TYPES ============ */
 export type Media =
-  | { type: 'image'; src: string }
-  | { type: 'video'; src: string };
+  | { type: 'image'; src: string; aspect?: AspectRatio }
+  | { type: 'video'; src: string; aspect?: AspectRatio }
+  | { type: 'embed'; src: string; aspect?: AspectRatio; label?: string };
+
+/* Allowed aspect ratios — keeps the visual rhythm controllable */
+export type AspectRatio =
+  | '16/9'
+  | '4/3'
+  | '3/2'
+  | '1/1'
+  | '4/5'
+  | '2/3'
+  | '3/4'
+  | '9/16'
+  | '21/9';
+
+/* ============ SECTION LAYOUTS ============ */
+
+/* A "row" inside a mixed-layout section — its own column count + aspect.
+ * Used when a section has images of different shapes that need grouping. */
+export type GridRow = {
+  cols: 1 | 2 | 3 | 4;
+  aspect: AspectRatio;
+  media: Media[];
+};
+
+/* Three layout flavors for the new system:
+ *  - uniform: every tile shares one column count and aspect ratio (clean grid)
+ *  - mixed: rows with different col/aspect combos for mixed media
+ *  - legacy: the old `cols` number, used by projects not yet migrated
+ */
+export type Layout =
+  | { type: 'uniform'; cols: 1 | 2 | 3 | 4; aspect: AspectRatio }
+  | { type: 'mixed'; rows: GridRow[] }
+  | { type: 'legacy'; cols: 1 | 2 | 3 | 4 };
 
 export type Section = {
   eyebrow?: string;
   title: string;
   body?: string;
+  /** Media array — used when layout is uniform or for legacy projects. */
   media: Media[];
-  cols: 1 | 2 | 3 | 4;
+  /** New layout descriptor. If provided, takes precedence over `cols`. */
+  layout?: Layout;
+  /** @deprecated Use layout instead. Kept for backward compatibility. */
+  cols?: 1 | 2 | 3 | 4;
 };
 
 export type ProjectKind = 'professional' | 'personal';
@@ -135,44 +173,86 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '01',
         title: 'Visual Identity',
-        body: "The primary logo for WWIMF was built around two core themes: interactivity and music. Bars integrated into the wordmark represent a music visualizer, emphasizing the dynamic and immersive nature of sound central to the festival experience.\n\nA secondary logo extends this concept by combining the visualizer motif with the shape of a hand, a symbol of human interaction, creativity, and expression. The modular design of the bars within the hand allows for customization, reflecting the festival's adaptable and participatory spirit.\n\nWWIMF's typography blends Cityburn Regular with Courier New, creating a balance between experimental energy and technical precision.",
+        body: "The primary logo for WWIMF was built around two core themes: interactivity and music. Bars integrated into the wordmark represent a music visualizer, emphasizing the dynamic and immersive nature of sound central to the festival experience.\n\nA secondary logo extends this concept by combining the visualizer motif with the shape of a hand, a symbol of human interaction, creativity, and expression. The modular design of the bars within the hand allows for customization, reflecting the festival's adaptable and participatory spirit.\n\nWWIMF's typography blends Cityburn Regular with Courier New, creating a balance between experimental energy and technical precision. Cityburn adds a bold, contemporary edge, while Courier New brings a structured, analog feel connecting the identity to both music production and digital interaction. The color system is bold, abstract, and high-energy, using unconventional combinations to echo the festival's immersive and boundary-pushing character. The overall visual system is designed to be flexible, expressive, and suitable across both digital and physical environments.",
         media: [{ type: 'image', src: img('UUebmgTykuRmwaxxSRK1LIPuAk', 1800) }],
-        cols: 1,
+        // Brand sheet is 9:16 portrait — single column, full width
+        layout: {
+          type: 'uniform',
+          cols: 1,
+          aspect: '9/16',
+        },
       },
       {
         eyebrow: '02',
         title: 'Stage Designs',
-        body: 'This spread showcases how architecture, lighting, and digital media can fuse to create fully immersive performance spaces. Through a series of conceptual mock-ups and visual studies, we explore biomorphic structures, theatrical light displays, augmented stages, and reactive installations that invite festival-goers to shape, and be shaped by their surroundings.',
+        body: 'This spread showcases how architecture, lighting, and digital media can fuse to create fully immersive performance spaces. Through a series of conceptual mock-ups and visual studies, we explore biomorphic structures, theatrical light displays, augmented stages, and reactive installations that invite festival-goers to shape, and be shaped by their surroundings. Each design underscores WWIMF\'s commitment to interactivity and multisensory engagement, offering a blueprint for redefining the relationship between music, space, and audience participation on a global scale.',
+        // All 4 images are 16:9 — clean 2x2 grid
         media: [
           { type: 'image', src: img('o97WGHUpa9ixF0VWB0k5MSLrfoo', 1600) },
           { type: 'image', src: img('qPQ3eQuaNTjJmIixnjmhqBpwd6Q', 1600) },
           { type: 'image', src: img('NqkfXXGcBQuZLkaeZfem9RJfaio', 1600) },
           { type: 'image', src: img('WDPbozH0bp0WOLB1FBBUKKZuhYM', 1600) },
         ],
-        cols: 2,
+        layout: {
+          type: 'uniform',
+          cols: 2,
+          aspect: '16/9',
+        },
       },
       {
         eyebrow: '03',
         title: 'Interactive Elements',
-        body: 'At WWIMF, interactivity is central to the experience, transforming attendees from passive spectators into active participants. From touch-responsive environments and immersive tunnels to motion-activated light displays and interactive stages that place audiences beneath the performance itself, every element is designed to react to presence, gesture, and movement.\n\nWearable tech like smart wristbands enables guests to influence live performances and trigger real-time effects.',
-        media: [
-          { type: 'image', src: img('aybJsg9p5A56xYuv6JKk8bLvM', 1600) },
-          { type: 'image', src: img('Mgx0cinXenRjsIoslHuYLr8mg', 1600) },
-          { type: 'image', src: img('X1jzFS77jaBBcIrnTQECBv9rvSU', 1600) },
-          { type: 'image', src: img('BtNPqZMQkzIt5w30cxAOy83jJk8', 1600) },
-        ],
-        cols: 2,
+        body: 'At WWIMF, interactivity is central to the experience, transforming attendees from passive spectators into active participants. From touch-responsive environments and immersive tunnels to motion-activated light displays and interactive stages that place audiences beneath the performance itself, every element is designed to react to presence, gesture, and movement.\n\nWearable tech like smart wristbands enables guests to influence live performances and trigger real-time effects. Glow-in-the-dark pens offer opportunities for spontaneous creativity, allowing attendees to leave their mark on the festival\'s physical environment. These tools, combined with collaborative interfaces, empower co-creation and personal expression.\n\nWWIMF reimagines the live music experience by making the audience an integral part of the performance, blurring the boundaries between art, technology, and human connection.',
+        media: [],
+        // 3 landscape 16:9 + 1 square — split into two rows
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 3,
+              aspect: '16/9',
+              media: [
+                { type: 'image', src: img('aybJsg9p5A56xYuv6JKk8bLvM', 1600) },
+                { type: 'image', src: img('Mgx0cinXenRjsIoslHuYLr8mg', 1600) },
+                { type: 'image', src: img('X1jzFS77jaBBcIrnTQECBv9rvSU', 1600) },
+              ],
+            },
+            {
+              cols: 1,
+              aspect: '1/1',
+              media: [
+                { type: 'image', src: img('BtNPqZMQkzIt5w30cxAOy83jJk8', 1600) },
+              ],
+            },
+          ],
+        },
       },
       {
         eyebrow: '04',
         title: 'Merchandise',
-        body: "WWIMF's merchandise extends the festival's identity into wearable and collectible pieces that blend function, fashion, and interactivity. This section showcases examples including a tote bag, shirt, and festival wristband.",
-        media: [
-          { type: 'image', src: img('tlPJM0dL0bhh0Q91yaVbSJhDM', 1600) },
-          { type: 'image', src: img('xElnq0fSkrSMcOxT7PsQvfu0FbE', 1600) },
-          { type: 'image', src: img('SrsSN7QpTyN8chUaACfrkQqLA', 1600) },
-        ],
-        cols: 3,
+        body: "WWIMF's merchandise extends the festival's identity into wearable and collectible pieces that blend function, fashion, and interactivity. This section showcases examples including a tote bag, shirt, and festival wristband — each designed to reflect the bold, immersive aesthetic of the event.",
+        media: [],
+        // 1 square + 2 landscape 3:2 → split into two rows
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 1,
+              aspect: '1/1',
+              media: [
+                { type: 'image', src: img('tlPJM0dL0bhh0Q91yaVbSJhDM', 2000) },
+              ],
+            },
+            {
+              cols: 2,
+              aspect: '3/2',
+              media: [
+                { type: 'image', src: img('xElnq0fSkrSMcOxT7PsQvfu0FbE', 1800) },
+                { type: 'image', src: img('SrsSN7QpTyN8chUaACfrkQqLA', 1800) },
+              ],
+            },
+          ],
+        },
       },
       {
         eyebrow: '05',
@@ -184,54 +264,90 @@ export const PROJECTS: Project[] = [
           { type: 'image', src: img('Mkx7TGojidK6CkPMAJMAwgTc3Q') },
           { type: 'image', src: img('E9fpj1LaWmYKoK5PcryvoyJGdo') },
         ],
-        cols: 4,
+        // All Instagram posts are 1:1 — clean 4-col row
+        layout: {
+          type: 'uniform',
+          cols: 4,
+          aspect: '1/1',
+        },
       },
       {
         eyebrow: '06',
         title: 'Marketing',
-        body: "Posters designed to showcase the WWIMF daily lineup, highlighting performance dates and featured artists. Each poster balances clarity and visual impact, using bold typography, color coding, and grid-based layouts.",
+        body: "Posters designed to showcase the WWIMF daily lineup, highlighting performance dates and featured artists. Each poster balances clarity and visual impact, using bold typography, color coding, and grid-based layouts to organize information while maintaining the festival's immersive aesthetic. These designs function both as promotional materials and informational tools, crafted to be displayed digitally and in print across festival spaces, social media, and citywide advertising. The goal: to communicate schedule details at a glance while reinforcing the identity of the WWIMF.",
         media: [
-          { type: 'image', src: img('z95EhHshRBIBeZfkAkZ1bhkEONU', 1600) },
-          { type: 'image', src: img('vuKP1K8MvNVJo8MiWI9lybFOvA', 1600) },
-          { type: 'image', src: img('1QuHHwmXoPDzzL9rlzo4N6nrE', 1600) },
+          { type: 'image', src: img('z95EhHshRBIBeZfkAkZ1bhkEONU', 1400) },
+          { type: 'image', src: img('vuKP1K8MvNVJo8MiWI9lybFOvA', 1400) },
+          { type: 'image', src: img('1QuHHwmXoPDzzL9rlzo4N6nrE', 1400) },
         ],
-        cols: 3,
+        // Posters are 2:3 portrait — 3 columns
+        layout: {
+          type: 'uniform',
+          cols: 3,
+          aspect: '2/3',
+        },
       },
       {
         eyebrow: '07',
         title: 'Marketing Visualization',
-        body: "Urban mockups showcasing how WWIMF's lineup posters function in real-world environments — integrated into cityscapes, transit stations, and public walls.",
+        body: "These urban mockups showcase how WWIMF's lineup posters function in real-world environments — integrated into cityscapes, transit stations, and public walls. The placements emphasize visibility, accessibility, and the posters' ability to stand out in diverse, high-traffic settings. Together, these visualizations present a cohesive strategy for extending festival branding beyond the digital space and into the streets, where curiosity, discovery, and engagement begin.",
         media: [
           { type: 'image', src: img('W2IZkcmxISHxaNSOWQ9F9Hv8', 1800) },
           { type: 'image', src: img('IBOdBrAVsLSNJPOK9RmgTbBuW8g', 1800) },
           { type: 'image', src: img('1IoQANhAdu3stz4VErq3a1UlXg', 1800) },
           { type: 'image', src: jpg('YmYwKaLbrN1SU5XyaipJcTVn4ow', 2000) },
         ],
-        cols: 2,
+        // All 3:2 landscape — 2-col grid
+        layout: {
+          type: 'uniform',
+          cols: 2,
+          aspect: '3/2',
+        },
       },
       {
         eyebrow: '08',
         title: 'Animations',
-        body: 'A series of animated visuals created to extend the WWIMF brand into motion. These animations bring the festival\'s identity to life through audio-reactive elements and dynamic transitions.',
-        media: [{ type: 'video', src: vid('Pl1quVl6bu6Uo42E8OOl05tDSjc') }],
-        cols: 1,
+        body: "A series of animated visuals created to extend the WWIMF brand into motion. These animations bring the festival's identity to life through audio-reactive elements and dynamic transitions, mirroring the energy and interactivity at the heart of the event. Designed for use across screens, stage visuals, and social media, these animations reinforce the immersive nature of the festival. Visual motifs from the branding system, like the waveform-inspired pattern and bold color gradients, are animated to pulse, shift, and respond, echoing the rhythm of live music and crowd movement.",
+        media: [{ type: 'video', src: vid('Pl1quVl6bu6Uo42E8OOl05tDSjc'), aspect: '16/9' }],
+        layout: {
+          type: 'uniform',
+          cols: 1,
+          aspect: '16/9',
+        },
       },
       {
         eyebrow: '09',
         title: 'Capstone Show Setup',
-        body: 'Presented at Fusion: 2025 RIT Graphic Design Capstone, this installation showcased the WWIMF brand through a multi-sensory display. The setup included dual-screen animated visuals, printed posters, a branded info poster, and the WWIMF book.',
+        body: 'Presented at Fusion: 2025 RIT Graphic Design Capstone, this installation showcased the WWIMF brand through a multi-sensory display. The setup included dual-screen animated visuals, printed posters, a branded info poster, and the WWIMF book. This exhibition space served as both a culmination of my senior capstone project and a branded environment in itself, bringing the WWIMF concept to life through spatial design.',
         media: [
-          { type: 'image', src: img('Qy3WsjTQu7UQBnFGQ7BRQtxQT3Q', 1600) },
-          { type: 'image', src: img('PmQD3v5WO4MKgqwtUDsCMoQGYw', 1600) },
+          { type: 'image', src: img('Qy3WsjTQu7UQBnFGQ7BRQtxQT3Q', 1400) },
+          { type: 'image', src: img('PmQD3v5WO4MKgqwtUDsCMoQGYw', 1400) },
         ],
-        cols: 2,
+        // Both photos are 3:4 portrait — 2-col grid
+        layout: {
+          type: 'uniform',
+          cols: 2,
+          aspect: '3/4',
+        },
       },
       {
         eyebrow: '10',
         title: 'WWIMF Book',
-        body: 'A conceptual art book serving as the visual heart of the World Wide Interactive Music Festival brand. Read the book at online.fliphtml5.com/gwqwl/oqte',
-        media: [],
-        cols: 1,
+        body: 'This conceptual art book serves as the visual heart of the World Wide Interactive Music Festival brand. Designed to express the spirit of global creativity, connection, and innovation, the book weaves together branding elements, motion stills, interactive concepts, and festival-worldbuilding into one cohesive narrative.',
+        // Embedded FlipHTML5 book — landscape format with native page-turn UI
+        media: [
+          {
+            type: 'embed',
+            src: 'https://online.fliphtml5.com/gwqwl/oqte/index.html',
+            aspect: '16/9',
+            label: 'Open in new tab →',
+          },
+        ],
+        layout: {
+          type: 'uniform',
+          cols: 1,
+          aspect: '16/9',
+        },
       },
     ],
   },

@@ -1,113 +1,248 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useState } from 'react';
-import type { Section, Media } from '@/lib/projects';
+import type { Media, Section, GridRow, AspectRatio } from '@/lib/projects';
 import { useLightbox } from '@/lib/lightbox-context';
+import { VideoPlayer } from './video-player';
+import { EmbedFrame } from './embed-frame';
+
+/* ============ HELPERS ============ */
+
+/** Tailwind class for a column count. Mobile collapses to 1 col by default,
+ *  except for tight grids (4 cols) which keep 2 cols on small screens. */
+function colClasses(cols: 1 | 2 | 3 | 4): string {
+  switch (cols) {
+    case 1:
+      return 'grid-cols-1';
+    case 2:
+      return 'grid-cols-1 sm:grid-cols-2';
+    case 3:
+      return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3';
+    case 4:
+      return 'grid-cols-2 sm:grid-cols-2 md:grid-cols-4';
+  }
+}
+
+/** Inline aspectRatio style — CSS supports any ratio. */
+function aspectStyle(aspect: AspectRatio | string | undefined) {
+  if (!aspect) return undefined;
+  return { aspectRatio: aspect };
+}
+
+/* ============ COMPONENT ============ */
 
 export function CaseSection({ section }: { section: Section }) {
   const { show } = useLightbox();
 
-  // Build list of all media in this section for lightbox navigation
-  const allMedia: Media[] = section.media;
+  /* Flatten all images in this section for lightbox navigation,
+   * traversing both top-level media and any nested row media. */
+  const allImages: Media[] = [];
+  if (section.layout?.type === 'mixed') {
+    section.layout.rows.forEach((row) => {
+      row.media.forEach((m) => {
+        if (m.type === 'image') allImages.push(m);
+      });
+    });
+  } else {
+    section.media.forEach((m) => {
+      if (m.type === 'image') allImages.push(m);
+    });
+  }
+  const indexOfImage = (m: Media) => allImages.indexOf(m);
 
   return (
-    <section className="py-[18px] pb-9 border-b border-line mb-9 last:border-b-0 last:mb-0">
-      {section.eyebrow && (
-        <div className="text-[11px] tracking-[0.16em] uppercase text-accent font-bold mb-[10px]">
-          {section.eyebrow}
-        </div>
-      )}
-      <h2 className="font-display font-extrabold text-[28px] sm:text-[34px] lg:text-[42px] tracking-[-0.025em] leading-[1.04] mb-[18px]">
-        {section.title}
-      </h2>
-      {section.body && (
-        <p className="text-[15.5px] leading-[1.66] text-[#cfcdc7] max-w-[780px] mb-[14px] whitespace-pre-line">
-          {section.body}
-        </p>
-      )}
-      {section.media.length > 0 && (
-        <div
-          className={`mt-6 grid gap-[10px] ${
-            section.cols === 1
-              ? 'grid-cols-1'
-              : section.cols === 2
-                ? 'grid-cols-1 sm:grid-cols-2'
-                : section.cols === 3
-                  ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3'
-                  : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
-          }`}
-        >
-          {section.media.map((m, i) => (
-            <MediaTile key={i} media={m} index={i} all={allMedia} onLightbox={show} />
-          ))}
-        </div>
+    <section className="py-10 lg:py-14 border-b border-line last:border-b-0">
+      {/* Section header */}
+      <div className="mb-8 max-w-3xl">
+        {section.eyebrow && (
+          <div className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted mb-3">
+            <span className="gradient-text-static">{section.eyebrow}</span>
+          </div>
+        )}
+        <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4">
+          {section.title}
+        </h2>
+        {section.body && (
+          <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line">
+            {section.body}
+          </p>
+        )}
+      </div>
+
+      {/* Render based on layout type */}
+      {section.layout?.type === 'mixed' ? (
+        <MixedLayout rows={section.layout.rows} allImages={allImages} onLightbox={show} indexOf={indexOfImage} />
+      ) : section.layout?.type === 'uniform' ? (
+        <UniformLayout
+          cols={section.layout.cols}
+          aspect={section.layout.aspect}
+          media={section.media}
+          allImages={allImages}
+          onLightbox={show}
+          indexOf={indexOfImage}
+        />
+      ) : (
+        /* Legacy: render using old cols prop, no fixed aspect (image's natural h-auto) */
+        <LegacyLayout
+          cols={section.cols || 1}
+          media={section.media}
+          allImages={allImages}
+          onLightbox={show}
+          indexOf={indexOfImage}
+        />
       )}
     </section>
   );
 }
 
+/* ============ LAYOUTS ============ */
+
+function UniformLayout({
+  cols,
+  aspect,
+  media,
+  allImages,
+  onLightbox,
+  indexOf,
+}: {
+  cols: 1 | 2 | 3 | 4;
+  aspect: AspectRatio;
+  media: Media[];
+  allImages: Media[];
+  onLightbox: (items: Media[], i: number) => void;
+  indexOf: (m: Media) => number;
+}) {
+  return (
+    <div className={`grid gap-3 lg:gap-4 ${colClasses(cols)}`}>
+      {media.map((m, i) => (
+        <MediaTile
+          key={i}
+          media={m}
+          aspect={aspect}
+          onLightbox={() => onLightbox(allImages, Math.max(0, indexOf(m)))}
+        />
+      ))}
+    </div>
+  );
+}
+
+function MixedLayout({
+  rows,
+  allImages,
+  onLightbox,
+  indexOf,
+}: {
+  rows: GridRow[];
+  allImages: Media[];
+  onLightbox: (items: Media[], i: number) => void;
+  indexOf: (m: Media) => number;
+}) {
+  return (
+    <div className="space-y-3 lg:space-y-4">
+      {rows.map((row, i) => (
+        <div key={i} className={`grid gap-3 lg:gap-4 ${colClasses(row.cols)}`}>
+          {row.media.map((m, j) => (
+            <MediaTile
+              key={j}
+              media={m}
+              aspect={row.aspect}
+              onLightbox={() => onLightbox(allImages, Math.max(0, indexOf(m)))}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function LegacyLayout({
+  cols,
+  media,
+  allImages,
+  onLightbox,
+  indexOf,
+}: {
+  cols: 1 | 2 | 3 | 4;
+  media: Media[];
+  allImages: Media[];
+  onLightbox: (items: Media[], i: number) => void;
+  indexOf: (m: Media) => number;
+}) {
+  return (
+    <div className={`grid gap-3 lg:gap-4 ${colClasses(cols)}`}>
+      {media.map((m, i) => (
+        <MediaTile
+          key={i}
+          media={m}
+          aspect={undefined /* legacy: natural h-auto */}
+          onLightbox={() => onLightbox(allImages, Math.max(0, indexOf(m)))}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ============ TILE ============ */
+
 function MediaTile({
   media,
-  index,
-  all,
+  aspect,
   onLightbox,
 }: {
   media: Media;
-  index: number;
-  all: Media[];
-  onLightbox: (items: Media[], i: number) => void;
+  aspect?: AspectRatio;
+  onLightbox: () => void;
 }) {
-  const [playing, setPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
   if (media.type === 'video') {
+    return <VideoPlayer src={media.src} aspect={media.aspect || aspect || '16/9'} />;
+  }
+
+  if (media.type === 'embed') {
     return (
-      <div
-        className={`cs-tile relative rounded-lg overflow-hidden bg-panel-2 cursor-pointer hover:-translate-y-0.5 transition-transform aspect-video ${
-          playing ? 'playing-inline' : ''
-        }`}
-        onClick={() => {
-          const v = videoRef.current;
-          if (!v) return;
-          if (v.paused) {
-            v.play();
-            setPlaying(true);
-          } else {
-            v.pause();
-            setPlaying(false);
-          }
-        }}
-      >
-        <video
-          ref={videoRef}
-          src={media.src}
-          preload="metadata"
-          playsInline
-          loop
-          muted
-          onEnded={() => setPlaying(false)}
-          className="w-full h-full object-cover bg-black"
-        />
-        <div className="play-overlay" />
-      </div>
+      <EmbedFrame
+        src={media.src}
+        aspect={media.aspect || aspect || '16/9'}
+        label={media.label}
+      />
     );
   }
 
+  /* Image. The container locks the aspect ratio when provided,
+   * so the image always renders at exactly that shape (no stretching, no cropping). */
+  if (aspect || media.aspect) {
+    return (
+      <button
+        onClick={onLightbox}
+        className="relative w-full bg-panel-2 rounded-lg overflow-hidden cursor-zoom-in group block"
+        style={aspectStyle(media.aspect || aspect)}
+      >
+        <Image
+          src={media.src}
+          alt=""
+          fill
+          sizes="(max-width:600px) 100vw, (max-width:1200px) 50vw, 800px"
+          className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+          unoptimized
+        />
+      </button>
+    );
+  }
+
+  /* Legacy fallback — natural aspect from the source. */
   return (
-    <div
-      className="cs-tile is-image relative rounded-lg overflow-hidden bg-panel-2 cursor-zoom-in hover:-translate-y-0.5 transition-transform"
-      onClick={() => onLightbox(all, index)}
+    <button
+      onClick={onLightbox}
+      className="relative w-full bg-panel-2 rounded-lg overflow-hidden cursor-zoom-in group block"
     >
       <Image
         src={media.src}
         alt=""
         width={1600}
         height={1000}
-        sizes="(max-width:600px) 100vw, (max-width:1200px) 50vw, 33vw"
+        sizes="(max-width:600px) 100vw, (max-width:1200px) 50vw, 800px"
         className="w-full h-auto object-cover"
         unoptimized
       />
-    </div>
+    </button>
   );
 }

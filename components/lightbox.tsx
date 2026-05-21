@@ -63,7 +63,7 @@ export function Lightbox() {
             playsInline
             className="max-w-[96vw] max-h-[90vh] rounded-lg shadow-[0_24px_60px_-14px_rgba(0,0,0,0.7)]"
           />
-        ) : (
+        ) : it.type === 'image' ? (
           // Using a regular <img> in the lightbox so we don't fight next/image sizing
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -71,7 +71,7 @@ export function Lightbox() {
             alt=""
             className="max-w-[96vw] max-h-[90vh] rounded-lg shadow-[0_24px_60px_-14px_rgba(0,0,0,0.7)]"
           />
-        )}
+        ) : null}
       </div>
 
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 text-[#aaa] text-[13px] tabular-nums">
