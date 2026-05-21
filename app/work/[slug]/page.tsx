@@ -91,10 +91,109 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
+        {/* The Brief — case-study intro paragraph block. Only renders when set. */}
+        {p.brief && (
+          <section className="mb-12 lg:mb-16">
+            <div className="flex items-baseline gap-3 mb-5 border-b border-line pb-3">
+              <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted">
+                <span className="gradient-text-static">01</span> · The Brief
+              </span>
+            </div>
+            <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-5 max-w-3xl">
+              {p.brief.eyebrow || 'The Brief'}
+            </h2>
+            <div className="max-w-[760px] space-y-5">
+              <p className="text-[18px] lg:text-[20px] leading-[1.5] text-text">
+                {p.brief.lead}
+              </p>
+              {p.brief.body.map((para, i) => (
+                <p key={i} className="text-[15px] lg:text-[16px] leading-[1.62] text-muted">
+                  {para}
+                </p>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* The Approach — 5-step process flow. */}
+        {p.approach && (
+          <section className="mb-12 lg:mb-16">
+            <div className="flex items-baseline gap-3 mb-5 border-b border-line pb-3">
+              <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted">
+                <span className="gradient-text-static">02</span> · The Approach
+              </span>
+            </div>
+            <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-5 max-w-3xl">
+              {p.approach.eyebrow || 'The Approach'}
+            </h2>
+            <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted max-w-[760px] mb-8">
+              {p.approach.intro}
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+              {p.approach.steps.map((step, i) => (
+                <div
+                  key={i}
+                  className="bg-panel rounded-[10px] p-5 hover:bg-elev transition-colors"
+                >
+                  <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-3">
+                    {step.label}
+                  </div>
+                  <div className="font-display font-extrabold text-[18px] tracking-[-0.015em] mb-2">
+                    {step.title}
+                  </div>
+                  <p className="text-[13px] leading-[1.5] text-muted">{step.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* The Work — header before case sections, only when this project has a brief
+            (i.e. is presented as a full case study). Otherwise just render sections. */}
+        {p.brief && (
+          <div className="flex items-baseline gap-3 mb-5 border-b border-line pb-3 mt-12">
+            <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted">
+              <span className="gradient-text-static">03</span> · The Work ·{' '}
+              {String(p.sections.length).padStart(2, '0')} Projects
+            </span>
+          </div>
+        )}
+
         {/* Case study sections */}
         {p.sections.map((sec, i) => (
-          <CaseSection key={i} section={sec} />
+          <CaseSection key={i} section={sec} index={i} />
         ))}
+
+        {/* The Recap — stats block at the end of the case study. */}
+        {p.recap && (
+          <section className="my-12 lg:my-16 bg-panel rounded-[12px] p-7 lg:p-10">
+            <div className="flex items-baseline gap-3 mb-5">
+              <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted">
+                <span className="gradient-text-static">04</span> · {p.recap.eyebrow || 'The Recap'}
+              </span>
+            </div>
+            <h2 className="font-display font-extrabold text-[32px] sm:text-[44px] lg:text-[56px] tracking-[-0.03em] leading-[0.96] mb-8 max-w-3xl">
+              {p.recap.headline}
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 lg:gap-3">
+              {p.recap.stats.map((stat, i) => (
+                <div key={i} className="border-t border-line pt-4">
+                  <div className="font-display font-extrabold text-[44px] lg:text-[64px] tracking-[-0.03em] leading-none tabular-nums">
+                    <span className="gradient-text-static">{stat.value}</span>
+                    {stat.unit && (
+                      <span className="text-[20px] lg:text-[26px] text-muted ml-1 align-baseline">
+                        {stat.unit}
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-2 mt-3">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Prev / Next */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-10">

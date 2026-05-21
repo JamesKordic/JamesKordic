@@ -31,7 +31,14 @@ function aspectStyle(aspect: AspectRatio | string | undefined) {
 
 /* ============ COMPONENT ============ */
 
-export function CaseSection({ section }: { section: Section }) {
+export function CaseSection({
+  section,
+  index,
+}: {
+  section: Section;
+  /** Optional 0-based section index, used to render a project number ("№ 01"). */
+  index?: number;
+}) {
   const { show } = useLightbox();
 
   /* Flatten all images in this section for lightbox navigation,
@@ -50,22 +57,57 @@ export function CaseSection({ section }: { section: Section }) {
   }
   const indexOfImage = (m: Media) => allImages.indexOf(m);
 
+  // If the section has any case-study intro fields (context / role / fieldNote),
+  // render the richer layout. Otherwise fall back to the simple body-paragraph layout.
+  const isCaseStudy = !!(section.context || section.role || section.fieldNote);
+  const projectNumber = typeof index === 'number' ? String(index + 1).padStart(2, '0') : null;
+
   return (
     <section className="py-10 lg:py-14 border-b border-line last:border-b-0">
       {/* Section header */}
-      <div className="mb-8 max-w-3xl">
-        {section.eyebrow && (
-          <div className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted mb-3">
-            <span className="gradient-text-static">{section.eyebrow}</span>
-          </div>
-        )}
-        <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4">
+      <div className="mb-8">
+        {/* Top bar: № + tag + title in a single row, like a chapter divider */}
+        <div className="flex items-baseline gap-4 mb-4 flex-wrap">
+          {projectNumber && (
+            <span className="font-mono text-[11px] font-bold tracking-[0.18em] uppercase">
+              <span className="gradient-text-static">№ {projectNumber}</span>
+            </span>
+          )}
+          {section.eyebrow && (
+            <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2">
+              {section.eyebrow}
+            </span>
+          )}
+        </div>
+        <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4 max-w-3xl">
           {section.title}
         </h2>
         {section.body && (
-          <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line">
+          <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line max-w-3xl">
             {section.body}
           </p>
+        )}
+
+        {/* Case-study Context + Role grid — two columns on desktop, stacked on mobile */}
+        {isCaseStudy && (section.context || section.role) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-7 pt-6 border-t border-line max-w-4xl">
+            {section.context && (
+              <div>
+                <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
+                  // Context
+                </div>
+                <p className="text-[14.5px] leading-[1.6] text-text">{section.context}</p>
+              </div>
+            )}
+            {section.role && (
+              <div>
+                <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
+                  // My Role
+                </div>
+                <p className="text-[14.5px] leading-[1.6] text-text">{section.role}</p>
+              </div>
+            )}
+          </div>
         )}
       </div>
 
@@ -90,6 +132,19 @@ export function CaseSection({ section }: { section: Section }) {
           onLightbox={show}
           indexOf={indexOfImage}
         />
+      )}
+
+      {/* Field note — italicized pull-quote callout after the media grid.
+       * Used to share a lesson, breakthrough, or insight from this project. */}
+      {section.fieldNote && (
+        <div className="mt-8 lg:mt-10 max-w-4xl border-l-2 border-accent pl-5 py-2">
+          <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-accent mb-2">
+            Field Note ↳
+          </div>
+          <p className="text-[16px] lg:text-[18px] leading-[1.55] text-text italic">
+            {section.fieldNote}
+          </p>
+        </div>
       )}
     </section>
   );

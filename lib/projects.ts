@@ -46,6 +46,12 @@ export type Section = {
   eyebrow?: string;
   title: string;
   body?: string;
+  /** Case-study intro paragraph — what the client needed / project context. */
+  context?: string;
+  /** Case-study intro paragraph — what the designer specifically did. */
+  role?: string;
+  /** Pull-quote callout at the end of the section. Lesson or insight learned. */
+  fieldNote?: string;
   /** Media array — used when layout is uniform or for legacy projects. */
   media: Media[];
   /** New layout descriptor. If provided, takes precedence over `cols`. */
@@ -55,6 +61,12 @@ export type Section = {
 };
 
 export type ProjectKind = 'professional' | 'personal';
+
+/** A single step in the project's design approach (case-study sections). */
+export type ApproachStep = { label: string; title: string; body: string };
+
+/** A stat shown in the recap (e.g. "~50 assets shipped"). */
+export type RecapStat = { value: string; label: string; unit?: string };
 
 export type Project = {
   id: string;
@@ -70,6 +82,11 @@ export type Project = {
   len: number;
   blurb: string;
   desc: string;
+  /** Optional case-study sections — when present, render before the work. */
+  brief?: { eyebrow?: string; lead: string; body: string[] };
+  approach?: { eyebrow?: string; intro: string; steps: ApproachStep[] };
+  /** Optional recap — stats shown at the end of the case study. */
+  recap?: { eyebrow?: string; headline: string; stats: RecapStat[] };
   sections: Section[];
 };
 
@@ -93,12 +110,43 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 262,
     blurb: 'Music & entertainment marketing',
-    desc: "An exploration of music and entertainment marketing through collaborative campaign work at The Syndicate, this internship experience spanned projects across indie and major label artists as well as TV, film, and comedy. Responsibilities included creating digital assets, tour and promotional visuals, and event materials, translating each artist or project's unique voice into impactful, audience-driven design and storytelling campaigns.",
+    desc: 'A year inside an NYC music & entertainment marketing agency — designing across indie labels, major-label artists, comedy, and film. Five concurrent client tracks. Around 50 shipped assets. One person.',
+    brief: {
+      eyebrow: 'The Brief',
+      lead: "The Syndicate represents artists and entertainment brands — its design team translates each one's distinct identity into campaign-ready assets at scroll velocity.",
+      body: [
+        "Over twelve months I worked across five concurrent client tracks: tour and release campaigns for Guns N' Roses, a promotional video for Killphonic Records, comedy social for Craig Ferguson, sync-licensing posts for Last Gang Records, and the full visual identity rollout for Indie Week's conference.",
+        'Core problem: no two clients shared audience, tone, or format. A Guns N\' Roses Reel and a Last Gang sync post needed to feel like they came from entirely different worlds — while both being produced by the same person, in the same week, to a shared production schedule.',
+      ],
+    },
+    approach: {
+      eyebrow: 'The Approach',
+      intro: 'To stay fast across five voices, I built a workflow that front-loaded reference and brand intake before opening a design file. Every client got the same five-step treatment, scaled to the size of the deliverable.',
+      steps: [
+        { label: 'Step 01', title: 'Intake', body: 'Brief, audience, surface, success metric — written down before anything else.' },
+        { label: 'Step 02', title: 'Reference', body: "Fan-facing mood, not designer-facing. What does the artist's audience already love?" },
+        { label: 'Step 03', title: 'Test', body: 'One 3-second motion test before committing to a direction. Cheap to throw away.' },
+        { label: 'Step 04', title: 'Build', body: 'Format-correct specs from frame one — no last-minute reformatting for platform variants.' },
+        { label: 'Step 05', title: 'Iterate', body: 'Variant pass for A/B testing and platform-specific fit (Reels, Shorts, TikTok, feed).' },
+      ],
+    },
+    recap: {
+      eyebrow: 'The Recap',
+      headline: 'A year of shipping, not just designing.',
+      stats: [
+        { value: '~50', label: 'Assets shipped' },
+        { value: '05', label: 'Concurrent clients' },
+        { value: '12', label: 'Months', unit: 'MO' },
+        { value: '02', label: 'Average turnaround', unit: 'WK' },
+      ],
+    },
     sections: [
       {
         eyebrow: 'Music',
         title: "Guns N' Roses",
-        body: "Instagram Reels created for Guns N' Roses, featuring dynamic visuals and music-driven edits to promote tours, music, and fan engagement.",
+        context: 'Short-form social content to promote the 2024 tour cycle and back-catalog releases. Assets needed to land instantly on TikTok, Reels, and Shorts — speed-readable, album-art-led, motion driven by the music.',
+        role: 'Solo design and motion on this client track. Storyboarded each Reel, animated in After Effects, cut to track stems, exported per-platform specs.',
+        fieldNote: 'Breakthrough: treating each Reel as a 3-second hook plus 27 seconds of payoff — not 30 even seconds. Engagement jumped once I stopped front-loading band names.',
         // 3 vertical Reels — keep them small, 3 across
         media: [
           { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'), aspect: '9/16' },
@@ -110,7 +158,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Records',
         title: 'Killphonic Records',
-        body: 'Promotional video created for Killphonic Records to showcase Heart of Gold: The Songs of Neil Young Vol. 1. The video highlights featured artists and promotes pre-order availability across multiple digital platforms.',
+        context: 'Cross-platform promo for Heart of Gold: The Songs of Neil Young Vol. 1 — a covers compilation. The video had to celebrate ten featured artists equally while driving pre-orders across DSPs.',
+        role: 'Motion design lead. Designed the typographic system, sequenced artist reveals to the lead single, built platform variants (1:1, 9:16, 16:9).',
+        fieldNote: 'Ten artist credits in 45 seconds is a typographic problem, not a video one. Solved with a single grid the camera moved through.',
         // Single horizontal promo video — full width 16:9
         media: [{ type: 'video', src: vid('1bkwSiwMean5Ugrcj5THWu5rK8c'), aspect: '16/9' }],
         layout: { type: 'uniform', cols: 1, aspect: '16/9' },
@@ -118,7 +168,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Comedy',
         title: 'Craig Ferguson',
-        body: 'Social media assets designed for Craig Ferguson, featuring curated show clips formatted for multiple digital platforms to highlight his comedic style and drive audience engagement.',
+        context: "Ongoing social content for the comedian's tour and podcast. Clip-curated, designed for repeatable weekly output across Instagram, TikTok, YouTube Shorts.",
+        role: 'Design, motion, and edit. Built a reusable lower-third and intro system that the team could refill weekly without losing the on-brand feel.',
+        fieldNote: 'The deliverable was less the individual clips, more the system — a kit the team could ship from for months without me.',
         // 4 vertical social clips — 4 across on desktop
         media: [
           { type: 'video', src: vid('AGvRC8ZeWglalhmRVoWrAenDbU'), aspect: '9/16' },
@@ -131,7 +183,8 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Records',
         title: 'Last Gang Records',
-        body: "Social media posts created for Last Gang Records, spotlighting music placements in video games, film, and other media, designed to drive engagement and showcase the label's cultural reach.",
+        context: 'Sync-placement announcements for Last Gang Records — spotlighting label music in games, film, and TV to drive industry awareness and listener discovery.',
+        role: 'Static and motion social. Built a flexible template that could swap artist, work, and placement medium without redesigning each post from scratch.',
         // 3 vertical items in a single row at native 4:5.
         // The video source is 9:16 but rendered at 4:5 with cover-crop so
         // it matches the image heights — no letterbox bars on top/bottom.
@@ -145,7 +198,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Conference',
         title: 'Indie Week',
-        body: 'Branded assets created for Indie Week to promote event speakers, key dates, and on-site signage. Designs supported both digital promotion and in-person visibility across the multi-day conference.',
+        context: "Full visual rollout for the multi-day music industry conference — speaker announcements, schedule cards, wayfinding signage, social countdowns, and on-site print collateral.",
+        role: 'Design across digital and print. Took the existing brand framework and produced roughly 20 deliverables in two weeks ahead of the event.',
+        fieldNote: 'Highest-volume project of the year. The brand framework already existed — my job was holding it together across 20 deliverables under deadline.',
         media: [],
         // Mixed aspects — group into:
         //  Row 1: 4 squares (speaker cards, 1:1)
