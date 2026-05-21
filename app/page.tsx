@@ -1,122 +1,127 @@
 'use client';
 
 import Link from 'next/link';
-import { PROJECTS, POPULAR, getProject, ARTIST } from '@/lib/projects';
+import { PROJECTS, POPULAR, getProject } from '@/lib/projects';
 import { usePlayer } from '@/lib/player-context';
-import { AlbumCard } from '@/components/album-card';
-import { TrackRow } from '@/components/track-row';
+import { AlbumCard, FeaturedCard } from '@/components/album-card';
 import { PlayIcon, ShuffleIcon, VerifiedIcon } from '@/components/icons';
 
 export default function HomePage() {
   const { playFrom, shufflePlay } = usePlayer();
 
+  // The 3 projects we want above the fold as the showcase
+  const featured = POPULAR.slice(0, 3)
+    .map((id) => getProject(id))
+    .filter((p): p is NonNullable<ReturnType<typeof getProject>> => !!p);
+
   return (
     <div>
-      {/* Hero */}
+      {/* COMPACT ARTIST STRIP — about 1/3 the height of the old hero */}
       <header
-        className="relative min-h-[380px] px-5 lg:px-8 pb-[26px] flex flex-col justify-end"
+        className="relative px-5 lg:px-8 pt-20 pb-6 flex items-end"
         style={{
           background:
             'radial-gradient(120% 150% at 12% 0%, rgba(200,241,53,0.22), transparent 55%), linear-gradient(180deg,#3b3d2e 0%, #1a1a1d 78%)',
         }}
       >
-        <div className="flex items-center gap-2 mt-[84px] text-[13px] font-semibold">
-          <VerifiedIcon className="w-[21px] h-[21px]" />
-          <span>Verified Designer</span>
-        </div>
-        <h1 className="font-display font-extrabold leading-[0.92] tracking-[-0.035em] my-[14px] mt-[14px] mb-[18px] text-[48px] sm:text-[72px] lg:text-[116px]">
-          James <em className="not-italic text-accent">Kordic</em>
-        </h1>
-        <div className="flex items-center gap-2 flex-wrap text-[13.5px] font-medium">
-          <span>New York–based Graphic & Motion Designer</span>
-          <span className="w-1 h-1 rounded-full bg-muted inline-block" />
-          <span className="text-muted">{PROJECTS.length} projects in rotation</span>
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 w-full">
+          <div>
+            <div className="flex items-center gap-2 text-[12px] font-semibold mb-2">
+              <VerifiedIcon className="w-[18px] h-[18px]" />
+              <span>Verified Designer</span>
+            </div>
+            <h1 className="font-display font-extrabold leading-[0.95] tracking-[-0.03em] text-[44px] sm:text-[64px] lg:text-[80px]">
+              James <em className="not-italic text-accent">Kordic</em>
+            </h1>
+            <p className="text-[14px] text-muted mt-2 max-w-md">
+              New York-based Graphic & Motion Designer · {PROJECTS.length} projects · Work for Taco Bell, FX, MNRK Heavy, The Syndicate
+            </p>
+          </div>
+
+          {/* Action buttons — moved into the artist strip to save vertical space */}
+          <div className="flex items-center gap-4 flex-none">
+            <button
+              onClick={() => playFrom(POPULAR[0])}
+              className="w-[52px] h-[52px] rounded-full bg-accent flex items-center justify-center flex-none shadow-[0_8px_24px_-6px_rgba(200,241,53,0.5)] hover:scale-[1.06] active:scale-[0.96] transition-transform"
+              aria-label="Play"
+            >
+              <PlayIcon className="w-[22px] h-[22px] fill-accent-ink" />
+            </button>
+            <button
+              onClick={shufflePlay}
+              className="text-muted hover:text-text hover:scale-[1.08] transition-all"
+              aria-label="Shuffle"
+            >
+              <ShuffleIcon className="w-7 h-7" />
+            </button>
+            <Link
+              href="/about"
+              className="font-bold text-[12px] tracking-[0.05em] uppercase border-[1.5px] border-[#5a5a5e] hover:border-text rounded-[30px] px-4 py-2 transition-all"
+            >
+              About
+            </Link>
+          </div>
         </div>
       </header>
 
-      {/* Action bar */}
-      <div className="flex items-center gap-6 px-5 lg:px-8 pt-6 pb-2">
-        <button
-          onClick={() => playFrom(POPULAR[0])}
-          className="w-[58px] h-[58px] rounded-full bg-accent flex items-center justify-center flex-none shadow-[0_8px_24px_-6px_rgba(200,241,53,0.5)] hover:scale-[1.06] active:scale-[0.96] transition-transform"
-          aria-label="Play"
-        >
-          <PlayIcon className="w-[25px] h-[25px] fill-accent-ink" />
-        </button>
-        <button
-          onClick={shufflePlay}
-          className="text-muted hover:text-text hover:scale-[1.08] transition-all"
-          aria-label="Shuffle"
-        >
-          <ShuffleIcon className="w-[30px] h-[30px]" />
-        </button>
-        <Link
-          href="/about"
-          className="font-bold text-[13px] tracking-[0.04em] uppercase border-[1.5px] border-[#5a5a5e] hover:border-text rounded-[30px] px-[18px] py-[9px] hover:scale-[1.04] transition-all"
-        >
-          Follow
-        </Link>
-      </div>
-
-      {/* Popular */}
-      <section className="px-5 lg:px-8 pt-[30px] pb-[6px]">
-        <div className="flex items-baseline justify-between mb-[6px]">
-          <h2 className="font-display font-extrabold text-[25px] tracking-[-0.02em]">Popular</h2>
-        </div>
-        <p className="text-[13px] text-muted mb-[14px]">
-          The projects on heaviest rotation — click any row to open the full case study.
-        </p>
-        <div className="mt-[6px]">
-          {POPULAR.map((id, i) => {
-            const p = getProject(id);
-            if (!p) return null;
-            return <TrackRow key={id} p={p} i={i} />;
-          })}
-        </div>
-      </section>
-
-      {/* Discography */}
-      <section className="px-5 lg:px-8 pt-[30px] pb-[6px]">
-        <div className="flex items-baseline justify-between mb-[6px]">
-          <h2 className="font-display font-extrabold text-[25px] tracking-[-0.02em]">
-            Discography
+      {/* FEATURED PROJECTS — 3 large thumbnails with full info, above the fold */}
+      <section className="px-5 lg:px-8 pt-6 pb-2">
+        <div className="flex items-baseline justify-between mb-4">
+          <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em]">
+            Featured work
           </h2>
           <Link
             href="/search"
-            className="text-[12px] font-bold tracking-[0.07em] uppercase text-muted hover:underline"
+            className="text-[11.5px] font-bold tracking-[0.07em] uppercase text-muted hover:text-text hover:underline transition-colors"
           >
-            Browse all
+            View all →
           </Link>
         </div>
-        <p className="text-[13px] text-muted mb-[14px]">
-          Every project, packaged as a release. Click a cover to dive into the full case study.
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
+          {featured.map((p, i) => (
+            <FeaturedCard key={p.id} p={p} i={i} />
+          ))}
+        </div>
+      </section>
+
+      {/* CATALOG — every other project as a bigger card */}
+      <section className="px-5 lg:px-8 pt-10 pb-4">
+        <div className="flex items-baseline justify-between mb-4">
+          <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em]">
+            Full catalog
+          </h2>
+          <span className="text-[11.5px] font-bold tracking-[0.07em] uppercase text-muted-2">
+            {PROJECTS.length} releases
+          </span>
+        </div>
+        <p className="text-[13px] text-muted mb-5 max-w-xl">
+          Click any cover for the full case study with all the images, videos, and process work.
         </p>
-        <div className="grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-2 mt-2">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 lg:gap-4">
           {PROJECTS.map((p, i) => (
             <AlbumCard key={p.id} p={p} i={i} />
           ))}
         </div>
       </section>
 
-      {/* About blurb */}
-      <section className="px-5 lg:px-8 pt-[30px] pb-10">
-        <div className="flex items-baseline justify-between mb-[6px]">
-          <h2 className="font-display font-extrabold text-[25px] tracking-[-0.02em]">
-            About the artist
-          </h2>
-        </div>
-        <p className="text-[13px] text-muted mb-[14px]">
-          A Graphic & Motion Designer creating digital ads, social content, and motion graphics for
-          brands and agencies.
-        </p>
+      {/* Closing strip */}
+      <section className="px-5 lg:px-8 pt-12 pb-12">
         <Link
           href="/about"
-          className="block max-w-[520px] bg-panel rounded-[9px] p-5 hover:bg-elev transition-colors"
+          className="block bg-panel hover:bg-elev rounded-xl p-6 lg:p-8 transition-colors"
         >
-          <div className="text-[#cfcdc7] text-[14px] leading-[1.6]">
-            BFA in Graphic Design from the Rochester Institute of Technology · four years designing
-            brands professionally · work for Taco Bell, FX, and The Syndicate. Tap to read more &
-            get in touch.
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <h3 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em] mb-1">
+                Want to make something?
+              </h3>
+              <p className="text-[14px] text-muted">
+                Available for freelance and full-time. Drop a line.
+              </p>
+            </div>
+            <span className="font-bold text-[13px] tracking-[0.04em] uppercase text-accent flex items-center gap-2">
+              Get in touch <span aria-hidden>→</span>
+            </span>
           </div>
         </Link>
       </section>
