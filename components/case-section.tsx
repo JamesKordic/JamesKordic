@@ -252,7 +252,13 @@ function MediaTile({
   onLightbox: () => void;
 }) {
   if (media.type === 'video') {
-    return <VideoPlayer src={media.src} aspect={media.aspect || aspect || '16/9'} />;
+    return (
+      <VideoPlayer
+        src={media.src}
+        aspect={media.aspect || aspect || '16/9'}
+        fit={media.fit}
+      />
+    );
   }
 
   if (media.type === 'embed') {

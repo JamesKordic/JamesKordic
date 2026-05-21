@@ -14,23 +14,27 @@ import { useEffect, useRef, useState } from 'react';
  *  - Mute/unmute button in the bottom-right corner of the video
  *  - When paused, a large play button appears centered
  *  - Container locks aspect ratio so the video always fits without
- *    cropping (object-contain inside the locked container, but the
- *    container's aspect matches the source so contain == cover here)
+ *    cropping when fit='contain', or fills the container by cropping
+ *    when fit='cover' (use when aligning a video with images of a
+ *    different aspect in the same row)
  *  - Native controls hidden in favor of our minimal overlay
  *
  * Props:
  *  - src: video URL
- *  - aspect: CSS aspect-ratio string (e.g. "16/9", "1/1")
+ *  - aspect: CSS aspect-ratio string for the CONTAINER (e.g. "16/9", "1/1")
  *  - poster: optional poster image URL
+ *  - fit: 'contain' (default, no cropping, may letterbox) or 'cover' (crop to fill)
  */
 export function VideoPlayer({
   src,
   aspect = '16/9',
   poster,
+  fit = 'contain',
 }: {
   src: string;
   aspect?: string;
   poster?: string;
+  fit?: 'contain' | 'cover';
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -108,7 +112,7 @@ export function VideoPlayer({
         onPause={() => setPlaying(false)}
         onEnded={() => setPlaying(false)}
         onLoadedMetadata={() => setLoaded(true)}
-        className="absolute inset-0 w-full h-full object-contain bg-black"
+        className={`absolute inset-0 w-full h-full bg-black ${fit === 'cover' ? 'object-cover' : 'object-contain'}`}
       />
 
       {/* Loading shimmer */}

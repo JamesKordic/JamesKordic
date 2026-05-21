@@ -4,7 +4,7 @@
 /* ============ MEDIA TYPES ============ */
 export type Media =
   | { type: 'image'; src: string; aspect?: AspectRatio }
-  | { type: 'video'; src: string; aspect?: AspectRatio }
+  | { type: 'video'; src: string; aspect?: AspectRatio; fit?: 'contain' | 'cover' }
   | { type: 'embed'; src: string; aspect?: AspectRatio; label?: string };
 
 /* Allowed aspect ratios — keeps the visual rhythm controllable */
@@ -132,16 +132,14 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Records',
         title: 'Last Gang Records',
         body: "Social media posts created for Last Gang Records, spotlighting music placements in video games, film, and other media, designed to drive engagement and showcase the label's cultural reach.",
-        // 3 vertical items in a single row, each in its native aspect:
-        // image (4:5) | video (9:16) | image (4:5). Heights won't match
-        // exactly but no cropping — original proportions preserved.
+        // 3 vertical items in a single row at native 4:5.
+        // The video source is 9:16 but rendered at 4:5 with cover-crop so
+        // it matches the image heights — no letterbox bars on top/bottom.
         media: [
           { type: 'image', src: img('wLWX3ICDe3WN8RjmJIxv26KSk', 1400), aspect: '4/5' },
-          { type: 'video', src: vid('IzzjPLgg8Yw88u4F4XjG4RHjyA'), aspect: '9/16' },
+          { type: 'video', src: vid('IzzjPLgg8Yw88u4F4XjG4RHjyA'), aspect: '4/5', fit: 'cover' },
           { type: 'image', src: img('QR1zQdH6QNFmHzn0PT4PEGPCRM', 1400), aspect: '4/5' },
         ],
-        // Per-item aspects override the row aspect, so the row aspect
-        // here only acts as a fallback (it isn't used since every item has its own).
         layout: { type: 'uniform', cols: 3, aspect: '4/5' },
       },
       {
