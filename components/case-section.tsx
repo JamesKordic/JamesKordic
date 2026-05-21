@@ -132,9 +132,11 @@ function UniformLayout({
   onLightbox: (items: Media[], i: number) => void;
   indexOf: (m: Media) => number;
 }) {
-  // Special case: single item — center it with a sensible max width
-  // so vertical content doesn't blow up to full screen width on desktop
-  if (media.length === 1) {
+  // Special case: single item in a MULTI-column layout — center with a
+  // sensible max width so vertical content doesn't blow up to full screen.
+  // If cols === 1, the author wants it full-width (e.g. a brand sheet),
+  // so we skip the constraint.
+  if (media.length === 1 && cols > 1) {
     return (
       <div className="flex justify-center">
         <div className={`w-full ${singleItemMaxWidth(aspect)}`}>

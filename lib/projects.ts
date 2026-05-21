@@ -111,9 +111,9 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Records',
         title: 'Killphonic Records',
         body: 'Promotional video created for Killphonic Records to showcase Heart of Gold: The Songs of Neil Young Vol. 1. The video highlights featured artists and promotes pre-order availability across multiple digital platforms.',
-        // Vertical promo video — centered, modest width
-        media: [{ type: 'video', src: vid('1bkwSiwMean5Ugrcj5THWu5rK8c'), aspect: '9/16' }],
-        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
+        // Single horizontal promo video — full width 16:9
+        media: [{ type: 'video', src: vid('1bkwSiwMean5Ugrcj5THWu5rK8c'), aspect: '16/9' }],
+        layout: { type: 'uniform', cols: 1, aspect: '16/9' },
       },
       {
         eyebrow: 'Comedy',
@@ -132,27 +132,13 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Records',
         title: 'Last Gang Records',
         body: "Social media posts created for Last Gang Records, spotlighting music placements in video games, film, and other media, designed to drive engagement and showcase the label's cultural reach.",
-        // 2 images at 4:5 + 1 vertical video — group images together with 4:5,
-        // video separate at 9:16
-        media: [],
-        layout: {
-          type: 'mixed',
-          rows: [
-            {
-              cols: 2,
-              aspect: '4/5',
-              media: [
-                { type: 'image', src: img('wLWX3ICDe3WN8RjmJIxv26KSk', 1400) },
-                { type: 'image', src: img('QR1zQdH6QNFmHzn0PT4PEGPCRM', 1400) },
-              ],
-            },
-            {
-              cols: 3,
-              aspect: '9/16',
-              media: [{ type: 'video', src: vid('IzzjPLgg8Yw88u4F4XjG4RHjyA'), aspect: '9/16' }],
-            },
-          ],
-        },
+        // 3 vertical items in a single row: image | video (center) | image
+        media: [
+          { type: 'image', src: img('wLWX3ICDe3WN8RjmJIxv26KSk', 1400) },
+          { type: 'video', src: vid('IzzjPLgg8Yw88u4F4XjG4RHjyA'), aspect: '9/16' },
+          { type: 'image', src: img('QR1zQdH6QNFmHzn0PT4PEGPCRM', 1400) },
+        ],
+        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
       {
         eyebrow: 'Conference',
@@ -256,56 +242,26 @@ export const PROJECTS: Project[] = [
         eyebrow: '03',
         title: 'Interactive Elements',
         body: 'At WWIMF, interactivity is central to the experience, transforming attendees from passive spectators into active participants. From touch-responsive environments and immersive tunnels to motion-activated light displays and interactive stages that place audiences beneath the performance itself, every element is designed to react to presence, gesture, and movement.\n\nWearable tech like smart wristbands enables guests to influence live performances and trigger real-time effects. Glow-in-the-dark pens offer opportunities for spontaneous creativity, allowing attendees to leave their mark on the festival\'s physical environment. These tools, combined with collaborative interfaces, empower co-creation and personal expression.\n\nWWIMF reimagines the live music experience by making the audience an integral part of the performance, blurring the boundaries between art, technology, and human connection.',
-        media: [],
-        // 3 landscape 16:9 + 1 square — split into two rows
-        layout: {
-          type: 'mixed',
-          rows: [
-            {
-              cols: 3,
-              aspect: '16/9',
-              media: [
-                { type: 'image', src: img('aybJsg9p5A56xYuv6JKk8bLvM', 1600) },
-                { type: 'image', src: img('Mgx0cinXenRjsIoslHuYLr8mg', 1600) },
-                { type: 'image', src: img('X1jzFS77jaBBcIrnTQECBv9rvSU', 1600) },
-              ],
-            },
-            {
-              cols: 1,
-              aspect: '1/1',
-              media: [
-                { type: 'image', src: img('BtNPqZMQkzIt5w30cxAOy83jJk8', 1600) },
-              ],
-            },
-          ],
-        },
+        // All 4 images at 16:9 — clean 2x2 grid (pen image replaced with new 16:9 version)
+        media: [
+          { type: 'image', src: img('aybJsg9p5A56xYuv6JKk8bLvM', 1600) },
+          { type: 'image', src: img('Mgx0cinXenRjsIoslHuYLr8mg', 1600) },
+          { type: 'image', src: img('X1jzFS77jaBBcIrnTQECBv9rvSU', 1600) },
+          { type: 'image', src: '/projects/wwimf/interactive-pen-new.png' },
+        ],
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
         eyebrow: '04',
         title: 'Merchandise',
         body: "WWIMF's merchandise extends the festival's identity into wearable and collectible pieces that blend function, fashion, and interactivity. This section showcases examples including a tote bag, shirt, and festival wristband — each designed to reflect the bold, immersive aesthetic of the event.",
-        media: [],
-        // 1 square + 2 landscape 3:2 → split into two rows
-        layout: {
-          type: 'mixed',
-          rows: [
-            {
-              cols: 1,
-              aspect: '1/1',
-              media: [
-                { type: 'image', src: img('tlPJM0dL0bhh0Q91yaVbSJhDM', 2000) },
-              ],
-            },
-            {
-              cols: 2,
-              aspect: '3/2',
-              media: [
-                { type: 'image', src: img('xElnq0fSkrSMcOxT7PsQvfu0FbE', 1800) },
-                { type: 'image', src: img('SrsSN7QpTyN8chUaACfrkQqLA', 1800) },
-              ],
-            },
-          ],
-        },
+        // 3 images all at 3:2 landscape — single clean row
+        media: [
+          { type: 'image', src: '/projects/wwimf/merch-wristband-new.png' },
+          { type: 'image', src: img('xElnq0fSkrSMcOxT7PsQvfu0FbE', 1800) },
+          { type: 'image', src: img('SrsSN7QpTyN8chUaACfrkQqLA', 1800) },
+        ],
+        layout: { type: 'uniform', cols: 3, aspect: '3/2' },
       },
       {
         eyebrow: '05',
@@ -579,39 +535,28 @@ export const PROJECTS: Project[] = [
         layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
       {
-        eyebrow: 'Motion',
-        title: 'Animated Promo',
-        // Single animated promo — vertical story format
-        media: [{ type: 'video', src: vid('FK55AYBGIvyG941MP5Y6r210WQ'), aspect: '9/16' }],
+        eyebrow: 'Artist Spotlight',
+        title: 'Lowheaven',
+        body: "A focused promotional set for Lowheaven, featuring vertical static visuals paired with an animated promo. Designed for Instagram Stories and other vertical-first formats, the trio balances the band's still imagery with kinetic motion in the center.",
+        // 3 vertical items in a single row: image | animated video | image
+        media: [
+          { type: 'image', src: img('NMFZUWif8OdwlGY2I1fN82EFbM', 800) },
+          { type: 'video', src: vid('FK55AYBGIvyG941MP5Y6r210WQ'), aspect: '9/16' },
+          { type: 'image', src: img('ehNHhSGMI7HnTwITsjX9yhvXU4', 1000) },
+        ],
         layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
       {
         eyebrow: 'Series',
-        title: 'Artist & Album Highlights',
-        // 1 vertical 9:16 + 4 portrait 4:5 — split into two rows
-        media: [],
-        layout: {
-          type: 'mixed',
-          rows: [
-            {
-              cols: 3,
-              aspect: '9/16',
-              media: [
-                { type: 'image', src: img('NMFZUWif8OdwlGY2I1fN82EFbM', 800) },
-              ],
-            },
-            {
-              cols: 4,
-              aspect: '4/5',
-              media: [
-                { type: 'image', src: img('ehNHhSGMI7HnTwITsjX9yhvXU4', 1000) },
-                { type: 'image', src: img('HMVx8iZd2TefUWO8Vz6jRNfXXY', 1000) },
-                { type: 'image', src: img('yPZFXNjclLlWDlt68KG5yKV8tLA', 1000) },
-                { type: 'image', src: img('PPdTtg6dUObxX4DSpZNpuvop8', 1000) },
-              ],
-            },
-          ],
-        },
+        title: 'Album Releases',
+        body: 'Portrait album release announcements for various artists on the MNRK Heavy roster.',
+        // 3 album release portraits at 4:5
+        media: [
+          { type: 'image', src: img('HMVx8iZd2TefUWO8Vz6jRNfXXY', 1000) },
+          { type: 'image', src: img('yPZFXNjclLlWDlt68KG5yKV8tLA', 1000) },
+          { type: 'image', src: img('PPdTtg6dUObxX4DSpZNpuvop8', 1000) },
+        ],
+        layout: { type: 'uniform', cols: 3, aspect: '4/5' },
       },
       {
         eyebrow: 'Banners',
@@ -883,29 +828,15 @@ export const PROJECTS: Project[] = [
         eyebrow: '07',
         title: 'Marketing Visualization',
         body: 'Mockups visualizing the Voltage campaign in real-world environments — sidewalks, subway stations, cafés, outdoor walls.',
-        // 3 mockups at 16:9 + 1 at 4:3 → mixed
-        media: [],
-        layout: {
-          type: 'mixed',
-          rows: [
-            {
-              cols: 2,
-              aspect: '16/9',
-              media: [
-                { type: 'image', src: img('IpI82P0dP2tZgXSG9I6Mks1IJtE', 1600) },
-                { type: 'image', src: img('zbcLbTwFqnwn06TRxdXhryWLLo', 1600) },
-                { type: 'image', src: img('4GlJStWiYO5TRCWEog9C5UOq0', 1600) },
-              ],
-            },
-            {
-              cols: 1,
-              aspect: '4/3',
-              media: [
-                { type: 'image', src: img('B0dJI8FyWq9UYskJ7JsR3oWxVgI', 1800) },
-              ],
-            },
-          ],
-        },
+        // 4 mockups in a 2x2 grid at 16:9
+        // Note: the last image is natively 4:3 but renders cleanly cover-cropped to 16:9
+        media: [
+          { type: 'image', src: img('IpI82P0dP2tZgXSG9I6Mks1IJtE', 1600) },
+          { type: 'image', src: img('zbcLbTwFqnwn06TRxdXhryWLLo', 1600) },
+          { type: 'image', src: img('4GlJStWiYO5TRCWEog9C5UOq0', 1600) },
+          { type: 'image', src: img('B0dJI8FyWq9UYskJ7JsR3oWxVgI', 1800) },
+        ],
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
         eyebrow: '08',
