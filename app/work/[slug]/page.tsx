@@ -39,7 +39,24 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           }}
         />
         <div className="relative z-10 w-[170px] h-[170px] lg:w-[226px] lg:h-[226px] flex-none rounded-lg overflow-hidden shadow-[0_24px_50px_-14px_rgba(0,0,0,0.8)] bg-panel-2">
+          {/* If the project has a coverVideo, render it on top of the
+              cover image. The image still loads first (acts as a poster)
+              so there's never an empty box. The video is muted + looped
+              + autoplay — silent ambient hero, not interactive. */}
           <Image src={p.cover} alt={`${p.title} cover`} fill sizes="226px" className="object-cover" priority />
+          {p.coverVideo && (
+            <video
+              src={p.coverVideo}
+              poster={p.cover}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={`${p.title} cover video`}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
         </div>
         <div className="relative z-10 min-w-0 pb-[6px] flex-1">
           <div className="text-[12px] font-bold tracking-[0.05em] uppercase">

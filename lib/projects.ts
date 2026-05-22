@@ -73,6 +73,11 @@ export type Project = {
   kind: ProjectKind;
   title: string;
   cover: string;
+  /** Optional looping hero video shown on the project page only.
+   *  The `cover` image is still used everywhere else (thumbnails,
+   *  sidebar, prev/next, player bar, search) AND as this video's
+   *  poster while it loads. */
+  coverVideo?: string;
   themeColor: string;
   tags: string[];
   client: string;
@@ -465,6 +470,7 @@ export const PROJECTS: Project[] = [
     kind: 'professional',
     title: 'Taco Bell',
     cover: img('WJoqOnXjeHEhfNWLt27wGXvkTwg', 800),
+    coverVideo: '/projects/taco-bell/hero.mp4',
     themeColor: '#7a2e8a',
     tags: ['Creative Direction', 'Marketing', 'Motion Design'],
     client: 'Taco Bell',
