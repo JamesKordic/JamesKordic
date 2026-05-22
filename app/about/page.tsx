@@ -1,40 +1,9 @@
 'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { PROJECTS, POPULAR, getProject, ARTIST } from '@/lib/projects';
-import { usePlayer } from '@/lib/player-context';
-import { PlayIcon, ShuffleIcon, VerifiedIcon } from '@/components/icons';
-import Image from 'next/image';
+import { PROJECTS } from '@/lib/projects';
+import { VerifiedIcon } from '@/components/icons';
 
 export default function AboutPage() {
-  const router = useRouter();
-  const { playFrom } = usePlayer();
-
-  // Featured "Artist Pick" — surface the project the artist most wants
-  // visitors to see. I'm using the first POPULAR project as the proxy.
-  const artistPick = getProject(POPULAR[0]);
-
-  // "Top tracks" — the top 5 from POPULAR, mimicking Spotify's "Popular" list
-  const topTracks = POPULAR.slice(0, 5)
-    .map((id) => getProject(id))
-    .filter((p): p is NonNullable<ReturnType<typeof getProject>> => !!p);
-
-  // "Fans also like" — the personal-work projects (Side B). Spotify uses
-  // this slot for related artists; here it surfaces concept/self-initiated
-  // work that complements the client-side work.
-  const youMightLike = PROJECTS.filter((p) => p.kind === 'personal').slice(0, 4);
-
-  const handlePlay = (id: string) => {
-    playFrom(id);
-    router.push(`/work/${id}`);
-  };
-
-  const handleShuffle = () => {
-    const random = PROJECTS[Math.floor(Math.random() * PROJECTS.length)];
-    handlePlay(random.id);
-  };
-
   return (
     <div>
       {/* ============ ARTIST HERO ============
@@ -84,25 +53,13 @@ export default function AboutPage() {
       </header>
 
       {/* ============ ACTION ROW ============
-       *  Mimics the Spotify play / follow / menu row under the artist hero. */}
+       *  Simplified to just the two CTAs that fit an about page: contact
+       *  and résumé. Removed Play/Shuffle (those are discovery actions
+       *  and discovery sections have been removed from this page). */}
       <section className="px-5 lg:px-8 pt-2 pb-10 flex items-center gap-5 flex-wrap">
-        <button
-          onClick={() => artistPick && handlePlay(artistPick.id)}
-          className="w-[60px] h-[60px] rounded-full bg-gradient-to-br from-accent via-cyan to-magenta flex items-center justify-center shadow-[0_8px_24px_-6px_rgba(200,241,53,0.5)] hover:scale-[1.06] active:scale-[0.96] transition-transform"
-          aria-label="Play featured project"
-        >
-          <PlayIcon className="w-[26px] h-[26px] fill-accent-ink translate-x-[1px]" />
-        </button>
-        <button
-          onClick={handleShuffle}
-          className="text-muted hover:text-text hover:scale-[1.08] transition-all"
-          aria-label="Shuffle to a random project"
-        >
-          <ShuffleIcon className="w-[30px] h-[30px]" />
-        </button>
         <a
           href="mailto:Jkordic@me.com"
-          className="font-bold text-[13px] tracking-[0.05em] uppercase border-[1.5px] border-[#5a5a5e] hover:border-text rounded-[30px] px-[20px] py-[10px] transition-all hover:scale-[1.03]"
+          className="font-bold text-[13px] tracking-[0.05em] uppercase bg-accent text-accent-ink rounded-[30px] px-[24px] py-[13px] hover:scale-[1.05] transition-transform"
         >
           Get in touch
         </a>
@@ -110,92 +67,11 @@ export default function AboutPage() {
           href="https://drive.google.com/file/d/10fG8m5VriZOOSDyXZnowGsIqEZaRUp6Y/view"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-semibold text-[14px] text-muted hover:text-text transition-colors"
+          className="font-bold text-[13px] tracking-[0.05em] uppercase border-[1.5px] border-[#5a5a5e] hover:border-text rounded-[30px] px-[20px] py-[11px] transition-all hover:scale-[1.03]"
         >
           ⤓  Download résumé
         </a>
       </section>
-
-      {/* ============ POPULAR ============
-       *  Top 5 projects in a Spotify-style numbered track list. */}
-      <section className="px-5 lg:px-8 pb-12">
-        <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em] mb-4">
-          Popular
-        </h2>
-        <div className="space-y-1">
-          {topTracks.map((p, i) => (
-            <button
-              key={p.id}
-              onClick={() => handlePlay(p.id)}
-              className="group w-full grid grid-cols-[24px_46px_1fr_auto] lg:grid-cols-[24px_46px_1fr_120px_60px] items-center gap-3 lg:gap-4 px-2 py-2 rounded-md hover:bg-elev transition-colors text-left"
-            >
-              <span className="text-[14px] font-medium text-muted tabular-nums text-right group-hover:hidden">
-                {i + 1}
-              </span>
-              <span className="hidden group-hover:inline-flex justify-end text-text">
-                <PlayIcon className="w-[14px] h-[14px] fill-current" />
-              </span>
-              <div className="w-[46px] h-[46px] rounded-[5px] overflow-hidden bg-panel-2 relative flex-none">
-                <Image src={p.cover} alt="" fill sizes="46px" className="object-cover" />
-              </div>
-              <div className="min-w-0">
-                <div className="font-semibold text-[15px] truncate group-hover:text-accent transition-colors">
-                  {p.title}
-                </div>
-                <div className="text-[12px] text-muted truncate mt-[2px]">{p.client}</div>
-              </div>
-              <div className="hidden lg:block text-[13px] text-muted-2 tabular-nums">
-                {p.year}
-              </div>
-              <div className="text-[13px] text-muted-2 tabular-nums text-right">
-                {p.tags[0]}
-              </div>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* ============ ARTIST PICK ============
-       *  Spotify's "Artist Pick" — a single featured project surfaced
-       *  prominently with cover + reasoning. */}
-      {artistPick && (
-        <section className="px-5 lg:px-8 pb-12">
-          <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em] mb-4">
-            Artist Pick
-          </h2>
-          <Link
-            href={`/work/${artistPick.id}`}
-            className="group block bg-panel hover:bg-elev rounded-[10px] p-4 lg:p-5 transition-colors max-w-[640px]"
-          >
-            <div className="flex items-center gap-4 lg:gap-5">
-              <div className="w-[100px] h-[100px] lg:w-[140px] lg:h-[140px] flex-none rounded-md overflow-hidden bg-panel-2 relative shadow-[0_9px_22px_-8px_rgba(0,0,0,0.65)]">
-                <Image
-                  src={artistPick.cover}
-                  alt={artistPick.title}
-                  fill
-                  sizes="140px"
-                  className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
-                  <span className="gradient-text-static">Posted by {ARTIST.split(' ')[0]}</span>
-                </div>
-                <div className="font-display font-extrabold text-[20px] lg:text-[26px] tracking-[-0.015em] leading-tight mb-1">
-                  {artistPick.title}
-                </div>
-                <div className="text-[13px] text-muted mb-2">
-                  {artistPick.client} · {artistPick.year}
-                </div>
-                <div className="text-[13px] text-text leading-[1.5] line-clamp-2">
-                  &ldquo;{artistPick.blurb} — the project that probably best represents where the
-                  work&apos;s headed.&rdquo;
-                </div>
-              </div>
-            </div>
-          </Link>
-        </section>
-      )}
 
       {/* ============ ABOUT (the bio itself) ============
        *  Two-column layout: bio text on the left, "factoid" stats on the right.
@@ -270,39 +146,6 @@ export default function AboutPage() {
           >
             Reach out
           </a>
-        </div>
-      </section>
-
-      {/* ============ FANS ALSO LIKE ============
-       *  Spotify suggests related artists. Repurposed: personal-work
-       *  projects surfaced as "related" to the client-side work above. */}
-      <section className="px-5 lg:px-8 pb-12">
-        <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em] mb-1">
-          You might also like
-        </h2>
-        <p className="text-[13px] text-muted mb-5">Personal projects and self-initiated work.</p>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
-          {youMightLike.map((p) => (
-            <Link
-              key={p.id}
-              href={`/work/${p.id}`}
-              className="group bg-panel hover:bg-elev rounded-[10px] p-3 lg:p-4 transition-colors block"
-            >
-              <div className="relative mb-3 rounded-md overflow-hidden shadow-[0_9px_22px_-8px_rgba(0,0,0,0.65)] aspect-square bg-panel-2">
-                <Image
-                  src={p.cover}
-                  alt={p.title}
-                  fill
-                  sizes="(max-width:768px) 50vw, 25vw"
-                  className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                />
-              </div>
-              <div className="font-display font-bold text-[16px] tracking-[-0.01em] leading-tight truncate">
-                {p.title}
-              </div>
-              <div className="text-[12px] text-muted-2 mt-1 truncate">{p.tags[0]}</div>
-            </Link>
-          ))}
         </div>
       </section>
 
