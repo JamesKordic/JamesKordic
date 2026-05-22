@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { PROJECTS, ARTIST } from '@/lib/projects';
 import { usePlayer } from '@/lib/player-context';
 import { HomeIcon, SearchIcon, UserIcon, LibraryIcon } from './icons';
+import { ProjectMonogram } from './project-monogram';
 
 export function Sidebar({
   open,
@@ -117,9 +118,7 @@ export function Sidebar({
                   isOnThisPage ? 'bg-elev' : 'hover:bg-elev'
                 }`}
               >
-                <div className="w-[46px] h-[46px] rounded-[5px] flex-none overflow-hidden bg-panel-2 relative">
-                  <Image src={p.cover} alt="" fill sizes="46px" className="object-cover" />
-                </div>
+                <ProjectMonogram p={p} size={46} />
                 <div className="min-w-0">
                   <div
                     className={`font-semibold text-[13.5px] truncate ${
