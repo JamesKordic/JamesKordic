@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import type { Project } from '@/lib/projects';
 import { usePlayer } from '@/lib/player-context';
 import { PlayIcon } from './icons';
+import { ProjectCover } from './project-cover';
 
 /**
  * Default catalog card — larger than before, with title/tags/year
@@ -20,12 +20,10 @@ export function AlbumCard({ p, i = 0 }: { p: Project; i?: number }) {
         className="group block bg-panel hover:bg-elev rounded-[10px] p-3 lg:p-4 transition-colors text-left cursor-pointer"
       >
         <div className="relative mb-4 rounded-md overflow-hidden shadow-[0_9px_22px_-8px_rgba(0,0,0,0.65)] aspect-square bg-panel-2">
-          <Image
-            src={p.cover}
-            alt={`${p.title} cover`}
-            fill
+          <ProjectCover
+            p={p}
             sizes="(max-width:560px) 50vw, (max-width:1100px) 33vw, 25vw"
-            className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+            className="group-hover:scale-[1.03] transition-transform duration-500"
           />
           <button
             onClick={() => {
@@ -99,12 +97,10 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
         />
 
         <div className="relative mb-5 rounded-lg overflow-hidden shadow-[0_16px_40px_-12px_rgba(0,0,0,0.7)] aspect-square bg-panel-2">
-          <Image
-            src={p.cover}
-            alt={`${p.title} cover`}
-            fill
+          <ProjectCover
+            p={p}
             sizes="(max-width:768px) 100vw, 33vw"
-            className="object-cover group-hover:scale-[1.04] transition-transform duration-700"
+            className="group-hover:scale-[1.04] transition-transform duration-700"
             priority={i < 3}
           />
           <button
