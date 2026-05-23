@@ -92,10 +92,19 @@ body::after {
 }
 
 /* Equalizer animation.
- * Each of the four bars uses a different color from the site's gradient
- * (lime → cyan → violet → magenta) so the EQ reads as a miniature spectrum
- * rather than four lime stripes. Animation delays are also intentionally
- * staggered (set below) so the bars move in a wave. */
+ *
+ * Each bar uses:
+ *   1. A different color (lime, cyan, violet, magenta — matches the site
+ *      gradient so the EQ reads as a miniature spectrum)
+ *   2. A different @keyframes track with a unique shape and rhythm
+ *   3. A different duration AND a different ease so the four bars
+ *      genuinely move out of sync — not just phase-shifted copies of
+ *      the same wave. Without varied keyframes, all four bars would
+ *      pulse in lockstep no matter what delay you set, because they'd
+ *      be the same sine wave shifted in time.
+ *
+ * Result: irregular, music-meter-like motion. The bars cross each other,
+ * peak independently, and never all align at the same height. */
 .eq {
   display: inline-flex;
   align-items: flex-end;
@@ -106,35 +115,65 @@ body::after {
   width: 2.5px;
   height: 30%;
   border-radius: 1px;
+  /* iteration-count infinite + fill-mode none so the bars settle
+   * back to 30% when the parent .run class is removed (paused state). */
 }
-/* Per-bar color matches a stop in the site's main gradient */
 .eq span:nth-child(1) {
-  background: #c8f135; /* lime */
-  animation-delay: -0.2s;
+  background: #c8f135; /* lime — bass-like, slower, big swings */
 }
 .eq span:nth-child(2) {
-  background: #22d3ee; /* cyan */
-  animation-delay: -0.5s;
+  background: #22d3ee; /* cyan — mids, quick choppy motion */
 }
 .eq span:nth-child(3) {
-  background: #8b5cf6; /* violet */
-  animation-delay: 0s;
+  background: #8b5cf6; /* violet — high mids, double-peak */
 }
 .eq span:nth-child(4) {
-  background: #ff2d8a; /* magenta */
-  animation-delay: -0.35s;
+  background: #ff2d8a; /* magenta — treble, fastest, sharp peaks */
 }
-.eq.run span {
-  animation: eq 0.8s ease-in-out infinite;
+.eq.run span:nth-child(1) {
+  animation: eq-1 1.05s ease-in-out infinite;
 }
-@keyframes eq {
-  0%,
-  100% {
-    height: 25%;
-  }
-  50% {
-    height: 100%;
-  }
+.eq.run span:nth-child(2) {
+  animation: eq-2 0.62s ease-in-out infinite;
+}
+.eq.run span:nth-child(3) {
+  animation: eq-3 0.83s ease-in-out infinite;
+}
+.eq.run span:nth-child(4) {
+  animation: eq-4 0.48s ease-out infinite;
+}
+
+/* Each keyframe block has a distinct profile — different heights at
+ * different points in the loop. They share the same range (15–100%)
+ * but never hit the same height at the same loop-fraction. */
+@keyframes eq-1 {
+  0%   { height: 30%; }
+  25%  { height: 95%; }
+  55%  { height: 50%; }
+  80%  { height: 75%; }
+  100% { height: 30%; }
+}
+@keyframes eq-2 {
+  0%   { height: 55%; }
+  20%  { height: 25%; }
+  50%  { height: 90%; }
+  75%  { height: 40%; }
+  100% { height: 55%; }
+}
+@keyframes eq-3 {
+  0%   { height: 70%; }
+  15%  { height: 100%; }
+  40%  { height: 35%; }
+  65%  { height: 85%; }
+  90%  { height: 20%; }
+  100% { height: 70%; }
+}
+@keyframes eq-4 {
+  0%   { height: 20%; }
+  30%  { height: 80%; }
+  60%  { height: 45%; }
+  85%  { height: 100%; }
+  100% { height: 20%; }
 }
 
 /* Spinning record */
