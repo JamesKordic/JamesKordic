@@ -55,7 +55,7 @@ const MONOGRAMS: Record<string, Monogram> = {
     from: '#1d2f7a',
     to: '#22d3ee',
     logoSrc: '/logos/wwimf.png',
-    logoScale: 0.66, // hand mark has internal detail — don't crowd the edges
+    logoScale: 0.78, // portrait hand mark — scale up so it doesn't read too thin
   },
   'taco-bell': {
     text: 'TB',
