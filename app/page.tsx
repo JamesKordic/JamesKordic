@@ -173,11 +173,13 @@ export default function HomePage() {
           </div>
 
           <div className="relative text-accent-ink px-6 py-10 lg:px-12 lg:py-14">
-            {/* Availability status pill */}
-            <div className="inline-flex items-center gap-2 bg-accent-ink text-accent font-bold text-[11px] tracking-[0.14em] uppercase px-3 py-1.5 rounded-full mb-6">
+            {/* Availability status pill — dark chip with white text + cyan
+             *  pulsing dot. Switched away from lime text/dot so the pill
+             *  doesn't read as solid green against the gradient backdrop. */}
+            <div className="inline-flex items-center gap-2 bg-accent-ink text-text font-bold text-[11px] tracking-[0.14em] uppercase px-3 py-1.5 rounded-full mb-6">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan" />
               </span>
               Open for work · 2026
             </div>
@@ -197,9 +199,12 @@ export default function HomePage() {
 
             {/* Primary + secondary actions */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+              {/* Primary email button — dark chip with WHITE email text
+               *  (was lime). The gradient arrow circle on the right stays
+               *  the focal accent. */}
               <a
                 href="mailto:Jkordic@me.com"
-                className="group inline-flex items-center justify-between gap-4 bg-accent-ink text-accent rounded-full pl-6 pr-3 py-3 font-bold text-[15px] hover:scale-[1.03] active:scale-[0.97] transition-transform shadow-[0_8px_24px_-6px_rgba(0,0,0,0.4)]"
+                className="group inline-flex items-center justify-between gap-4 bg-accent-ink text-text rounded-full pl-6 pr-3 py-3 font-bold text-[15px] hover:scale-[1.03] active:scale-[0.97] transition-transform shadow-[0_8px_24px_-6px_rgba(0,0,0,0.4)]"
               >
                 <span className="flex items-center gap-3">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
@@ -213,11 +218,13 @@ export default function HomePage() {
                 </span>
               </a>
 
+              {/* Secondary outlined button — hover state now fills with
+               *  white text on dark bg (was lime text). */}
               <a
                 href="https://drive.google.com/file/d/10fG8m5VriZOOSDyXZnowGsIqEZaRUp6Y/view"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 border-2 border-accent-ink text-accent-ink font-bold text-[14px] tracking-[0.02em] rounded-full px-5 py-3 hover:bg-accent-ink hover:text-accent transition-colors"
+                className="inline-flex items-center gap-2.5 border-2 border-accent-ink text-accent-ink font-bold text-[14px] tracking-[0.02em] rounded-full px-5 py-3 hover:bg-accent-ink hover:text-text transition-colors"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
                   <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" strokeLinecap="round" strokeLinejoin="round" />

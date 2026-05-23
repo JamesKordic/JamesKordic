@@ -13,9 +13,22 @@ export const PauseIcon = (p: SVGProps<SVGSVGElement>) => (
 );
 
 export const VerifiedIcon = (p: SVGProps<SVGSVGElement>) => (
+  // Verified badge uses the site's signature gradient instead of a flat lime fill.
+  // The gradient is defined inline so the icon is self-contained — no external
+  // CSS coupling. We use a fixed gradient id (`vg`) because there's no risk of
+  // multiple verified badges being rendered with conflicting fills inside the
+  // same SVG: each VerifiedIcon is its own SVG element, so the id only needs
+  // to be unique within its own SVG tree.
   <svg viewBox="0 0 24 24" {...p}>
+    <defs>
+      <linearGradient id="vg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#c8f135" />
+        <stop offset="50%" stopColor="#22d3ee" />
+        <stop offset="100%" stopColor="#ff2d8a" />
+      </linearGradient>
+    </defs>
     <path
-      fill="#c8f135"
+      fill="url(#vg)"
       d="m12 2 2.4 2 3.1-.5 1 3 3 1-.5 3.1 2 2.4-2 2.4.5 3.1-3 1-1 3-3.1-.5L12 22l-2.4-2-3.1.5-1-3-3-1 .5-3.1L1 12l2-2.4L2.5 6.5l3-1 1-3 3.1.5z"
     />
     <path fill="#0a0a0a" d="m10.6 14.6-2.3-2.3-1.4 1.4 3.7 3.7 7-7-1.4-1.4z" />

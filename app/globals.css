@@ -23,9 +23,13 @@ body {
   overflow: hidden;
 }
 
+/* Text selection — uses magenta (part of the site's gradient palette).
+ * Note: browsers don't support gradient backgrounds on ::selection, so we
+ * pick a solid color from the gradient stops. Magenta gives strong contrast
+ * against the dark text and reads cleanly as "selected." */
 ::selection {
-  background: #c8f135;
-  color: #10130a;
+  background: #ff2d8a;
+  color: #ffffff;
 }
 
 a {
@@ -87,7 +91,11 @@ body::after {
   background: transparent;
 }
 
-/* Equalizer animation */
+/* Equalizer animation.
+ * Each of the four bars uses a different color from the site's gradient
+ * (lime → cyan → violet → magenta) so the EQ reads as a miniature spectrum
+ * rather than four lime stripes. Animation delays are also intentionally
+ * staggered (set below) so the bars move in a wave. */
 .eq {
   display: inline-flex;
   align-items: flex-end;
@@ -96,24 +104,28 @@ body::after {
 }
 .eq span {
   width: 2.5px;
-  background: #c8f135;
   height: 30%;
   border-radius: 1px;
 }
-.eq.run span {
-  animation: eq 0.8s ease-in-out infinite;
-}
+/* Per-bar color matches a stop in the site's main gradient */
 .eq span:nth-child(1) {
+  background: #c8f135; /* lime */
   animation-delay: -0.2s;
 }
 .eq span:nth-child(2) {
+  background: #22d3ee; /* cyan */
   animation-delay: -0.5s;
 }
 .eq span:nth-child(3) {
+  background: #8b5cf6; /* violet */
   animation-delay: 0s;
 }
 .eq span:nth-child(4) {
+  background: #ff2d8a; /* magenta */
   animation-delay: -0.35s;
+}
+.eq.run span {
+  animation: eq 0.8s ease-in-out infinite;
 }
 @keyframes eq {
   0%,
