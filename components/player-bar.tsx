@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
 import { usePlayer } from '@/lib/player-context';
 import { PROJECTS, getProject, fmtTime } from '@/lib/projects';
+import { ProjectMonogram } from './project-monogram';
 import {
   ShuffleIcon,
   PrevIcon,
@@ -81,11 +81,23 @@ export function PlayerBar() {
     <footer className="col-span-1 lg:col-span-2 row-start-2 bg-panel/95 backdrop-blur-sm rounded-[10px] lg:bg-transparent lg:backdrop-blur-none lg:rounded-none grid grid-cols-[1fr_auto] sm:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_2fr_1fr] items-center px-3 sm:px-4 gap-3 sm:gap-4 min-w-0 overflow-hidden">
       {/* Now Playing */}
       <div className="flex items-center gap-2.5 sm:gap-[14px] min-w-0">
+        {/* Cover tile — uses the same gradient + logo monogram treatment
+         *  as the library sidebar, not the photographic cover. Renders
+         *  two sizes (mobile 40px, desktop 58px) because ProjectMonogram
+         *  takes a fixed numeric size prop rather than CSS-responsive
+         *  sizing. The drop shadow stays so the tile reads as a card
+         *  sitting on top of the player bar surface. */}
         <Link
           href={`/work/${state.id}`}
-          className="w-[40px] h-[40px] sm:w-[58px] sm:h-[58px] rounded-md flex-none overflow-hidden bg-panel-2 shadow-[0_5px_14px_-4px_rgba(0,0,0,0.6)] relative cursor-pointer"
+          className="flex-none shadow-[0_5px_14px_-4px_rgba(0,0,0,0.6)] rounded-[5px] cursor-pointer"
+          aria-label={`Open ${p.title}`}
         >
-          <Image src={p.cover} alt="" fill sizes="58px" className="object-cover" />
+          <span className="sm:hidden">
+            <ProjectMonogram p={p} size={40} />
+          </span>
+          <span className="hidden sm:inline-block">
+            <ProjectMonogram p={p} size={58} />
+          </span>
         </Link>
         <div className="min-w-0 flex-1">
           <Link
