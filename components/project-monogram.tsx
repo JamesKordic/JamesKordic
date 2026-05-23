@@ -43,37 +43,47 @@ type Monogram = {
  *  library sidebar — it doesn't belong on the Project data model. */
 const MONOGRAMS: Record<string, Monogram> = {
   'the-syndicate': {
-    text: 'TS',
+    text: 'TS', // fallback / alt text only when logoSrc is set
     from: '#3c3a4a',
     to: '#8b5cf6',
+    logoSrc: '/logos/the-syndicate.png',
+    logoScale: 0.68,
   },
   wwimf: {
     text: 'WW',
     letterSpacing: '-0.04em',
     from: '#1d2f7a',
     to: '#22d3ee',
+    logoSrc: '/logos/wwimf.png',
+    logoScale: 0.66, // hand mark has internal detail — don't crowd the edges
   },
   'taco-bell': {
-    text: 'TB', // used as fallback / alt text only when logoSrc is set
+    text: 'TB',
     from: '#7a2e8a',
     to: '#ff2d8a',
     logoSrc: '/logos/taco-bell.png',
-    logoScale: 0.7, // bell is naturally compact; give it a bit more room
+    logoScale: 0.7,
   },
   'mnrk-heavy': {
     text: 'MH',
     from: '#7a0e0e',
     to: '#ffb84a',
+    logoSrc: '/logos/mnrk-heavy.png',
+    logoScale: 0.78, // 2:1 wide text logo — needs more horizontal presence
   },
   consensus: {
     text: 'CO',
     from: '#0e2e7a',
     to: '#22d3ee',
+    logoSrc: '/logos/consensus.png',
+    logoScale: 0.66, // CoinDesk "C" with dots — keep some breathing room
   },
   adults: {
     text: 'AF',
     from: '#7a1a14',
     to: '#ff2d8a',
+    logoSrc: '/logos/adults.png',
+    logoScale: 0.72, // FX rectangular mark — wider than tall
   },
   voltage: {
     text: 'VO',
@@ -81,11 +91,15 @@ const MONOGRAMS: Record<string, Monogram> = {
     to: '#c8f135',
     // Voltage's lime gradient is bright — switch to ink for contrast
     ink: '#10130a',
+    logoSrc: '/logos/voltage.png',
+    logoScale: 0.74, // black V trapezoid — distinctive, let it dominate
   },
   nike: {
     text: 'NK',
     from: '#7a2e14',
     to: '#ffb84a',
+    logoSrc: '/logos/nike.png',
+    logoScale: 0.82, // swoosh is ~3:1 wide — scale up so the stroke reads
   },
 };
 
