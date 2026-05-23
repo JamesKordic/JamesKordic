@@ -102,7 +102,7 @@ export function PlayerBar() {
         <button
           onClick={() => toggleLike()}
           className={`hidden sm:block transition-transform hover:scale-[1.15] flex-none ${
-            liked ? 'text-accent' : 'text-muted'
+            liked ? 'text-magenta' : 'text-muted'
           }`}
           aria-label="Like"
         >
@@ -120,7 +120,7 @@ export function PlayerBar() {
           <button
             onClick={toggleShuffle}
             className={`hidden sm:block transition-all hover:scale-[1.1] ${
-              state.shuffle ? 'text-accent' : 'text-muted hover:text-text'
+              state.shuffle ? 'text-cyan' : 'text-muted hover:text-text'
             }`}
             aria-label="Shuffle"
           >
@@ -155,7 +155,7 @@ export function PlayerBar() {
           <button
             onClick={toggleRepeat}
             className={`hidden sm:block transition-all hover:scale-[1.1] ${
-              state.repeat ? 'text-accent' : 'text-muted hover:text-text'
+              state.repeat ? 'text-cyan' : 'text-muted hover:text-text'
             }`}
             aria-label="Repeat"
           >
@@ -173,7 +173,7 @@ export function PlayerBar() {
             className="flex-1 h-[5px] bg-[#4a4a4e] rounded cursor-pointer relative group"
           >
             <div
-              className="h-full bg-text rounded relative group-hover:bg-accent transition-colors"
+              className="h-full bg-text rounded relative group-hover:bg-gradient-to-r group-hover:from-accent group-hover:via-cyan group-hover:to-magenta transition-colors"
               style={{ width: `${state.progress * 100}%` }}
             >
               <span className="absolute -right-[6px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-text opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -197,7 +197,7 @@ export function PlayerBar() {
           className="w-[92px] h-[5px] bg-[#4a4a4e] rounded cursor-pointer relative group"
         >
           <div
-            className="h-full bg-text rounded group-hover:bg-accent transition-colors"
+            className="h-full bg-text rounded group-hover:bg-gradient-to-r group-hover:from-accent group-hover:via-cyan group-hover:to-magenta transition-colors"
             style={{ width: `${state.vol * 100}%` }}
           />
         </div>

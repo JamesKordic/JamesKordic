@@ -15,7 +15,7 @@ export function TrackRow({ p, i }: { p: Project; i: number }) {
     <Link
       href={`/work/${p.id}`}
       className={`track-row group grid grid-cols-[34px_1fr_90px_60px] sm:grid-cols-[34px_1fr_180px_90px_60px] items-center gap-[14px] px-3 py-[9px] rounded-md transition-colors cursor-pointer hover:bg-elev ${
-        isCurrent ? '[&_.tr-name]:text-accent' : ''
+        isCurrent ? '[&_.tr-name]:gradient-text-static' : ''
       }`}
     >
       <div className="text-[15px] text-muted text-center tabular-nums relative h-5">

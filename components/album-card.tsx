@@ -142,7 +142,7 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
           ))}
           <span className="ml-auto text-[11.5px] font-semibold gradient-text-static flex items-center gap-1 group-hover:gap-2 transition-all">
             View case study
-            <span aria-hidden className="text-accent">→</span>
+            <span aria-hidden>→</span>
           </span>
         </div>
       </Link>

@@ -75,7 +75,7 @@ export function EmbedFrame({
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
-        className="absolute top-3 right-3 z-10 font-mono text-[10px] tracking-[0.14em] uppercase bg-bg/80 backdrop-blur-md text-text px-3 py-1.5 rounded-full hover:bg-accent hover:text-accent-ink transition-colors"
+        className="absolute top-3 right-3 z-10 font-mono text-[10px] tracking-[0.14em] uppercase bg-bg/80 backdrop-blur-md text-text px-3 py-1.5 rounded-full hover:bg-gradient-to-r hover:from-accent hover:via-cyan hover:to-magenta hover:text-accent-ink transition-colors"
       >
         {label}
       </a>

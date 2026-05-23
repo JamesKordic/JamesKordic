@@ -59,7 +59,7 @@ export default function AboutPage() {
       <section className="px-5 lg:px-8 pt-2 pb-10 flex items-center gap-5 flex-wrap">
         <a
           href="mailto:Jkordic@me.com"
-          className="font-bold text-[13px] tracking-[0.05em] uppercase bg-accent text-accent-ink rounded-[30px] px-[24px] py-[13px] hover:scale-[1.05] transition-transform"
+          className="font-bold text-[13px] tracking-[0.05em] uppercase bg-gradient-to-br from-accent via-cyan to-magenta text-accent-ink rounded-[30px] px-[24px] py-[13px] hover:scale-[1.05] transition-transform shadow-[0_6px_20px_-6px_rgba(200,241,53,0.4)]"
         >
           Get in touch
         </a>
@@ -126,10 +126,13 @@ export default function AboutPage() {
           Currently
         </h2>
         <div className="bg-panel rounded-[12px] p-5 lg:p-6 flex items-center gap-4 lg:gap-5 relative overflow-hidden">
-          {/* Status dot — pulsing accent, signals "online / available" */}
+          {/* Status dot — cyan pulsing dot signals "online / available."
+           *  Using cyan (not green) keeps the site palette consistent — solid
+           *  accent green is reserved exclusively for inside the multi-color
+           *  gradient CTA panel on the home page. */}
           <div className="relative flex h-3 w-3 flex-none ml-1">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-accent" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75" />
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="font-display font-extrabold text-[18px] lg:text-[20px] tracking-[-0.01em]">
@@ -274,7 +277,7 @@ function ContactCard({
       rel={external ? 'noopener noreferrer' : undefined}
       className="group bg-panel hover:bg-elev rounded-[10px] p-4 transition-colors flex items-center gap-3"
     >
-      <span className="text-muted group-hover:text-accent transition-colors flex-none">{icon}</span>
+      <span className="text-muted group-hover:text-cyan transition-colors flex-none">{icon}</span>
       <div className="min-w-0">
         <div className="text-[10px] tracking-[0.14em] uppercase text-muted-2 font-semibold mb-0.5">
           {label}

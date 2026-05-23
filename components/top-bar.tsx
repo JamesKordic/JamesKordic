@@ -69,7 +69,7 @@ export function TopBar({
       {showPlay && scrolled && (
         <button
           onClick={handlePlay}
-          className="w-[42px] h-[42px] rounded-full bg-accent flex items-center justify-center flex-none hover:scale-[1.06] transition-transform"
+          className="w-[42px] h-[42px] rounded-full bg-gradient-to-br from-accent via-cyan to-magenta flex items-center justify-center flex-none hover:scale-[1.06] transition-transform shadow-[0_6px_18px_-4px_rgba(200,241,53,0.5)]"
         >
           <PlayIcon className="w-[18px] h-[18px] fill-accent-ink" />
         </button>

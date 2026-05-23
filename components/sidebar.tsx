@@ -122,11 +122,10 @@ export function Sidebar({
                 <div className="min-w-0">
                   <div
                     className={`font-semibold text-[13.5px] truncate ${
-                      isOnThisPage
-                        ? 'gradient-text-static'
-                        : isPlayingThis
-                          ? 'text-accent'
-                          : ''
+                      // Both "currently on this page" and "currently playing"
+                      // get the gradient treatment — keeps the palette
+                      // consistent and avoids any solid green
+                      isOnThisPage || isPlayingThis ? 'gradient-text-static' : ''
                     }`}
                   >
                     {p.title}
@@ -188,7 +187,7 @@ function NavItem({
           aria-hidden
         />
       )}
-      <span className={active ? 'text-accent' : ''}>{icon}</span>
+      <span className={active ? 'text-cyan' : ''}>{icon}</span>
       <span className={active ? 'gradient-text-static' : ''}>{children}</span>
     </Link>
   );
