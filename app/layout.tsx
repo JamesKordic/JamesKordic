@@ -3,7 +3,6 @@ import './globals.css';
 import { PlayerProvider } from '@/lib/player-context';
 import { LightboxProvider } from '@/lib/lightbox-context';
 import { AppShell } from '@/components/app-shell';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: 'James Kordic — Graphic & Motion Designer',
@@ -20,7 +19,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AppShell>{children}</AppShell>
           </LightboxProvider>
         </PlayerProvider>
-        <SpeedInsights />
       </body>
     </html>
   );
