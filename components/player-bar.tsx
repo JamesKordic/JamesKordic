@@ -60,27 +60,48 @@ export function PlayerBar() {
   const liked = !!state.liked[state.id];
 
   return (
-    <footer className="col-span-2 row-start-2 grid grid-cols-[1fr_2fr_1fr] sm:grid-cols-[1fr_auto] lg:grid-cols-[1fr_2fr_1fr] items-center px-3 sm:px-4 gap-3 sm:gap-4">
+    /* PlayerBar layout
+     *
+     *  Mobile (< sm):
+     *    Single row, single column. Only the essentials visible:
+     *      [ cover ][ title/tags ][ play ][ next ]
+     *    The bar takes the full width (col-span-1) and uses the panel
+     *    background for a clean docked look. Like button, shuffle,
+     *    repeat, time, progress bar, and volume are all hidden — they
+     *    can be accessed from the project page itself.
+     *
+     *  Tablet (sm) and up:
+     *    3-column grid with Now Playing | Controls+Progress | (nothing yet)
+     *
+     *  Desktop (lg):
+     *    Full 3-column grid with the right side showing EQ + volume.
+     *    `col-span-2` only applies when the shell has 2 columns,
+     *    which is only at lg+ — at smaller sizes the player sits in
+     *    the single shell column. */
+    <footer className="col-span-1 lg:col-span-2 row-start-2 bg-panel/95 backdrop-blur-sm rounded-[10px] lg:bg-transparent lg:backdrop-blur-none lg:rounded-none grid grid-cols-[1fr_auto] sm:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_2fr_1fr] items-center px-3 sm:px-4 gap-3 sm:gap-4 min-w-0 overflow-hidden">
       {/* Now Playing */}
-      <div className="flex items-center gap-[14px] min-w-0">
+      <div className="flex items-center gap-2.5 sm:gap-[14px] min-w-0">
         <Link
           href={`/work/${state.id}`}
-          className="w-[46px] h-[46px] sm:w-[58px] sm:h-[58px] rounded-md flex-none overflow-hidden bg-panel-2 shadow-[0_5px_14px_-4px_rgba(0,0,0,0.6)] relative cursor-pointer"
+          className="w-[40px] h-[40px] sm:w-[58px] sm:h-[58px] rounded-md flex-none overflow-hidden bg-panel-2 shadow-[0_5px_14px_-4px_rgba(0,0,0,0.6)] relative cursor-pointer"
         >
           <Image src={p.cover} alt="" fill sizes="58px" className="object-cover" />
         </Link>
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <Link
             href={`/work/${state.id}`}
-            className="block font-bold text-[14px] truncate hover:underline"
+            className="block font-bold text-[13px] sm:text-[14px] truncate hover:underline"
           >
             {p.title}
           </Link>
-          <div className="text-[11.5px] text-muted truncate mt-[2px]">{p.tags.join(' · ')}</div>
+          <div className="text-[10.5px] sm:text-[11.5px] text-muted truncate mt-[2px]">
+            {p.tags.join(' · ')}
+          </div>
         </div>
+        {/* Like — hidden on mobile to save space; available on project page */}
         <button
           onClick={() => toggleLike()}
-          className={`transition-transform hover:scale-[1.15] flex-none ${
+          className={`hidden sm:block transition-transform hover:scale-[1.15] flex-none ${
             liked ? 'text-accent' : 'text-muted'
           }`}
           aria-label="Like"
@@ -94,8 +115,8 @@ export function PlayerBar() {
       </div>
 
       {/* Controls */}
-      <div className="flex flex-col items-center gap-2">
-        <div className="flex items-center gap-5">
+      <div className="flex flex-col items-center gap-2 min-w-0">
+        <div className="flex items-center gap-3 sm:gap-5">
           <button
             onClick={toggleShuffle}
             className={`hidden sm:block transition-all hover:scale-[1.1] ${
@@ -105,22 +126,23 @@ export function PlayerBar() {
           >
             <ShuffleIcon className="w-[18px] h-[18px]" />
           </button>
+          {/* Prev — hidden on mobile; users can swipe / use next instead */}
           <button
             onClick={goPrev}
-            className="text-muted hover:text-text transition-all hover:scale-[1.1]"
+            className="hidden sm:block text-muted hover:text-text transition-all hover:scale-[1.1]"
             aria-label="Previous project"
           >
             <PrevIcon className="w-[18px] h-[18px]" />
           </button>
           <button
             onClick={togglePlay}
-            className="w-[38px] h-[38px] rounded-full bg-text flex items-center justify-center flex-none transition-transform hover:scale-[1.08] active:scale-[0.93]"
+            className="w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] rounded-full bg-text flex items-center justify-center flex-none transition-transform hover:scale-[1.08] active:scale-[0.93]"
             aria-label="Play"
           >
             {state.playing ? (
-              <PauseIcon className="w-[17px] h-[17px] fill-[#0a0a0a]" />
+              <PauseIcon className="w-[15px] h-[15px] sm:w-[17px] sm:h-[17px] fill-[#0a0a0a]" />
             ) : (
-              <PlayIcon className="w-[17px] h-[17px] fill-[#0a0a0a]" />
+              <PlayIcon className="w-[15px] h-[15px] sm:w-[17px] sm:h-[17px] fill-[#0a0a0a]" />
             )}
           </button>
           <button
@@ -140,6 +162,7 @@ export function PlayerBar() {
             <RepeatIcon className="w-[18px] h-[18px]" />
           </button>
         </div>
+        {/* Progress bar — desktop only; on mobile space is at a premium */}
         <div className="hidden sm:flex items-center gap-[11px] w-full max-w-[600px]">
           <span className="text-[11px] text-muted tabular-nums w-[34px]">
             {fmtTime(state.progress * p.len)}
@@ -160,7 +183,7 @@ export function PlayerBar() {
         </div>
       </div>
 
-      {/* Right side */}
+      {/* Right side — desktop only (EQ + volume slider) */}
       <div className="hidden lg:flex items-center justify-end gap-[14px]">
         <span className={`eq ${state.playing ? 'run' : ''}`}>
           <span /><span /><span /><span />

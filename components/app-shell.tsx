@@ -50,7 +50,14 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <ScrollProvider value={viewRef}>
-      <div className="grid grid-cols-1 lg:grid-cols-[248px_1fr] grid-rows-[1fr_78px] lg:grid-rows-[1fr_92px] gap-2 h-screen p-2">
+      {/* Root grid:
+       *   Mobile: single column, content row + 78px player row
+       *   Desktop: 248px sidebar + content, content row + 92px player row
+       * h-svh uses the small viewport height unit on mobile, which excludes
+       * the browser's UI chrome. Falls back to h-screen for browsers that
+       * don't support svh. overflow-hidden prevents the document itself from
+       * scrolling — only the inner viewRef should scroll. */}
+      <div className="grid grid-cols-1 lg:grid-cols-[248px_1fr] grid-rows-[1fr_64px] sm:grid-rows-[1fr_78px] lg:grid-rows-[1fr_92px] gap-2 h-screen h-svh p-2 overflow-hidden">
         <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
         <main className="row-start-1 col-start-1 lg:col-start-2 bg-gradient-to-b from-panel-2 to-panel rounded-[11px] relative min-h-0 overflow-hidden">
@@ -62,7 +69,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           />
           <div
             ref={viewRef}
-            className="absolute inset-0 overflow-y-auto scroll-smooth scrollbar-styled"
+            className="absolute inset-0 overflow-y-auto overflow-x-hidden scroll-smooth scrollbar-styled"
           >
             <div className="view-anim">{children}</div>
           </div>
