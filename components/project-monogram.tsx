@@ -29,6 +29,13 @@ type Monogram = {
   to: string;
   /** Text color override. Default is paper-cream — good for dark gradients. */
   ink?: string;
+  /** Optional path to a white-on-transparent logo image. When set, the
+   *  logo replaces the text monogram. Used for projects where the brand
+   *  has a strong mark of its own (e.g. Taco Bell's bell). */
+  logoSrc?: string;
+  /** Percentage of the tile the logo should occupy (0-1). Default 0.62.
+   *  Lower values create more padding around the logo. */
+  logoScale?: number;
 };
 
 /** Hand-tuned monogram per project. The mapping lives here (not in
@@ -47,9 +54,11 @@ const MONOGRAMS: Record<string, Monogram> = {
     to: '#22d3ee',
   },
   'taco-bell': {
-    text: 'TB',
+    text: 'TB', // used as fallback / alt text only when logoSrc is set
     from: '#7a2e8a',
     to: '#ff2d8a',
+    logoSrc: '/logos/taco-bell.png',
+    logoScale: 0.7, // bell is naturally compact; give it a bit more room
   },
   'mnrk-heavy': {
     text: 'MH',
@@ -105,6 +114,10 @@ export function ProjectMonogram({
   // enough to dominate the tile, but with breathing room from the edge.
   const fontSize = Math.round(size * (m.text.length > 2 ? 0.38 : 0.46));
 
+  // When the project has a logo image, size it to occupy `logoScale`
+  // fraction of the tile. Default 62% leaves a small even margin all around.
+  const logoSize = Math.round(size * (m.logoScale ?? 0.62));
+
   return (
     <div
       className="rounded-[5px] flex-none flex items-center justify-center font-display font-extrabold relative overflow-hidden"
@@ -126,19 +139,40 @@ export function ProjectMonogram({
         }}
         aria-hidden
       />
-      <span
-        className="relative"
-        style={{
-          fontSize,
-          lineHeight: 1,
-          letterSpacing: m.letterSpacing || '-0.02em',
-          // Slight optical adjustment — uppercase display letters tend to
-          // look heavy at the baseline; a tiny upward shift balances them.
-          transform: 'translateY(-1px)',
-        }}
-      >
-        {m.text}
-      </span>
+      {m.logoSrc ? (
+        // White-on-transparent brand logo overlaid on the gradient tile.
+        // Using a plain <img> instead of next/image because the logos live
+        // in /public, are very small (~12KB), and we want guaranteed inline
+        // rendering without the next/image fill-container constraints.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={m.logoSrc}
+          alt=""
+          className="relative pointer-events-none select-none"
+          style={{
+            // Constrain to a square box; the image's own aspect ratio is
+            // preserved via `object-contain` so non-square logos (like
+            // Taco Bell's slightly portrait bell) don't get squashed.
+            width: logoSize,
+            height: logoSize,
+            objectFit: 'contain',
+          }}
+        />
+      ) : (
+        <span
+          className="relative"
+          style={{
+            fontSize,
+            lineHeight: 1,
+            letterSpacing: m.letterSpacing || '-0.02em',
+            // Slight optical adjustment — uppercase display letters tend to
+            // look heavy at the baseline; a tiny upward shift balances them.
+            transform: 'translateY(-1px)',
+          }}
+        >
+          {m.text}
+        </span>
+      )}
     </div>
   );
 }
