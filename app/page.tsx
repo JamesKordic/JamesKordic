@@ -57,8 +57,10 @@ export default function HomePage() {
             <h1 className="font-display font-extrabold leading-[0.95] tracking-[-0.03em] text-[44px] sm:text-[64px] lg:text-[80px]">
               James <em className="not-italic gradient-text">Kordic</em>
             </h1>
-            <p className="text-[14px] text-muted mt-2 max-w-md">
-              New York-based Graphic & Motion Designer · {PROJECTS.length} projects · Work for Taco Bell, FX, MNRK Heavy, The Syndicate
+            <p className="text-[14px] text-muted mt-2 max-w-[640px]">
+              A New York&ndash;based Graphic & Motion Designer whose advertising experience,
+              mixed-media approach, and results-driven creative work help brands connect
+              with audiences across digital platforms.
             </p>
           </div>
 

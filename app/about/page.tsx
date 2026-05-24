@@ -94,16 +94,18 @@ export default function AboutPage() {
 
           <div className="relative z-10">
             <p className="text-[17px] lg:text-[18px] leading-[1.6] text-text mb-4">
-              James Kordic is a Graphic and Motion Designer based in New York, creating digital
-              ads, social content, and motion graphics for brands and the agencies that work
-              with them. His advertising experience and mixed-media approach drive
-              results-focused creative work.
+              I&apos;m a Graphic and Motion Designer based in New York, creating digital ads,
+              social content, and motion graphics for brands and agencies. I&apos;ve produced
+              work for Taco Bell, FX, and The Syndicate, along with large-scale campaigns
+              for the Rochester Institute of Technology.
+            </p>
+            <p className="text-[15px] leading-[1.6] text-muted mb-4">
+              I graduated from the Rochester Institute of Technology with a BFA in Graphic
+              Design and have been designing brands professionally for four years.
             </p>
             <p className="text-[15px] leading-[1.6] text-muted">
-              He has produced work for Taco Bell, FX, MNRK Heavy, Consensus by CoinDesk, and The
-              Syndicate, along with large-scale campaigns for the Rochester Institute of
-              Technology — where he earned a BFA in Graphic Design. Away from the screen, he&apos;s
-              usually deep in music or experimenting with film photography.
+              When I&apos;m not behind a computer screen, I&apos;m usually diving into music
+              or experimenting with film photography.
             </p>
           </div>
 
