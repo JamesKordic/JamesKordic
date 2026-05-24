@@ -14,15 +14,19 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
   const viewRef = useRef<HTMLDivElement>(null);
-  const { togglePlay } = usePlayer();
+  const { togglePlay, setCurrent } = usePlayer();
 
   // Determine title for top bar based on route
   let title = ARTIST;
   let showPlay = true;
+  let currentProjectSlug: string | null = null;
   if (pathname?.startsWith('/work/')) {
     const slug = pathname.replace('/work/', '');
     const p = getProject(slug);
-    if (p) title = p.title;
+    if (p) {
+      title = p.title;
+      currentProjectSlug = slug;
+    }
   } else if (pathname === '/search') {
     title = 'Browse Work';
     showPlay = false;
@@ -35,6 +39,22 @@ export function AppShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (viewRef.current) viewRef.current.scrollTop = 0;
   }, [pathname]);
+
+  /* Keep the player synced with whichever project the user is viewing.
+   *
+   * The player bar should always reflect the current page — if you're on
+   * /work/wwimf, the bar should show WWIMF. Previously the bar only
+   * updated when you clicked a play button, so navigating via the sidebar
+   * library left the bar showing whichever project was last played.
+   *
+   * We only sync TO a project (when currentProjectSlug is set). On the
+   * home page, about page, or search, we leave the player alone so the
+   * "last viewed project" stays visible in the bar. */
+  useEffect(() => {
+    if (currentProjectSlug) {
+      setCurrent(currentProjectSlug);
+    }
+  }, [currentProjectSlug, setCurrent]);
 
   // Space bar toggles play (when not focused on input)
   useEffect(() => {

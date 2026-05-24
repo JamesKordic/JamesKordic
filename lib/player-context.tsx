@@ -24,6 +24,11 @@ type PlayerState = {
 type Ctx = {
   state: PlayerState;
   playFrom: (id: string) => void;
+  /** Sync the player to a project without forcing play/pause state.
+   *  Used by the app shell when the URL changes to a project page —
+   *  the player bar should reflect which project the visitor is viewing,
+   *  but we shouldn't auto-start playback just from navigation. */
+  setCurrent: (id: string) => void;
   togglePlay: () => void;
   next: () => void;
   prev: () => void;
@@ -87,6 +92,17 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     }));
   }, []);
 
+  /** Update which project the player is "on" without forcing play/pause.
+   *  Resets progress to 0 if it's a different project. Used by the app
+   *  shell to keep the player synced with whichever project page the
+   *  user is currently viewing. No-op if already on this project. */
+  const setCurrent = useCallback((id: string) => {
+    setState((s) => {
+      if (s.id === id) return s;
+      return { ...s, id, progress: 0 };
+    });
+  }, []);
+
   const togglePlay = useCallback(() => {
     setState((s) => ({ ...s, playing: !s.playing }));
   }, []);
@@ -144,6 +160,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
       value={{
         state,
         playFrom,
+        setCurrent,
         togglePlay,
         next,
         prev,
