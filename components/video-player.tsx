@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { SITE_TEXT } from '@/lib/site-text';
 
 /**
  * Custom video player used inside case-study sections.
@@ -171,7 +172,7 @@ export function VideoPlayer({
        *   - the poster image (if any) is in place */}
       {!thumbnailReady && (
         <div className="absolute inset-0 flex items-center justify-center text-muted-2 text-[12px] font-mono">
-          Loading…
+          {SITE_TEXT.videoPlayer.loadingLabel}
         </div>
       )}
 

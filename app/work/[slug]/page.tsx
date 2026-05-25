@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { PROJECTS, getProject, ARTIST } from '@/lib/projects';
 import { CaseSection } from '@/components/case-section';
 import { ProjectActions } from '@/components/project-actions';
+import { SITE_TEXT } from '@/lib/site-text';
+
+const T = SITE_TEXT;
 
 export async function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.id }));
@@ -90,19 +93,19 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 py-[18px] pb-6 border-b border-line mb-9">
           <div>
             <div className="text-[11px] tracking-[0.12em] uppercase text-muted-2 mb-[6px]">
-              Client
+              {T.projectPage.metaClientLabel}
             </div>
             <div className="font-display font-bold text-[18px] tracking-[-0.01em]">{p.client}</div>
           </div>
           <div>
             <div className="text-[11px] tracking-[0.12em] uppercase text-muted-2 mb-[6px]">
-              Date
+              {T.projectPage.metaDateLabel}
             </div>
             <div className="font-display font-bold text-[18px] tracking-[-0.01em]">{p.date}</div>
           </div>
           <div>
             <div className="text-[11px] tracking-[0.12em] uppercase text-muted-2 mb-[6px]">
-              Role
+              {T.projectPage.metaRoleLabel}
             </div>
             <div className="font-display font-bold text-[18px] tracking-[-0.01em]">{p.role}</div>
           </div>
@@ -113,11 +116,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <section className="mb-12 lg:mb-16">
             <div className="flex items-baseline gap-3 mb-5 border-b border-line pb-3">
               <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted">
-                <span className="gradient-text-static">01</span> · The Brief
+                <span className="gradient-text-static">01</span> · {T.projectPage.briefEyebrowDefault}
               </span>
             </div>
             <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-5 max-w-3xl">
-              {p.brief.eyebrow || 'The Brief'}
+              {p.brief.eyebrow || T.projectPage.briefEyebrowDefault}
             </h2>
             <div className="max-w-[760px] space-y-5">
               <p className="text-[18px] lg:text-[20px] leading-[1.5] text-text">
@@ -137,11 +140,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <section className="mb-12 lg:mb-16">
             <div className="flex items-baseline gap-3 mb-5 border-b border-line pb-3">
               <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted">
-                <span className="gradient-text-static">02</span> · The Approach
+                <span className="gradient-text-static">02</span> · {T.projectPage.approachEyebrowDefault}
               </span>
             </div>
             <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-5 max-w-3xl">
-              {p.approach.eyebrow || 'The Approach'}
+              {p.approach.eyebrow || T.projectPage.approachEyebrowDefault}
             </h2>
             <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted max-w-[760px] mb-8">
               {p.approach.intro}
@@ -170,8 +173,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         {p.brief && (
           <div className="flex items-baseline gap-3 mb-5 border-b border-line pb-3 mt-12">
             <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted">
-              <span className="gradient-text-static">03</span> · The Work ·{' '}
-              {String(p.sections.length).padStart(2, '0')} Projects
+              <span className="gradient-text-static">03</span> · {T.projectPage.workEyebrow} ·{' '}
+              {String(p.sections.length).padStart(2, '0')} {T.projectPage.workProjectsSuffix}
             </span>
           </div>
         )}
@@ -186,7 +189,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <section className="my-12 lg:my-16 bg-panel rounded-[12px] p-7 lg:p-10">
             <div className="flex items-baseline gap-3 mb-5">
               <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted">
-                <span className="gradient-text-static">04</span> · {p.recap.eyebrow || 'The Recap'}
+                <span className="gradient-text-static">04</span> · {p.recap.eyebrow || T.projectPage.recapEyebrowDefault}
               </span>
             </div>
             <h2 className="font-display font-extrabold text-[32px] sm:text-[44px] lg:text-[56px] tracking-[-0.03em] leading-[0.96] mb-8 max-w-3xl">

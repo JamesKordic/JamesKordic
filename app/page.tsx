@@ -6,6 +6,9 @@ import { PROJECTS, POPULAR, getProject } from '@/lib/projects';
 import { usePlayer } from '@/lib/player-context';
 import { AlbumCard, FeaturedCard } from '@/components/album-card';
 import { PlayIcon, ShuffleIcon, VerifiedIcon } from '@/components/icons';
+import { SITE_TEXT } from '@/lib/site-text';
+
+const T = SITE_TEXT;
 
 export default function HomePage() {
   const router = useRouter();
@@ -52,15 +55,14 @@ export default function HomePage() {
           <div>
             <div className="flex items-center gap-2 text-[12px] font-semibold mb-2">
               <VerifiedIcon className="w-[18px] h-[18px]" />
-              <span>Verified Designer</span>
+              <span>{T.artist.verifiedLabel}</span>
             </div>
             <h1 className="font-display font-extrabold leading-[0.95] tracking-[-0.03em] text-[44px] sm:text-[64px] lg:text-[80px]">
-              James <em className="not-italic gradient-text">Kordic</em>
+              {T.artist.firstName}{' '}
+              <em className="not-italic gradient-text">{T.artist.lastName}</em>
             </h1>
             <p className="text-[14px] text-muted mt-2 max-w-[640px]">
-              A New York&ndash;based Graphic & Motion Designer whose advertising experience,
-              mixed-media approach, and results-driven creative work help brands connect
-              with audiences across digital platforms.
+              {T.home.tagline}
             </p>
           </div>
 
@@ -93,13 +95,13 @@ export default function HomePage() {
       <section className="px-5 lg:px-8 pt-6 pb-2">
         <div className="flex items-baseline justify-between mb-4">
           <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em]">
-            Featured work
+            {T.home.featuredHeading}
           </h2>
           <Link
             href="/search"
             className="text-[11.5px] font-bold tracking-[0.07em] uppercase text-muted hover:text-text hover:underline transition-colors"
           >
-            View all →
+            {T.home.viewAllLink}
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
@@ -111,18 +113,18 @@ export default function HomePage() {
 
       {/* SIDE A — PROFESSIONAL CLIENT WORK */}
       <CatalogSide
-        label="Side A"
-        title="Professional client work"
-        sub="Commissioned work for music, entertainment, food, and tech brands."
+        label={T.home.sideALabel}
+        title={T.home.sideAHeading}
+        sub={T.home.sideASubheading}
         projects={sideA}
         theme="magenta"
       />
 
       {/* SIDE B — PERSONAL WORK */}
       <CatalogSide
-        label="Side B"
-        title="Personal work"
-        sub="Concepts, capstones, and self-initiated explorations."
+        label={T.home.sideBLabel}
+        title={T.home.sideBHeading}
+        sub={T.home.sideBSubheading}
         projects={sideB}
         theme="cyan"
       />
@@ -183,20 +185,20 @@ export default function HomePage() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan" />
               </span>
-              Open for work · 2026
+              {T.home.cta.availability}
             </div>
 
             {/* Headline */}
             <h2 className="font-display font-extrabold tracking-[-0.035em] leading-[0.92] text-[44px] sm:text-[64px] lg:text-[88px] mb-3 max-w-3xl">
-              Let&apos;s make something{' '}
+              {T.home.cta.headlinePrefix}{' '}
               <em className="not-italic underline decoration-[6px] underline-offset-[6px]">
-                loud.
+                {T.home.cta.headlineEmphasis}
               </em>
             </h2>
 
             {/* Subhead */}
             <p className="text-[15px] lg:text-[17px] font-medium leading-[1.5] max-w-xl mb-8 opacity-90">
-              Available for freelance and full-time design work — motion, brand, advertising, anything that needs to move and feel.
+              {T.home.cta.subhead}
             </p>
 
             {/* Primary + secondary actions */}
@@ -205,7 +207,7 @@ export default function HomePage() {
                *  (was lime). The gradient arrow circle on the right stays
                *  the focal accent. */}
               <a
-                href="mailto:Jkordic@me.com"
+                href={`mailto:${T.contact.email}`}
                 className="group inline-flex items-center justify-between gap-4 bg-accent-ink text-text rounded-full pl-6 pr-3 py-3 font-bold text-[15px] hover:scale-[1.03] active:scale-[0.97] transition-transform shadow-[0_8px_24px_-6px_rgba(0,0,0,0.4)]"
               >
                 <span className="flex items-center gap-3">
@@ -213,7 +215,7 @@ export default function HomePage() {
                     <rect x="3" y="5" width="18" height="14" rx="2.5" />
                     <path d="m3.5 7 8.5 6 8.5-6" strokeLinecap="round" />
                   </svg>
-                  Jkordic@me.com
+                  {T.home.cta.emailButton}
                 </span>
                 <span className="w-9 h-9 rounded-full bg-gradient-to-br from-accent via-cyan to-magenta text-accent-ink flex items-center justify-center font-bold text-[18px] group-hover:rotate-[-12deg] transition-transform">
                   →
@@ -223,7 +225,7 @@ export default function HomePage() {
               {/* Secondary outlined button — hover state now fills with
                *  white text on dark bg (was lime text). */}
               <a
-                href="https://drive.google.com/file/d/10fG8m5VriZOOSDyXZnowGsIqEZaRUp6Y/view"
+                href={T.contact.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 border-2 border-accent-ink text-accent-ink font-bold text-[14px] tracking-[0.02em] rounded-full px-5 py-3 hover:bg-accent-ink hover:text-text transition-colors"
@@ -231,14 +233,14 @@ export default function HomePage() {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
                   <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                Download résumé
+                {T.home.cta.resumeButton}
               </a>
 
               <Link
                 href="/about"
                 className="inline-flex items-center gap-2 font-bold text-[13px] tracking-[0.05em] uppercase text-accent-ink hover:opacity-70 transition-opacity sm:ml-auto"
               >
-                Full about / contact
+                {T.home.cta.aboutLink}
                 <span aria-hidden>→</span>
               </Link>
             </div>

@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { usePlayer } from '@/lib/player-context';
 import { PROJECTS, getProject, fmtTime } from '@/lib/projects';
 import { ProjectMonogram } from './project-monogram';
+import { SITE_TEXT } from '@/lib/site-text';
 import {
   ShuffleIcon,
   PrevIcon,
@@ -36,24 +37,24 @@ type PageEntry = {
 
 const PAGE_ENTRIES: Record<string, PageEntry> = {
   '/': {
-    title: 'Home',
-    subtitle: 'Featured · Side A · Side B',
+    title: SITE_TEXT.player.pages.home.title,
+    subtitle: SITE_TEXT.player.pages.home.subtitle,
     href: '/',
     from: '#c8f135',
     to: '#22d3ee',
     Icon: HomeIcon,
   },
   '/search': {
-    title: 'Browse Work',
-    subtitle: 'Search the catalog',
+    title: SITE_TEXT.player.pages.search.title,
+    subtitle: SITE_TEXT.player.pages.search.subtitle,
     href: '/search',
     from: '#22d3ee',
     to: '#8b5cf6',
     Icon: SearchIcon,
   },
   '/about': {
-    title: 'About / Contact',
-    subtitle: 'James Kordic',
+    title: SITE_TEXT.player.pages.about.title,
+    subtitle: SITE_TEXT.player.pages.about.subtitle,
     href: '/about',
     from: '#8b5cf6',
     to: '#ff2d8a',
@@ -136,7 +137,7 @@ export function PlayerBar() {
          *  reads as a state badge, not as a clickable control. */}
         <div className="hidden sm:flex items-center gap-2 flex-none">
           <span className="text-[10px] font-bold tracking-[0.18em] uppercase gradient-text-static">
-            Now Browsing
+            {SITE_TEXT.player.nowBrowsingLabel}
           </span>
         </div>
       </footer>

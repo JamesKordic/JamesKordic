@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BackIcon, ForwardIcon, MenuIcon, PlayIcon } from './icons';
 import { usePlayer } from '@/lib/player-context';
+import { SITE_TEXT } from '@/lib/site-text';
 
 export function TopBar({
   title,
@@ -86,10 +87,10 @@ export function TopBar({
       <span className="flex-1" />
 
       <a
-        href="mailto:Jkordic@me.com"
+        href={`mailto:${SITE_TEXT.contact.email}`}
         className="hidden sm:block font-bold text-[13px] px-[17px] py-[9px] rounded-[30px] bg-text text-[#0a0a0a] hover:scale-[1.05] transition-transform flex-none"
       >
-        Get in touch
+        {SITE_TEXT.topBar.getInTouchLabel}
       </a>
     </div>
   );

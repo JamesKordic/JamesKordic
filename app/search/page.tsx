@@ -4,6 +4,9 @@ import { useState, useMemo } from 'react';
 import { PROJECTS, CATEGORIES } from '@/lib/projects';
 import { AlbumCard } from '@/components/album-card';
 import { SearchIcon } from '@/components/icons';
+import { SITE_TEXT } from '@/lib/site-text';
+
+const T = SITE_TEXT;
 
 export default function SearchPage() {
   const [filter, setFilter] = useState('');
@@ -28,7 +31,7 @@ export default function SearchPage() {
           type="text"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          placeholder="Search projects, clients, disciplines…"
+          placeholder={T.search.placeholder}
           autoComplete="off"
           className="bg-transparent border-none outline-none text-text font-medium text-[15px] w-full placeholder:text-muted-2"
         />
@@ -37,7 +40,8 @@ export default function SearchPage() {
       {filter.trim() && (
         <>
           <h3 className="font-display font-extrabold text-[23px] mt-[30px] mb-[14px]">
-            {hits.length} result{hits.length !== 1 ? 's' : ''}
+            {hits.length} {T.search.resultLabel}
+            {hits.length !== 1 ? 's' : ''}
           </h3>
           {hits.length > 0 ? (
             <div className="grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-2">
@@ -46,13 +50,15 @@ export default function SearchPage() {
               ))}
             </div>
           ) : (
-            <p className="text-muted">No projects match &ldquo;{filter}&rdquo;.</p>
+            <p className="text-muted">
+              {T.search.noResults} &ldquo;{filter}&rdquo;.
+            </p>
           )}
         </>
       )}
 
       <h3 className="font-display font-extrabold text-[23px] mt-[30px] mb-[14px]">
-        Browse by discipline
+        {T.search.browseByDiscipline}
       </h3>
       <div className="grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-[14px]">
         {CATEGORIES.map((c) => (
@@ -71,7 +77,9 @@ export default function SearchPage() {
         ))}
       </div>
 
-      <h3 className="font-display font-extrabold text-[23px] mt-[30px] mb-[14px]">All projects</h3>
+      <h3 className="font-display font-extrabold text-[23px] mt-[30px] mb-[14px]">
+        {T.search.allProjects}
+      </h3>
       <div className="grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-2">
         {PROJECTS.map((p, i) => (
           <AlbumCard key={p.id} p={p} i={i} />

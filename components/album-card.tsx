@@ -5,6 +5,7 @@ import type { Project } from '@/lib/projects';
 import { usePlayer } from '@/lib/player-context';
 import { PlayIcon } from './icons';
 import { ProjectCover } from './project-cover';
+import { SITE_TEXT } from '@/lib/site-text';
 
 /**
  * Default catalog card — larger than before, with title/tags/year
@@ -117,7 +118,7 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
           </button>
           {/* Gradient FEATURED badge */}
           <div className="absolute top-3 left-3 text-[10px] font-bold tracking-[0.14em] uppercase bg-gradient-to-r from-accent via-cyan to-magenta text-accent-ink px-2 py-1 rounded-sm">
-            Featured
+            {SITE_TEXT.cards.featuredBadge}
           </div>
         </div>
         <div className="flex items-baseline justify-between gap-3 mb-2">
@@ -141,7 +142,7 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
             </span>
           ))}
           <span className="ml-auto text-[11.5px] font-semibold gradient-text-static flex items-center gap-1 group-hover:gap-2 transition-all">
-            View case study
+            {SITE_TEXT.cards.viewCaseStudy}
             <span aria-hidden>→</span>
           </span>
         </div>

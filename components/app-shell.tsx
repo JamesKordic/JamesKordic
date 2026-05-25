@@ -9,6 +9,7 @@ import { Lightbox } from './lightbox';
 import { ScrollProvider } from '@/lib/scroll-context';
 import { getProject, ARTIST } from '@/lib/projects';
 import { usePlayer } from '@/lib/player-context';
+import { SITE_TEXT } from '@/lib/site-text';
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -28,10 +29,10 @@ export function AppShell({ children }: { children: ReactNode }) {
       currentProjectSlug = slug;
     }
   } else if (pathname === '/search') {
-    title = 'Browse Work';
+    title = SITE_TEXT.search.heading;
     showPlay = false;
   } else if (pathname === '/about') {
-    title = 'About';
+    title = SITE_TEXT.about.headings.about;
     showPlay = false;
   }
 

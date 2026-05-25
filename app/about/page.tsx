@@ -2,6 +2,9 @@
 
 import { PROJECTS } from '@/lib/projects';
 import { VerifiedIcon } from '@/components/icons';
+import { SITE_TEXT } from '@/lib/site-text';
+
+const T = SITE_TEXT;
 
 export default function AboutPage() {
   return (
@@ -31,12 +34,13 @@ export default function AboutPage() {
           {/* "Verified Designer" pill — exact same component as home page */}
           <div className="flex items-center gap-2 text-[13px] font-semibold mb-4">
             <VerifiedIcon className="w-[18px] h-[18px]" />
-            <span>Verified Designer</span>
+            <span>{T.artist.verifiedLabel}</span>
           </div>
 
           {/* Giant artist name — overlaps the bottom of the hero gradient */}
           <h1 className="font-display font-extrabold leading-[0.92] tracking-[-0.035em] text-[64px] sm:text-[100px] lg:text-[140px] xl:text-[170px]">
-            James <em className="not-italic gradient-text">Kordic</em>
+            {T.artist.firstName}{' '}
+            <em className="not-italic gradient-text">{T.artist.lastName}</em>
           </h1>
 
           {/* Spotify-style metadata row under the name */}
@@ -45,9 +49,9 @@ export default function AboutPage() {
               {PROJECTS.length.toLocaleString()} projects
             </span>
             <span className="w-1 h-1 rounded-full bg-muted inline-block" />
-            <span className="text-muted">New York, NY</span>
+            <span className="text-muted">{T.artist.location}</span>
             <span className="w-1 h-1 rounded-full bg-muted inline-block" />
-            <span className="text-muted">Est. 2024</span>
+            <span className="text-muted">{T.artist.established}</span>
           </div>
         </div>
       </header>
@@ -58,18 +62,18 @@ export default function AboutPage() {
        *  and discovery sections have been removed from this page). */}
       <section className="px-5 lg:px-8 pt-2 pb-10 flex items-center gap-5 flex-wrap">
         <a
-          href="mailto:Jkordic@me.com"
+          href={`mailto:${T.contact.email}`}
           className="font-bold text-[13px] tracking-[0.05em] uppercase bg-gradient-to-br from-accent via-cyan to-magenta text-accent-ink rounded-[30px] px-[24px] py-[13px] hover:scale-[1.05] transition-transform shadow-[0_6px_20px_-6px_rgba(200,241,53,0.4)]"
         >
-          Get in touch
+          {T.about.actionRow.getInTouchLabel}
         </a>
         <a
-          href="https://drive.google.com/file/d/10fG8m5VriZOOSDyXZnowGsIqEZaRUp6Y/view"
+          href={T.contact.resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="font-bold text-[13px] tracking-[0.05em] uppercase border-[1.5px] border-[#5a5a5e] hover:border-text rounded-[30px] px-[20px] py-[11px] transition-all hover:scale-[1.03]"
         >
-          ⤓  Download résumé
+          {T.about.actionRow.resumeLabel}
         </a>
       </section>
 
@@ -78,7 +82,7 @@ export default function AboutPage() {
        *  Mimics Spotify's About tab with monthly listeners and where-they're-from. */}
       <section className="px-5 lg:px-8 pb-12">
         <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em] mb-4">
-          About
+          {T.about.headings.about}
         </h2>
         <div className="grid lg:grid-cols-[1fr_320px] gap-6 lg:gap-10 bg-panel rounded-[12px] p-6 lg:p-8 relative overflow-hidden">
           {/* Subtle gradient backdrop — kept to ~5% opacity so the bio text
@@ -92,30 +96,35 @@ export default function AboutPage() {
             aria-hidden
           />
 
+          {/* Bio paragraphs — first one is larger, the rest are muted */}
           <div className="relative z-10">
-            <p className="text-[17px] lg:text-[18px] leading-[1.6] text-text mb-4">
-              I&apos;m a Graphic and Motion Designer based in New York, creating digital ads,
-              social content, and motion graphics for brands and agencies. I&apos;ve produced
-              work for Taco Bell, FX, and The Syndicate, along with large-scale campaigns
-              for the Rochester Institute of Technology.
-            </p>
-            <p className="text-[15px] leading-[1.6] text-muted mb-4">
-              I graduated from the Rochester Institute of Technology with a BFA in Graphic
-              Design and have been designing brands professionally for four years.
-            </p>
-            <p className="text-[15px] leading-[1.6] text-muted">
-              When I&apos;m not behind a computer screen, I&apos;m usually diving into music
-              or experimenting with film photography.
-            </p>
+            {T.about.bio.map((paragraph, i) => (
+              <p
+                key={i}
+                className={
+                  i === 0
+                    ? 'text-[17px] lg:text-[18px] leading-[1.6] text-text mb-4'
+                    : `text-[15px] leading-[1.6] text-muted ${
+                        i < T.about.bio.length - 1 ? 'mb-4' : ''
+                      }`
+                }
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
 
           {/* "Factoids" panel — Spotify's monthly listeners block becomes
            *  a stack of designer-relevant stats. */}
           <div className="relative z-10 space-y-4">
-            <Factoid value={PROJECTS.length.toString()} label="Released projects" gradient />
-            <Factoid value="4 yrs" label="Designing professionally" />
-            <Factoid value="BFA" label="Graphic Design, RIT" />
-            <Factoid value="NYC" label="Currently based in" />
+            {T.about.factoids.map((f, i) => (
+              <Factoid
+                key={i}
+                value={f.useProjectCount ? PROJECTS.length.toString() : f.value}
+                label={f.label}
+                gradient={f.gradient}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -125,7 +134,7 @@ export default function AboutPage() {
        *  equivalent: current availability + how to reach out. */}
       <section className="px-5 lg:px-8 pb-12">
         <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em] mb-4">
-          Currently
+          {T.about.headings.currently}
         </h2>
         <div className="bg-panel rounded-[12px] p-5 lg:p-6 flex items-center gap-4 lg:gap-5 relative overflow-hidden">
           {/* Status dot — cyan pulsing dot signals "online / available."
@@ -138,18 +147,17 @@ export default function AboutPage() {
           </div>
           <div className="flex-1 min-w-0">
             <div className="font-display font-extrabold text-[18px] lg:text-[20px] tracking-[-0.01em]">
-              Open for work · 2026
+              {T.about.availability.title}
             </div>
             <div className="text-[13px] lg:text-[14px] text-muted mt-1">
-              Available for freelance and full-time. Remote, onsite, or hybrid. Replies within 24
-              hours.
+              {T.about.availability.subtitle}
             </div>
           </div>
           <a
-            href="mailto:Jkordic@me.com"
+            href={`mailto:${T.contact.email}`}
             className="hidden sm:inline-block font-bold text-[12px] tracking-[0.05em] uppercase bg-text text-bg rounded-[30px] px-[20px] py-[11px] hover:scale-[1.05] transition-transform whitespace-nowrap"
           >
-            Reach out
+            {T.about.availability.buttonLabel}
           </a>
         </div>
       </section>
@@ -158,13 +166,13 @@ export default function AboutPage() {
        *  All contact channels in one compact card grid. */}
       <section className="px-5 lg:px-8 pb-12">
         <h2 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.02em] mb-4">
-          Connect
+          {T.about.headings.connect}
         </h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-3">
           <ContactCard
             label="Email"
-            value="Jkordic@me.com"
-            href="mailto:Jkordic@me.com"
+            value={T.contact.email}
+            href={`mailto:${T.contact.email}`}
             icon={
               <svg
                 viewBox="0 0 24 24"
@@ -180,8 +188,8 @@ export default function AboutPage() {
           />
           <ContactCard
             label="Phone"
-            value="+1 (631) 742-8043"
-            href="tel:+16317428043"
+            value={T.contact.phone}
+            href={`tel:${T.contact.phoneRaw}`}
             icon={
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-[20px] h-[20px]">
                 <path d="M6.6 3.5 9 3l1.6 4-2 1.5a12 12 0 0 0 5.4 5.4l1.5-2 4 1.6-.5 2.4A2 2 0 0 1 22 21a18 18 0 0 1-19-19 2 2 0 0 1 3.6-1.5Z" />
@@ -190,8 +198,8 @@ export default function AboutPage() {
           />
           <ContactCard
             label="LinkedIn"
-            value="@jameskordic"
-            href="https://www.linkedin.com/in/jameskordic/"
+            value={`@${T.contact.linkedinHandle}`}
+            href={T.contact.linkedinUrl}
             external
             icon={
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-[20px] h-[20px]">
@@ -201,8 +209,8 @@ export default function AboutPage() {
           />
           <ContactCard
             label="Instagram"
-            value="@jameskordic"
-            href="https://www.instagram.com/jameskordic/"
+            value={`@${T.contact.instagramHandle}`}
+            href={T.contact.instagramUrl}
             external
             icon={
               <svg
@@ -221,9 +229,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <p className="text-muted-2 text-[12px] px-5 lg:px-8 pb-8">
-        ©2026 James Kordic · Graphic Design
-      </p>
+      <p className="text-muted-2 text-[12px] px-5 lg:px-8 pb-8">{T.footer.copyright}</p>
     </div>
   );
 }

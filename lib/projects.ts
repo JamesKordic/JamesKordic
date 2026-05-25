@@ -115,7 +115,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 262,
     blurb: 'Music & entertainment marketing',
-    desc: 'A year inside an NYC music & entertainment marketing agency — designing across indie labels, major-label artists, comedy, and film. Five concurrent client tracks. Around 50 shipped assets. One person.',
+    desc: 'A year inside an music & entertainment marketing agency — designing across indie labels, major-label artists, comedy, and film. Five concurrent client tracks. Around 50 shipped assets. One person.',
     brief: {
       eyebrow: 'The Brief',
       lead: "The Syndicate represents artists and entertainment brands — its design team translates each one's distinct identity into campaign-ready assets at scroll velocity.",
@@ -259,7 +259,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'wwimf',
     kind: 'personal',
-    title: 'World Wide Interactive Music Festival',
+    title: 'WWIMF',
     cover: '/covers/wwimf.jpg',
     themeColor: '#1d2f7a',
     tags: ['Concept Work', 'Branding', 'Interactive Design'],
@@ -268,7 +268,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2025',
     len: 268,
-    blurb: 'Capstone — branding & interactive',
+    blurb: 'Interactive music festival concept',
     desc: 'A senior capstone reimagining what a global music festival could be when audiences stop being spectators and start being collaborators. Branding, stage design, wearables, marketing, and a 60-page art book — all built around one question: what if every guest left their fingerprint on the festival?',
     brief: {
       eyebrow: 'The Brief',
@@ -648,7 +648,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 201,
-    blurb: 'Social design for a metal label',
+    blurb: 'Social Media design for a music label',
     desc: 'Social design and motion across MNRK Heavy\'s metal and hard-rock roster — anniversary posts, story-format release promo, artist-spotlight campaigns (including a focused Lowheaven drop), and wide-format header artwork. Intensity at speed, across multiple bands at once.',
     brief: {
       eyebrow: 'The Brief',
@@ -748,7 +748,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'consensus',
     kind: 'professional',
-    title: 'Consensus by CoinDesk',
+    title: 'Consensus 2025',
     cover: '/covers/consensus.jpg',
     themeColor: '#0e2e7a',
     tags: ['Creative Direction', 'Motion Design', 'Conference'],
@@ -757,7 +757,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 236,
-    blurb: 'Conference creative & motion',
+    blurb: 'Design and motion for a major crypto conference',
     desc: "Pre-event creative for Consensus, CoinDesk's flagship conference — a series of motion pieces, speaker visuals, and brand-partner cards that built anticipation in the weeks leading up to the show.",
     brief: {
       eyebrow: 'The Brief',
@@ -1272,7 +1272,10 @@ export const CATEGORIES = [
   { name: 'Marketing', c: '#e25a26' },
 ];
 
-export const ARTIST = 'James Kordic';
+// Artist name. Re-exported from SITE_TEXT so the name lives in one place
+// (lib/site-text.ts) and everything else that imports `ARTIST` still works.
+import { SITE_TEXT } from './site-text';
+export const ARTIST = SITE_TEXT.artist.name;
 
 export const getProject = (id: string) => PROJECTS.find((p) => p.id === id);
 

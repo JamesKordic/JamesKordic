@@ -7,6 +7,9 @@ import { PROJECTS, ARTIST } from '@/lib/projects';
 import { usePlayer } from '@/lib/player-context';
 import { HomeIcon, SearchIcon, UserIcon, LibraryIcon } from './icons';
 import { ProjectMonogram } from './project-monogram';
+import { SITE_TEXT } from '@/lib/site-text';
+
+const T = SITE_TEXT;
 
 export function Sidebar({
   open,
@@ -58,7 +61,7 @@ export function Sidebar({
               {ARTIST}
             </span>
             <span className="block text-[10px] tracking-[0.22em] uppercase text-muted-2 mt-[3px]">
-              Graphic Design
+              {T.artist.discipline}
             </span>
           </span>
         </Link>
@@ -73,7 +76,7 @@ export function Sidebar({
             active={isActive('/')}
             onClick={onClose}
           >
-            Home
+            {T.sidebar.home}
           </NavItem>
           <NavItem
             href="/search"
@@ -81,7 +84,7 @@ export function Sidebar({
             active={isActive('/search')}
             onClick={onClose}
           >
-            Browse Work
+            {T.sidebar.browse}
           </NavItem>
           <NavItem
             href="/about"
@@ -89,7 +92,7 @@ export function Sidebar({
             active={isActive('/about')}
             onClick={onClose}
           >
-            About / Contact
+            {T.sidebar.about}
           </NavItem>
         </nav>
       </div>
@@ -99,10 +102,10 @@ export function Sidebar({
         <div className="flex items-center justify-between px-3 pb-3">
           <span className="flex items-center gap-[11px] font-bold text-[14px] text-muted">
             <LibraryIcon className="w-5 h-5" />
-            Your Library
+            {T.sidebar.library}
           </span>
           <span className="text-[11px] text-muted-2 border border-line rounded-[20px] px-[9px] py-[3px]">
-            {PROJECTS.length} projects
+            {PROJECTS.length} {T.sidebar.libraryCountSuffix}
           </span>
         </div>
         <div className="overflow-y-auto flex-1 px-[6px] pb-[6px] scrollbar-thin">
@@ -131,7 +134,7 @@ export function Sidebar({
                     {p.title}
                   </div>
                   <div className="text-[11.5px] text-muted-2 truncate mt-[2px]">
-                    Project · {ARTIST}
+                    {T.sidebar.libraryItemSubtitle} · {ARTIST}
                   </div>
                 </div>
               </Link>

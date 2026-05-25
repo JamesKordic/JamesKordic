@@ -5,6 +5,7 @@ import type { Media, Section, GridRow, AspectRatio } from '@/lib/projects';
 import { useLightbox } from '@/lib/lightbox-context';
 import { VideoPlayer } from './video-player';
 import { EmbedFrame } from './embed-frame';
+import { SITE_TEXT } from '@/lib/site-text';
 
 /* ============ HELPERS ============ */
 
@@ -94,7 +95,7 @@ export function CaseSection({
             {section.context && (
               <div>
                 <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
-                  // Context
+                  {SITE_TEXT.projectPage.sectionContextLabel}
                 </div>
                 <p className="text-[14.5px] leading-[1.6] text-text">{section.context}</p>
               </div>
@@ -102,7 +103,7 @@ export function CaseSection({
             {section.role && (
               <div>
                 <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
-                  // My Role
+                  {SITE_TEXT.projectPage.sectionRoleLabel}
                 </div>
                 <p className="text-[14.5px] leading-[1.6] text-text">{section.role}</p>
               </div>
@@ -153,7 +154,7 @@ export function CaseSection({
             aria-hidden
           />
           <div className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2 gradient-text-static">
-            Field Note ↳
+            {SITE_TEXT.projectPage.fieldNoteLabel}
           </div>
           <p className="text-[16px] lg:text-[18px] leading-[1.55] text-text italic">
             {section.fieldNote}
