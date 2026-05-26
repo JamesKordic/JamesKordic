@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { SITE_TEXT } from '@/lib/site-text';
 
 /**
@@ -11,20 +11,25 @@ import { SITE_TEXT } from '@/lib/site-text';
  *  - Does NOT autoplay. Browsers block sound from autoplaying anyway;
  *    requiring the user to press play is both spec-compliant and
  *    avoids surprise audio when scrolling past a section.
- *  - Click anywhere on the video toggles play/pause
- *  - Mute/unmute button in the bottom-right corner of the video
- *  - When paused, a large play button appears centered
- *  - Container locks aspect ratio so the video always fits without
- *    cropping when fit='contain', or fills the container by cropping
- *    when fit='cover' (use when aligning a video with images of a
- *    different aspect in the same row)
- *  - Native controls hidden in favor of our minimal overlay
+ *  - Click on the VIDEO body toggles play/pause
+ *  - Clicks on the control bar are isolated — they do their own thing
+ *    and don't toggle play
+ *  - Full control bar at the bottom: play, time, scrubbable progress
+ *    bar, total time, mute, and fullscreen
+ *  - Keyboard shortcuts when the player is focused/hovered:
+ *      Space    play/pause
+ *      ←/→      seek -5s / +5s
+ *      M        mute toggle
+ *      F        fullscreen toggle
+ *  - Auto-thumbnail: nudges currentTime to 0.05 on mount so a real frame
+ *    shows instead of a black box
+ *  - Pauses when scrolled out of view (no surprise audio later)
  *
  * Props:
  *  - src: video URL
- *  - aspect: CSS aspect-ratio string for the CONTAINER (e.g. "16/9", "1/1")
+ *  - aspect: CSS aspect-ratio string for the container (e.g. "16/9")
  *  - poster: optional poster image URL
- *  - fit: 'contain' (default, no cropping, may letterbox) or 'cover' (crop to fill)
+ *  - fit: 'contain' (no cropping, may letterbox) or 'cover' (crop to fill)
  */
 export function VideoPlayer({
   src,
@@ -37,60 +42,46 @@ export function VideoPlayer({
   poster?: string;
   fit?: 'contain' | 'cover';
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const scrubRef = useRef<HTMLDivElement>(null);
   const [playing, setPlaying] = useState(false);
-  const [muted, setMuted] = useState(false); // Always start unmuted per spec
+  const [muted, setMuted] = useState(false);
   const [hovering, setHovering] = useState(false);
-  /** Whether the first frame has been decoded and is visible as a
-   *  pseudo-thumbnail. Used to hide the loading shimmer once we have
-   *  something to show, even before the user presses play. */
   const [thumbnailReady, setThumbnailReady] = useState(false);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  /** How much of the video has been buffered, as a 0–1 fraction of duration.
+   *  Drawn as a faint white overlay on the scrub bar behind the gradient fill,
+   *  so the user can see what's already downloaded vs. what's being played. */
+  const [buffered, setBuffered] = useState(0);
+  /** Tracked separately from hover so we can keep controls visible during
+   *  a scrub drag even if the cursor moves outside the bar momentarily. */
+  const [scrubbing, setScrubbing] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
 
   // Keep DOM muted attribute in sync with state
   useEffect(() => {
     if (videoRef.current) videoRef.current.muted = muted;
   }, [muted]);
 
-  /* Auto-thumbnail: nudge the video to decode and display its first frame
-   * so it doesn't show as a black box before the user presses play.
-   *
-   * Mechanism: once metadata is loaded, we set currentTime slightly past 0
-   * (0.05s). The browser is then required to decode and present that frame,
-   * which becomes the visible "poster" without us needing a separate image.
-   *
-   * This is necessary because:
-   *   1. Most case-study videos don't have an explicit poster image set
-   *   2. <video preload="metadata"> only fetches headers, not pixels
-   *   3. Without this nudge, the video element renders as a black rectangle
-   *      until play() is called
-   *
-   * Safe across Chrome / Firefox / Safari / iOS Safari (playsInline is set).
-   * Skipped when an explicit poster is provided — that takes precedence. */
+  /* Auto-thumbnail — see longer explanation below. Seeks to 0.05s on mount
+   * so the first frame decodes and replaces the black box. */
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     if (poster) {
-      // Explicit poster wins — let the browser handle it
       setThumbnailReady(true);
       return;
     }
-
     const handleLoadedMetadata = () => {
-      // Nudge to a fraction of a second to force a frame decode.
-      // Using 0.05 (not 0) because some browsers won't render frame 0
-      // until seeking actually moves the playhead — exact 0 == no-op.
       try {
         v.currentTime = 0.05;
       } catch {
-        // Some browsers throw if the video isn't seekable yet. Safe to skip.
+        /* not seekable yet — fine to skip */
       }
     };
-
-    const handleSeeked = () => {
-      // After the seek lands, a frame is now on screen
-      setThumbnailReady(true);
-    };
-
+    const handleSeeked = () => setThumbnailReady(true);
     v.addEventListener('loadedmetadata', handleLoadedMetadata);
     v.addEventListener('seeked', handleSeeked);
     return () => {
@@ -99,22 +90,91 @@ export function VideoPlayer({
     };
   }, [poster, src]);
 
-  // Pause when scrolled out of view (avoids leaving sound playing
-  // when the user has moved on to another section).
+  /* Wire up time / duration / buffered events. These drive the scrub bar,
+   * the time readouts, and the buffered-progress overlay. */
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const onTime = () => setCurrentTime(v.currentTime);
+    const onDuration = () => setDuration(v.duration || 0);
+    const onProgress = () => {
+      // buffered.end(N) might throw if no ranges are loaded — guard it
+      if (v.buffered.length > 0 && v.duration) {
+        setBuffered(v.buffered.end(v.buffered.length - 1) / v.duration);
+      }
+    };
+    v.addEventListener('timeupdate', onTime);
+    v.addEventListener('durationchange', onDuration);
+    v.addEventListener('loadedmetadata', onDuration);
+    v.addEventListener('progress', onProgress);
+    return () => {
+      v.removeEventListener('timeupdate', onTime);
+      v.removeEventListener('durationchange', onDuration);
+      v.removeEventListener('loadedmetadata', onDuration);
+      v.removeEventListener('progress', onProgress);
+    };
+  }, []);
+
+  /* Pause when scrolled out of view */
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting && !v.paused) {
-          v.pause();
-        }
+        if (!entry.isIntersecting && !v.paused) v.pause();
       },
       { threshold: 0.25 }
     );
     observer.observe(v);
     return () => observer.disconnect();
   }, []);
+
+  /* Track fullscreen state — the API doesn't directly tell us, so we
+   * listen for the change event and check document.fullscreenElement. */
+  useEffect(() => {
+    const onFs = () => {
+      setFullscreen(document.fullscreenElement === containerRef.current);
+    };
+    document.addEventListener('fullscreenchange', onFs);
+    return () => document.removeEventListener('fullscreenchange', onFs);
+  }, []);
+
+  /** Computes a seek position from a pointer event and applies it.
+   *  Used for both click-to-seek and drag-to-scrub. */
+  const seekFromEvent = useCallback((clientX: number) => {
+    const v = videoRef.current;
+    const bar = scrubRef.current;
+    if (!v || !bar || !v.duration) return;
+    const rect = bar.getBoundingClientRect();
+    const frac = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    v.currentTime = frac * v.duration;
+    setCurrentTime(v.currentTime);
+  }, []);
+
+  /* Scrubbing: pointerdown starts a drag, pointermove tracks it, pointerup
+   * ends it. setPointerCapture keeps events flowing even when the pointer
+   * leaves the bar — that's what makes a smooth drag possible. */
+  const handleScrubStart = (e: React.PointerEvent) => {
+    e.stopPropagation();
+    setScrubbing(true);
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    seekFromEvent(e.clientX);
+  };
+  const handleScrubMove = (e: React.PointerEvent) => {
+    if (!scrubbing) return;
+    e.stopPropagation();
+    seekFromEvent(e.clientX);
+  };
+  const handleScrubEnd = (e: React.PointerEvent) => {
+    if (!scrubbing) return;
+    e.stopPropagation();
+    setScrubbing(false);
+    try {
+      (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {
+      /* releasing pointer capture can throw if it wasn't held — ignore */
+    }
+  };
 
   const togglePlay = async () => {
     const v = videoRef.current;
@@ -128,8 +188,8 @@ export function VideoPlayer({
         setPlaying(false);
       }
     } catch {
-      // If play() rejects (some browsers reject unmuted play attempts when
-      // the user hasn't interacted yet), retry muted as a graceful fallback.
+      // Some browsers block unmuted play() until first user gesture.
+      // Retry muted as a graceful fallback.
       v.muted = true;
       setMuted(true);
       try {
@@ -142,17 +202,84 @@ export function VideoPlayer({
   };
 
   const toggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation(); // don't trigger play toggle
+    e.stopPropagation();
     setMuted((m) => !m);
   };
 
+  const toggleFullscreen = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const el = containerRef.current;
+    if (!el) return;
+    try {
+      if (document.fullscreenElement === el) {
+        await document.exitFullscreen();
+      } else {
+        await el.requestFullscreen();
+      }
+    } catch {
+      /* fullscreen API can be blocked or unsupported — silent skip */
+    }
+  };
+
+  /* Keyboard shortcuts. The container is given tabindex=-1 + focusable
+   * behavior; we listen on keydown only when this video is hovered or
+   * focused so multiple videos on the page don't all respond at once. */
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const el = containerRef.current;
+      if (!el) return;
+      // Only act if this player is the focused element OR mouse is hovering it
+      const isActive = document.activeElement === el || hovering;
+      if (!isActive) return;
+      const v = videoRef.current;
+      if (!v) return;
+      switch (e.key) {
+        case ' ':
+        case 'k':
+          e.preventDefault();
+          togglePlay();
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          v.currentTime = Math.max(0, v.currentTime - 5);
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          v.currentTime = Math.min(v.duration || 0, v.currentTime + 5);
+          break;
+        case 'm':
+        case 'M':
+          e.preventDefault();
+          setMuted((x) => !x);
+          break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          toggleFullscreen({ stopPropagation() {} } as unknown as React.MouseEvent);
+          break;
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+    // togglePlay and toggleFullscreen are stable enough — including them
+    // would require useCallback wrapping for every method. The closure
+    // captures the latest refs/state.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hovering]);
+
+  const progressFrac = duration > 0 ? currentTime / duration : 0;
+  // Show controls when not playing, when hovering, or while actively scrubbing
+  const controlsVisible = !playing || hovering || scrubbing;
+
   return (
     <div
+      ref={containerRef}
       className="relative w-full bg-black rounded-lg overflow-hidden group cursor-pointer select-none"
       style={{ aspectRatio: aspect }}
       onClick={togglePlay}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
+      tabIndex={-1}
     >
       <video
         ref={videoRef}
@@ -163,20 +290,19 @@ export function VideoPlayer({
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onEnded={() => setPlaying(false)}
-        className={`absolute inset-0 w-full h-full bg-black ${fit === 'cover' ? 'object-cover' : 'object-contain'}`}
+        className={`absolute inset-0 w-full h-full bg-black ${
+          fit === 'cover' ? 'object-cover' : 'object-contain'
+        }`}
       />
 
-      {/* Loading shimmer — visible until we have something to show.
-       *  Hidden once either:
-       *   - the first frame has been decoded (auto-thumbnail), OR
-       *   - the poster image (if any) is in place */}
+      {/* Loading shimmer */}
       {!thumbnailReady && (
         <div className="absolute inset-0 flex items-center justify-center text-muted-2 text-[12px] font-mono">
           {SITE_TEXT.videoPlayer.loadingLabel}
         </div>
       )}
 
-      {/* Center play button (visible when paused) */}
+      {/* Center play button when paused */}
       {!playing && thumbnailReady && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-bg/80 backdrop-blur-md flex items-center justify-center shadow-[0_8px_24px_-6px_rgba(0,0,0,0.6)]">
@@ -191,37 +317,148 @@ export function VideoPlayer({
         </div>
       )}
 
-      {/* Bottom-right controls bar */}
+      {/* Bottom control bar — full-width with gradient fade behind for legibility */}
       <div
-        className={`absolute bottom-3 right-3 flex items-center gap-2 transition-opacity duration-200 ${
-          hovering || !playing ? 'opacity-100' : 'opacity-0'
+        className={`absolute left-0 right-0 bottom-0 transition-opacity duration-200 ${
+          controlsVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        {/* Mute toggle */}
-        <button
-          onClick={toggleMute}
-          className="w-10 h-10 rounded-full bg-bg/80 backdrop-blur-md flex items-center justify-center hover:bg-bg transition-colors text-text"
-          aria-label={muted ? 'Unmute' : 'Mute'}
-          title={muted ? 'Unmute' : 'Mute'}
-        >
-          {muted ? (
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-              <path d="M3 9v6h4l5 5V4L7 9zm13 .5a4 4 0 0 1 0 5" />
-              <path
-                d="M19 7l4 10M23 7l-4 10"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                strokeLinecap="round"
-              />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-              <path d="M3 9v6h4l5 5V4L7 9zm13 .5a4 4 0 0 1 0 5M18 6a8 8 0 0 1 0 12" />
-            </svg>
-          )}
-        </button>
+        {/* Backdrop gradient — fades the video edge so light pixels don't
+         *  swallow the controls. Pointer-events-none so it doesn't catch
+         *  clicks meant for the controls. */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)',
+          }}
+          aria-hidden
+        />
+
+        <div className="relative px-3 sm:px-4 pb-2.5 pt-1.5 flex flex-col gap-1.5">
+          {/* Scrub bar — sits ABOVE the row of controls so it spans the
+           *  full width. Pointer-event based for smooth drag scrubbing. */}
+          <div
+            ref={scrubRef}
+            onPointerDown={handleScrubStart}
+            onPointerMove={handleScrubMove}
+            onPointerUp={handleScrubEnd}
+            onPointerCancel={handleScrubEnd}
+            onClick={(e) => e.stopPropagation()}
+            className="relative h-[4px] hover:h-[6px] transition-all bg-white/20 rounded-full cursor-pointer group/bar"
+            role="slider"
+            aria-label="Seek"
+            aria-valuemin={0}
+            aria-valuemax={duration}
+            aria-valuenow={currentTime}
+          >
+            {/* Buffered overlay — shows how much has loaded ahead */}
+            <div
+              className="absolute inset-y-0 left-0 bg-white/30 rounded-full pointer-events-none"
+              style={{ width: `${buffered * 100}%` }}
+            />
+            {/* Played overlay — uses the site's signature gradient */}
+            <div
+              className="absolute inset-y-0 left-0 rounded-full pointer-events-none"
+              style={{
+                width: `${progressFrac * 100}%`,
+                background:
+                  'linear-gradient(90deg, #c8f135 0%, #22d3ee 50%, #ff2d8a 100%)',
+              }}
+            />
+            {/* Scrub handle — appears on hover and during scrubbing */}
+            <div
+              className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-white shadow-md transition-opacity ${
+                scrubbing || hovering ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{ left: `${progressFrac * 100}%` }}
+              aria-hidden
+            />
+          </div>
+
+          {/* Bottom row: play • time • spacer • mute • fullscreen */}
+          <div
+            className="flex items-center gap-3 text-text"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                togglePlay();
+              }}
+              className="flex items-center justify-center w-7 h-7 hover:scale-110 transition-transform"
+              aria-label={playing ? 'Pause' : 'Play'}
+              title={playing ? 'Pause (Space)' : 'Play (Space)'}
+            >
+              {playing ? (
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                  <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              )}
+            </button>
+
+            <span className="text-[11px] sm:text-[12px] font-mono tabular-nums text-text/90">
+              {fmt(currentTime)} <span className="text-text/40">/</span>{' '}
+              {fmt(duration)}
+            </span>
+
+            <div className="flex-1" />
+
+            <button
+              onClick={toggleMute}
+              className="flex items-center justify-center w-7 h-7 hover:scale-110 transition-transform"
+              aria-label={muted ? 'Unmute' : 'Mute'}
+              title={muted ? 'Unmute (M)' : 'Mute (M)'}
+            >
+              {muted ? (
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]">
+                  <path d="M3 9v6h4l5 5V4L7 9z" />
+                  <path
+                    d="M16 9l5 5m0-5l-5 5"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]">
+                  <path d="M3 9v6h4l5 5V4L7 9zm13.5 0a3 3 0 0 1 0 6M19 6a8 8 0 0 1 0 12" />
+                </svg>
+              )}
+            </button>
+
+            <button
+              onClick={toggleFullscreen}
+              className="flex items-center justify-center w-7 h-7 hover:scale-110 transition-transform"
+              aria-label={fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+              title={fullscreen ? 'Exit fullscreen (F)' : 'Fullscreen (F)'}
+            >
+              {fullscreen ? (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                  <path d="M8 3v3a2 2 0 0 1-2 2H3M16 3v3a2 2 0 0 0 2 2h3M8 21v-3a2 2 0 0 0-2-2H3M16 21v-3a2 2 0 0 1 2-2h3" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                  <path d="M3 8V5a2 2 0 0 1 2-2h3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M21 16v3a2 2 0 0 1-2 2h-3" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
+}
+
+/** Format a number of seconds as M:SS. Returns "0:00" for NaN/Infinity
+ *  so duration shows something sensible before metadata loads. */
+function fmt(seconds: number): string {
+  if (!isFinite(seconds) || seconds < 0) return '0:00';
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s.toString().padStart(2, '0')}`;
 }
