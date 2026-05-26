@@ -63,36 +63,46 @@ export function CaseSection({
   const isCaseStudy = !!(section.context || section.role || section.fieldNote);
   const projectNumber = typeof index === 'number' ? String(index + 1).padStart(2, '0') : null;
 
+  // A section is "titled" if it has any header content. Untitled sections
+  // render as pure media — used for multi-part groupings where a single
+  // heading spans several layout blocks (e.g. Taco Bell's Feed The Beat
+  // section that includes multiple carousels). Project number still
+  // shows on titled sections only.
+  const isTitled = !!(section.title || section.eyebrow);
+
   return (
     <section className="py-10 lg:py-14 border-b border-line last:border-b-0">
-      {/* Section header */}
-      <div className="mb-8">
-        {/* Top bar: № + tag + title in a single row, like a chapter divider */}
-        <div className="flex items-baseline gap-4 mb-4 flex-wrap">
-          {projectNumber && (
-            <span className="font-mono text-[11px] font-bold tracking-[0.18em] uppercase">
-              <span className="gradient-text-static">№ {projectNumber}</span>
-            </span>
+      {/* Section header — only renders when the section has a title or eyebrow */}
+      {isTitled && (
+        <div className="mb-8">
+          {/* Top bar: № + tag + title in a single row, like a chapter divider */}
+          <div className="flex items-baseline gap-4 mb-4 flex-wrap">
+            {projectNumber && (
+              <span className="font-mono text-[11px] font-bold tracking-[0.18em] uppercase">
+                <span className="gradient-text-static">№ {projectNumber}</span>
+              </span>
+            )}
+            {section.eyebrow && (
+              <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2">
+                {section.eyebrow}
+              </span>
+            )}
+          </div>
+          {section.title && (
+            <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4 max-w-3xl">
+              {section.title}
+            </h2>
           )}
-          {section.eyebrow && (
-            <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2">
-              {section.eyebrow}
-            </span>
+          {section.body && (
+            <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line max-w-3xl">
+              {section.body}
+            </p>
           )}
-        </div>
-        <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4 max-w-3xl">
-          {section.title}
-        </h2>
-        {section.body && (
-          <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line max-w-3xl">
-            {section.body}
-          </p>
-        )}
 
-        {/* Case-study Context + Role grid — two columns on desktop, stacked on mobile */}
-        {isCaseStudy && (section.context || section.role) && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-7 pt-6 border-t border-line max-w-4xl">
-            {section.context && (
+          {/* Case-study Context + Role grid — two columns on desktop, stacked on mobile */}
+          {isCaseStudy && (section.context || section.role) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-7 pt-6 border-t border-line max-w-4xl">
+              {section.context && (
               <div>
                 <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
                   {SITE_TEXT.projectPage.sectionContextLabel}
@@ -109,8 +119,9 @@ export function CaseSection({
               </div>
             )}
           </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
 
       {/* Render based on layout type */}
       {section.layout?.type === 'mixed' ? (

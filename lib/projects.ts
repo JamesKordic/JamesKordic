@@ -115,7 +115,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 262,
     blurb: 'Music & entertainment marketing',
-    desc: 'A year inside an music & entertainment marketing agency — designing across indie labels, major-label artists, comedy, and film. Five concurrent client tracks. Around 50 shipped assets. One person.',
+    desc: "An exploration of music and entertainment marketing through collaborative campaign work at The Syndicate, this internship experience spanned projects across indie and major label artists as well as TV, film, and comedy. Responsibilities included creating digital assets, tour and promotional visuals, and event materials, translating each artist or project's unique voice into impactful, audience-driven design and storytelling campaigns.",
     brief: {
       eyebrow: 'The Brief',
       lead: "The Syndicate represents artists and entertainment brands — its design team translates each one's distinct identity into campaign-ready assets at scroll velocity.",
@@ -149,9 +149,8 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Music',
         title: "Guns N' Roses",
-        context: 'Short-form social content to promote the 2024 tour cycle and back-catalog releases. Assets needed to land instantly on TikTok, Reels, and Shorts — speed-readable, album-art-led, motion driven by the music.',
-        role: 'Solo design and motion on this client track. Storyboarded each Reel, animated in After Effects, cut to track stems, exported per-platform specs.',
-        fieldNote: 'Breakthrough: treating each Reel as a 3-second hook plus 27 seconds of payoff — not 30 even seconds. Engagement jumped once I stopped front-loading band names.',
+        context:
+          "Instagram Reels created for Guns N' Roses, featuring dynamic visuals and music-driven edits to promote tours, music, and fan engagement.",
         // 3 vertical Reels — keep them small, 3 across
         media: [
           { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'), aspect: '9/16' },
@@ -163,9 +162,8 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Records',
         title: 'Killphonic Records',
-        context: 'Cross-platform promo for Heart of Gold: The Songs of Neil Young Vol. 1 — a covers compilation. The video had to celebrate ten featured artists equally while driving pre-orders across DSPs.',
-        role: 'Motion design lead. Designed the typographic system, sequenced artist reveals to the lead single, built platform variants (1:1, 9:16, 16:9).',
-        fieldNote: 'Ten artist credits in 45 seconds is a typographic problem, not a video one. Solved with a single grid the camera moved through.',
+        context:
+          'Promotional video created for Killphonic Records to showcase Heart of Gold: The Songs of Neil Young Vol. 1. The video highlights featured artists and promotes pre-order availability across multiple digital platforms.',
         // Single horizontal promo video — full width 16:9
         media: [{ type: 'video', src: vid('1bkwSiwMean5Ugrcj5THWu5rK8c'), aspect: '16/9' }],
         layout: { type: 'uniform', cols: 1, aspect: '16/9' },
@@ -173,9 +171,8 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Comedy',
         title: 'Craig Ferguson',
-        context: "Ongoing social content for the comedian's tour and podcast. Clip-curated, designed for repeatable weekly output across Instagram, TikTok, YouTube Shorts.",
-        role: 'Design, motion, and edit. Built a reusable lower-third and intro system that the team could refill weekly without losing the on-brand feel.',
-        fieldNote: 'The deliverable was less the individual clips, more the system — a kit the team could ship from for months without me.',
+        context:
+          "Social media assets designed for Craig Ferguson, featuring curated show clips formatted for multiple digital platforms to highlight his comedic style and drive audience engagement.",
         // 4 vertical social clips — 4 across on desktop
         media: [
           { type: 'video', src: vid('AGvRC8ZeWglalhmRVoWrAenDbU'), aspect: '9/16' },
@@ -188,8 +185,8 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Records',
         title: 'Last Gang Records',
-        context: 'Sync-placement announcements for Last Gang Records — spotlighting label music in games, film, and TV to drive industry awareness and listener discovery.',
-        role: 'Static and motion social. Built a flexible template that could swap artist, work, and placement medium without redesigning each post from scratch.',
+        context:
+          "Social media posts created for Last Gang Records, spotlighting music placements in video games, film, and other media, designed to drive engagement and showcase the label's cultural reach.",
         // 3 vertical items in a single row at native 4:5.
         // The video source is 9:16 but rendered at 4:5 with cover-crop so
         // it matches the image heights — no letterbox bars on top/bottom.
@@ -203,9 +200,8 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: 'Conference',
         title: 'Indie Week',
-        context: "Full visual rollout for the multi-day music industry conference — speaker announcements, schedule cards, wayfinding signage, social countdowns, and on-site print collateral.",
-        role: 'Design across digital and print. Took the existing brand framework and produced roughly 20 deliverables in two weeks ahead of the event.',
-        fieldNote: 'Highest-volume project of the year. The brand framework already existed — my job was holding it together across 20 deliverables under deadline.',
+        context:
+          'Branded assets created for Indie Week to promote event speakers, key dates, and on-site signage. Designs supported both digital promotion and in-person visibility across the multi-day conference.',
         media: [],
         // Mixed aspects — group into:
         //  Row 1: 4 squares (speaker cards, 1:1)
@@ -259,7 +255,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'wwimf',
     kind: 'personal',
-    title: 'WWIMF',
+    title: 'World Wide Interactive Music Festival',
     cover: '/covers/wwimf.jpg',
     themeColor: '#1d2f7a',
     tags: ['Concept Work', 'Branding', 'Interactive Design'],
@@ -268,8 +264,8 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2025',
     len: 268,
-    blurb: 'Interactive music festival concept',
-    desc: 'A senior capstone reimagining what a global music festival could be when audiences stop being spectators and start being collaborators. Branding, stage design, wearables, marketing, and a 60-page art book — all built around one question: what if every guest left their fingerprint on the festival?',
+    blurb: 'Capstone — branding & interactive',
+    desc: "An exploration of how design can support a more immersive and inclusive global festival where music, visual art, and innovation converge with guest engagement. Guests become active contributors through immersive environments, interactive stages, and participatory technology.\n\n| Presented at *Fusion: 2025 RIT Graphic Design Capstone*",
     brief: {
       eyebrow: 'The Brief',
       lead: "What if a festival could be co-authored by its audience — not just attended by them? WWIMF is a year-long capstone exploring that question through brand, environment, and technology.",
@@ -479,7 +475,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 188,
     blurb: 'Feed The Beat campaign',
-    desc: "Long-running social design for Taco Bell's Feed The Beat program — the brand's emerging-artist platform. Roughly 50 artist spotlight assets, six campaign drops, one extending motion piece, and a template-driven workflow built to scale.",
+    desc: "An exploration of how branded storytelling and visual identity can elevate emerging musical talent through Taco Bell's Feed The Beat program, where social media content and strategic partnerships amplify artist visibility and connect audiences through culture-driven design.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Feed The Beat is Taco Bell's ongoing platform for spotlighting emerging artists. The work had to feel like Taco Bell on first glance and like the artist on second glance — both, every time, at scroll speed.",
@@ -512,10 +508,9 @@ export const PROJECTS: Project[] = [
     sections: [
       {
         eyebrow: 'Feed The Beat',
-        title: 'Social Campaign Set 01',
-        context: "First drop set the template. The Feed The Beat brand zone, type system, and artist-frame logic that the next five sets would extend all got locked here.",
-        role: "Designed the initial campaign kit (frame, type, color rules) and produced the first eight artist spotlight posts off of it. From this point on, future drops were template applications — the design work shifted from inventing to refining.",
-        fieldNote: 'The win wasn\'t the eight posts. It was the kit underneath them — once that existed, every subsequent drop took a fraction of the time.',
+        title: 'Feed The Beat',
+        context:
+          "Social media content created for Taco Bell's Feed The Beat program, promoting emerging artists and bands through branded visuals that highlight them and their partnership with the campaign.",
         media: [
           { type: 'image', src: img('WJoqOnXjeHEhfNWLt27wGXvkTwg', 800) },
           { type: 'image', src: img('QinypJ6EZZl2PxsikGi8LxH7rI', 800) },
@@ -528,10 +523,12 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
+      // Continuation media — no title/eyebrow so these render under the
+      // single "Feed The Beat" heading above. Mirrors the live site's
+      // structure where the entire project is one section with multiple
+      // carousels of social posts.
       {
-        eyebrow: 'Feed The Beat',
-        title: 'Social Campaign Set 02',
-        body: 'Second drop. The frame from Set 01 stays; the palette shifts to follow a new batch of artists.',
+        title: '',
         media: [
           { type: 'image', src: img('CpK6sL4Ca8n0g1rDyovBAbI7M4', 800) },
           { type: 'image', src: img('vNUDzO04xvQcoZ9krMjzUziqKw', 800) },
@@ -543,9 +540,7 @@ export const PROJECTS: Project[] = [
         layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
       {
-        eyebrow: 'Feed The Beat',
-        title: 'Social Campaign Set 03',
-        body: 'Third drop. By this point the type sizing and contrast rules had stabilized.',
+        title: '',
         media: [
           { type: 'image', src: img('FaBFN1wAQD4SBQtyw4qBlTm9Vug', 800) },
           { type: 'image', src: img('LRzQBS1vj7Nk6N8NLk4DSVSDn8', 800) },
@@ -558,12 +553,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
+      // Mixed image/video/image row — the motion piece + flanking stills
       {
-        eyebrow: 'Motion',
-        title: 'Motion Promo',
-        context: "Mid-campaign we needed something with motion — not a Reel built from stills, but a piece that justified the format. A breath in the middle of the static campaign feed.",
-        role: 'Designed and animated the motion piece, plus the two paired stills that flank it on feed — so the trio reads as a single beat in the otherwise-still campaign.',
-        body: 'Motion graphics extending the campaign across video formats.',
+        title: '',
         media: [],
         layout: {
           type: 'mixed',
@@ -581,9 +573,7 @@ export const PROJECTS: Project[] = [
         },
       },
       {
-        eyebrow: 'Feed The Beat',
-        title: 'Social Campaign Set 04',
-        body: 'Fourth drop. Layout refinements pulled from earlier engagement data — tighter artist crops, larger names.',
+        title: '',
         media: [
           { type: 'image', src: img('DTFgtKaf4W0ASJj3wRA6M0SAO2g', 800) },
           { type: 'image', src: img('RM0qw0GFu2HlsXykQ0S9SN817Y0', 800) },
@@ -597,9 +587,7 @@ export const PROJECTS: Project[] = [
         layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
       {
-        eyebrow: 'Feed The Beat',
-        title: 'Social Campaign Set 05',
-        body: 'Fifth drop. Color palettes leaned brighter to break feed monotony as the campaign matured.',
+        title: '',
         media: [
           { type: 'image', src: img('n50FkjKb5qEuOIoSihuzXUug9c', 800) },
           { type: 'image', src: img('PgLX3uOS9zFNRWIqAO3eKdOjDKQ', 800) },
@@ -612,9 +600,7 @@ export const PROJECTS: Project[] = [
         layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
       {
-        eyebrow: 'Feed The Beat',
-        title: 'Social Campaign Set 06',
-        body: 'Final drop. The kit had stabilized into a true system by this point — output speed roughly tripled vs Set 01.',
+        title: '',
         media: [
           { type: 'image', src: img('xy2xZpnFgQQHFiIGVmxJrQYYfl0', 800) },
           { type: 'image', src: img('Kw7ngQ5sLaXnk71XhDg8wJrDbLg', 800) },
@@ -627,10 +613,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 4, aspect: '9/16' },
       },
+      // Single hero shot closing out the section
       {
-        eyebrow: 'Hero',
-        title: 'Campaign Hero Shot',
-        body: 'Single hero composition closing out the campaign year — the platform identity at full scale.',
+        title: '',
         media: [{ type: 'image', src: jpg('63aOXKIxowYxm2ZkN1iAs800E', 2000) }],
         layout: { type: 'uniform', cols: 1, aspect: '16/9' },
       },
@@ -648,8 +633,8 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 201,
-    blurb: 'Social Media design for a music label',
-    desc: 'Social design and motion across MNRK Heavy\'s metal and hard-rock roster — anniversary posts, story-format release promo, artist-spotlight campaigns (including a focused Lowheaven drop), and wide-format header artwork. Intensity at speed, across multiple bands at once.',
+    blurb: 'Social design for a metal label',
+    desc: "A series of digital design explorations supporting music promotion and fan engagement for MNRK Heavy. This project involved creating social media assets across multiple platforms to spotlight anniversaries, new releases, and artist milestones—capturing the intensity of heavy metal and hard rock through bold, audience focused visuals.",
     brief: {
       eyebrow: 'The Brief',
       lead: "MNRK Heavy needed a steady stream of social design that could sit next to album covers from Lowheaven, Lamb of God, and the rest of the roster without ever looking lighter than the music it was promoting.",
@@ -681,10 +666,10 @@ export const PROJECTS: Project[] = [
     },
     sections: [
       {
-        eyebrow: 'Series',
-        title: 'Anniversaries & Milestones',
-        context: "Catalog anniversaries are recurring moments for any label — they keep older records active and remind fans the label has history. They needed designs that respected the original album art instead of overpowering it.",
-        role: 'Designed the milestone series template — square format, anniversary number locked in a consistent position, album art preserved at full visibility.',
+        eyebrow: 'Social & Promo',
+        title: 'Social Media & Promotional Design',
+        context:
+          'A range of social media designs created for MNRK Heavy across multiple platforms — anniversary posts, story-format release promos, album release announcements, artist spotlights, and cross-platform banner artwork. Each piece captures the intensity of heavy metal and hard rock while staying anchored in the label\'s identity.',
         media: [
           { type: 'image', src: img('9XqPreXztmx0ZFPcME8FfCynnVA', 1080) },
           { type: 'image', src: img('7Qjm7UkhPslMPlb3HtRA64T1QE', 1080) },
@@ -692,11 +677,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 3, aspect: '1/1' },
       },
+      // Continuation media — vertical story-format release promos
       {
-        eyebrow: 'Series',
-        title: 'Release Promo Stories',
-        context: "Story-format promo needs a different rhythm than feed posts — vertical, fleeting, optimized for a quick tap-through. The system had to swap artists fast without rebuilding the layout each time.",
-        role: "Built a vertical story template that could be re-skinned per release in minutes — same hierarchy, swappable artwork and release info.",
+        title: '',
         media: [
           { type: 'image', src: img('9UI8emR67MioNNc1UoERq8vMz0', 800) },
           { type: 'image', src: img('SgEyMzySbt9AZN27bElzAGXEmE', 800) },
@@ -704,12 +687,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
+      // Lowheaven trio — two stills flanking a vertical video
       {
-        eyebrow: 'Artist Spotlight',
-        title: 'Lowheaven',
-        context: 'Lowheaven needed a focused promotional set distinct from the regular release-stories cadence — a small dedicated trio that could carry the band\'s atmosphere on its own.',
-        role: "Designed two vertical static visuals and paired them with an animated promo in the center. The three pieces share a palette and treatment but each does a different job — context, motion, payoff.",
-        fieldNote: "A three-piece release isn't a campaign — it's a beat. Designed it as one composition split across three frames, not three posts.",
+        title: '',
         media: [
           { type: 'image', src: img('NMFZUWif8OdwlGY2I1fN82EFbM', 800) },
           { type: 'video', src: vid('FK55AYBGIvyG941MP5Y6r210WQ'), aspect: '9/16' },
@@ -717,11 +697,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
+      // Portrait release announcements — 4-up
       {
-        eyebrow: 'Series',
-        title: 'Album Releases',
-        context: "The portrait-format release announcements covered the bulk of the label's roster — different artists, different aesthetics, same label identity underneath.",
-        role: 'Applied the per-artist treatment framework to four releases — each pulling from its own cover art while sharing the MNRK release-info module at the bottom.',
+        title: '',
         media: [
           { type: 'image', src: img('ehNHhSGMI7HnTwITsjX9yhvXU4', 1000) },
           { type: 'image', src: img('HMVx8iZd2TefUWO8Vz6jRNfXXY', 1000) },
@@ -730,13 +708,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 4, aspect: '4/5' },
       },
+      // Ultra-wide header banners — 3:1 ratio
       {
-        eyebrow: 'Banners',
-        title: 'Header Visuals',
-        context: "MNRK Heavy needed cross-platform banner artwork (YouTube, Spotify, label site headers) that worked at ultra-wide ratios where most album art doesn't.",
-        role: 'Composed two ultra-wide banner systems built around stretched-out type and cropped artwork — designed specifically for the 3:1 surface, not retrofit from a square comp.',
-        fieldNote: 'Wide banner art is a different design problem than square album art. Treating it that way — instead of resizing a cover — produced work that actually lived on the platforms it was for.',
-        body: 'Cross-platform banner artwork supporting label-wide branding.',
+        title: '',
         media: [
           { type: 'image', src: img('q67CSkcAjKBKwr5vmOJvUNJMvg', 2000) },
           { type: 'image', src: img('r5HqxivM3ZGsL1vwlto2nKbRPMo', 2000) },
@@ -748,7 +722,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'consensus',
     kind: 'professional',
-    title: 'Consensus 2025',
+    title: 'Consensus by CoinDesk',
     cover: '/covers/consensus.jpg',
     themeColor: '#0e2e7a',
     tags: ['Creative Direction', 'Motion Design', 'Conference'],
@@ -757,8 +731,8 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 236,
-    blurb: 'Design and motion for a major crypto conference',
-    desc: "Pre-event creative for Consensus, CoinDesk's flagship conference — a series of motion pieces, speaker visuals, and brand-partner cards that built anticipation in the weeks leading up to the show.",
+    blurb: 'Conference creative & motion',
+    desc: "A collection of event-driven digital assets developed for Consensus by CoinDesk, designed to build momentum and audience engagement leading up to the conference. This work highlighted featured speakers, partner brands, and key event moments—delivering a cohesive visual identity across social media and digital platforms to drive anticipation and attendance.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Consensus is CoinDesk's flagship conference — the biggest stage in crypto. The pre-event creative had to feel as serious as a Wall Street keynote and as urgent as a tech launch, all while pushing through a crowded feed.",
@@ -790,12 +764,10 @@ export const PROJECTS: Project[] = [
     },
     sections: [
       {
-        eyebrow: 'Motion',
-        title: 'Animated Conference Assets',
-        context: 'The animated pieces were the front line of the campaign — the first thing audiences saw scrolling. They had to communicate event, speaker, and date in under five seconds.',
-        role: 'Designed and animated five conference promos — speaker reveals, theme spots, and countdown pieces. Built a shared motion grammar so the whole set reads as one campaign.',
-        fieldNote: 'Conference motion lives or dies on the first second. Got it right by treating the speaker name as the headline, not the supporting cast.',
-        body: 'A series of motion pieces created in the lead-up to Consensus, promoting speakers, key dates, and partner brands.',
+        eyebrow: 'Conference Creative',
+        title: 'Pre-Event Creative for Consensus',
+        context:
+          "A series of digital assets created for Consensus by CoinDesk — motion pieces promoting speakers and themes, photographic stills grounding the event in real space, and partner-brand cards positioning sponsors against the Consensus identity. The full set built anticipation across the weeks leading up to the conference.",
         // 5 conference promo videos at 16:9
         media: [
           { type: 'video', src: vid('FGmZ7d1wogIeSBmBUxRHuAypA'), aspect: '16/9' },
@@ -806,12 +778,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
+      // Continuation media — photographic stills at 16:9
       {
-        eyebrow: 'Stills',
-        title: 'Speaker & Event Visuals',
-        context: 'Stills did a different job — they made the event feel real. Where motion built anticipation, photography proved this was a physical place with actual people.',
-        role: 'Designed the still composition system — speaker portraits, event-floor framing, type overlays that worked across photography without competing with the photo itself.',
-        // 4 conference stills at 16:9
+        title: '',
         media: [
           { type: 'image', src: img('bfBUPwtLvvm6QWSoaVBGhuEezw', 1600) },
           { type: 'image', src: img('A9M3tgXxg68c2DqXVP5B7peoU0', 1600) },
@@ -820,12 +789,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
+      // Partner brand cards — square format
       {
-        eyebrow: 'Partners',
-        title: 'Brand Partner Cards',
-        context: "Partner brands needed prominent placement without making the event feel like a sponsor wall. The cards had to honor each partner's identity inside the Consensus frame.",
-        role: 'Designed the partner-card system — square format, brand mark prominent, Consensus framing applied lightly enough to stay visible without dominating.',
-        // 2 square partner cards
+        title: '',
         media: [
           { type: 'image', src: img('hccJPn12kNmnUnlQCi3wpIp7dUI', 1600) },
           { type: 'image', src: img('IGB6zWcaQxm6ReXNgvoF3LOt8', 1600) },
@@ -847,7 +813,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 177,
     blurb: 'Series launch campaign',
-    desc: "Full launch campaign for FX's series Adults — trailers, character key art, social, posters, OOH, and stickers. A complete launch system designed to introduce a new show to a feed, a billboard, and a swag drawer all in the same week.",
+    desc: "A promotional design campaign supporting the launch of FX's new series Adults. This work translated the show's tone and visual identity into cohesive assets across social media, digital platforms, and print—driving awareness and audience connection through bold, narrative-focused visuals.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Adults is a new FX series following a chosen-family of young roommates navigating their twenties in New York. The campaign had to translate its sharp, character-driven tone across every surface a show launch touches.",
@@ -879,12 +845,11 @@ export const PROJECTS: Project[] = [
     },
     sections: [
       {
-        eyebrow: 'Motion',
-        title: 'Trailers & Promos',
-        context: "Trailers were the campaign's tentpole — the format with the most narrative room. They had to deliver tone, characters, and premise in under 30 seconds without spoiling the show.",
-        role: 'Edited and graphic-designed four trailer/promo cuts at 16:9. Built the show\'s lower-third system, title cards, and end-frames so every cut feels like one piece of franchise work.',
-        fieldNote: 'Trailer design is editing more than designing. The graphic system existed to disappear — the show is the show.',
-        // 4 series trailers at 16:9 — 2 across for prominence
+        eyebrow: 'Launch Campaign',
+        title: 'Adults on FX — Launch Campaign',
+        context:
+          "A promotional design campaign supporting the launch of FX's new series Adults. The system translated the show's tone and visual identity into cohesive assets across trailers, character key art, social, posters, out-of-home placements, and a fan sticker pack — every surface a show launch touches.",
+        // 4 series trailers at 16:9 — 2 across
         media: [
           { type: 'video', src: vid('Yw37NLO1xKxuLc3BFLZZzWkgQc'), aspect: '16/9' },
           { type: 'video', src: vid('XaZegHDXqqcBixPkXhxX95UQzI'), aspect: '16/9' },
@@ -893,12 +858,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
+      // Continuation media — 6-character key art at 4:5
       {
-        eyebrow: 'Character Cards',
-        title: 'Key Art',
-        context: 'Key art is the source of truth for an ensemble show — every other downstream surface (social, posters, OOH) inherits from how the characters get framed and styled here.',
-        role: 'Designed the six-character key art system. Locked treatment, color, and type so each card stands alone but the set reads as one ensemble.',
-        // 6 character cards at ~4:5 portrait
+        title: '',
         media: [
           { type: 'image', src: img('sKtr7uRzmThZzKQB0Y4tvdWaAkY', 1000) },
           { type: 'image', src: img('RsyuUFxNSyuC3LfDBe67S2O2l2U', 1000) },
@@ -909,12 +871,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 3, aspect: '4/5' },
       },
+      // Social posts — 6 at 4:5
       {
-        eyebrow: 'Social',
-        title: 'Social Assets',
-        context: 'Vertical and square social posts had to make the character work feel native to feed. Same ensemble identity, recomposed for thumb-stopping platform behavior.',
-        role: "Adapted the key-art system into six social-first posts — tighter crops, type sized for vertical, color contrast pushed for feed visibility.",
-        // 6 social posts at 4:5
+        title: '',
         media: [
           { type: 'image', src: jpg('pAGwmQHK4M9NgVDsrOOtKUazUM', 1000) },
           { type: 'image', src: jpg('BnguCFt7PUDPd5DTfJTRVwvEQY', 1000) },
@@ -925,13 +884,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 3, aspect: '4/5' },
       },
+      // Theatrical posters — 4 tall posters at 4:5
       {
-        eyebrow: 'Print',
-        title: 'Posters',
-        context: 'Theatrical-style posters had to feel like premium one-sheets — the kind you actually want to put on a wall — while still functioning as ad units.',
-        role: 'Designed four posters with the ensemble as the focal point. Built each as both a finished one-sheet and a flexible base for press, paid, and key-art distribution.',
-        fieldNote: 'Show posters work best when they look like artifacts, not advertisements. Designed each one as if it had to survive being printed and pinned to a wall.',
-        // 4 tall posters — they're 6600×8400 which is ~11:14, closer to 4:5
+        title: '',
         media: [
           { type: 'image', src: img('kWR3a7VWmOGOLt89uoLR3ik37hM', 1500) },
           { type: 'image', src: img('CrPZChQ4g0OQ4xC6ksAsCyUKB2s', 1500) },
@@ -940,14 +895,9 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 2, aspect: '4/5' },
       },
+      // Out-of-home — ultra-wide banners + city panels
       {
-        eyebrow: 'Out of Home',
-        title: 'Banners & Placements',
-        context: 'OOH had two distinct formats — ultra-wide highway/transit banners and city-panel placements at 4:3. Both had to stop traffic without requiring a viewer to read fine print.',
-        role: 'Built the OOH system in two passes: stretched the ensemble across 3:1 banners as a horizontal panorama, then re-cropped for city-panel placements where each character could carry its own panel.',
-        body: 'Mixed-format out-of-home placements: ultra-wide horizontal banners and city panel placements.',
-        // Mixed: 3 ultra-wide banners (1200×460 ≈ 21/8 — use 3/1 close enough),
-        // then 3 nearly-4:3 (1450×1080) + 1 4:3 (1200×900) → mixed rows
+        title: '',
         media: [],
         layout: {
           type: 'mixed',
@@ -974,12 +924,9 @@ export const PROJECTS: Project[] = [
           ],
         },
       },
+      // Sticker set — 3 small square pieces
       {
-        eyebrow: 'Stickers',
-        title: 'Sticker Set',
-        context: 'Stickers are the cheapest, fastest, most fan-facing surface in a launch — the unofficial test of whether a show has a visual identity worth carrying around.',
-        role: 'Pulled three motifs from the larger system — character icon, type lockup, and a callback gag — and stripped them down to sticker-sized punch.',
-        // 3 stickers — 2 are 1:1, 1 is 600×659 (close enough to 1:1)
+        title: '',
         media: [
           { type: 'image', src: img('9ZD5RETiuyP0dfDMRgRfC00j9SQ', 800) },
           { type: 'image', src: img('6sWKyIr98rlHBt0xBlKoMOOM6c', 800) },
@@ -1002,7 +949,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 189,
     blurb: 'Beverage brand & 3D packaging',
-    desc: "A conceptual energy drink brand built from scratch — naming, identity, four-flavor packaging system, full 3D can renders, marketing visualization, and a launch promo. Voltage is what happens when lemonade and an energy drink share an outlet.",
+    desc: "An exploration of how energy and flavor converge through a reimagined beverage experience. Voltage is a conceptual energy drink brand merging the refreshing taste of lemonade with the bold intensity of an energy drink. Inspired by the electrical potential found in lemons, the brand identity channels a sense of power, clarity, and high-voltage impact across naming, packaging, and visual design. Developed to fill a market gap for flavor-forward options that feel both familiar and exciting, the project redefines what an energy drink can be through design and storytelling.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Voltage is a self-initiated beverage brand merging lemonade with energy-drink intensity. The project is part identity exercise, part 3D challenge, and part marketing studio — built to prove the whole product cycle from logo to billboard.",
@@ -1162,7 +1109,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 223,
     blurb: 'Self-initiated brand exploration',
-    desc: "Self-directed Nike work — Air Jordan 1 modeling in Blender, in-software process documentation, and an Air Max poster series. Personal exploration with no client constraints, used to push 3D modeling chops and poster composition.",
+    desc: "An exploration of Nike's dynamic visual language and culture-defining storytelling through self-initiated design work. This collection reimagines how the brand's iconic identity can extend across diverse mediums, highlighting the adaptability and energy that define Nike's voice.",
     brief: {
       eyebrow: 'The Brief',
       lead: "No client. No deck. Just Nike — the brand that taught everyone how product design and graphic design can be the same conversation — and a sustained personal exploration of what it would look like to design for them.",
@@ -1194,12 +1141,10 @@ export const PROJECTS: Project[] = [
     },
     sections: [
       {
-        eyebrow: '01',
+        eyebrow: '3D',
         title: 'Air Jordan 1',
-        context: "The AJ1 is a benchmark — anyone can recognize the silhouette, and any inaccuracy in proportion or material reads instantly. Picking it was the point: it's the hardest possible target for a personal 3D project.",
-        role: 'Modeled the entire shoe in Blender from reference photography. Built materials (leather, rubber, suede, metal eyelets) with proper UVs, then lit and rendered four hero compositions.',
-        fieldNote: "Iconic objects are the hardest to recreate — your eye has decades of reference for what's right. A 2% error in the Swoosh angle becomes the only thing anyone sees.",
-        body: 'A personal 3D project recreating the classic Air Jordan 1 in Blender. Focused on realistic textures, accurate proportions, and brand-authentic details for use in product visualization and other assets.',
+        context:
+          'A personal 3D project recreating the classic Air Jordan 1 in Blender. Focused on realistic textures, accurate proportions, and brand-authentic details for use in product visualization and other assets.',
         // 4 Blender renders at 16:9
         media: [
           { type: 'image', src: jpg('j8y8xAfZOZidHy4aAQmt91XtGvI', 1600) },
@@ -1210,11 +1155,10 @@ export const PROJECTS: Project[] = [
         layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
-        eyebrow: '02',
+        eyebrow: 'Process',
         title: '3D Model Process',
-        context: 'Documentation matters more on self-directed work than commissioned work — there\'s no client brief to prove the technical claim. The process screenshots have to do that job themselves.',
-        role: 'Captured the build inside Blender at four stages — wireframe, materials, lighting setup, final render. Composed each screenshot as a finished frame rather than a raw cap.',
-        body: 'Inside-Blender screenshots showing visualization and process.',
+        context:
+          'Some inside Blender screenshots to show my visualization and process.',
         // 4 Blender screenshots — 16:9 close enough
         media: [
           { type: 'image', src: img('cDhoWJ08o4OgQYnHNUuO8i1Otw', 1600) },
@@ -1225,12 +1169,10 @@ export const PROJECTS: Project[] = [
         layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
       {
-        eyebrow: '03',
+        eyebrow: 'Posters',
         title: 'Air Max Posters',
-        context: 'After spending weeks inside Blender, I wanted to use a totally different muscle — 2D poster composition with no 3D in sight. The Air Max series was the answer: type-led, gritty, retro-energy.',
-        role: 'Designed four poster compositions plus one ultra-wide closer. Each leans into a different colorway and pulls its energy from expressive typography and texture rather than product photography.',
-        fieldNote: 'Switching between 3D and 2D within the same project is healthy creative cross-training. Each side makes the other look at problems differently.',
-        body: 'A bold, stylized poster campaign celebrating the iconic Air Max silhouette. Each composition emphasizes a unique colorway with expressive typography, gritty textures, and retro-inspired energy.',
+        context:
+          'A bold, stylized poster campaign celebrating the iconic Air Max silhouette. Each composition emphasizes a unique colorway with expressive typography, gritty textures, and retro-inspired energy, channeling the raw streetwear culture that defines the Nike brand.',
         // Mixed: 3 tall posters at 2:3 + 1 ultra-wide banner at 2:1
         media: [],
         layout: {
@@ -1250,6 +1192,51 @@ export const PROJECTS: Project[] = [
               aspect: '2/1',
               media: [
                 { type: 'image', src: jpg('02d64IOjIvc0yd2SQnEAoNdjm8', 2000) },
+              ],
+            },
+          ],
+        },
+      },
+      {
+        eyebrow: 'Motion',
+        title: 'Evolution of Nike Sneakers Timeline',
+        context:
+          "A visual timeline exploring the legacy of Nike's most iconic sneaker releases from 1970 to 1995. This project combines clean vector illustrations with motion graphics to create a sleek, informative animation that highlights each model's cultural and design significance.",
+        // Mixed: a wide hero panorama + 10 process frames + 1 video
+        media: [],
+        layout: {
+          type: 'mixed',
+          rows: [
+            // Wide hero panorama (4384x1500 ≈ 3:1)
+            {
+              cols: 1,
+              aspect: '3/1',
+              media: [
+                { type: 'image', src: img('6GcSHzQ9KfXtXjMVTFTgDJpeg', 2000) },
+              ],
+            },
+            // Frame grid — 10 stills at 16:9
+            {
+              cols: 2,
+              aspect: '16/9',
+              media: [
+                { type: 'image', src: img('NdgiLbmCeSgH4owLPtjI7qqlI5Y', 1600) },
+                { type: 'image', src: img('azbDyWeD9LjuNi8ACpjLOlw9rM', 1600) },
+                { type: 'image', src: img('C1ohrDzDWbMzyQXAVqwXBL35lvA', 1600) },
+                { type: 'image', src: img('Xljzk2xsEwmQgpkIFbG75NuVL4', 1600) },
+                { type: 'image', src: img('dGCo1GurvaZMtCN1cxz3kNVqFqI', 1600) },
+                { type: 'image', src: img('rUt9M6IfZqcpwtsg6mxQwC6LTwo', 1600) },
+                { type: 'image', src: img('Wq4zLZuGIE3MkXl141iLdoDHg', 1600) },
+                { type: 'image', src: img('fvOlheWEAae7TzS9IOF4Han0N0', 1600) },
+                { type: 'image', src: img('qe6mfo8PCkiagBhG4id4cj7XtBM', 1600) },
+              ],
+            },
+            // Final motion piece — full-width
+            {
+              cols: 1,
+              aspect: '16/9',
+              media: [
+                { type: 'video', src: vid('PC09fpxsInbQiKP0enoHTSweY'), aspect: '16/9' },
               ],
             },
           ],

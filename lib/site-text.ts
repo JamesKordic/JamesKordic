@@ -46,7 +46,7 @@ export const SITE_TEXT = {
     /** Location string used in About metadata row */
     location: 'New York, NY',
     /** Founded/established year shown in About metadata row */
-    established: 'Est. 2001',
+    established: 'Est. 2024',
   },
 
   /* ---- HOME PAGE ---- */
@@ -65,7 +65,7 @@ export const SITE_TEXT = {
     sideAHeading: 'Professional client work',
     /** Subheading for Side A */
     sideASubheading:
-      'Commissioned work for music, entertainment, and tech brands.',
+      'Commissioned work for music, entertainment, food, and tech brands.',
 
     /** "Side B" label */
     sideBLabel: 'Side B',
