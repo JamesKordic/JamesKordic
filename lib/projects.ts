@@ -212,7 +212,6 @@ export const PROJECTS: Project[] = [
         //  Row 1: 4 squares (speaker cards, 1:1)
         //  Row 2: 3 tall (1:2 dates)
         //  Row 3: 2 ultra-wide banners (2:1)
-        //  Row 4: 4 mixed portraits (9:16, 2:3, 1:1)
         layout: {
           type: 'mixed',
           rows: [
@@ -243,15 +242,6 @@ export const PROJECTS: Project[] = [
                 { type: 'image', src: img('mcC9plXqXvGp1TUSOqiiCfCrig', 2000) },
               ],
             },
-            {
-              cols: 3,
-              aspect: '2/3',
-              media: [
-                { type: 'image', src: img('oBy0pJgzZloupGU62fc8PFXH5c', 1000) },
-                { type: 'image', src: img('fNABELlafPtUG70DuR50mudCTaw', 1000) },
-                { type: 'image', src: jpg('uUhmvQ8VocFRVIi9A401nWnuNc', 1000) },
-              ],
-            },
           ],
         },
       },
@@ -260,7 +250,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'wwimf',
     kind: 'personal',
-    title: 'World Wide Interactive Music Festival',
+    title: 'WWIMF',
     cover: '/covers/wwimf.jpg',
     themeColor: '#1d2f7a',
     tags: ['Concept Work', 'Branding', 'Interactive Design'],
@@ -713,7 +703,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'consensus',
     kind: 'professional',
-    title: 'Consensus by CoinDesk',
+    title: 'Consensus',
     cover: '/covers/consensus.jpg',
     themeColor: '#0e2e7a',
     tags: ['Creative Direction', 'Motion Design', 'Conference'],

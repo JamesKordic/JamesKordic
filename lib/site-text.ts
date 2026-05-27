@@ -273,6 +273,6 @@ export const SITE_TEXT = {
   meta: {
     title: 'James Kordic — Graphic & Motion Designer',
     description:
-      'New York-based Graphic & Motion Designer. Work for Taco Bell, FX, MNRK Heavy, Consensus by CoinDesk, and The Syndicate.',
+      'New York-based Graphic & Motion Designer. Work for Taco Bell, FX, MNRK Heavy, Consensus, and The Syndicate.',
   },
 };
