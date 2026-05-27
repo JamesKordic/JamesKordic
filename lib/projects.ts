@@ -40,6 +40,11 @@ export type GridRow = {
 export type Layout =
   | { type: 'uniform'; cols: 1 | 2 | 3 | 4; aspect: AspectRatio }
   | { type: 'mixed'; rows: GridRow[] }
+  /** Horizontally scrolling row of fixed-width cards.
+   *  - `aspect`: aspect ratio of each card
+   *  - `visible`: how many cards fit in the viewport at desktop sizes
+   *    (mobile shows fewer automatically; defaults to 4) */
+  | { type: 'carousel'; aspect: AspectRatio; visible?: 2 | 3 | 4 | 5 }
   | { type: 'legacy'; cols: 1 | 2 | 3 | 4 };
 
 export type Section = {
@@ -506,56 +511,13 @@ export const PROJECTS: Project[] = [
       ],
     },
     sections: [
+      // 1. THE VIDEO + FLANKING STILLS — now the lead section, carries the
+      //    "Feed The Beat" heading and the canonical description.
       {
         eyebrow: 'Feed The Beat',
         title: 'Feed The Beat',
         context:
           "Social media content created for Taco Bell's Feed The Beat program, promoting emerging artists and bands through branded visuals that highlight them and their partnership with the campaign.",
-        media: [
-          { type: 'image', src: img('WJoqOnXjeHEhfNWLt27wGXvkTwg', 800) },
-          { type: 'image', src: img('QinypJ6EZZl2PxsikGi8LxH7rI', 800) },
-          { type: 'image', src: img('MIC8H4bXAQm2mNj9Y65agGW1Eg', 800) },
-          { type: 'image', src: img('OTL7uPOcESMtqS94Z9Duez3zug', 800) },
-          { type: 'image', src: img('KxxjaeQYhjNg9bmWNo37hm7Bk', 800) },
-          { type: 'image', src: img('xULBx27t9CKcxctPJyrnOlQmZs', 800) },
-          { type: 'image', src: img('dYZN9PqZAH7rsAjoNfm0X3Hy31s', 800) },
-          { type: 'image', src: img('1L08UResr99bfGx0dyyscmyJSQ', 800) },
-        ],
-        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
-      },
-      // Continuation media — no title/eyebrow so these render under the
-      // single "Feed The Beat" heading above. Mirrors the live site's
-      // structure where the entire project is one section with multiple
-      // carousels of social posts.
-      {
-        title: '',
-        media: [
-          { type: 'image', src: img('CpK6sL4Ca8n0g1rDyovBAbI7M4', 800) },
-          { type: 'image', src: img('vNUDzO04xvQcoZ9krMjzUziqKw', 800) },
-          { type: 'image', src: img('GTaoryMjDqdt31bStBwjD1VNDk', 800) },
-          { type: 'image', src: img('Ix9O7siEQORLQAOyXkyevV4pQ', 800) },
-          { type: 'image', src: img('lsqIP4Lmt9l3Aff7VWi3m2yfQUk', 800) },
-          { type: 'image', src: img('A8EahCbmUoBL3FSikxxGMmScgYM', 800) },
-        ],
-        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
-      },
-      {
-        title: '',
-        media: [
-          { type: 'image', src: img('FaBFN1wAQD4SBQtyw4qBlTm9Vug', 800) },
-          { type: 'image', src: img('LRzQBS1vj7Nk6N8NLk4DSVSDn8', 800) },
-          { type: 'image', src: img('dcw5lrjVDnbGdfipQrRzEMWCM', 800) },
-          { type: 'image', src: img('BJIBErSrjVqsJvO2oiPEZH3VVEY', 800) },
-          { type: 'image', src: img('SAHMpheWMzMBJzFuYI2tV0KOQZg', 800) },
-          { type: 'image', src: img('kI7MFEv683x0Cqh63prYiop0pdQ', 800) },
-          { type: 'image', src: img('3zB4NalMAvLAnX4J7ij9b8HA', 800) },
-          { type: 'image', src: img('KfcTXKzUHayaCDqEkz6XZwM3d4', 800) },
-        ],
-        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
-      },
-      // Mixed image/video/image row — the motion piece + flanking stills
-      {
-        title: '',
         media: [],
         layout: {
           type: 'mixed',
@@ -572,6 +534,55 @@ export const PROJECTS: Project[] = [
           ],
         },
       },
+      // 2. HERO IMAGE — sits directly under the video section
+      {
+        title: '',
+        media: [{ type: 'image', src: jpg('63aOXKIxowYxm2ZkN1iAs800E', 2000) }],
+        layout: { type: 'uniform', cols: 1, aspect: '16/9' },
+      },
+      // 3-8. CAROUSELS — six horizontally-scrolling carousels of phone-format
+      //      vertical posts. Mirrors the live site's structure where each
+      //      group of 8 posts becomes its own scrubbable carousel.
+      {
+        title: '',
+        media: [
+          { type: 'image', src: img('WJoqOnXjeHEhfNWLt27wGXvkTwg', 800) },
+          { type: 'image', src: img('QinypJ6EZZl2PxsikGi8LxH7rI', 800) },
+          { type: 'image', src: img('MIC8H4bXAQm2mNj9Y65agGW1Eg', 800) },
+          { type: 'image', src: img('OTL7uPOcESMtqS94Z9Duez3zug', 800) },
+          { type: 'image', src: img('KxxjaeQYhjNg9bmWNo37hm7Bk', 800) },
+          { type: 'image', src: img('xULBx27t9CKcxctPJyrnOlQmZs', 800) },
+          { type: 'image', src: img('dYZN9PqZAH7rsAjoNfm0X3Hy31s', 800) },
+          { type: 'image', src: img('1L08UResr99bfGx0dyyscmyJSQ', 800) },
+        ],
+        layout: { type: 'carousel', aspect: '9/16', visible: 4 },
+      },
+      {
+        title: '',
+        media: [
+          { type: 'image', src: img('CpK6sL4Ca8n0g1rDyovBAbI7M4', 800) },
+          { type: 'image', src: img('vNUDzO04xvQcoZ9krMjzUziqKw', 800) },
+          { type: 'image', src: img('GTaoryMjDqdt31bStBwjD1VNDk', 800) },
+          { type: 'image', src: img('Ix9O7siEQORLQAOyXkyevV4pQ', 800) },
+          { type: 'image', src: img('lsqIP4Lmt9l3Aff7VWi3m2yfQUk', 800) },
+          { type: 'image', src: img('A8EahCbmUoBL3FSikxxGMmScgYM', 800) },
+        ],
+        layout: { type: 'carousel', aspect: '9/16', visible: 4 },
+      },
+      {
+        title: '',
+        media: [
+          { type: 'image', src: img('FaBFN1wAQD4SBQtyw4qBlTm9Vug', 800) },
+          { type: 'image', src: img('LRzQBS1vj7Nk6N8NLk4DSVSDn8', 800) },
+          { type: 'image', src: img('dcw5lrjVDnbGdfipQrRzEMWCM', 800) },
+          { type: 'image', src: img('BJIBErSrjVqsJvO2oiPEZH3VVEY', 800) },
+          { type: 'image', src: img('SAHMpheWMzMBJzFuYI2tV0KOQZg', 800) },
+          { type: 'image', src: img('kI7MFEv683x0Cqh63prYiop0pdQ', 800) },
+          { type: 'image', src: img('3zB4NalMAvLAnX4J7ij9b8HA', 800) },
+          { type: 'image', src: img('KfcTXKzUHayaCDqEkz6XZwM3d4', 800) },
+        ],
+        layout: { type: 'carousel', aspect: '9/16', visible: 4 },
+      },
       {
         title: '',
         media: [
@@ -584,7 +595,7 @@ export const PROJECTS: Project[] = [
           { type: 'image', src: img('nROXYm5aRxay6E93SF25CUAlluM', 800) },
           { type: 'image', src: img('dtArTiIFnI8H31tLKnOQdEs0Ukg', 800) },
         ],
-        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
+        layout: { type: 'carousel', aspect: '9/16', visible: 4 },
       },
       {
         title: '',
@@ -597,7 +608,7 @@ export const PROJECTS: Project[] = [
           { type: 'image', src: img('DiNhNyzDj4dRND3tzhRg2C1Qt4', 800) },
           { type: 'image', src: img('8cqX82V4hFSm3N8oshOdb4deG9I', 800) },
         ],
-        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
+        layout: { type: 'carousel', aspect: '9/16', visible: 4 },
       },
       {
         title: '',
@@ -611,13 +622,7 @@ export const PROJECTS: Project[] = [
           { type: 'image', src: img('qaZqsMfiEtGdHdHkQqxH0hAZnQk', 800) },
           { type: 'image', src: img('17gJFO5wLMLh4iHXnJCgkww8mw', 800) },
         ],
-        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
-      },
-      // Single hero shot closing out the section
-      {
-        title: '',
-        media: [{ type: 'image', src: jpg('63aOXKIxowYxm2ZkN1iAs800E', 2000) }],
-        layout: { type: 'uniform', cols: 1, aspect: '16/9' },
+        layout: { type: 'carousel', aspect: '9/16', visible: 4 },
       },
     ],
   },
@@ -1192,51 +1197,6 @@ export const PROJECTS: Project[] = [
               aspect: '2/1',
               media: [
                 { type: 'image', src: jpg('02d64IOjIvc0yd2SQnEAoNdjm8', 2000) },
-              ],
-            },
-          ],
-        },
-      },
-      {
-        eyebrow: 'Motion',
-        title: 'Evolution of Nike Sneakers Timeline',
-        context:
-          "A visual timeline exploring the legacy of Nike's most iconic sneaker releases from 1970 to 1995. This project combines clean vector illustrations with motion graphics to create a sleek, informative animation that highlights each model's cultural and design significance.",
-        // Mixed: a wide hero panorama + 10 process frames + 1 video
-        media: [],
-        layout: {
-          type: 'mixed',
-          rows: [
-            // Wide hero panorama (4384x1500 ≈ 3:1)
-            {
-              cols: 1,
-              aspect: '3/1',
-              media: [
-                { type: 'image', src: img('6GcSHzQ9KfXtXjMVTFTgDJpeg', 2000) },
-              ],
-            },
-            // Frame grid — 10 stills at 16:9
-            {
-              cols: 2,
-              aspect: '16/9',
-              media: [
-                { type: 'image', src: img('NdgiLbmCeSgH4owLPtjI7qqlI5Y', 1600) },
-                { type: 'image', src: img('azbDyWeD9LjuNi8ACpjLOlw9rM', 1600) },
-                { type: 'image', src: img('C1ohrDzDWbMzyQXAVqwXBL35lvA', 1600) },
-                { type: 'image', src: img('Xljzk2xsEwmQgpkIFbG75NuVL4', 1600) },
-                { type: 'image', src: img('dGCo1GurvaZMtCN1cxz3kNVqFqI', 1600) },
-                { type: 'image', src: img('rUt9M6IfZqcpwtsg6mxQwC6LTwo', 1600) },
-                { type: 'image', src: img('Wq4zLZuGIE3MkXl141iLdoDHg', 1600) },
-                { type: 'image', src: img('fvOlheWEAae7TzS9IOF4Han0N0', 1600) },
-                { type: 'image', src: img('qe6mfo8PCkiagBhG4id4cj7XtBM', 1600) },
-              ],
-            },
-            // Final motion piece — full-width
-            {
-              cols: 1,
-              aspect: '16/9',
-              media: [
-                { type: 'video', src: vid('PC09fpxsInbQiKP0enoHTSweY'), aspect: '16/9' },
               ],
             },
           ],

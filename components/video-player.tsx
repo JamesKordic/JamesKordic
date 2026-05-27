@@ -58,6 +58,11 @@ export function VideoPlayer({
   /** Tracked separately from hover so we can keep controls visible during
    *  a scrub drag even if the cursor moves outside the bar momentarily. */
   const [scrubbing, setScrubbing] = useState(false);
+  /** Hover state for the scrub bar's hit area specifically. Separate from
+   *  the player-level `hovering` because we want the scrub handle to
+   *  appear when the mouse is over the bar (not just anywhere on the
+   *  player). Also drives the bar's 4px → 6px height growth on hover. */
+  const [barHover, setBarHover] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
 
   // Keep DOM muted attribute in sync with state
@@ -95,8 +100,14 @@ export function VideoPlayer({
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
+    // Read duration eagerly in case the metadata event already fired
+    // before this effect ran. (preload="metadata" can complete fast.)
+    if (isFinite(v.duration) && v.duration > 0) setDuration(v.duration);
+
     const onTime = () => setCurrentTime(v.currentTime);
-    const onDuration = () => setDuration(v.duration || 0);
+    const onDuration = () => {
+      if (isFinite(v.duration) && v.duration > 0) setDuration(v.duration);
+    };
     const onProgress = () => {
       // buffered.end(N) might throw if no ranges are loaded — guard it
       if (v.buffered.length > 0 && v.duration) {
@@ -140,34 +151,59 @@ export function VideoPlayer({
   }, []);
 
   /** Computes a seek position from a pointer event and applies it.
-   *  Used for both click-to-seek and drag-to-scrub. */
+   *  Used for both click-to-seek and drag-to-scrub.
+   *
+   *  Note: we update currentTime state IMMEDIATELY here rather than waiting
+   *  for the video's `timeupdate` event, because that event only fires at
+   *  ~4Hz. During a scrub drag the time readout needs to feel like it's
+   *  following the cursor, not lagging behind it. */
   const seekFromEvent = useCallback((clientX: number) => {
     const v = videoRef.current;
     const bar = scrubRef.current;
-    if (!v || !bar || !v.duration) return;
+    if (!v || !bar) return;
+    const dur = v.duration;
+    if (!isFinite(dur) || dur <= 0) return;
     const rect = bar.getBoundingClientRect();
     const frac = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-    v.currentTime = frac * v.duration;
-    setCurrentTime(v.currentTime);
+    const target = frac * dur;
+    v.currentTime = target;
+    setCurrentTime(target);
   }, []);
 
+  /** Tracks whether a scrub drag is active. We use a ref (not state) here
+   *  because pointermove events can fire BEFORE React flushes the state
+   *  update from setScrubbing(true) — and a stale-closure read of state
+   *  would cause the move handler to bail out and never scrub. A ref
+   *  updates synchronously, so the move handler always sees the truth. */
+  const scrubbingRef = useRef(false);
+
   /* Scrubbing: pointerdown starts a drag, pointermove tracks it, pointerup
-   * ends it. setPointerCapture keeps events flowing even when the pointer
-   * leaves the bar — that's what makes a smooth drag possible. */
+   * ends it. setPointerCapture keeps pointer events routed to the bar
+   * element even when the cursor moves outside it — that's what makes a
+   * smooth drag possible without losing the gesture mid-motion. */
   const handleScrubStart = (e: React.PointerEvent) => {
     e.stopPropagation();
+    e.preventDefault();
+    scrubbingRef.current = true;
     setScrubbing(true);
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    try {
+      (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {
+      /* Some browsers/elements don't support pointer capture — drag
+       *  still works via the native pointer event flow, just less robustly. */
+    }
     seekFromEvent(e.clientX);
   };
   const handleScrubMove = (e: React.PointerEvent) => {
-    if (!scrubbing) return;
+    if (!scrubbingRef.current) return;
     e.stopPropagation();
+    e.preventDefault();
     seekFromEvent(e.clientX);
   };
   const handleScrubEnd = (e: React.PointerEvent) => {
-    if (!scrubbing) return;
+    if (!scrubbingRef.current) return;
     e.stopPropagation();
+    scrubbingRef.current = false;
     setScrubbing(false);
     try {
       (e.target as HTMLElement).releasePointerCapture(e.pointerId);
@@ -336,43 +372,57 @@ export function VideoPlayer({
 
         <div className="relative px-3 sm:px-4 pb-2.5 pt-1.5 flex flex-col gap-1.5">
           {/* Scrub bar — sits ABOVE the row of controls so it spans the
-           *  full width. Pointer-event based for smooth drag scrubbing. */}
+           *  full width. Pointer-event based for smooth drag scrubbing.
+           *
+           *  We wrap the visually-thin bar in a TALLER transparent hit
+           *  area (h-4) so clicks always land. The visible bar inside is
+           *  only 4-6px tall — without a hit zone, most user clicks miss
+           *  it and bubble to the container, which interprets them as
+           *  play/pause toggles instead of seek requests. */}
           <div
-            ref={scrubRef}
             onPointerDown={handleScrubStart}
             onPointerMove={handleScrubMove}
             onPointerUp={handleScrubEnd}
             onPointerCancel={handleScrubEnd}
             onClick={(e) => e.stopPropagation()}
-            className="relative h-[4px] hover:h-[6px] transition-all bg-white/20 rounded-full cursor-pointer group/bar"
-            role="slider"
-            aria-label="Seek"
-            aria-valuemin={0}
-            aria-valuemax={duration}
-            aria-valuenow={currentTime}
+            onMouseEnter={() => setBarHover(true)}
+            onMouseLeave={() => setBarHover(false)}
+            className="relative h-4 flex items-center cursor-pointer group/bar"
           >
-            {/* Buffered overlay — shows how much has loaded ahead */}
             <div
-              className="absolute inset-y-0 left-0 bg-white/30 rounded-full pointer-events-none"
-              style={{ width: `${buffered * 100}%` }}
-            />
-            {/* Played overlay — uses the site's signature gradient */}
-            <div
-              className="absolute inset-y-0 left-0 rounded-full pointer-events-none"
-              style={{
-                width: `${progressFrac * 100}%`,
-                background:
-                  'linear-gradient(90deg, #c8f135 0%, #22d3ee 50%, #ff2d8a 100%)',
-              }}
-            />
-            {/* Scrub handle — appears on hover and during scrubbing */}
-            <div
-              className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-white shadow-md transition-opacity ${
-                scrubbing || hovering ? 'opacity-100' : 'opacity-0'
-              }`}
-              style={{ left: `${progressFrac * 100}%` }}
-              aria-hidden
-            />
+              ref={scrubRef}
+              className={`relative w-full ${
+                barHover || scrubbing ? 'h-[6px]' : 'h-[4px]'
+              } transition-[height] bg-white/20 rounded-full pointer-events-none`}
+              role="slider"
+              aria-label="Seek"
+              aria-valuemin={0}
+              aria-valuemax={duration}
+              aria-valuenow={currentTime}
+            >
+              {/* Buffered overlay — shows how much has loaded ahead */}
+              <div
+                className="absolute inset-y-0 left-0 bg-white/30 rounded-full"
+                style={{ width: `${buffered * 100}%` }}
+              />
+              {/* Played overlay — uses the site's signature gradient */}
+              <div
+                className="absolute inset-y-0 left-0 rounded-full"
+                style={{
+                  width: `${progressFrac * 100}%`,
+                  background:
+                    'linear-gradient(90deg, #c8f135 0%, #22d3ee 50%, #ff2d8a 100%)',
+                }}
+              />
+              {/* Scrub handle — appears on hover and during scrubbing */}
+              <div
+                className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-white shadow-md transition-opacity ${
+                  scrubbing || barHover ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={{ left: `${progressFrac * 100}%` }}
+                aria-hidden
+              />
+            </div>
           </div>
 
           {/* Bottom row: play • time • spacer • mute • fullscreen */}
