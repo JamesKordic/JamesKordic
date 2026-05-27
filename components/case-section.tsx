@@ -498,6 +498,7 @@ function MediaTile({
         src={media.src}
         aspect={media.aspect || aspect || '16/9'}
         fit={media.fit}
+        poster={media.poster}
       />
     );
   }

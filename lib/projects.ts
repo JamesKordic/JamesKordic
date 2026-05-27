@@ -4,7 +4,18 @@
 /* ============ MEDIA TYPES ============ */
 export type Media =
   | { type: 'image'; src: string; aspect?: AspectRatio }
-  | { type: 'video'; src: string; aspect?: AspectRatio; fit?: 'contain' | 'cover' }
+  | {
+      type: 'video';
+      src: string;
+      aspect?: AspectRatio;
+      fit?: 'contain' | 'cover';
+      /** Optional custom thumbnail URL shown before playback. If omitted,
+       *  the player auto-captures the first frame of the video.
+       *  Path can be absolute (https://...) or a project-relative path
+       *  starting with `/` (e.g. `/posters/syndicate-hero.jpg` for an
+       *  image in `/public/posters/`). */
+      poster?: string;
+    }
   | { type: 'embed'; src: string; aspect?: AspectRatio; label?: string };
 
 /* Allowed aspect ratios — keeps the visual rhythm controllable */
