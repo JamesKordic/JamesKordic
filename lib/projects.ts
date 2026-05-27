@@ -540,9 +540,11 @@ export const PROJECTS: Project[] = [
         media: [{ type: 'image', src: jpg('63aOXKIxowYxm2ZkN1iAs800E', 2000) }],
         layout: { type: 'uniform', cols: 1, aspect: '16/9' },
       },
-      // 3-8. CAROUSELS — six horizontally-scrolling carousels of phone-format
-      //      vertical posts. Mirrors the live site's structure where each
-      //      group of 8 posts becomes its own scrubbable carousel.
+      // 3-5. CAROUSELS — three merged carousels combining color-matched
+      //      campaign sets (live site had 6 carousels; these merge the
+      //      paired sets that share the same color palette).
+      //
+      // Carousel 1: sets 1 + 4 merged (16 images)
       {
         title: '',
         media: [
@@ -554,38 +556,6 @@ export const PROJECTS: Project[] = [
           { type: 'image', src: img('xULBx27t9CKcxctPJyrnOlQmZs', 800) },
           { type: 'image', src: img('dYZN9PqZAH7rsAjoNfm0X3Hy31s', 800) },
           { type: 'image', src: img('1L08UResr99bfGx0dyyscmyJSQ', 800) },
-        ],
-        layout: { type: 'carousel', aspect: '9/16', visible: 4 },
-      },
-      {
-        title: '',
-        media: [
-          { type: 'image', src: img('CpK6sL4Ca8n0g1rDyovBAbI7M4', 800) },
-          { type: 'image', src: img('vNUDzO04xvQcoZ9krMjzUziqKw', 800) },
-          { type: 'image', src: img('GTaoryMjDqdt31bStBwjD1VNDk', 800) },
-          { type: 'image', src: img('Ix9O7siEQORLQAOyXkyevV4pQ', 800) },
-          { type: 'image', src: img('lsqIP4Lmt9l3Aff7VWi3m2yfQUk', 800) },
-          { type: 'image', src: img('A8EahCbmUoBL3FSikxxGMmScgYM', 800) },
-        ],
-        layout: { type: 'carousel', aspect: '9/16', visible: 4 },
-      },
-      {
-        title: '',
-        media: [
-          { type: 'image', src: img('FaBFN1wAQD4SBQtyw4qBlTm9Vug', 800) },
-          { type: 'image', src: img('LRzQBS1vj7Nk6N8NLk4DSVSDn8', 800) },
-          { type: 'image', src: img('dcw5lrjVDnbGdfipQrRzEMWCM', 800) },
-          { type: 'image', src: img('BJIBErSrjVqsJvO2oiPEZH3VVEY', 800) },
-          { type: 'image', src: img('SAHMpheWMzMBJzFuYI2tV0KOQZg', 800) },
-          { type: 'image', src: img('kI7MFEv683x0Cqh63prYiop0pdQ', 800) },
-          { type: 'image', src: img('3zB4NalMAvLAnX4J7ij9b8HA', 800) },
-          { type: 'image', src: img('KfcTXKzUHayaCDqEkz6XZwM3d4', 800) },
-        ],
-        layout: { type: 'carousel', aspect: '9/16', visible: 4 },
-      },
-      {
-        title: '',
-        media: [
           { type: 'image', src: img('DTFgtKaf4W0ASJj3wRA6M0SAO2g', 800) },
           { type: 'image', src: img('RM0qw0GFu2HlsXykQ0S9SN817Y0', 800) },
           { type: 'image', src: img('4m7nvTUPJ5Peaoz12wByOsoPCpI', 800) },
@@ -597,9 +567,16 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'carousel', aspect: '9/16', visible: 4 },
       },
+      // Carousel 2: sets 2 + 5 merged (13 images)
       {
         title: '',
         media: [
+          { type: 'image', src: img('CpK6sL4Ca8n0g1rDyovBAbI7M4', 800) },
+          { type: 'image', src: img('vNUDzO04xvQcoZ9krMjzUziqKw', 800) },
+          { type: 'image', src: img('GTaoryMjDqdt31bStBwjD1VNDk', 800) },
+          { type: 'image', src: img('Ix9O7siEQORLQAOyXkyevV4pQ', 800) },
+          { type: 'image', src: img('lsqIP4Lmt9l3Aff7VWi3m2yfQUk', 800) },
+          { type: 'image', src: img('A8EahCbmUoBL3FSikxxGMmScgYM', 800) },
           { type: 'image', src: img('n50FkjKb5qEuOIoSihuzXUug9c', 800) },
           { type: 'image', src: img('PgLX3uOS9zFNRWIqAO3eKdOjDKQ', 800) },
           { type: 'image', src: img('U9yieMsonoNFbXxxRhdDD3nJU8', 800) },
@@ -610,9 +587,18 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'carousel', aspect: '9/16', visible: 4 },
       },
+      // Carousel 3: sets 3 + 6 merged (16 images)
       {
         title: '',
         media: [
+          { type: 'image', src: img('FaBFN1wAQD4SBQtyw4qBlTm9Vug', 800) },
+          { type: 'image', src: img('LRzQBS1vj7Nk6N8NLk4DSVSDn8', 800) },
+          { type: 'image', src: img('dcw5lrjVDnbGdfipQrRzEMWCM', 800) },
+          { type: 'image', src: img('BJIBErSrjVqsJvO2oiPEZH3VVEY', 800) },
+          { type: 'image', src: img('SAHMpheWMzMBJzFuYI2tV0KOQZg', 800) },
+          { type: 'image', src: img('kI7MFEv683x0Cqh63prYiop0pdQ', 800) },
+          { type: 'image', src: img('3zB4NalMAvLAnX4J7ij9b8HA', 800) },
+          { type: 'image', src: img('KfcTXKzUHayaCDqEkz6XZwM3d4', 800) },
           { type: 'image', src: img('xy2xZpnFgQQHFiIGVmxJrQYYfl0', 800) },
           { type: 'image', src: img('Kw7ngQ5sLaXnk71XhDg8wJrDbLg', 800) },
           { type: 'image', src: img('nCMHVbIk2Zmwp5NtxYsW2KOdou0', 800) },
