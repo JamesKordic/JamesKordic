@@ -60,7 +60,7 @@ export default function AboutPage() {
        *  Simplified to just the two CTAs that fit an about page: contact
        *  and résumé. Removed Play/Shuffle (those are discovery actions
        *  and discovery sections have been removed from this page). */}
-      <section className="px-5 lg:px-8 pt-2 pb-10 flex items-center gap-5 flex-wrap">
+      <section className="px-5 lg:px-8 pt-6 lg:pt-10 pb-10 flex items-center gap-5 flex-wrap">
         <a
           href={`mailto:${T.contact.email}`}
           className="font-bold text-[13px] tracking-[0.05em] uppercase bg-gradient-to-br from-accent via-cyan to-magenta text-accent-ink rounded-[30px] px-[24px] py-[13px] hover:scale-[1.05] transition-transform shadow-[0_6px_20px_-6px_rgba(200,241,53,0.4)]"
