@@ -169,9 +169,9 @@ export const PROJECTS: Project[] = [
           "Instagram Reels created for Guns N' Roses, featuring dynamic visuals and music-driven edits to promote tours, music, and fan engagement.",
         // 3 vertical Reels — keep them small, 3 across
         media: [
-          { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'), aspect: '9/16' },
-          { type: 'video', src: vid('c5CmANQj9sWEtQAUdOy0dVCRan8'), aspect: '9/16' },
-          { type: 'video', src: vid('m4aBld36mXRoGXa41tRbBPqFMs'), aspect: '9/16' },
+          { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'), aspect: '9/16', poster: '/posters/TAsErfe3Mav2ZPK82B8hoA7HANs.jpg'},
+          { type: 'video', src: vid('c5CmANQj9sWEtQAUdOy0dVCRan8'), aspect: '9/16', poster: '/posters/c5CmANQj9sWEtQAUdOy0dVCRan8.jpg' },
+          { type: 'video', src: vid('m4aBld36mXRoGXa41tRbBPqFMs'), aspect: '9/16', poster: '/posters/m4aBld36mXRoGXa41tRbBPqFMs.jpg' },
         ],
         layout: { type: 'uniform', cols: 3, aspect: '9/16' },
       },
