@@ -361,7 +361,6 @@ function CarouselLayout({
        *  scroll instead of moving the carousel sideways. */}
       <div
         ref={trackRef}
-        data-lenis-prevent
         className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 [&::-webkit-scrollbar]:hidden"
         style={{ scrollbarWidth: 'none' }}
       >
