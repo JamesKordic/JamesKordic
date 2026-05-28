@@ -353,9 +353,15 @@ function CarouselLayout({
     <div className="relative">
       {/* Scroll track — overflow-x-auto with snap. `[&::-webkit-scrollbar]:hidden`
        *  hides the native scrollbar in WebKit; `scrollbar-width: none` does
-       *  the same for Firefox via inline style. */}
+       *  the same for Firefox via inline style.
+       *
+       *  `data-lenis-prevent` opts this element out of the page-level Lenis
+       *  smooth scroll on desktop — without it, horizontal trackpad swipes
+       *  here would get intercepted by Lenis and try to drive vertical page
+       *  scroll instead of moving the carousel sideways. */}
       <div
         ref={trackRef}
+        data-lenis-prevent
         className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 [&::-webkit-scrollbar]:hidden"
         style={{ scrollbarWidth: 'none' }}
       >
