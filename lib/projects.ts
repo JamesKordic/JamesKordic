@@ -181,7 +181,14 @@ export const PROJECTS: Project[] = [
         context:
           'Promotional video created for Killphonic Records to showcase Heart of Gold: The Songs of Neil Young Vol. 1. The video highlights featured artists and promotes pre-order availability across multiple digital platforms.',
         // Single horizontal promo video — full width 16:9
-        media: [{ type: 'video', src: vid('1bkwSiwMean5Ugrcj5THWu5rK8c'), aspect: '16/9' }],
+        media: [
+          {
+            type: 'video',
+            src: vid('1bkwSiwMean5Ugrcj5THWu5rK8c'),
+            aspect: '16/9',
+            poster: '/posters/syndicate-killphonic.jpg',
+          },
+        ],
         layout: { type: 'uniform', cols: 1, aspect: '16/9' },
       },
       {
