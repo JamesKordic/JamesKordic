@@ -93,7 +93,7 @@ function PageTile({ entry, size }: { entry: PageEntry; size: number }) {
 export function PlayerBar() {
   const router = useRouter();
   const pathname = usePathname();
-  const { state, togglePlay, toggleShuffle, toggleRepeat, seek, setVol, toggleLike, playFrom } =
+  const { state, togglePlay, toggleShuffle, toggleRepeat, seek, setVol, playFrom } =
     usePlayer();
   const barRef = useRef<HTMLDivElement>(null);
   const volRef = useRef<HTMLDivElement>(null);
@@ -179,7 +179,6 @@ export function PlayerBar() {
     setVol((e.clientX - r.left) / r.width);
   };
 
-  const liked = !!state.liked[state.id];
 
   return (
     /* PlayerBar layout
@@ -232,20 +231,7 @@ export function PlayerBar() {
             {project.tags.join(' · ')}
           </div>
         </div>
-        {/* Like — hidden on mobile to save space; available on project page */}
-        <button
-          onClick={() => toggleLike()}
-          className={`hidden sm:block transition-transform hover:scale-[1.15] flex-none ${
-            liked ? 'text-magenta' : 'text-muted'
-          }`}
-          aria-label="Like"
-        >
-          <HeartIcon
-            className="w-[18px] h-[18px]"
-            fill={liked ? 'currentColor' : 'none'}
-            stroke={liked ? 'currentColor' : 'currentColor'}
-          />
-        </button>
+        
       </div>
 
       {/* Controls */}

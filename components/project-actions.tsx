@@ -4,8 +4,7 @@ import { usePlayer } from '@/lib/player-context';
 import { PlayIcon, HeartIcon } from './icons';
 
 export function ProjectActions({ id }: { id: string }) {
-  const { playFrom, toggleLike, state } = usePlayer();
-  const liked = !!state.liked[id];
+  const { playFrom, state } = usePlayer();
 
   return (
     <div className="flex items-center gap-6 py-[22px] pb-[14px]">
@@ -16,19 +15,7 @@ export function ProjectActions({ id }: { id: string }) {
       >
         <PlayIcon className="w-[25px] h-[25px] fill-accent-ink" />
       </button>
-      <button
-        onClick={() => toggleLike(id)}
-        className={`transition-all hover:scale-[1.08] ${
-          liked ? 'text-magenta' : 'text-muted hover:text-text'
-        }`}
-        aria-label="Like"
-      >
-        <HeartIcon
-          className="w-[30px] h-[30px]"
-          fill={liked ? 'currentColor' : 'none'}
-          strokeWidth="1.7"
-        />
-      </button>
+     
     </div>
   );
 }
