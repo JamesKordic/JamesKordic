@@ -24,7 +24,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   // Determine title for top bar based on route
   let title = ARTIST;
-  let showPlay = true;
+  let showPlay = false;
   let currentProjectSlug: string | null = null;
   if (pathname?.startsWith('/work/')) {
     const slug = pathname.replace('/work/', '');

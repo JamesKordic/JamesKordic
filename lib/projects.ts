@@ -130,7 +130,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 262,
-    blurb: 'Music & entertainment marketing',
+    blurb: 'Music & Entertainment Marketing',
     desc: "An exploration of music and entertainment marketing through collaborative campaign work at The Syndicate, this internship experience spanned projects across indie and major label artists as well as TV, film, and comedy. Responsibilities included creating digital assets, tour and promotional visuals, and event materials, translating each artist or project's unique voice into impactful, audience-driven design and storytelling campaigns.",
     brief: {
       eyebrow: 'The Brief',
