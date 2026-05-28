@@ -65,9 +65,21 @@ export function AppShell({ children }: { children: ReactNode }) {
 
     const container = viewRef.current;
     if (!container) return;
+    /* The actual content element is the inner `.view-anim` div that
+     * holds the page's children. We MUST pass this as `content` (not
+     * leave it defaulting to the wrapper) because Lenis uses a
+     * ResizeObserver on `content` to detect height changes. A scroll
+     * container's outer element doesn't resize when content grows —
+     * only its scrollHeight does — so observing it instead of the
+     * inner content would leave Lenis stuck on the stale max-scroll
+     * distance from initial mount, bounding scroll at the wrong point
+     * once images/fonts/etc finish loading and push the page taller. */
+    const content = container.firstElementChild as HTMLElement | null;
+    if (!content) return;
 
     const lenis = new Lenis({
       wrapper: container,
+      content,
       // Lerp = how much of the remaining distance to traverse each frame.
       // 0.1 = a noticeable but quick easing. Lower = more drift, higher =
       // closer to native instant feel.
@@ -102,11 +114,18 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   // Reset scroll when route changes. Route via Lenis when it's active
   // so the smooth scroll loop knows what's going on; otherwise fall
-  // back to native scrollTop assignment (mobile path).
+  // back to native scrollTop assignment (mobile path). Also call
+  // lenis.resize() after the route swap so the new page's content
+  // height is picked up — belt and suspenders alongside the
+  // ResizeObserver, since the new content may render in a single
+  // synchronous render tick before RO would fire.
   useEffect(() => {
     const lenis = lenisRef.current;
     if (lenis) {
       lenis.scrollTo(0, { immediate: true });
+      // Defer one tick so the new children have mounted and laid out
+      // before we re-measure.
+      requestAnimationFrame(() => lenis.resize());
     } else if (viewRef.current) {
       viewRef.current.scrollTop = 0;
     }
