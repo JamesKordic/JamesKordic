@@ -428,7 +428,7 @@ export const PROJECTS: Project[] = [
         context: 'The visualizer bars existed as static elements in the brand sheet — but the whole point of a visualizer is movement. They needed to be brought to life as motion stings the festival could use across screens.',
         role: 'Animated the visualizer pattern as an audio-reactive system, tuned the timing to feel rhythmic without being literally beat-matched (the music it accompanies will vary).',
         body: "A series of animated visuals created to extend the WWIMF brand into motion. These animations bring the festival's identity to life through audio-reactive elements and dynamic transitions, mirroring the energy and interactivity at the heart of the event. Designed for use across screens, stage visuals, and social media, these animations reinforce the immersive nature of the festival. Visual motifs from the branding system, like the waveform-inspired pattern and bold color gradients, are animated to pulse, shift, and respond, echoing the rhythm of live music and crowd movement.",
-        media: [{ type: 'video', src: vid('Pl1quVl6bu6Uo42E8OOl05tDSjc'), aspect: '16/9' }],
+        media: [{ type: 'video', src: vid('Pl1quVl6bu6Uo42E8OOl05tDSjc'), aspect: '16/9', poster: '/posters/Pl1quVl6bu6Uo42E8OOl05tDSjc.jpg'  }],
         layout: {
           type: 'uniform',
           cols: 1,
@@ -769,11 +769,11 @@ export const PROJECTS: Project[] = [
           "A series of digital assets created for Consensus by CoinDesk — motion pieces promoting speakers and themes, photographic stills grounding the event in real space, and partner-brand cards positioning sponsors against the Consensus identity. The full set built anticipation across the weeks leading up to the conference.",
         // 5 conference promo videos at 16:9
         media: [
-          { type: 'video', src: vid('FGmZ7d1wogIeSBmBUxRHuAypA'), aspect: '16/9' },
-          { type: 'video', src: vid('EHi0hyhlfrDou6eTi3ve8ZqNehQ'), aspect: '16/9' },
-          { type: 'video', src: vid('JXI1YO5u54PI8cgTPim0MIRPWw'), aspect: '16/9' },
-          { type: 'video', src: vid('TmWj5VaGCOyES6xO7LWChbAUg'), aspect: '16/9' },
-          { type: 'video', src: vid('gew2hxLBzCIYTzlbMQidZYIcPig'), aspect: '16/9' },
+          { type: 'video', src: vid('FGmZ7d1wogIeSBmBUxRHuAypA'), aspect: '16/9', poster: '/posters/FGmZ7d1wogIeSBmBUxRHuAypA.jpg' },
+          { type: 'video', src: vid('EHi0hyhlfrDou6eTi3ve8ZqNehQ'), aspect: '16/9', poster: '/posters/EHi0hyhlfrDou6eTi3ve8ZqNehQ.jpg' },
+          { type: 'video', src: vid('JXI1YO5u54PI8cgTPim0MIRPWw'), aspect: '16/9', poster: '/posters/JXI1YO5u54PI8cgTPim0MIRPWw.jpg' },
+          { type: 'video', src: vid('TmWj5VaGCOyES6xO7LWChbAUg'), aspect: '16/9', poster: '/posters/TmWj5VaGCOyES6xO7LWChbAUg.jpg' },
+          { type: 'video', src: vid('gew2hxLBzCIYTzlbMQidZYIcPig'), aspect: '16/9', poster: '/posters/gew2hxLBzCIYTzlbMQidZYIcPig.jpg' },
         ],
         layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
@@ -850,10 +850,10 @@ export const PROJECTS: Project[] = [
           "A promotional design campaign supporting the launch of FX's new series Adults. The system translated the show's tone and visual identity into cohesive assets across trailers, character key art, social, posters, out-of-home placements, and a fan sticker pack — every surface a show launch touches.",
         // 4 series trailers at 16:9 — 2 across
         media: [
-          { type: 'video', src: vid('Yw37NLO1xKxuLc3BFLZZzWkgQc'), aspect: '16/9' },
-          { type: 'video', src: vid('XaZegHDXqqcBixPkXhxX95UQzI'), aspect: '16/9' },
-          { type: 'video', src: vid('GloFwqsAum9l3DuM2l44DzuPqcQ'), aspect: '16/9' },
-          { type: 'video', src: vid('UVgNZoOfRtVKhXN11dlMQJP3Ck'), aspect: '16/9' },
+          { type: 'video', src: vid('Yw37NLO1xKxuLc3BFLZZzWkgQc'), aspect: '16/9', poster: '/posters/Yw37NLO1xKxuLc3BFLZZzWkgQc.jpg' },
+          { type: 'video', src: vid('XaZegHDXqqcBixPkXhxX95UQzI'), aspect: '16/9', poster: '/posters/XaZegHDXqqcBixPkXhxX95UQzI.jpg' },
+          { type: 'video', src: vid('GloFwqsAum9l3DuM2l44DzuPqcQ'), aspect: '16/9', poster: '/posters/GloFwqsAum9l3DuM2l44DzuPqcQ.jpg' },
+          { type: 'video', src: vid('UVgNZoOfRtVKhXN11dlMQJP3Ck'), aspect: '16/9', poster: '/posters/UVgNZoOfRtVKhXN11dlMQJP3Ck.jpg' },
         ],
         layout: { type: 'uniform', cols: 2, aspect: '16/9' },
       },
@@ -1090,7 +1090,7 @@ export const PROJECTS: Project[] = [
         fieldNote: "A launch video isn't a separate deliverable — it's a compression of everything else you made. Made it last so it could pull from everywhere.",
         body: 'Short-form video introducing the Voltage brand with bold energy — 3D cans, kinetic typography, and a pulsing electronic soundtrack.',
         // Promotional video at 16:9
-        media: [{ type: 'video', src: vid('lt6cuzs8UMkuQy4AWDxo3d5Djpo'), aspect: '16/9' }],
+        media: [{ type: 'video', src: vid('lt6cuzs8UMkuQy4AWDxo3d5Djpo'), aspect: '16/9', poster: '/posters/lt6cuzs8UMkuQy4AWDxo3d5Djpo.jpg' }],
         layout: { type: 'uniform', cols: 1, aspect: '16/9' },
       },
     ],
