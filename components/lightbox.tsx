@@ -12,15 +12,29 @@ export function Lightbox() {
 
   return (
     <div
-      className="fixed inset-0 bg-[rgba(0,0,0,0.94)] z-[200] flex items-center justify-center p-10 animate-fadein"
+      className="fixed inset-0 bg-[rgba(0,0,0,0.94)] z-[200] flex items-center justify-center p-4 sm:p-10 animate-fadein"
       onClick={close}
     >
+      {/* Close button — fixed positioning, lifted to z-[210] so it always
+       *  sits above the image content (which lives in a sibling div at
+       *  the parent's stacking context). On mobile, tall vertical images
+       *  fill the screen at max-h-[90vh] / max-w-[96vw] and would
+       *  otherwise render on top of any controls that don't have a
+       *  higher z-index than the image.
+       *
+       *  Background uses a denser fill (40% white + backdrop-blur) and a
+       *  hairline border so the button stays legible against bright OR
+       *  dark image content — both can show through the lightbox dimmer. */}
       <button
         onClick={(e) => {
           e.stopPropagation();
           close();
         }}
-        className="fixed top-6 right-7 w-11 h-11 rounded-full bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)] flex items-center justify-center text-white text-2xl transition-colors"
+        className="fixed top-4 right-4 sm:top-6 sm:right-7 z-[210] w-11 h-11 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md ring-1 ring-white/30 flex items-center justify-center text-white text-2xl leading-none transition-colors shadow-[0_4px_14px_-2px_rgba(0,0,0,0.5)]"
+        style={{
+          top: 'max(1rem, env(safe-area-inset-top))',
+          right: 'max(1rem, env(safe-area-inset-right))',
+        }}
         aria-label="Close"
       >
         ×
@@ -33,7 +47,7 @@ export function Lightbox() {
               e.stopPropagation();
               step(-1);
             }}
-            className="fixed top-1/2 left-6 -translate-y-1/2 w-12 h-12 rounded-full bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)] flex items-center justify-center text-white transition-colors"
+            className="fixed top-1/2 left-3 sm:left-6 -translate-y-1/2 z-[210] w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md ring-1 ring-white/30 flex items-center justify-center text-white transition-colors shadow-[0_4px_14px_-2px_rgba(0,0,0,0.5)]"
             aria-label="Previous"
           >
             <BackIcon className="w-[22px] h-[22px]" />
@@ -43,7 +57,7 @@ export function Lightbox() {
               e.stopPropagation();
               step(1);
             }}
-            className="fixed top-1/2 right-6 -translate-y-1/2 w-12 h-12 rounded-full bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)] flex items-center justify-center text-white transition-colors"
+            className="fixed top-1/2 right-3 sm:right-6 -translate-y-1/2 z-[210] w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md ring-1 ring-white/30 flex items-center justify-center text-white transition-colors shadow-[0_4px_14px_-2px_rgba(0,0,0,0.5)]"
             aria-label="Next"
           >
             <ForwardIcon className="w-[22px] h-[22px]" />
@@ -74,7 +88,7 @@ export function Lightbox() {
         ) : null}
       </div>
 
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 text-[#aaa] text-[13px] tabular-nums">
+      <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-[210] text-white/70 text-[12px] sm:text-[13px] tabular-nums px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md">
         {index + 1} / {items.length}
       </div>
     </div>
