@@ -136,13 +136,13 @@ export const PROJECTS: Project[] = [
       eyebrow: 'The Brief',
       lead: "The Syndicate represents artists and entertainment brands — its design team translates each one's distinct identity into campaign-ready assets at scroll velocity.",
       body: [
-        "Over twelve months I worked across five concurrent client tracks: tour and release campaigns for Guns N' Roses, a promotional video for Killphonic Records, comedy social for Craig Ferguson, sync-licensing posts for Last Gang Records, and the full visual identity rollout for Indie Week's conference.",
+        "Over twelve months I worked across multiple concurrent client tracks: tour and release campaigns for Guns N' Roses, a promotional video for Killphonic Records, comedy social for Craig Ferguson, sync-licensing posts for Last Gang Records, and the full visual identity rollout for Indie Week's conference.",
         'Core problem: no two clients shared audience, tone, or format. A Guns N\' Roses Reel and a Last Gang sync post needed to feel like they came from entirely different worlds — while both being produced by the same person, in the same week, to a shared production schedule.',
       ],
     },
     approach: {
       eyebrow: 'The Approach',
-      intro: 'To stay fast across five voices, I built a workflow that front-loaded reference and brand intake before opening a design file. Every client got the same five-step treatment, scaled to the size of the deliverable.',
+      intro: 'To stay fast across many different voices, I built a workflow that front-loaded reference and brand intake before opening a design file. Every client got the same five-step treatment, scaled to the size of the deliverable.',
       steps: [
         { label: 'Step 01', title: 'Intake', body: 'Brief, audience, surface, success metric — written down before anything else.' },
         { label: 'Step 02', title: 'Reference', body: "Fan-facing mood, not designer-facing. What does the artist's audience already love?" },
@@ -155,10 +155,10 @@ export const PROJECTS: Project[] = [
       eyebrow: 'The Recap',
       headline: 'A year of shipping, not just designing.',
       stats: [
-        { value: '~50', label: 'Assets shipped' },
-        { value: '05', label: 'Concurrent clients' },
+        { value: '~50+', label: 'Assets shipped' },
+        { value: '05+', label: 'Concurrent clients' },
         { value: '12', label: 'Months', unit: 'MO' },
-        { value: '02', label: 'Average turnaround', unit: 'WK' },
+        { value: '100K+', label: 'Impressions Generated' },
       ],
     },
     sections: [
@@ -277,7 +277,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2025',
     len: 268,
-    blurb: 'Capstone — branding & interactive',
+    blurb: 'Interactive music festival concept',
     desc: "An exploration of how design can support a more immersive and inclusive global festival where music, visual art, and innovation converge with guest engagement. Guests become active contributors through immersive environments, interactive stages, and participatory technology.\n\n| Presented at *Fusion: 2025 RIT Graphic Design Capstone*",
     brief: {
       eyebrow: 'The Brief',
@@ -302,8 +302,8 @@ export const PROJECTS: Project[] = [
       eyebrow: 'The Recap',
       headline: "A festival that doesn't exist — built like it does.",
       stats: [
-        { value: '10', label: 'Brand artifacts' },
-        { value: '60', label: 'Page art book', unit: 'PP' },
+        { value: '1', label: 'Designed Festival' },
+        { value: '28', label: 'Page art book', unit: 'PP' },
         { value: '01', label: 'Capstone show' },
         { value: '12', label: 'Months of build', unit: 'MO' },
       ],
@@ -512,9 +512,9 @@ export const PROJECTS: Project[] = [
       eyebrow: 'The Recap',
       headline: 'Roughly 50 artists, one kit, one voice.',
       stats: [
-        { value: '~50', label: 'Social assets shipped' },
-        { value: '06', label: 'Campaign drops' },
-        { value: '01', label: 'Motion piece' },
+        { value: '~50+', label: 'Social assets shipped' },
+        { value: '05+', label: 'Campaign drops' },
+        { value: '100+', label: 'Tacos Consumed' },
         { value: '12', label: 'Months in market', unit: 'MO' },
       ],
     },
@@ -659,8 +659,8 @@ export const PROJECTS: Project[] = [
       stats: [
         { value: '10+', label: 'Artist campaigns' },
         { value: '01', label: 'Animated promo' },
-        { value: '02', label: 'Banner systems' },
-        { value: '04', label: 'Surface formats' },
+        { value: '02', label: 'Carousel systems' },
+        { value: '04', label: 'Thanksgiving meals' },
       ],
     },
     sections: [
@@ -836,10 +836,10 @@ export const PROJECTS: Project[] = [
       eyebrow: 'The Recap',
       headline: 'One show, six surfaces, one voice.',
       stats: [
-        { value: '04', label: 'Trailers' },
+        { value: '04', label: 'Animated pieces' },
         { value: '12', label: 'Character + social posts' },
-        { value: '04', label: 'Posters' },
-        { value: '06', label: 'Asset families' },
+        { value: '04', label: 'Menus + posters' },
+        { value: '01', label: 'Show release' },
       ],
     },
     sections: [
