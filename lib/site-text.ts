@@ -46,7 +46,7 @@ export const SITE_TEXT = {
     /** Location string used in About metadata row */
     location: 'New York, NY',
     /** Founded/established year shown in About metadata row */
-    established: 'Est. 2024',
+    established: 'Est. 2001',
   },
 
   /* ---- HOME PAGE ---- */
