@@ -248,7 +248,7 @@ export const PROJECTS: Project[] = [
               aspect: '1/2',
               media: [
                 { type: 'image', src: img('LoQPSGaYQwziEdo7ydNpikCqoQ', 800) },
-                { type: 'image', src: img('oqbLVKzEb16nGxMiUuEI1Fo1U0', 800) },
+                { type: 'image', src: '/projects/the-syndicate/IndieWeek-Sign.png',  },
                 { type: 'image', src: img('bpHcCcSIeuecSinBTOQMj2IHLm0', 800) },
               ],
             },
