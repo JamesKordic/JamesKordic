@@ -260,7 +260,7 @@ export const SITE_TEXT = {
     instagramUrl: 'https://www.instagram.com/jameskordic/',
     /** Resume — Google Drive shareable link */
     resumeUrl:
-      'https://drive.google.com/file/d/10fG8m5VriZOOSDyXZnowGsIqEZaRUp6Y/view',
+      'https://drive.google.com/file/d/1P7Eqjmen-XEUlW7eNgpwFKTb0ITSQ1ty/view?usp=sharing',
   },
 
   /* ---- FOOTER ---- */
