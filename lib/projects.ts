@@ -257,7 +257,7 @@ export const PROJECTS: Project[] = [
               aspect: '2/1',
               media: [
                 { type: 'image', src: img('uF0VkAU6tFzbjXtqEMY4iFihFm8', 2000) },
-                { type: 'image', src: img('public/projects/the-syndicate/Indiemock.png', ) },
+                { type: 'image', src: img('/projects/the-syndicate/Indiemock.png', ) },
               ],
             },
           ],
