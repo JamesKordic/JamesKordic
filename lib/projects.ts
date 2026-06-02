@@ -366,9 +366,9 @@ export const PROJECTS: Project[] = [
           { type: 'image', src: '/projects/wwimf/merch-wristband-new.png' },
          { type: 'image', src: '/projects/wwimf/Totebag-cooler.png',  },
           { type: 'image', src: img('SrsSN7QpTyN8chUaACfrkQqLA', 1800) },
-          { type: 'image', src: '/projects/wwimf/wristband_on_someones_wrist._Ensure_202606021846.png',  },
-          { type: 'image', src: '/projects/wwimf/Totebag_on_persons_arm._Ensure_202606021843.png',  },
-          { type: 'image', src: '/projects/wwimf/person_wearing_back_of_shirt,_202606021931.png',  },
+          { type: 'image', src: '/projects/wwimf/wristband_on_someones_wrist.png',  },
+          { type: 'image', src: '/projects/wwimf/Totebag_on_persons_arm.png',  },
+          { type: 'image', src: '/projects/wwimf/person_wearing_back_of_shirt.png',  },
           
         ],
         layout: { type: 'uniform', cols: 3, aspect: '3/2' },
