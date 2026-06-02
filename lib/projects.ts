@@ -364,8 +364,12 @@ export const PROJECTS: Project[] = [
         body: "WWIMF's merchandise extends the festival's identity into wearable and collectible pieces that blend function, fashion, and interactivity. This section showcases examples including a tote bag, shirt, and festival wristband — each designed to reflect the bold, immersive aesthetic of the event.",
         media: [
           { type: 'image', src: '/projects/wwimf/merch-wristband-new.png' },
-          { type: 'image', src: img('xElnq0fSkrSMcOxT7PsQvfu0FbE', 1800) },
+         { type: 'image', src: '/projects/the-syndicate/Totebag-cooler.png',  },
           { type: 'image', src: img('SrsSN7QpTyN8chUaACfrkQqLA', 1800) },
+          { type: 'image', src: '/projects/the-syndicate/wristband_on_someones_wrist._Ensure_202606021846.png',  },
+          { type: 'image', src: '/projects/the-syndicate/Totebag_on_persons_arm._Ensure_202606021843.png',  },
+          { type: 'image', src: '/projects/the-syndicate/person_wearing_back_of_shirt,_202606021931.png',  },
+          
         ],
         layout: { type: 'uniform', cols: 3, aspect: '3/2' },
       },
