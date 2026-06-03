@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { PROJECTS, POPULAR, getProject } from '@/lib/projects';
 import { usePlayer } from '@/lib/player-context';
-import { AlbumCard, FeaturedCard } from '@/components/album-card';
+import { AlbumCard, FeaturedCard, ComingSoonCard } from '@/components/album-card';
 import { PlayIcon, ShuffleIcon, VerifiedIcon } from '@/components/icons';
 import { SITE_TEXT } from '@/lib/site-text';
 
@@ -111,13 +111,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SIDE A — PROFESSIONAL CLIENT WORK */}
+      {/* SIDE A — PROFESSIONAL CLIENT WORK
+       *  extraCards appends a Coming Soon placeholder card to the end of
+       *  the grid. It's not a real project (not in PROJECTS), so it
+       *  doesn't appear in featured, the sidebar library, search, or
+       *  the player bar — only here. */}
       <CatalogSide
         label={T.home.sideALabel}
         title={T.home.sideAHeading}
         sub={T.home.sideASubheading}
         projects={sideA}
         theme="magenta"
+        extraCards={<ComingSoonCard i={sideA.length} />}
       />
 
       {/* SIDE B — PERSONAL WORK */}
@@ -304,12 +309,18 @@ function CatalogSide({
   sub,
   projects,
   theme,
+  extraCards,
 }: {
   label: string;
   title: string;
   sub: string;
   projects: typeof PROJECTS;
   theme: 'magenta' | 'cyan';
+  /** Optional non-project content rendered AFTER all AlbumCards in the
+   *  grid — used to inject placeholder cards like "Coming Soon (under
+   *  NDA)" that aren't real catalog entries but should occupy a slot in
+   *  the visual rhythm of the row. */
+  extraCards?: React.ReactNode;
 }) {
   const chipGradient =
     theme === 'magenta'
@@ -343,6 +354,7 @@ function CatalogSide({
         {projects.map((p, i) => (
           <AlbumCard key={p.id} p={p} i={i} />
         ))}
+        {extraCards}
       </div>
     </section>
   );
