@@ -235,11 +235,15 @@ export function ComingSoonCard({ i = 0 }: { i?: number }) {
             </div>
           </div>
 
-          {/* Hover reveal overlay — fades in to fully cover the cover
-           *  area with the NDA explanation. */}
-          <div className="absolute inset-0 flex items-center justify-center text-center p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-bg/92 backdrop-blur-[3px]">
+          {/* Hover reveal overlay — fully opaque so the message reads
+           *  cleanly. Earlier this was 92% with a 3px blur, but the
+           *  bright lock-circle gradient and the white THE·TEAM logo
+           *  underneath were bleeding through the semi-transparent
+           *  layer and competing with both the gradient eyebrow and
+           *  the body text. Solid bg eliminates the contrast fight. */}
+          <div className="absolute inset-0 flex items-center justify-center text-center p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-bg">
             <div>
-              <div className="text-[10px] font-bold tracking-[0.18em] uppercase gradient-text-static mb-2.5">
+              <div className="text-[11px] font-bold tracking-[0.18em] uppercase gradient-text-static mb-3">
                 Coming Soon
               </div>
               <p className="text-[13px] font-medium leading-[1.5] text-text max-w-[90%] mx-auto">
