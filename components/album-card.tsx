@@ -175,17 +175,25 @@ export function ComingSoonCard({ i = 0 }: { i?: number }) {
 
   return (
     <div className="stagger" style={{ animationDelay: `${i * 55}ms` }}>
+      {/* The card itself is fundamentally non-interactive:
+       *   - no Link / no onClick / no router push
+       *   - no tabIndex so it's not in the keyboard focus order
+       *   - cursor-default so the mouse doesn't shift to a pointer
+       *   - no hover:bg-elev or focus ring — those affordances would
+       *     read as "this is clickable," which it isn't
+       * The hover reveal of the NDA message is purely a visual flourish
+       * for sighted users. The full message is also exposed via aria-label
+       * and the always-visible "Under NDA" badge / "TBA" tag / subtitle,
+       * so screen-reader and keyboard users still get the information. */}
       <div
         role="article"
         aria-label={`THE·TEAM. ${ndaMessage}`}
-        tabIndex={0}
-        className="group block bg-panel hover:bg-elev focus:bg-elev rounded-[10px] p-3 lg:p-4 cursor-default select-none relative outline-none focus:ring-2 focus:ring-magenta/40 transition-colors"
+        className="group block bg-panel rounded-[10px] p-3 lg:p-4 cursor-default select-none relative"
       >
-        {/* Cover — THE·TEAM logo as the backdrop with a lock badge
-         *  overlaid on top. The logo is rendered via next/image with
-         *  object-cover so it fills the square cleanly. The lock icon
-         *  sits centered above the logo with a soft dark scrim behind
-         *  it so it stays legible against the light logo background. */}
+        {/* Cover — THE·TEAM logo on a dark backdrop. The lock and the
+         *  Under NDA badge are layered on top as gradient overlays so
+         *  they pop against the dark cover the same way the play button
+         *  and Side A label do elsewhere on the site. */}
         <div className="relative mb-4 rounded-md overflow-hidden shadow-[0_9px_22px_-8px_rgba(0,0,0,0.65)] aspect-square bg-panel-2">
           {/* The logo cover image */}
           <Image
@@ -196,38 +204,27 @@ export function ComingSoonCard({ i = 0 }: { i?: number }) {
             className="object-cover"
           />
 
-          {/* Soft darkening vignette — gives the lock icon enough
-           *  contrast against the light logo background without
-           *  overwhelming the brand image underneath. */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                'radial-gradient(circle at center, rgba(8,8,12,0.18) 0%, transparent 55%)',
-            }}
-            aria-hidden
-          />
-
-          {/* "Under NDA" badge in the corner. On a light background the
-           *  outlined-on-dark treatment from before would disappear, so
-           *  this version uses a solid dark pill with light text for
-           *  clear contrast. */}
-          <div className="absolute top-3 left-3 z-10 text-[10px] font-bold tracking-[0.18em] uppercase text-text px-2 py-1 rounded-sm bg-bg/85 backdrop-blur-sm">
+          {/* "Under NDA" badge — gradient pill matching the Side A
+           *  treatment (magenta → amber → accent, dark text). Gives the
+           *  card a strong identity-system tie-in: it reads as a piece
+           *  of the same visual language as the section headers. */}
+          <div className="absolute top-3 left-3 z-10 text-[10px] font-bold tracking-[0.18em] uppercase text-accent-ink px-2.5 py-1 rounded-sm bg-gradient-to-r from-magenta via-amber to-accent">
             Under NDA
           </div>
 
-          {/* Centered lock icon — dark fill so it stands out against the
-           *  light logo backdrop. Sized smaller than before since the
-           *  logo now carries the main visual identity; the lock is a
-           *  badge layered on top, not the focal point. */}
-          <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-focus:scale-110 pointer-events-none">
-            <div className="w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-full bg-bg/85 backdrop-blur-sm flex items-center justify-center shadow-[0_8px_20px_-6px_rgba(0,0,0,0.45)]">
+          {/* Centered lock icon — gradient circle matching the play
+           *  button treatment (accent → cyan → magenta) with a dark
+           *  lock fill inside. Same visual language as the hover
+           *  play affordance on real project cards, but locked in the
+           *  always-visible state instead of fading in. */}
+          <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 pointer-events-none">
+            <div className="w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-full bg-gradient-to-br from-accent via-cyan to-magenta flex items-center justify-center shadow-[0_8px_20px_-6px_rgba(0,0,0,0.45)]">
               <svg
                 viewBox="0 0 24 24"
-                className="w-8 h-8 lg:w-9 lg:h-9 text-text"
+                className="w-8 h-8 lg:w-9 lg:h-9 text-accent-ink"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="1.6"
+                strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
@@ -238,9 +235,9 @@ export function ComingSoonCard({ i = 0 }: { i?: number }) {
             </div>
           </div>
 
-          {/* Hover/focus reveal overlay — fades in to fully cover the
-           *  cover area with the NDA explanation. */}
-          <div className="absolute inset-0 flex items-center justify-center text-center p-5 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 bg-bg/92 backdrop-blur-[3px]">
+          {/* Hover reveal overlay — fades in to fully cover the cover
+           *  area with the NDA explanation. */}
+          <div className="absolute inset-0 flex items-center justify-center text-center p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-bg/92 backdrop-blur-[3px]">
             <div>
               <div className="text-[10px] font-bold tracking-[0.18em] uppercase gradient-text-static mb-2.5">
                 Coming Soon
