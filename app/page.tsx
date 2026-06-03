@@ -112,17 +112,18 @@ export default function HomePage() {
       </section>
 
       {/* SIDE A — PROFESSIONAL CLIENT WORK
-       *  extraCards appends a Coming Soon placeholder card to the end of
-       *  the grid. It's not a real project (not in PROJECTS), so it
-       *  doesn't appear in featured, the sidebar library, search, or
-       *  the player bar — only here. */}
+       *  extraCards prepends a Coming Soon placeholder card to the
+       *  front of the grid (sits before The Syndicate). It's not a
+       *  real project (not in PROJECTS), so it doesn't appear in
+       *  featured, the sidebar library, search, or the player bar —
+       *  only here. */}
       <CatalogSide
         label={T.home.sideALabel}
         title={T.home.sideAHeading}
         sub={T.home.sideASubheading}
         projects={sideA}
         theme="magenta"
-        extraCards={<ComingSoonCard i={sideA.length} />}
+        extraCards={<ComingSoonCard i={0} />}
       />
 
       {/* SIDE B — PERSONAL WORK */}
@@ -351,10 +352,15 @@ function CatalogSide({
         </div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 lg:gap-4">
-        {projects.map((p, i) => (
-          <AlbumCard key={p.id} p={p} i={i} />
-        ))}
+        {/* extraCards renders BEFORE the catalog so a "Coming Soon" or
+         *  similar placeholder leads the row instead of trailing it.
+         *  When present, real project cards bump their stagger index by
+         *  one so animations cascade from the extra card → projects in
+         *  visual order. */}
         {extraCards}
+        {projects.map((p, i) => (
+          <AlbumCard key={p.id} p={p} i={extraCards ? i + 1 : i} />
+        ))}
       </div>
     </section>
   );
