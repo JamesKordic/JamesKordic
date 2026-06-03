@@ -204,13 +204,7 @@ export function ComingSoonCard({ i = 0 }: { i?: number }) {
             className="object-cover"
           />
 
-          {/* "Under NDA" badge — gradient pill matching the Side A
-           *  treatment (magenta → amber → accent, dark text). Gives the
-           *  card a strong identity-system tie-in: it reads as a piece
-           *  of the same visual language as the section headers. */}
-          <div className="absolute top-3 left-3 z-10 text-[10px] font-bold tracking-[0.18em] uppercase text-accent-ink px-2.5 py-1 rounded-sm bg-gradient-to-r from-magenta via-amber to-accent">
-            Under NDA
-          </div>
+         
 
           {/* Centered lock icon — gradient circle matching the play
            *  button treatment (accent → cyan → magenta) with a dark
