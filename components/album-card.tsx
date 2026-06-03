@@ -171,7 +171,7 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
  *    readers announce it without needing to see the hover overlay.
  */
 export function ComingSoonCard({ i = 0 }: { i?: number }) {
-  const ndaMessage = 'This project is currently under NDA, coming soon!';
+  const ndaMessage = 'This project is currently under NDA.';
 
   return (
     <div className="stagger" style={{ animationDelay: `${i * 55}ms` }}>
@@ -261,7 +261,7 @@ export function ComingSoonCard({ i = 0 }: { i?: number }) {
           THE·TEAM
         </h3>
         <p className="text-[13.5px] text-muted-2 mt-1.5 leading-[1.45] line-clamp-2">
-          Currently under non-disclosure. Reveal coming soon.
+          Sports, Music, and Entertainment Marketing.
         </p>
         <div className="flex flex-wrap gap-1.5 mt-3">
           <span className="text-[10.5px] font-semibold tracking-[0.04em] uppercase bg-elev-hi text-muted px-2 py-1 rounded-sm">
