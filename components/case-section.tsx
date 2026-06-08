@@ -21,7 +21,7 @@ function colClasses(cols: 1 | 2 | 3 | 4): string {
     case 3:
       return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3';
     case 4:
-      return 'grid-cols-2 sm:grid-cols-2 md:grid-cols-4';
+      return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-4';
   }
 }
 
