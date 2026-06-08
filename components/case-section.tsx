@@ -76,19 +76,6 @@ export function CaseSection({
       {/* Section header — only renders when the section has a title or eyebrow */}
       {isTitled && (
         <div className="mb-8">
-          {/* Top bar: № + tag + title in a single row, like a chapter divider */}
-          <div className="flex items-baseline gap-4 mb-4 flex-wrap">
-            {projectNumber && (
-              <span className="font-mono text-[11px] font-bold tracking-[0.18em] uppercase">
-                <span className="gradient-text-static">№ {projectNumber}</span>
-              </span>
-            )}
-            {section.eyebrow && (
-              <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2">
-                {section.eyebrow}
-              </span>
-            )}
-          </div>
           {section.title && (
             <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4 max-w-3xl">
               {section.title}
@@ -104,22 +91,22 @@ export function CaseSection({
           {isCaseStudy && (section.context || section.role) && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-7 pt-6 border-t border-line max-w-4xl">
               {section.context && (
-              <div>
-                <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
-                  {SITE_TEXT.projectPage.sectionContextLabel}
+                <div>
+                  <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
+                    {SITE_TEXT.projectPage.sectionContextLabel}
+                  </div>
+                  <p className="text-[14.5px] leading-[1.6] text-text">{section.context}</p>
                 </div>
-                <p className="text-[14.5px] leading-[1.6] text-text">{section.context}</p>
-              </div>
-            )}
-            {section.role && (
-              <div>
-                <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
-                  {SITE_TEXT.projectPage.sectionRoleLabel}
+              )}
+              {section.role && (
+                <div>
+                  <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
+                    {SITE_TEXT.projectPage.sectionRoleLabel}
+                  </div>
+                  <p className="text-[14.5px] leading-[1.6] text-text">{section.role}</p>
                 </div>
-                <p className="text-[14.5px] leading-[1.6] text-text">{section.role}</p>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
           )}
         </div>
       )}
