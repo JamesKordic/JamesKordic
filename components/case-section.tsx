@@ -75,20 +75,7 @@ export function CaseSection({
     <section className="py-10 lg:py-14 border-b border-line last:border-b-0">
       {/* Section header — only renders when the section has a title or eyebrow */}
       {isTitled && (
-        <div className="mb-8">
-          {/* Top bar: № + tag + title in a single row, like a chapter divider */}
-          <div className="flex items-baseline gap-4 mb-4 flex-wrap">
-            {projectNumber && (
-              <span className="font-mono text-[11px] font-bold tracking-[0.18em] uppercase">
-                <span className="gradient-text-static">№ {projectNumber}</span>
-              </span>
-            )}
-            {section.eyebrow && (
-              <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2">
-                {section.eyebrow}
-              </span>
-            )}
-          </div>
+       
           {section.title && (
             <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4 max-w-3xl">
               {section.title}
