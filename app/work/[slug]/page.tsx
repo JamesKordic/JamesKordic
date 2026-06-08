@@ -89,27 +89,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           {p.desc}
         </p>
 
-        {/* Meta strip */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 py-[18px] pb-6 border-b border-line mb-9">
-          <div>
-            <div className="text-[11px] tracking-[0.12em] uppercase text-muted-2 mb-[6px]">
-              {T.projectPage.metaClientLabel}
-            </div>
-            <div className="font-display font-bold text-[18px] tracking-[-0.01em]">{p.client}</div>
-          </div>
-          <div>
-            <div className="text-[11px] tracking-[0.12em] uppercase text-muted-2 mb-[6px]">
-              {T.projectPage.metaDateLabel}
-            </div>
-            <div className="font-display font-bold text-[18px] tracking-[-0.01em]">{p.date}</div>
-          </div>
-          <div>
-            <div className="text-[11px] tracking-[0.12em] uppercase text-muted-2 mb-[6px]">
-              {T.projectPage.metaRoleLabel}
-            </div>
-            <div className="font-display font-bold text-[18px] tracking-[-0.01em]">{p.role}</div>
-          </div>
-        </div>
+        
 
         {/* The Brief — case-study intro paragraph block. Only renders when set. */}
         {p.brief && (
