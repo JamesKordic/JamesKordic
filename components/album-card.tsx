@@ -131,7 +131,7 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
           </span>
         </div>
         <p className="text-[14px] text-muted leading-[1.55] line-clamp-2 mb-3">
-          {p.blurb} — {p.client}
+          {p.blurb}
         </p>
         <div className="flex flex-wrap items-center gap-1.5">
           {p.tags.map((tag) => (
