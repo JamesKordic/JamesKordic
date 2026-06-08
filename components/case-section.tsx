@@ -72,20 +72,7 @@ export function CaseSection({
   const isTitled = !!(section.title || section.eyebrow);
 
   return (
-    <section className="py-10 lg:py-14 border-b border-line last:border-b-0">
-      {/* Section header — only renders when the section has a title or eyebrow */}
-      {isTitled && (
-       
-          {section.title && (
-            <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4 max-w-3xl">
-              {section.title}
-            </h2>
-          )}
-          {section.body && (
-            <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line max-w-3xl">
-              {section.body}
-            </p>
-          )}
+    
 
           {/* Case-study Context + Role grid — two columns on desktop, stacked on mobile */}
           {isCaseStudy && (section.context || section.role) && (
