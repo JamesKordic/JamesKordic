@@ -132,35 +132,9 @@ export const PROJECTS: Project[] = [
     len: 262,
     blurb: 'Music & Entertainment Marketing',
     desc: "An exploration of music and entertainment marketing through collaborative campaign work at The Syndicate, this internship experience spanned projects across indie and major label artists as well as TV, film, and comedy. Responsibilities included creating digital assets, tour and promotional visuals, and event materials, translating each artist or project's unique voice into impactful, audience-driven design and storytelling campaigns.",
-    brief: {
-      eyebrow: 'The Brief',
-      lead: "The Syndicate represents artists and entertainment brands — its design team translates each one's distinct identity into campaign-ready assets at scroll velocity.",
-      body: [
-        "Over twelve months I worked across multiple concurrent client tracks: tour and release campaigns for Guns N' Roses, a promotional video for Killphonic Records, comedy social for Craig Ferguson, sync-licensing posts for Last Gang Records, and the full visual identity rollout for Indie Week's conference.",
-        'Core problem: no two clients shared audience, tone, or format. A Guns N\' Roses Reel and a Last Gang sync post needed to feel like they came from entirely different worlds — while both being produced by the same person, in the same week, to a shared production schedule.',
-      ],
-    },
-    approach: {
-      eyebrow: 'The Approach',
-      intro: 'To stay fast across many different voices, I built a workflow that front-loaded reference and brand intake before opening a design file. Every client got the same five-step treatment, scaled to the size of the deliverable.',
-      steps: [
-        { label: 'Step 01', title: 'Intake', body: 'Brief, audience, surface, success metric — written down before anything else.' },
-        { label: 'Step 02', title: 'Reference', body: "Fan-facing mood, not designer-facing. What does the artist's audience already love?" },
-        { label: 'Step 03', title: 'Test', body: 'One 3-second motion test before committing to a direction. Cheap to throw away.' },
-        { label: 'Step 04', title: 'Build', body: 'Format-correct specs from frame one — no last-minute reformatting for platform variants.' },
-        { label: 'Step 05', title: 'Iterate', body: 'Variant pass for A/B testing and platform-specific fit (Reels, Shorts, TikTok, feed).' },
-      ],
-    },
-    recap: {
-      eyebrow: 'The Recap',
-      headline: 'A year of shipping, not just designing.',
-      stats: [
-        { value: '~50+', label: 'Assets shipped' },
-        { value: '05+', label: 'Concurrent clients' },
-        { value: '12', label: 'Months', unit: 'MO' },
-        { value: '100K+', label: 'Impressions Generated' },
-      ],
-    },
+   
+   
+   
     sections: [
       {
         eyebrow: 'Music',
