@@ -93,18 +93,12 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
        
     
-        {/* The Work — header before case sections, only when this project has a brief
-            (i.e. is presented as a full case study). Otherwise just render sections. */}
-        {p.brief && (
-          <div className="flex items-baseline gap-3 mb-5 border-b border-line pb-3 mt-12">
-            <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted">
-              <span className="gradient-text-static">03</span> · {T.projectPage.workEyebrow} ·{' '}
-              {String(p.sections.length).padStart(2, '0')} {T.projectPage.workProjectsSuffix}
-            </span>
-          </div>
-        )}
+  
 
-        
+        {/* Case study sections */}
+        {p.sections.map((sec, i) => (
+          <CaseSection key={i} section={sec} index={i} />
+        ))}
 
       
 
