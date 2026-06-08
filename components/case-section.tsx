@@ -143,32 +143,6 @@ export function CaseSection({
         />
       )}
 
-      {/* Field note — italicized pull-quote callout after the media grid.
-       * Used to share a lesson, breakthrough, or insight from this project. */}
-      {section.fieldNote && (
-        <div
-          className="mt-8 lg:mt-10 max-w-4xl pl-5 py-2 relative"
-        >
-          {/* Vertical gradient bar — replaces a flat green border so the
-           *  callout picks up the same lime → cyan → magenta palette used
-           *  throughout the site. Positioned absolute so the gradient
-           *  appears as a 2px-wide left rule along the full callout height. */}
-          <span
-            className="absolute left-0 top-0 bottom-0 w-[2px] rounded-full"
-            style={{
-              background:
-                'linear-gradient(180deg, #c8f135 0%, #22d3ee 50%, #ff2d8a 100%)',
-            }}
-            aria-hidden
-          />
-          <div className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2 gradient-text-static">
-            {SITE_TEXT.projectPage.fieldNoteLabel}
-          </div>
-          <p className="text-[16px] lg:text-[18px] leading-[1.55] text-text italic">
-            {section.fieldNote}
-          </p>
-        </div>
-      )}
     </section>
   );
 }
