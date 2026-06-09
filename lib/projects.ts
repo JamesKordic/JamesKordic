@@ -108,6 +108,13 @@ export type Project = {
   approach?: { eyebrow?: string; intro: string; steps: ApproachStep[] };
   /** Optional recap — stats shown at the end of the case study. */
   recap?: { eyebrow?: string; headline: string; stats: RecapStat[] };
+  /** Optional overview block — shown between the project description and
+   *  the first section. Use for a high-level project summary, key stats,
+   *  or any framing that helps visitors understand the work before diving in. */
+  overview?: {
+    headline?: string;
+    body: string[];
+  };
   sections: Section[];
 };
 
@@ -248,7 +255,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2025',
     len: 268,
-    blurb: 'Interactive Music Festival Concept',
+    blurb: 'Interactive music festival concept',
     desc: "An exploration of how design can support a more immersive and inclusive global festival where music, visual art, and innovation converge with guest engagement. Guests become active contributors through immersive environments, interactive stages, and participatory technology.\n\n| Presented at *Fusion: 2025 RIT Graphic Design Capstone*",
     brief: {
       eyebrow: 'The Brief',
@@ -279,10 +286,19 @@ export const PROJECTS: Project[] = [
         { value: '12', label: 'Months of build', unit: 'MO' },
       ],
     },
+    overview: {
+      headline: 'A festival brand built from the inside out',
+      body: [
+        'WWIMF is a conceptual global festival where music, visual art, and emerging technology converge with active audience participation — guests become contributors through immersive environments, interactive stages, and participatory wearables.',
+        'The project delivered as a complete brand system across identity, environments, merchandise, marketing, motion, and a printed art book. Presented at Fusion: the 2025 RIT Graphic Design Capstone show.',
+      ],
+    },
     sections: [
       {
         eyebrow: '01',
         title: 'Visual Identity',
+        context: "The festival needed an identity that could read across screens, signage, wristbands, and printed booklets without losing its sense of motion. Music had to be present in the mark itself — not just implied by the surrounding design.",
+        role: 'Built the primary wordmark, secondary hand-mark, type system (Cityburn + Courier New), and color palette. Designed the modular visualizer bars that show up in every other artifact downstream.',
         body: "The primary logo for WWIMF was built around two core themes: interactivity and music. Bars integrated into the wordmark represent a music visualizer, emphasizing the dynamic and immersive nature of sound central to the festival experience.\n\nA secondary logo extends this concept by combining the visualizer motif with the shape of a hand, a symbol of human interaction, creativity, and expression. The modular design of the bars within the hand allows for customization, reflecting the festival's adaptable and participatory spirit.\n\nWWIMF's typography blends Cityburn Regular with Courier New, creating a balance between experimental energy and technical precision. Cityburn adds a bold, contemporary edge, while Courier New brings a structured, analog feel connecting the identity to both music production and digital interaction. The color system is bold, abstract, and high-energy, using unconventional combinations to echo the festival's immersive and boundary-pushing character. The overall visual system is designed to be flexible, expressive, and suitable across both digital and physical environments.",
         fieldNote: 'The visualizer bars became the load-bearing element of the whole system. Once they existed, every subsequent decision — stage lighting, merch patterns, poster type — pointed back to them.',
         media: [{ type: 'image', src: img('UUebmgTykuRmwaxxSRK1LIPuAk', 1800) }],
@@ -460,7 +476,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 188,
-    blurb: 'Feed the Beat Campaign',
+    blurb: 'Feed The Beat campaign',
     desc: "An exploration of how branded storytelling and visual identity can elevate emerging musical talent through Taco Bell's Feed The Beat program, where social media content and strategic partnerships amplify artist visibility and connect audiences through culture-driven design.",
     brief: {
       eyebrow: 'The Brief',
@@ -605,7 +621,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 201,
-    blurb: 'Social Media Design for a Metal Label',
+    blurb: 'Social design for a metal label',
     desc: "A series of digital design explorations supporting music promotion and fan engagement for MNRK Heavy. This project involved creating social media assets across multiple platforms to spotlight anniversaries, new releases, and artist milestones—capturing the intensity of heavy metal and hard rock through bold, audience focused visuals.",
     brief: {
       eyebrow: 'The Brief',
@@ -703,7 +719,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 236,
-    blurb: 'Conference Creative & Motion',
+    blurb: 'Conference creative & motion',
     desc: "A collection of event-driven digital assets developed for Consensus by CoinDesk, designed to build momentum and audience engagement leading up to the conference. This work highlighted featured speakers, partner brands, and key event moments—delivering a cohesive visual identity across social media and digital platforms to drive anticipation and attendance.",
     brief: {
       eyebrow: 'The Brief',
@@ -784,7 +800,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 177,
-    blurb: 'Series Launch Campaign',
+    blurb: 'Series launch campaign',
     desc: "A promotional design campaign supporting the launch of FX's new series Adults. This work translated the show's tone and visual identity into cohesive assets across social media, digital platforms, and print—driving awareness and audience connection through bold, narrative-focused visuals.",
     brief: {
       eyebrow: 'The Brief',
@@ -920,7 +936,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design, 3D Design',
     year: '2024–25',
     len: 189,
-    blurb: 'Beverage Brand & 3D Packaging',
+    blurb: 'Beverage brand & 3D packaging',
     desc: "An exploration of how energy and flavor converge through a reimagined beverage experience. Voltage is a conceptual energy drink brand merging the refreshing taste of lemonade with the bold intensity of an energy drink. Inspired by the electrical potential found in lemons, the brand identity channels a sense of power, clarity, and high-voltage impact across naming, packaging, and visual design. Developed to fill a market gap for flavor-forward options that feel both familiar and exciting, the project redefines what an energy drink can be through design and storytelling.",
     brief: {
       eyebrow: 'The Brief',
@@ -1080,7 +1096,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design, 3D Design',
     year: '2024–25',
     len: 223,
-    blurb: 'Self Initiated Brand Exploration',
+    blurb: 'Self-initiated brand exploration',
     desc: "An exploration of Nike's dynamic visual language and culture-defining storytelling through self-initiated design work. This collection reimagines how the brand's iconic identity can extend across diverse mediums, highlighting the adaptability and energy that define Nike's voice.",
     brief: {
       eyebrow: 'The Brief',

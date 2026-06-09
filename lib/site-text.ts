@@ -53,8 +53,7 @@ export const SITE_TEXT = {
   home: {
     /** Subtitle under the giant "James Kordic" headline on the home page.
      *  This is the canonical site tagline. */
-    tagline:
-      'New York Based Graphic & Motion Designer.',
+    
 
     /** Section heading for the top-of-page "Featured" row */
     featuredHeading: 'Featured work',
@@ -82,11 +81,11 @@ export const SITE_TEXT = {
       /** Availability chip at the top of the CTA panel */
       availability: 'Open for work · 2026',
       /** Big headline. The word "loud." gets underlined automatically. */
-      headlinePrefix: 'Let’s Make Something',
-      headlineEmphasis: 'LOUD!',
+      headlinePrefix: 'Let’s make something',
+      headlineEmphasis: 'loud.',
       /** Subhead paragraph below the headline */
       subhead:
-        'Available for freelance and full-time design work — motion, brand, advertising, anything that needs to move and make noise.',
+        'Available for freelance and full-time design work — motion, brand, advertising, anything that needs to move and feel.',
       /** Primary button text (email address) */
       emailButton: 'Jkordic@me.com',
       /** Secondary button text */

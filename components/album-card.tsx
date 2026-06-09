@@ -255,7 +255,7 @@ export function ComingSoonCard({ i = 0 }: { i?: number }) {
           THE·TEAM
         </h3>
         <p className="text-[13.5px] text-muted-2 mt-1.5 leading-[1.45] line-clamp-2">
-          Sports, Music, & Entertainment Marketing.
+          Sports, Music, and Entertainment Marketing.
         </p>
         <div className="flex flex-wrap gap-1.5 mt-3">
           <span className="text-[10.5px] font-semibold tracking-[0.04em] uppercase bg-elev-hi text-muted px-2 py-1 rounded-sm">
