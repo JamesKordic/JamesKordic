@@ -54,7 +54,7 @@ export const SITE_TEXT = {
     /** Subtitle under the giant "James Kordic" headline on the home page.
      *  This is the canonical site tagline. */
     tagline:
-      '',
+      'New York Based Graphic & Motion Designer.',
 
     /** Section heading for the top-of-page "Featured" row */
     featuredHeading: 'Featured work',
