@@ -125,42 +125,13 @@ export const PROJECTS: Project[] = [
     cover: '/covers/the-syndicate.jpg',
     themeColor: '#3c3a4a',
     tags: ['Creative Direction', 'Marketing', 'Motion Design'],
-    client: 'The Syndicate',
-    date: '2024–2025',
-    role: 'Graphic Design, Motion Design',
+    client: '',
+    date: '',
+    role: '',
     year: '2024–25',
     len: 262,
     blurb: 'Music & Entertainment Marketing',
     desc: "An exploration of music and entertainment marketing through collaborative campaign work at The Syndicate, this internship experience spanned projects across indie and major label artists as well as TV, film, and comedy. Responsibilities included creating digital assets, tour and promotional visuals, and event materials, translating each artist or project's unique voice into impactful, audience-driven design and storytelling campaigns.",
-    brief: {
-      eyebrow: 'The Brief',
-      lead: "The Syndicate represents artists and entertainment brands — its design team translates each one's distinct identity into campaign-ready assets at scroll velocity.",
-      body: [
-        "Over twelve months I worked across multiple concurrent client tracks: tour and release campaigns for Guns N' Roses, a promotional video for Killphonic Records, comedy social for Craig Ferguson, sync-licensing posts for Last Gang Records, and the full visual identity rollout for Indie Week's conference.",
-        'Core problem: no two clients shared audience, tone, or format. A Guns N\' Roses Reel and a Last Gang sync post needed to feel like they came from entirely different worlds — while both being produced by the same person, in the same week, to a shared production schedule.',
-      ],
-    },
-    approach: {
-      eyebrow: 'The Approach',
-      intro: 'To stay fast across many different voices, I built a workflow that front-loaded reference and brand intake before opening a design file. Every client got the same five-step treatment, scaled to the size of the deliverable.',
-      steps: [
-        { label: 'Step 01', title: 'Intake', body: 'Brief, audience, surface, success metric — written down before anything else.' },
-        { label: 'Step 02', title: 'Reference', body: "Fan-facing mood, not designer-facing. What does the artist's audience already love?" },
-        { label: 'Step 03', title: 'Test', body: 'One 3-second motion test before committing to a direction. Cheap to throw away.' },
-        { label: 'Step 04', title: 'Build', body: 'Format-correct specs from frame one — no last-minute reformatting for platform variants.' },
-        { label: 'Step 05', title: 'Iterate', body: 'Variant pass for A/B testing and platform-specific fit (Reels, Shorts, TikTok, feed).' },
-      ],
-    },
-    recap: {
-      eyebrow: 'The Recap',
-      headline: 'A year of shipping, not just designing.',
-      stats: [
-        { value: '~50+', label: 'Assets shipped' },
-        { value: '05+', label: 'Concurrent clients' },
-        { value: '12', label: 'Months', unit: 'MO' },
-        { value: '100K+', label: 'Impressions Generated' },
-      ],
-    },
     sections: [
       {
         eyebrow: 'Music',
@@ -277,7 +248,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2025',
     len: 268,
-    blurb: 'Interactive music festival concept',
+    blurb: 'Interactive Music Festival Concept',
     desc: "An exploration of how design can support a more immersive and inclusive global festival where music, visual art, and innovation converge with guest engagement. Guests become active contributors through immersive environments, interactive stages, and participatory technology.\n\n| Presented at *Fusion: 2025 RIT Graphic Design Capstone*",
     brief: {
       eyebrow: 'The Brief',
@@ -366,9 +337,9 @@ export const PROJECTS: Project[] = [
           { type: 'image', src: '/projects/wwimf/merch-wristband-new.png' },
          { type: 'image', src: '/projects/wwimf/Totebag-cooler.png',  },
           { type: 'image', src: img('SrsSN7QpTyN8chUaACfrkQqLA', 1800) },
-          { type: 'image', src: '/projects/wwimf/wristband_on_someones_wrist._Ensure_202606021846.png',  },
-          { type: 'image', src: '/projects/wwimf/Totebag_on_persons_arm._Ensure_202606021843.png',  },
-          { type: 'image', src: '/projects/wwimf/person_wearing_back_of_shirt,_202606021931.png',  },
+          { type: 'image', src: '/projects/wwimf/wristband_on_someones_wrist.png',  },
+          { type: 'image', src: '/projects/wwimf/Totebag_on_persons_arm.png',  },
+          { type: 'image', src: '/projects/wwimf/person_wearing_back_of_shirt.png',  },
           
         ],
         layout: { type: 'uniform', cols: 3, aspect: '3/2' },
@@ -491,7 +462,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 188,
-    blurb: 'Feed The Beat campaign',
+    blurb: 'Feed the Beat Campaign',
     desc: "An exploration of how branded storytelling and visual identity can elevate emerging musical talent through Taco Bell's Feed The Beat program, where social media content and strategic partnerships amplify artist visibility and connect audiences through culture-driven design.",
     brief: {
       eyebrow: 'The Brief',
@@ -636,7 +607,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 201,
-    blurb: 'Social design for a metal label',
+    blurb: 'Social Media Design for a Metal Label',
     desc: "A series of digital design explorations supporting music promotion and fan engagement for MNRK Heavy. This project involved creating social media assets across multiple platforms to spotlight anniversaries, new releases, and artist milestones—capturing the intensity of heavy metal and hard rock through bold, audience focused visuals.",
     brief: {
       eyebrow: 'The Brief',
@@ -734,7 +705,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 236,
-    blurb: 'Conference creative & motion',
+    blurb: 'Conference Creative & Motion',
     desc: "A collection of event-driven digital assets developed for Consensus by CoinDesk, designed to build momentum and audience engagement leading up to the conference. This work highlighted featured speakers, partner brands, and key event moments—delivering a cohesive visual identity across social media and digital platforms to drive anticipation and attendance.",
     brief: {
       eyebrow: 'The Brief',
@@ -815,7 +786,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 177,
-    blurb: 'Series launch campaign',
+    blurb: 'Series Launch Campaign',
     desc: "A promotional design campaign supporting the launch of FX's new series Adults. This work translated the show's tone and visual identity into cohesive assets across social media, digital platforms, and print—driving awareness and audience connection through bold, narrative-focused visuals.",
     brief: {
       eyebrow: 'The Brief',
@@ -951,7 +922,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design, 3D Design',
     year: '2024–25',
     len: 189,
-    blurb: 'Beverage brand & 3D packaging',
+    blurb: 'Beverage Brand & 3D Packaging',
     desc: "An exploration of how energy and flavor converge through a reimagined beverage experience. Voltage is a conceptual energy drink brand merging the refreshing taste of lemonade with the bold intensity of an energy drink. Inspired by the electrical potential found in lemons, the brand identity channels a sense of power, clarity, and high-voltage impact across naming, packaging, and visual design. Developed to fill a market gap for flavor-forward options that feel both familiar and exciting, the project redefines what an energy drink can be through design and storytelling.",
     brief: {
       eyebrow: 'The Brief',
@@ -1111,7 +1082,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design, 3D Design',
     year: '2024–25',
     len: 223,
-    blurb: 'Self-initiated brand exploration',
+    blurb: 'Self Initiated Brand Exploration',
     desc: "An exploration of Nike's dynamic visual language and culture-defining storytelling through self-initiated design work. This collection reimagines how the brand's iconic identity can extend across diverse mediums, highlighting the adaptability and energy that define Nike's voice.",
     brief: {
       eyebrow: 'The Brief',
