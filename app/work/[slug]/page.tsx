@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PROJECTS, getProject, ARTIST } from '@/lib/projects';
 import { CaseSection } from '@/components/case-section';
-import { ProjectActions } from '@/components/project-actions';
 import { SITE_TEXT } from '@/lib/site-text';
 
 const T = SITE_TEXT;
@@ -83,9 +82,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       </header>
 
       <div className="px-5 lg:px-8 pb-[30px]">
-        <ProjectActions id={p.id} />
-
-        <p className="text-[17px] leading-[1.62] text-[#e2dfd6] max-w-[760px] py-2 pb-7 whitespace-pre-line">
+        <p className="text-[17px] leading-[1.62] text-[#e2dfd6] max-w-[760px] pb-7 whitespace-pre-line">
           {p.desc}
         </p>
 
