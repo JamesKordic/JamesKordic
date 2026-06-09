@@ -89,24 +89,14 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           {p.desc}
         </p>
 
-        {/* Overview — optional high-level summary shown before the work sections */}
-        {p.overview && (
-          <section className="mb-10 lg:mb-14 max-w-[760px]">
-            {p.overview.headline && (
-              <h2 className="font-display font-extrabold text-[24px] sm:text-[30px] lg:text-[36px] tracking-[-0.025em] leading-[1.08] mb-5">
-                {p.overview.headline}
-              </h2>
-            )}
-            <div className="space-y-4">
-              {p.overview.body.map((para, i) => (
-                <p key={i} className="text-[15px] lg:text-[16px] leading-[1.62] text-muted">
-                  {para}
-                </p>
-              ))}
-            </div>
-          </section>
-        )}
+        
 
+       
+    
+        {/* The Work — header before case sections, only when this project has a brief
+            (i.e. is presented as a full case study). Otherwise just render sections. */}
+        
+   
         {/* Case study sections */}
         {p.sections.map((sec, i) => (
           <CaseSection key={i} section={sec} index={i} />

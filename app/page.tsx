@@ -61,6 +61,9 @@ export default function HomePage() {
               {T.artist.firstName}{' '}
               <em className="not-italic gradient-text">{T.artist.lastName}</em>
             </h1>
+            <p className="text-[14px] text-muted mt-2 max-w-[640px]">
+              {T.home.tagline}
+            </p>
           </div>
 
           <div className="flex items-center gap-4 flex-none">
