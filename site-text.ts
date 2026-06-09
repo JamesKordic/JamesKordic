@@ -53,8 +53,7 @@ export const SITE_TEXT = {
   home: {
     /** Subtitle under the giant "James Kordic" headline on the home page.
      *  This is the canonical site tagline. */
-    tagline:
-      'A New York–based Graphic & Motion Designer whose advertising experience, mixed-media approach, and results-driven creative work help brands connect with audiences across digital platforms.',
+    
 
     /** Section heading for the top-of-page "Featured" row */
     featuredHeading: 'Featured work',
