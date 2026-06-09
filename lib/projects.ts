@@ -280,9 +280,26 @@ export const PROJECTS: Project[] = [
       ],
     },
     sections: [
+{
+        eyebrow: '',
+        title: 'Overview',
+        context: "",
+        role: '',
+        body: "The primary logo for WWIMF was built around two core themes: interactivity and music. Bars integrated into the wordmark represent a music visualizer, emphasizing the dynamic and immersive nature of sound central to the festival experience.\n\nA secondary logo extends this concept by combining the visualizer motif with the shape of a hand, a symbol of human interaction, creativity, and expression. The modular design of the bars within the hand allows for customization, reflecting the festival's adaptable and participatory spirit.\n\nWWIMF's typography blends Cityburn Regular with Courier New, creating a balance between experimental energy and technical precision. Cityburn adds a bold, contemporary edge, while Courier New brings a structured, analog feel connecting the identity to both music production and digital interaction. The color system is bold, abstract, and high-energy, using unconventional combinations to echo the festival's immersive and boundary-pushing character. The overall visual system is designed to be flexible, expressive, and suitable across both digital and physical environments.",
+        fieldNote: 'The visualizer bars became the load-bearing element of the whole system. Once they existed, every subsequent decision — stage lighting, merch patterns, poster type — pointed back to them.',
+        media: [{ type: 'image', src: img('', 1800) }],
+        layout: {
+          type: 'uniform',
+          cols: 1,
+          aspect: '9/16',
+        },
+      },
+
       {
         eyebrow: '01',
         title: 'Visual Identity',
+        context: "The festival needed an identity that could read across screens, signage, wristbands, and printed booklets without losing its sense of motion. Music had to be present in the mark itself — not just implied by the surrounding design.",
+        role: 'Built the primary wordmark, secondary hand-mark, type system (Cityburn + Courier New), and color palette. Designed the modular visualizer bars that show up in every other artifact downstream.',
         body: "The primary logo for WWIMF was built around two core themes: interactivity and music. Bars integrated into the wordmark represent a music visualizer, emphasizing the dynamic and immersive nature of sound central to the festival experience.\n\nA secondary logo extends this concept by combining the visualizer motif with the shape of a hand, a symbol of human interaction, creativity, and expression. The modular design of the bars within the hand allows for customization, reflecting the festival's adaptable and participatory spirit.\n\nWWIMF's typography blends Cityburn Regular with Courier New, creating a balance between experimental energy and technical precision. Cityburn adds a bold, contemporary edge, while Courier New brings a structured, analog feel connecting the identity to both music production and digital interaction. The color system is bold, abstract, and high-energy, using unconventional combinations to echo the festival's immersive and boundary-pushing character. The overall visual system is designed to be flexible, expressive, and suitable across both digital and physical environments.",
         fieldNote: 'The visualizer bars became the load-bearing element of the whole system. Once they existed, every subsequent decision — stage lighting, merch patterns, poster type — pointed back to them.',
         media: [{ type: 'image', src: img('UUebmgTykuRmwaxxSRK1LIPuAk', 1800) }],
