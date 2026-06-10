@@ -134,10 +134,6 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
               {tag}
             </span>
           ))}
-          <span className="ml-auto text-[11.5px] font-semibold gradient-text-static flex items-center gap-1 group-hover:gap-2 transition-all">
-            {SITE_TEXT.cards.viewCaseStudy}
-            <span aria-hidden>→</span>
-          </span>
         </div>
       </Link>
     </div>
