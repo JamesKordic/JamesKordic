@@ -80,10 +80,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
       <div className="px-6 lg:px-10 pb-10">
         {/* Overview */}
-        <section className="pt-2 pb-10 lg:pb-12 border-b border-line">
-          <div className="text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-4">
+        <section className="pt-14 lg:pt-20 pb-10 lg:pb-12 border-b border-line">
+          <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4 max-w-3xl">
             Overview
-          </div>
+          </h2>
           <p className="text-[17px] leading-[1.65] text-[#e2dfd6] max-w-[760px] whitespace-pre-line">
             {p.desc}
           </p>
