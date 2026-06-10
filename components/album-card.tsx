@@ -55,9 +55,6 @@ export function AlbumCard({ p, i = 0 }: { p: Project; i?: number }) {
               {tag}
             </span>
           ))}
-          <span className="text-[10.5px] font-semibold tracking-[0.04em] uppercase text-muted-2 px-1 py-1 ml-auto">
-            {p.year}
-          </span>
         </div>
       </Link>
     </div>
@@ -122,14 +119,9 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
             {SITE_TEXT.cards.featuredBadge}
           </div>
         </div>
-        <div className="flex items-baseline justify-between gap-3 mb-2">
-          <h3 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.015em] leading-tight truncate">
-            {p.title}
-          </h3>
-          <span className="text-[11.5px] font-semibold tracking-[0.04em] uppercase text-muted-2 whitespace-nowrap">
-            {p.year}
-          </span>
-        </div>
+        <h3 className="font-display font-extrabold text-[22px] lg:text-[26px] tracking-[-0.015em] leading-tight truncate mb-2">
+          {p.title}
+        </h3>
         <p className="text-[14px] text-muted leading-[1.55] line-clamp-2 mb-3">
           {p.blurb}
         </p>

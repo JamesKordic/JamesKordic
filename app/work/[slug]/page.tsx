@@ -69,8 +69,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <span className="w-1 h-1 rounded-full bg-muted inline-block" />
             <span>{p.blurb}</span>
             <span className="w-1 h-1 rounded-full bg-muted inline-block" />
-            <span className="text-muted">{p.year}</span>
-            <span className="w-1 h-1 rounded-full bg-muted inline-block" />
             <span className="text-muted">
               {p.sections.length} section{p.sections.length !== 1 ? 's' : ''}
             </span>
