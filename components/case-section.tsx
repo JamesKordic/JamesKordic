@@ -72,12 +72,12 @@ export function CaseSection({
   const isTitled = !!(section.title || section.eyebrow);
 
   return (
-    <section className="py-10 lg:py-14 border-b border-line last:border-b-0">
+    <section className="py-16 lg:py-20 border-b border-line last:border-b-0">
       {/* Section header — only renders when the section has a title or eyebrow */}
       {isTitled && (
-        <div className="mb-8">
+        <div className="mb-10 lg:mb-12">
           {section.title && (
-            <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4 max-w-3xl">
+            <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-6 max-w-3xl">
               {section.title}
             </h2>
           )}
@@ -89,10 +89,10 @@ export function CaseSection({
 
           {/* Case-study Context + Role grid — two columns on desktop, stacked on mobile */}
           {isCaseStudy && (section.context || section.role) && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-7 pt-6 border-t border-line max-w-4xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-8 pt-8 border-t border-line max-w-4xl">
               {section.context && (
                 <div>
-                  <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
+                  <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-3">
                     {SITE_TEXT.projectPage.sectionContextLabel}
                   </div>
                   <p className="text-[14.5px] leading-[1.6] text-text">{section.context}</p>
@@ -100,7 +100,7 @@ export function CaseSection({
               )}
               {section.role && (
                 <div>
-                  <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
+                  <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-3">
                     {SITE_TEXT.projectPage.sectionRoleLabel}
                   </div>
                   <p className="text-[14.5px] leading-[1.6] text-text">{section.role}</p>

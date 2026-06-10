@@ -28,7 +28,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   return (
     <div>
       {/* Hero */}
-      <header className="relative flex flex-col lg:flex-row items-start lg:items-end gap-5 lg:gap-8 px-6 lg:px-10 pt-20 lg:pt-24 pb-10 lg:pb-12 overflow-hidden">
+      <header className="relative flex flex-col lg:flex-row items-start lg:items-end gap-6 lg:gap-8 px-6 lg:px-10 pt-20 lg:pt-24 pb-12 lg:pb-16 overflow-hidden">
         {/* Per-project mesh gradient backdrop (uses themeColor) */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -78,10 +78,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </div>
       </header>
 
-      <div className="px-6 lg:px-10 pb-10">
+      <div className="px-6 lg:px-10 pb-12">
         {/* Overview */}
-        <section className="pt-14 lg:pt-20 pb-10 lg:pb-12 border-b border-line">
-          <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4 max-w-3xl">
+        <section className="py-16 lg:py-20 border-b border-line">
+          <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-6 max-w-3xl">
             Overview
           </h2>
           <p className="text-[17px] leading-[1.65] text-[#e2dfd6] max-w-[760px] whitespace-pre-line">
@@ -95,7 +95,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         ))}
 
         {/* Prev / Next */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-16">
           <Link
             href={`/work/${prev.id}`}
             className="bg-panel rounded-[9px] px-5 py-[18px] flex items-center gap-[14px] hover:bg-elev transition-colors"
