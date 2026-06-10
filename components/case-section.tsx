@@ -41,6 +41,7 @@ export function CaseSection({
   index?: number;
 }) {
   const { show } = useLightbox();
+  const [expanded, setExpanded] = useState(false);
 
   /* Flatten all images in this section for lightbox navigation,
    * traversing both top-level media and any nested row media. */
@@ -73,25 +74,54 @@ export function CaseSection({
 
   return (
     <section className="py-16 lg:py-20 border-b border-line last:border-b-0">
-      {/* Section header — only renders when the section has a title or eyebrow */}
+      {/* Section header — two-column on desktop (heading left, description right),
+          stacked on mobile. Extra paragraphs collapse behind a "Read more" toggle. */}
       {isTitled && (
         <div className="mb-10 lg:mb-12">
-          {section.title && (
-            <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-6 max-w-3xl">
-              {section.title}
-            </h2>
-          )}
-          {description.length > 0 && (
-            <div className="max-w-3xl space-y-4">
-              {description.map((text, i) => (
-                <p
-                  key={i}
-                  className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line"
-                >
-                  {text}
+          {description.length > 0 ? (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
+              <div className="lg:col-span-5">
+                {section.title && (
+                  <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04]">
+                    {section.title}
+                  </h2>
+                )}
+              </div>
+              <div className="lg:col-span-7 max-w-[640px]">
+                <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line">
+                  {description[0]}
                 </p>
-              ))}
+                {description.length > 1 && (
+                  <>
+                    {expanded && (
+                      <div className="mt-4 space-y-4">
+                        {description.slice(1).map((text, i) => (
+                          <p
+                            key={i}
+                            className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line"
+                          >
+                            {text}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                    <button
+                      onClick={() => setExpanded((v) => !v)}
+                      aria-expanded={expanded}
+                      className="mt-4 text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2 hover:text-text transition-colors"
+                    >
+                      {expanded ? 'Read Less' : 'Read More'}
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
+          ) : (
+            section.title && (
+              <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] max-w-3xl">
+                {section.title}
+              </h2>
+            )
           )}
         </div>
       )}
