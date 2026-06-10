@@ -3,10 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PROJECTS, getProject, ARTIST } from '@/lib/projects';
 import { CaseSection } from '@/components/case-section';
-import { ProjectActions } from '@/components/project-actions';
-import { SITE_TEXT } from '@/lib/site-text';
-
-const T = SITE_TEXT;
 
 export async function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.id }));
@@ -32,7 +28,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   return (
     <div>
       {/* Hero */}
-      <header className="relative flex flex-col lg:flex-row items-start lg:items-end gap-[18px] lg:gap-[26px] px-5 lg:px-8 pt-[74px] lg:pt-[80px] pb-[26px] overflow-hidden">
+      <header className="relative flex flex-col lg:flex-row items-start lg:items-end gap-6 lg:gap-8 px-6 lg:px-10 pt-20 lg:pt-24 pb-12 lg:pb-16 overflow-hidden">
         {/* Per-project mesh gradient backdrop (uses themeColor) */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -61,19 +57,17 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             />
           )}
         </div>
-        <div className="relative z-10 min-w-0 pb-[6px] flex-1">
+        <div className="relative z-10 min-w-0 flex-1">
           <div className="text-[12px] font-bold tracking-[0.05em] uppercase">
             Case Study · {p.tags[0]}
           </div>
-          <h1 className="font-display font-extrabold leading-[0.96] tracking-[-0.03em] my-[14px] text-[38px] sm:text-[56px] lg:text-[76px]">
+          <h1 className="font-display font-extrabold leading-[0.96] tracking-[-0.03em] mt-4 mb-5 text-[38px] sm:text-[56px] lg:text-[76px]">
             {p.title}
           </h1>
           <div className="flex items-center gap-[7px] flex-wrap text-[13.5px] font-medium">
             <span className="font-bold">{ARTIST}</span>
             <span className="w-1 h-1 rounded-full bg-muted inline-block" />
             <span>{p.blurb}</span>
-            <span className="w-1 h-1 rounded-full bg-muted inline-block" />
-            <span className="text-muted">{p.year}</span>
             <span className="w-1 h-1 rounded-full bg-muted inline-block" />
             <span className="text-muted">
               {p.sections.length} section{p.sections.length !== 1 ? 's' : ''}
@@ -82,30 +76,24 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </div>
       </header>
 
-      <div className="px-5 lg:px-8 pb-[30px]">
-        <ProjectActions id={p.id} />
+      <div className="px-6 lg:px-10 pb-12">
+        {/* Overview */}
+        <section className="py-16 lg:py-20 border-b border-line">
+          <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-6 max-w-3xl">
+            Overview
+          </h2>
+          <p className="text-[17px] leading-[1.65] text-[#e2dfd6] max-w-[760px] whitespace-pre-line">
+            {p.desc}
+          </p>
+        </section>
 
-        <p className="text-[17px] leading-[1.62] text-[#e2dfd6] max-w-[760px] py-2 pb-7 whitespace-pre-line">
-          {p.desc}
-        </p>
-
-        
-
-       
-    
-        {/* The Work — header before case sections, only when this project has a brief
-            (i.e. is presented as a full case study). Otherwise just render sections. */}
-        
-   
         {/* Case study sections */}
         {p.sections.map((sec, i) => (
           <CaseSection key={i} section={sec} index={i} />
         ))}
 
-      
-
         {/* Prev / Next */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-16">
           <Link
             href={`/work/${prev.id}`}
             className="bg-panel rounded-[9px] px-5 py-[18px] flex items-center gap-[14px] hover:bg-elev transition-colors"
@@ -140,7 +128,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </Link>
         </div>
 
-        <div className="text-center pt-10 pb-5">
+        <div className="text-center pt-12 pb-6">
           <Link
             href="/"
             className="font-bold text-[13px] tracking-[0.04em] uppercase border-[1.5px] border-[#5a5a5e] hover:border-text rounded-[30px] px-[18px] py-[9px] hover:scale-[1.04] inline-block transition-all"

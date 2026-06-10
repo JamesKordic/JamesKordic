@@ -14,7 +14,7 @@ export function TrackRow({ p, i }: { p: Project; i: number }) {
   return (
     <Link
       href={`/work/${p.id}`}
-      className={`track-row group grid grid-cols-[34px_1fr_90px_60px] sm:grid-cols-[34px_1fr_180px_90px_60px] items-center gap-[14px] px-3 py-[9px] rounded-md transition-colors cursor-pointer hover:bg-elev ${
+      className={`track-row group grid grid-cols-[34px_1fr_60px] sm:grid-cols-[34px_1fr_180px_60px] items-center gap-[14px] px-3 py-[9px] rounded-md transition-colors cursor-pointer hover:bg-elev ${
         isCurrent ? '[&_.tr-name]:gradient-text-static' : ''
       }`}
     >
@@ -34,7 +34,6 @@ export function TrackRow({ p, i }: { p: Project; i: number }) {
         </div>
       </div>
       <div className="hidden sm:block text-[12.5px] text-muted truncate">{p.tags[0]}</div>
-      <div className="text-[13px] text-muted text-right tabular-nums">{p.year}</div>
       <div className="text-[13px] text-muted text-right tabular-nums">{fmtTime(p.len)}</div>
     </Link>
   );

@@ -6,7 +6,6 @@ import type { Media, Section, GridRow, AspectRatio } from '@/lib/projects';
 import { useLightbox } from '@/lib/lightbox-context';
 import { VideoPlayer } from './video-player';
 import { EmbedFrame } from './embed-frame';
-import { SITE_TEXT } from '@/lib/site-text';
 
 /* ============ HELPERS ============ */
 
@@ -42,6 +41,7 @@ export function CaseSection({
   index?: number;
 }) {
   const { show } = useLightbox();
+  const [expanded, setExpanded] = useState(false);
 
   /* Flatten all images in this section for lightbox navigation,
    * traversing both top-level media and any nested row media. */
@@ -59,10 +59,11 @@ export function CaseSection({
   }
   const indexOfImage = (m: Media) => allImages.indexOf(m);
 
-  // If the section has any case-study intro fields (context / role / fieldNote),
-  // render the richer layout. Otherwise fall back to the simple body-paragraph layout.
-  const isCaseStudy = !!(section.context || section.role || section.fieldNote);
   const projectNumber = typeof index === 'number' ? String(index + 1).padStart(2, '0') : null;
+
+  // Merge context + role + body into a single flowing description.
+  // Authored order is context (what the brief was) → role (what I did) → body (deeper detail).
+  const description = [section.context, section.role, section.body].filter(Boolean) as string[];
 
   // A section is "titled" if it has any header content. Untitled sections
   // render as pure media — used for multi-part groupings where a single
@@ -72,41 +73,55 @@ export function CaseSection({
   const isTitled = !!(section.title || section.eyebrow);
 
   return (
-    <section className="py-10 lg:py-14 border-b border-line last:border-b-0">
-      {/* Section header — only renders when the section has a title or eyebrow */}
+    <section className="py-16 lg:py-20 border-b border-line last:border-b-0">
+      {/* Section header — two-column on desktop (heading left, description right),
+          stacked on mobile. Extra paragraphs collapse behind a "Read more" toggle. */}
       {isTitled && (
-        <div className="mb-8">
-          {section.title && (
-            <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] mb-4 max-w-3xl">
-              {section.title}
-            </h2>
-          )}
-          {section.body && (
-            <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line max-w-3xl">
-              {section.body}
-            </p>
-          )}
-
-          {/* Case-study Context + Role grid — two columns on desktop, stacked on mobile */}
-          {isCaseStudy && (section.context || section.role) && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mt-7 pt-6 border-t border-line max-w-4xl">
-              {section.context && (
-                <div>
-                  <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
-                    {SITE_TEXT.projectPage.sectionContextLabel}
-                  </div>
-                  <p className="text-[14.5px] leading-[1.6] text-text">{section.context}</p>
-                </div>
-              )}
-              {section.role && (
-                <div>
-                  <div className="text-[10px] font-bold tracking-[0.18em] uppercase text-muted-2 mb-2">
-                    {SITE_TEXT.projectPage.sectionRoleLabel}
-                  </div>
-                  <p className="text-[14.5px] leading-[1.6] text-text">{section.role}</p>
-                </div>
-              )}
+        <div className="mb-10 lg:mb-12">
+          {description.length > 0 ? (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
+              <div className="lg:col-span-5">
+                {section.title && (
+                  <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04]">
+                    {section.title}
+                  </h2>
+                )}
+              </div>
+              <div className="lg:col-span-7 max-w-[640px]">
+                <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line">
+                  {description[0]}
+                </p>
+                {description.length > 1 && (
+                  <>
+                    {expanded && (
+                      <div className="mt-4 space-y-4">
+                        {description.slice(1).map((text, i) => (
+                          <p
+                            key={i}
+                            className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line"
+                          >
+                            {text}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                    <button
+                      onClick={() => setExpanded((v) => !v)}
+                      aria-expanded={expanded}
+                      className="mt-4 text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2 hover:text-text transition-colors"
+                    >
+                      {expanded ? 'Read Less' : 'Read More'}
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
+          ) : (
+            section.title && (
+              <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] max-w-3xl">
+                {section.title}
+              </h2>
+            )
           )}
         </div>
       )}
