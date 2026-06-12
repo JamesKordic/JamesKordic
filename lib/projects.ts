@@ -249,7 +249,7 @@ export const PROJECTS: Project[] = [
     year: '2025',
     len: 268,
     blurb: 'Interactive Music Festival Concept',
-    desc: "An exploration of how design can support a more immersive and inclusive global festival where music, visual art, and innovation converge with guest engagement. Guests become active contributors through immersive environments, interactive stages, and participatory technology.\n\n| Presented at *Fusion: 2025 RIT Graphic Design Capstone*",
+    desc: "WWIMF — the World Wide Interactive Music Festival — is a conceptual festival I built as my senior capstone at RIT. It started with a question: what would a festival look like if the audience helped create it instead of just attending it? Over a year, I answered that with a complete brand — identity, stage environments, wearable tech, merchandise, marketing, motion, and a printed art book — treating the festival as if it were real and designing everything it would need.\n\n| Presented at *Fusion: 2025 RIT Graphic Design Capstone*",
     brief: {
       eyebrow: 'The Brief',
       lead: "What if a festival could be co-authored by its audience — not just attended by them? WWIMF is a year-long capstone exploring that question through brand, environment, and technology.",
@@ -283,9 +283,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '01',
         title: 'Visual Identity',
-        context: "The festival needed an identity that could read across screens, signage, wristbands, and printed booklets without losing its sense of motion. Music had to be present in the mark itself — not just implied by the surrounding design.",
-        role: 'Built the primary wordmark, secondary hand-mark, type system (Cityburn + Courier New), and color palette. Designed the modular visualizer bars that show up in every other artifact downstream.',
-        body: "The primary logo for WWIMF was built around two core themes: interactivity and music. Bars integrated into the wordmark represent a music visualizer, emphasizing the dynamic and immersive nature of sound central to the festival experience.\n\nA secondary logo extends this concept by combining the visualizer motif with the shape of a hand, a symbol of human interaction, creativity, and expression. The modular design of the bars within the hand allows for customization, reflecting the festival's adaptable and participatory spirit.\n\nWWIMF's typography blends Cityburn Regular with Courier New, creating a balance between experimental energy and technical precision. Cityburn adds a bold, contemporary edge, while Courier New brings a structured, analog feel connecting the identity to both music production and digital interaction. The color system is bold, abstract, and high-energy, using unconventional combinations to echo the festival's immersive and boundary-pushing character. The overall visual system is designed to be flexible, expressive, and suitable across both digital and physical environments.",
+        context: "Everything in WWIMF starts from the same idea: the music should be visible in the brand itself, not just implied around it. The identity also had to survive everywhere the festival would live — screens, signage, wristbands, a printed book — without losing its sense of motion.",
+        role: "I designed the primary wordmark, a secondary hand-mark, the type system, and the color palette. The most important decision turned out to be the modular visualizer bars — they end up in nearly every artifact that follows.",
+        body: "The wordmark is built around a music visualizer: bars rise and fall through the letterforms, so the logo reads like a track mid-play. A secondary mark merges those same bars with the shape of a hand — the simplest symbol I could find for participation. Because the bars are modular, the hand can be redrawn endlessly without breaking the system.\n\nFor type, I paired Cityburn with Courier New. Cityburn brings the loud, contemporary energy; Courier New grounds it with a structured, almost DAW-like technical feel. The palette is deliberately unconventional — high-energy combinations that feel closer to a stage rig than a corporate style guide. Every element was tested across digital and print before anything else got built on top of it.",
         fieldNote: 'The visualizer bars became the load-bearing element of the whole system. Once they existed, every subsequent decision — stage lighting, merch patterns, poster type — pointed back to them.',
         media: [{ type: 'image', src: img('UUebmgTykuRmwaxxSRK1LIPuAk', 1800) }],
         layout: {
@@ -297,9 +297,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '02',
         title: 'Stage Designs',
-        context: 'The festival needed environments that justified the participatory premise. A normal stage with a normal crowd in front of it wouldn\'t do — the architecture itself had to invite audience interaction.',
-        role: "Concepted four distinct stage typologies — biomorphic structures, projection-mapped facades, light-reactive frames, and audience-immersive surrounds — and rendered them as photoreal mockups for the capstone show.",
-        body: "This spread showcases how architecture, lighting, and digital media can fuse to create fully immersive performance spaces. Through a series of conceptual mock-ups and visual studies, we explore biomorphic structures, theatrical light displays, augmented stages, and reactive installations that invite festival-goers to shape, and be shaped by their surroundings. Each design underscores WWIMF's commitment to interactivity and multisensory engagement, offering a blueprint for redefining the relationship between music, space, and audience participation on a global scale.",
+        context: "If the premise is a festival the audience helps perform, a standard stage facing a standard crowd undermines it before the first set. The architecture itself had to do some of the inviting.",
+        role: "I concepted four stage typologies — biomorphic structures, projection-mapped facades, light-reactive frames, and stages that wrap around the audience — and rendered each as a photoreal mockup for the capstone show.",
+        body: "These studies explore how far a performance space can lean toward the crowd: structures that respond to movement, lighting that behaves like a participant, and layouts that put people inside the show rather than in front of it. I treated each render as a proof of concept — close enough to real that you could stand in front of it and argue about how to build it.",
         media: [
           { type: 'image', src: img('o97WGHUpa9ixF0VWB0k5MSLrfoo', 1600) },
           { type: 'image', src: img('qPQ3eQuaNTjJmIixnjmhqBpwd6Q', 1600) },
@@ -315,9 +315,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '03',
         title: 'Interactive Elements',
-        context: 'The participation premise needed objects you could actually touch. Without physical artifacts, "interactive festival" stays an abstraction in a brand deck.',
-        role: 'Designed the wearable tech (smart wristbands), the glow-in-the-dark pen system, and the touch-responsive surfaces — including the visual language they share, so an attendee picking up a pen feels the same brand they felt on the wristband.',
-        body: "At WWIMF, interactivity is central to the experience, transforming attendees from passive spectators into active participants. From touch-responsive environments and immersive tunnels to motion-activated light displays and interactive stages that place audiences beneath the performance itself, every element is designed to react to presence, gesture, and movement.\n\nWearable tech like smart wristbands enables guests to influence live performances and trigger real-time effects. Glow-in-the-dark pens offer opportunities for spontaneous creativity, allowing attendees to leave their mark on the festival's physical environment. These tools, combined with collaborative interfaces, empower co-creation and personal expression.\n\nWWIMF reimagines the live music experience by making the audience an integral part of the performance, blurring the boundaries between art, technology, and human connection.",
+        context: "\"Interactive festival\" stays an abstraction until there's something you can actually hold. This is the part of the project where participation becomes physical.",
+        role: "I designed the smart wristbands, a glow-in-the-dark pen system, and touch-responsive surfaces — plus the visual language they share, so picking up a pen feels like the same brand as wearing the wristband.",
+        body: "The wristband is the core of the kit: a wearable that lets guests influence the visuals and effects of a live set in real time. The pens are lower-tech but just as deliberate — they let people draw on the festival itself, leaving marks that accumulate over the weekend. Combined with touch-responsive walls and tunnels, these objects turn attendance into a kind of authorship: the festival looks different at the end of the night because of who was there.",
         fieldNote: 'Designing for participation means designing the affordance, not the object. The wristband isn\'t a wristband — it\'s a permission slip to influence the show.',
         media: [
           { type: 'image', src: img('aybJsg9p5A56xYuv6JKk8bLvM', 1600) },
@@ -330,9 +330,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '04',
         title: 'Merchandise',
-        context: 'Festival merch has a unique pressure: it has to look good as a flat artwork AND survive being worn / carried / wristed at full volume. The same identity has to translate to fabric, paper, and plastic.',
-        role: 'Designed the merch family — tote, shirt, and printed wristband — using the visualizer-bar pattern as the connective tissue so the pieces read as a set rather than three one-offs.',
-        body: "WWIMF's merchandise extends the festival's identity into wearable and collectible pieces that blend function, fashion, and interactivity. This section showcases examples including a tote bag, shirt, and festival wristband — each designed to reflect the bold, immersive aesthetic of the event.",
+        context: "Merch is where a brand gets stress-tested. It has to read as flat artwork and survive being worn, stuffed in a bag, and rained on — fabric, paper, and plastic all pulling from the same identity.",
+        role: "I designed the merch family — tote, shirt, and printed wristband — using the visualizer-bar pattern as the connective tissue, so the pieces read as a set rather than three one-offs.",
+        body: "Each piece carries the bars differently: wrapped tight around the wristband, blown up large on the tote, run across the back of the shirt. The test I kept coming back to was simple — could you recognize WWIMF from across a field by pattern alone?",
         media: [
           { type: 'image', src: '/projects/wwimf/merch-wristband-new.png' },
          { type: 'image', src: '/projects/wwimf/Totebag-cooler.png',  },
@@ -347,9 +347,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '05',
         title: 'Instagram Posts',
-        context: "Pre-festival social had to do two jobs at once: announce the lineup and prove the festival's visual world before anyone had ever been to it.",
-        role: 'Designed an artist-spotlight template that could carry any genre while staying recognizably WWIMF — same grid, same type, swap the artist and the color block.',
-        body: "A series of Instagram posts designed to spotlight new artists joining the WWIMF lineup. Each visual pairs dynamic imagery with bold typography to capture the energy and diversity of the festival's global soundscape.",
+        context: "Before a first festival exists, social media has to do two jobs at once: announce the lineup and prove the visual world is real before anyone has ever stood in it.",
+        role: "I built an artist-spotlight template flexible enough to carry any genre while staying unmistakably WWIMF — same grid, same type; swap the artist and the color block.",
+        body: "The series introduces artists joining the lineup, pairing photography with bold type and the visualizer pattern. Keeping the structure fixed lets the artists themselves provide the variety — the feed stays cohesive no matter who gets announced next.",
         media: [
           { type: 'image', src: img('NXZFs92bNHiD1jXMWJevPDU') },
           { type: 'image', src: img('Y2ye6xXMz2HALEAzxNW0wpr4VA') },
@@ -365,9 +365,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '06',
         title: 'Marketing',
-        context: 'The festival needed daily lineup posters that worked equally well as functional schedules and as decorative pieces fans would want to keep.',
-        role: 'Designed three daily posters around a shared grid, color-coded by day, with the visualizer pattern reading as a low-key background texture and the artist names doing the heavy typographic lifting.',
-        body: "Posters designed to showcase the WWIMF daily lineup, highlighting performance dates and featured artists. Each poster balances clarity and visual impact, using bold typography, color coding, and grid-based layouts to organize information while maintaining the festival's immersive aesthetic. These designs function both as promotional materials and informational tools, crafted to be displayed digitally and in print across festival spaces, social media, and citywide advertising. The goal: to communicate schedule details at a glance while reinforcing the identity of the WWIMF.",
+        context: "The daily lineup posters had to work as schedules you could read at a glance and as artwork people would actually want to keep after the weekend was over.",
+        role: "I designed three posters around a shared grid — one per day, color-coded — with the visualizer pattern receding into background texture and the artist names doing the typographic heavy lifting.",
+        body: "Each poster organizes a full day of performances without going quiet: the hierarchy holds at street distance, and the details reward a closer read. They were built to live everywhere at once — festival grounds, social feeds, and citywide print.",
         media: [
           { type: 'image', src: img('z95EhHshRBIBeZfkAkZ1bhkEONU', 1400) },
           { type: 'image', src: img('vuKP1K8MvNVJo8MiWI9lybFOvA', 1400) },
@@ -382,9 +382,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '07',
         title: 'Marketing Visualization',
-        context: "A poster that lives only on a screen doesn't sell a festival. The visualizations had to prove the brand could survive in the city — bus shelters, subway panels, plywood walls.",
-        role: 'Composited the lineup posters into photographed urban environments, choosing surfaces and contexts that matched the festival\'s tone (street-level, slightly chaotic, public).',
-        body: "These urban mockups showcase how WWIMF's lineup posters function in real-world environments — integrated into cityscapes, transit stations, and public walls. The placements emphasize visibility, accessibility, and the posters' ability to stand out in diverse, high-traffic settings. Together, these visualizations present a cohesive strategy for extending festival branding beyond the digital space and into the streets, where curiosity, discovery, and engagement begin.",
+        context: "A poster that only ever lives on a screen hasn't proven anything. These mockups put the campaign out in the city — bus shelters, subway panels, plywood walls — to see if it survives.",
+        role: "I composited the lineup posters into photographed urban environments, choosing surfaces that match the festival's tone: street-level, a little chaotic, very public.",
+        body: "Seeing the work at scale, surrounded by real visual noise, was the honest test of the system. The bold type and day color-coding hold up in high-traffic settings, and the campaign starts doing what festival marketing actually has to do — catch someone mid-commute and make them look up the lineup.",
         media: [
           { type: 'image', src: img('W2IZkcmxISHxaNSOWQ9F9Hv8', 1800) },
           { type: 'image', src: img('IBOdBrAVsLSNJPOK9RmgTbBuW8g', 1800) },
@@ -400,9 +400,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '08',
         title: 'Animations',
-        context: 'The visualizer bars existed as static elements in the brand sheet — but the whole point of a visualizer is movement. They needed to be brought to life as motion stings the festival could use across screens.',
-        role: 'Animated the visualizer pattern as an audio-reactive system, tuned the timing to feel rhythmic without being literally beat-matched (the music it accompanies will vary).',
-        body: "A series of animated visuals created to extend the WWIMF brand into motion. These animations bring the festival's identity to life through audio-reactive elements and dynamic transitions, mirroring the energy and interactivity at the heart of the event. Designed for use across screens, stage visuals, and social media, these animations reinforce the immersive nature of the festival. Visual motifs from the branding system, like the waveform-inspired pattern and bold color gradients, are animated to pulse, shift, and respond, echoing the rhythm of live music and crowd movement.",
+        context: "A visualizer that doesn't move is just a pattern. The bars needed to come to life as motion pieces the festival could run across screens, stage visuals, and social.",
+        role: "I animated the visualizer system as audio-reactive motion, tuning the timing to feel rhythmic without being literally beat-matched — the music it sits behind will always vary.",
+        body: "The animations pulse, shift, and respond the way a crowd does, carrying the brand's waveform pattern and color gradients into motion. This was also the brand's proof of concept: the identity wasn't borrowing the look of a music visualizer anymore — it was behaving like one.",
         media: [{ type: 'video', src: vid('Pl1quVl6bu6Uo42E8OOl05tDSjc'), aspect: '16/9', poster: '/posters/Pl1quVl6bu6Uo42E8OOl05tDSjc.jpg'  }],
         layout: {
           type: 'uniform',
@@ -413,9 +413,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '09',
         title: 'Capstone Show Setup',
-        context: "Fusion is RIT's senior capstone show. WWIMF needed to translate from screen-based brand work into a physical exhibition space without losing its energy.",
-        role: 'Designed the booth layout — dual-screen animation loops, printed lineup posters, info panel, and the WWIMF book on a plinth. Built the booth as a small-scale stand-in for the festival itself.',
-        body: 'Presented at Fusion: 2025 RIT Graphic Design Capstone, this installation showcased the WWIMF brand through a multi-sensory display. The setup included dual-screen animated visuals, printed posters, a branded info poster, and the WWIMF book. This exhibition space served as both a culmination of my senior capstone project and a branded environment in itself, bringing the WWIMF concept to life through spatial design.',
+        context: "Fusion is RIT's senior capstone show, and it gave WWIMF its one chance to exist physically. The booth had to translate a screen-based brand into a space people walk past in seconds.",
+        role: "I designed the booth — dual-screen animation loops, printed lineup posters, an info panel, and the WWIMF book on a plinth — treating it as a small-scale stand-in for the festival itself.",
+        body: "A booth gets maybe eight seconds of someone's attention. The screens earn the stop, the posters hold it, and the book is there for anyone who wants to go deep. The conversations it started at the show were the closest the festival ever came to having a real audience — which, for a project about participation, felt like the right ending.",
         fieldNote: 'A booth at a capstone show has eight seconds to communicate before someone walks past. Solve that and you can defend the whole rest of the project in the conversation it earns you.',
         media: [
           { type: 'image', src: img('Qy3WsjTQu7UQBnFGQ7BRQtxQT3Q', 1400) },
@@ -430,9 +430,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '10',
         title: 'WWIMF Book',
-        context: "The brand needed a permanent, physical home — somewhere the visual language, the world-building, and the case for the festival's existence could live together in one object.",
-        role: "Wrote, designed, and printed a 60-page art book that doubles as the brand's bible: identity, environments, interactive systems, marketing, and motion stills, all in one volume.",
-        body: 'This conceptual art book serves as the visual heart of the World Wide Interactive Music Festival brand. Designed to express the spirit of global creativity, connection, and innovation, the book weaves together branding elements, motion stills, interactive concepts, and festival-worldbuilding into one cohesive narrative.',
+        context: "Every part of the project needed a permanent home — one object where the identity, the environments, the interactive systems, and the case for the festival's existence could sit together.",
+        role: "I wrote, designed, and printed the art book that doubles as the brand's bible: identity, environments, interactive systems, marketing, and motion stills, all in one volume.",
+        body: "The book is the project's final word — part brand guide, part world-building document. It walks through how the festival looks, how it behaves, and why it should exist. Flipping through it is the closest thing to attending WWIMF; you can read it cover to cover below.",
         media: [
           {
             type: 'embed',
