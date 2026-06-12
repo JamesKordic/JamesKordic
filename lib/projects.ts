@@ -131,13 +131,13 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 262,
     blurb: 'Music & Entertainment Marketing',
-    desc: "The Syndicate is a music and entertainment marketing agency, and this internship put me inside its day-to-day campaign work. I designed for indie and major label artists as well as TV, film, and comedy clients: digital assets, tour and promotional visuals, and event materials. The job, again and again, was to translate each artist's voice into design their audience would actually stop scrolling for, and to ship it at campaign speed.",
+    desc: "The Syndicate is a music and entertainment marketing agency, and this internship put me inside its day-to-day campaign work. I designed for indie and major label artists as well as TV, film, and comedy clients. I created digital assets, tour and promotional visuals, and event materials. The job, again and again, was to translate each artist's voice into design their audience would actually stop scrolling for, and to ship it at campaign speed.",
     sections: [
       {
         eyebrow: 'Music',
         title: "Guns N' Roses",
         context:
-          "A set of Instagram Reels I created for Guns N' Roses to promote tours, music, and fan engagement. Each edit is driven by the track itself: the cuts, motion, and type all follow the music, because when the band is this iconic, the song is the hook and the design just has to keep pace with it.",
+          "A set of Instagram Reels I created for Guns N' Roses to promote tours, music, and fan engagement.",
         // 3 vertical Reels — keep them small, 3 across
         media: [
           { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'), aspect: '9/16', poster: '/posters/TAsErfe3Mav2ZPK82B8hoA7HANs.jpg'},
@@ -150,7 +150,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Records',
         title: 'Killphonic Records',
         context:
-          "A promotional video I created for Killphonic Records to announce Heart of Gold: The Songs of Neil Young Vol. 1. It introduces the featured artists and pushes pre-orders across digital platforms, compressing what would normally be a full press release into one watchable piece.",
+          "A promotional video I created for Killphonic Records to announce Heart of Gold: The Songs of Neil Young Vol. 1. It introduces the featured artists and pushes pre-orders across digital platforms.",
         // Single horizontal promo video — full width 16:9
         media: [
           {
@@ -166,7 +166,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Comedy',
         title: 'Craig Ferguson',
         context:
-          "Social clips I cut and designed for Craig Ferguson, pulling the sharpest moments from his shows and reformatting them for vertical feeds. Comedy clips live or die on timing, so the design stays out of the way and lets the joke land.",
+          "Social clips I cut and designed for Craig Ferguson, pulling the sharpest moments from his shows and reformatting them for vertical feeds.",
         // 4 vertical social clips — 4 across on desktop
         media: [
           { type: 'video', src: vid('AGvRC8ZeWglalhmRVoWrAenDbU'), aspect: '9/16' },
@@ -180,7 +180,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Records',
         title: 'Last Gang Records',
         context:
-          "Social posts I designed for Last Gang Records, spotlighting the label's music placements in video games, film, and other media. Each post celebrates the sync as a win for the artist while quietly making the bigger point: this catalog is everywhere.",
+          "Social posts I designed for Last Gang Records, spotlighting the label's music placements in video games, film, and other media.",
         // 3 vertical items in a single row at native 4:5.
         // The video source is 9:16 but rendered at 4:5 with cover-crop so
         // it matches the image heights — no letterbox bars on top/bottom.
@@ -249,7 +249,7 @@ export const PROJECTS: Project[] = [
     year: '2025',
     len: 268,
     blurb: 'Interactive Music Festival Concept',
-    desc: "WWIMF, the World Wide Interactive Music Festival, is a conceptual festival I built as my senior capstone at RIT. It started with a question: what would a festival look like if the audience helped create it instead of just attending it? Over a year, I answered that by building the complete brand: identity, stage environments, wearable tech, merchandise, marketing, motion, and a printed art book. I treated the festival as if it were real and designed everything it would need.\n\n| Presented at *Fusion: 2025 RIT Graphic Design Capstone*",
+    desc: "WWIMF, the World Wide Interactive Music Festival, is a conceptual festival I built as my senior capstone at RIT. It started with a question: what would a festival look like if the audience became more than just spectators? Over a year, I answered that by building the complete brand: identity, stage environments, wearable tech, merchandise, marketing, motion, and a printed art book. I treated the festival as if it were real and designed everything it would need.",
     brief: {
       eyebrow: 'The Brief',
       lead: "What if a festival could be co-authored by its audience, not just attended by them? WWIMF is a year-long capstone exploring that question through brand, environment, and technology.",
@@ -285,7 +285,7 @@ export const PROJECTS: Project[] = [
         title: 'Visual Identity',
         context: "Everything in WWIMF starts from the same idea: the music should be visible in the brand itself, not just implied around it. The identity also had to survive everywhere the festival would live, from screens and signage to wristbands and a printed book, without losing its sense of motion.",
         role: "I designed the primary wordmark, a secondary hand-mark, the type system, and the color palette. The most important decision turned out to be the modular visualizer bars, which end up in nearly every artifact that follows.",
-        body: "The wordmark is built around a music visualizer: bars rise and fall through the letterforms, so the logo reads like a track mid-play. A secondary mark merges those same bars with the shape of a hand, the simplest symbol I could find for participation. Because the bars are modular, the hand can be redrawn endlessly without breaking the system.\n\nFor type, I paired Cityburn with Courier New. Cityburn brings the loud, contemporary energy; Courier New grounds it with a structured, almost DAW-like technical feel. The palette is deliberately unconventional, full of high-energy combinations that feel closer to a stage rig than a corporate style guide. Every element was tested across digital and print before anything else got built on top of it.",
+        body: "The wordmark is built around a music visualizer: bars rise and fall through the letterforms, so the logo reads like a track mid-play. The secondary mark is where the festival's whole premise lives. It merges those same bars with the shape of a hand, the simplest symbol I could find for participation, and it turns the visualizer from something you watch into something you play. A hand reaching into the music is exactly what WWIMF asks of its audience, so the logo isn't just decorating the idea of interactivity; it's demonstrating it. And because the bars inside the hand are modular, the mark can be redrawn endlessly without breaking the system, the same way no two audience interactions at the festival would ever look alike.\n\nFor type, I paired Cityburn with Courier New. Cityburn brings the loud, contemporary energy; Courier New grounds it with a structured, almost DAW-like technical feel. The palette is deliberately unconventional, full of high-energy combinations that feel closer to a stage rig than a corporate style guide. Every element was tested across digital and print before anything else got built on top of it.",
         fieldNote: 'The visualizer bars became the load-bearing element of the whole system. Once they existed, every subsequent decision, from stage lighting to merch patterns to poster type, pointed back to them.',
         media: [{ type: 'image', src: img('UUebmgTykuRmwaxxSRK1LIPuAk', 1800) }],
         layout: {
@@ -317,7 +317,7 @@ export const PROJECTS: Project[] = [
         title: 'Interactive Elements',
         context: "\"Interactive festival\" stays an abstraction until there's something you can actually hold. This is the part of the project where participation becomes physical.",
         role: "I designed the smart wristbands, a glow-in-the-dark pen system, and touch-responsive surfaces, plus the visual language they share, so picking up a pen feels like the same brand as wearing the wristband.",
-        body: "The wristband is the core of the kit: a wearable that lets guests influence the visuals and effects of a live set in real time. The pens are lower-tech but just as deliberate; they let people draw on the festival itself, leaving marks that accumulate over the weekend. Combined with touch-responsive walls and tunnels, these objects turn attendance into a kind of authorship: the festival looks different at the end of the night because of who was there.",
+        body: "The wristband is the core of the kit: a wearable that lets guests influence the visuals and effects of a live set in real time. The pens are lower-tech but just as deliberate; they let people draw on the festival itself, leaving marks that accumulate over the weekend. The boldest concept is the under-stage view, an area built directly beneath the performance where guests watch the show from even closer than the front row, with the performers right above them. It flips the usual geometry of a concert: instead of looking up at a distant stage, you're inside it. Combined with touch-responsive walls and tunnels, these elements turn attendance into a kind of authorship: the festival looks different at the end of the night because of who was there.",
         fieldNote: 'Designing for participation means designing the affordance, not the object. The wristband isn\'t a wristband; it\'s a permission slip to influence the show.',
         media: [
           { type: 'image', src: img('aybJsg9p5A56xYuv6JKk8bLvM', 1600) },
@@ -500,7 +500,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Feed The Beat',
         title: 'Feed The Beat',
         context:
-          "Feed The Beat introduces new artists in batches, and these are the social campaigns that did it. I designed each drop as a kit: a locked Taco Bell frame with swap-in artist layers, so roughly fifty musicians could move through the system without it ever reading as a template. The carousels below show the campaign sets, grouped by their shared color palettes.",
+          "Feed The Beat introduces new artists in batches, and these are the social campaigns that did it. I designed each drop as a kit: a locked Taco Bell frame with swap-in artist layers, so roughly fifty musicians could move through the system without it ever reading as a template. Beyond the social sets, I designed the motion graphic that hypes up the roster, built a poster carrying the names of every artist on it, and helped with the packaging side of the program as well. The carousels below show the campaign sets, grouped by their shared color palettes.",
         media: [],
         layout: {
           type: 'mixed',
@@ -706,7 +706,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 236,
     blurb: 'Conference Creative & Motion',
-    desc: "Consensus by CoinDesk is one of the biggest conferences in crypto, and this work helped build the anticipation that fills it. I created the pre-event creative: animated promos spotlighting speakers and themes, photographic stills grounding the event in a real place, and partner-brand cards signaling its scale. Three different kinds of asset, one visual identity, all pointed at the same goal of getting people through the doors.",
+    desc: "Consensus by CoinDesk is one of the biggest conferences in crypto, and this work helped build the anticipation that fills it. I created the pre-event creative: animated promos spotlighting speakers and themes, stills to promote those same speakers, and partner-brand party announcements signaling its scale. Three different kinds of asset, one visual identity, all pointed at the same goal of getting people through the doors.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Consensus is CoinDesk's flagship conference, the biggest stage in crypto. The pre-event creative had to feel as serious as a Wall Street keynote and as urgent as a tech launch, all while pushing through a crowded feed.",
@@ -741,7 +741,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Conference Creative',
         title: 'Pre-Event Creative for Consensus',
         context:
-          "Everything here was built to make the conference feel inevitable. The motion pieces announce speakers and themes with countdown urgency, the stills place the event in a real space you can imagine standing in, and the partner cards put sponsor brands inside the Consensus identity without flattening either one. Together they ran across social and digital channels in the weeks leading up to the event.",
+          "Everything here was built to make the conference feel inevitable. The motion pieces announce speakers and themes with countdown urgency, the stills promote those same speakers in the event's visual language, and the partner-brand party announcements put sponsor names inside the Consensus identity without flattening either one. Together they ran across social and digital channels in the weeks leading up to the event.",
         // 5 conference promo videos at 16:9
         media: [
           { type: 'video', src: vid('FGmZ7d1wogIeSBmBUxRHuAypA'), aspect: '16/9', poster: '/posters/FGmZ7d1wogIeSBmBUxRHuAypA.jpg' },
@@ -787,24 +787,24 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 177,
     blurb: 'Series Launch Campaign',
-    desc: "Adults is an FX comedy about a group of twenty-somethings figuring it out together in New York, and this campaign carried its launch. I designed across every surface a series premiere touches: trailers and promos, character key art, social cutdowns, theatrical posters, out-of-home banners, and a fan sticker pack. Wherever you ran into the show, on a bus shelter or in your feed, it had to land as the same sharp, character-driven world.",
+    desc: "Adults is an FX comedy about a group of twenty-somethings figuring it out together in New York, and this campaign carried its launch. I designed across every surface a series premiere touches: animated screens, reality check game video questions, polaroid prints, cast announcements, menus, posters, banners, and real world mockup examples. Wherever you ran into the show, on a bus shelter or in your feed, it had to land as the same sharp, character-driven world.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Adults is a new FX series following a chosen-family of young roommates navigating their twenties in New York. The campaign had to translate its sharp, character-driven tone across every surface a show launch touches.",
       body: [
-        "Six asset families spanning motion to print: long-form trailers and promos, character key art establishing the ensemble, social cutdowns sized for feed, theatrical-style posters, ultra-wide OOH banners, and a sticker pack for fans.",
-        "The whole system had to feel like one show. Whether you saw Adults on a bus shelter, in your story feed, or on a friend's laptop sticker, the brand had to land instantly: same color logic, same type, same ensemble framing.",
+        "The asset families spanned motion to print: animated screens, video questions for the show's reality check game, polaroid prints, cast announcements establishing the ensemble, menus, posters, ultra-wide banners, and real world mockups showing the work in place.",
+        "The whole system had to feel like one show. Whether you saw Adults on a banner, in your story feed, or printed on a menu, the brand had to land instantly: same color logic, same type, same ensemble framing.",
       ],
     },
     approach: {
       eyebrow: 'The Approach',
-      intro: "Series launches are surface-multiplication problems. The character work is the source of truth. Get the cast positioned and styled right, and every downstream asset (trailers, posters, OOH) inherits from that. Bottom of the stack is the sticker pack: small, fast, fan-facing.",
+      intro: "Series launches are surface-multiplication problems. The character work is the source of truth. Get the cast positioned and styled right, and every downstream asset (animated screens, menus, posters, banners) inherits from that. Bottom of the stack are the real world mockups: proof the system holds up outside a feed.",
       steps: [
-        { label: 'Step 01', title: 'Character', body: 'Establish each cast member as a single key-art unit with consistent treatment.' },
-        { label: 'Step 02', title: 'Trailer', body: 'Pull moments from the show into 16:9 cutdowns that match the still character treatment.' },
-        { label: 'Step 03', title: 'Social', body: 'Cut the character work down for vertical feed and stories.' },
-        { label: 'Step 04', title: 'Poster', body: 'Compose the ensemble into theatrical-style posters for paid and press use.' },
-        { label: 'Step 05', title: 'OOH + Swag', body: 'Stretch the system to ultra-wide billboards and tighten it down to stickers.' },
+        { label: 'Step 01', title: 'Cast', body: 'Establish each cast member in the announcement art with one consistent treatment.' },
+        { label: 'Step 02', title: 'Motion', body: "Build the animated screens and the reality check game's video questions to match the still treatment." },
+        { label: 'Step 03', title: 'Polaroid', body: 'Translate the cast into polaroid prints and feed-ready social pieces.' },
+        { label: 'Step 04', title: 'Print', body: 'Compose the ensemble into menus and posters for paid and press use.' },
+        { label: 'Step 05', title: 'OOH', body: 'Stretch the system to ultra-wide banners and prove it with real world mockups.' },
       ],
     },
     recap: {
@@ -822,7 +822,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Launch Campaign',
         title: 'Launch Campaign',
         context:
-          "The full launch system for Adults, starting with the trailers. From there the campaign fans out into character key art that establishes the ensemble, social posts cut for the feed, theatrical posters, out-of-home placements, and a sticker pack for the fans the show hadn't met yet. One tone carries through all of it: sharp, young, and a little chaotic, just like the show.",
+          "The full launch system for Adults, starting with the animated screens and video questions from the show's reality check game. From there the campaign fans out into cast announcements that establish the ensemble, polaroid prints, menus, posters, banners, and real world mockups that show the work in place. One tone carries through all of it: sharp, young, and a little chaotic, just like the show.",
         // 4 series trailers at 16:9 — 2 across
         media: [
           { type: 'video', src: vid('Yw37NLO1xKxuLc3BFLZZzWkgQc'), aspect: '16/9', poster: '/posters/Yw37NLO1xKxuLc3BFLZZzWkgQc.jpg' },

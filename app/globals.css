@@ -23,6 +23,19 @@ body {
   overflow: hidden;
 }
 
+/* No typographic orphans. `balance` evens out heading line lengths;
+ * `pretty` stops paragraphs from stranding a single word on the last
+ * line. Both degrade gracefully in browsers without support. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
 /* Text selection — uses magenta (part of the site's gradient palette).
  * Note: browsers don't support gradient backgrounds on ::selection, so we
  * pick a solid color from the gradient stops. Magenta gives strong contrast
