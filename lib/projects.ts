@@ -137,7 +137,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Music',
         title: "Guns N' Roses",
         context:
-          "A set of Instagram Reels I created for Guns N' Roses to promote tours, music, and fan engagement.",
+          "A set of reels I created for Guns N' Roses to promote tours, music, and fan engagement across multiple digital platforms.",
         // 3 vertical Reels — keep them small, 3 across
         media: [
           { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'), aspect: '9/16', poster: '/posters/TAsErfe3Mav2ZPK82B8hoA7HANs.jpg'},
