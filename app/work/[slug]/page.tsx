@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PROJECTS, getProject, ARTIST } from '@/lib/projects';
 import { CaseSection } from '@/components/case-section';
+import { deWidow } from '@/lib/typography';
 
 export async function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.id }));
@@ -83,7 +84,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             Overview
           </h2>
           <p className="text-[17px] leading-[1.65] text-[#e2dfd6] max-w-[760px] whitespace-pre-line">
-            {p.desc}
+            {deWidow(p.desc)}
           </p>
         </section>
 

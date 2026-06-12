@@ -787,7 +787,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 177,
     blurb: 'Series Launch Campaign',
-    desc: "Adults is an FX comedy about a group of twenty-somethings figuring it out together in New York, and this campaign carried its launch. I designed across every surface a series premiere touches: animated screens, reality check game video questions, polaroid prints, cast announcements, menus, posters, banners, and real world mockup examples. Wherever you ran into the show, on a bus shelter or in your feed, it had to land as the same sharp, character-driven world.",
+    desc: "Adults is an FX comedy about a group of twenty-somethings figuring it out together in New York, and this campaign carried its launch. I designed across every surface a series premiere touches: animated screens, reality check game video questions, polaroid prints, cast announcements, menus, posters, banners, and real world mockup examples.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Adults is a new FX series following a chosen-family of young roommates navigating their twenties in New York. The campaign had to translate its sharp, character-driven tone across every surface a show launch touches.",

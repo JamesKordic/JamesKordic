@@ -6,6 +6,7 @@ import type { Media, Section, GridRow, AspectRatio } from '@/lib/projects';
 import { useLightbox } from '@/lib/lightbox-context';
 import { VideoPlayer } from './video-player';
 import { EmbedFrame } from './embed-frame';
+import { deWidow } from '@/lib/typography';
 
 /* ============ HELPERS ============ */
 
@@ -89,7 +90,7 @@ export function CaseSection({
               </div>
               <div className="lg:col-span-7 max-w-[640px]">
                 <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line">
-                  {description[0]}
+                  {deWidow(description[0])}
                 </p>
                 {description.length > 1 && (
                   <>
@@ -100,7 +101,7 @@ export function CaseSection({
                             key={i}
                             className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line"
                           >
-                            {text}
+                            {deWidow(text)}
                           </p>
                         ))}
                       </div>
