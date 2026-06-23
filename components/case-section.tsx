@@ -83,7 +83,7 @@ export function CaseSection({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
               <div className="lg:col-span-5">
                 {section.title && (
-                  <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04]">
+                  <h2 className="font-display font-normal text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.5px] leading-[1.06]">
                     {section.title}
                   </h2>
                 )}
@@ -119,7 +119,7 @@ export function CaseSection({
             </div>
           ) : (
             section.title && (
-              <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] max-w-3xl">
+              <h2 className="font-display font-normal text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.5px] leading-[1.06] max-w-3xl">
                 {section.title}
               </h2>
             )

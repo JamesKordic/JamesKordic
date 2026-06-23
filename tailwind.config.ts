@@ -9,33 +9,41 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Dark base — slightly cooler than pure black
-        bg: '#08080c',
-        panel: '#13131a',
-        'panel-2': '#1b1b25',
-        elev: '#252532',
-        'elev-hi': '#2e2e3e',
-        text: '#f3f1ec',
-        muted: '#a3a3a6',
-        'muted-2': '#74747a',
-        line: '#2a2a36',
+        // Editorial studio palette — warm cream base, ink text, terracotta accent.
+        // Light surfaces for the main content area.
+        bg: '#FAFAF8', // cream page background
+        panel: '#F1EFE8', // card / placeholder surface
+        'panel-2': '#E6E4DD', // image placeholder fill
+        elev: '#EDEAE0', // hover surface
+        'elev-hi': '#E6E4DD',
+        text: '#1B1A16', // ink
+        muted: '#7C7A72', // dim text
+        'muted-2': '#9A968A',
+        line: '#E6E4DD', // hairline rules
 
-        // Primary accent — kept the lime, slightly cooler
-        accent: '#c8f135',
-        'accent-ink': '#10130a',
+        // Dark sidebar panel surfaces
+        paneldark: '#15140F',
+        panelfg: '#EDEAE0',
+        paneldim: '#9A968A',
+        panelline: '#33312a',
 
-        // New cooler accents for gradients
-        magenta: '#ff2d8a',
-        'magenta-deep': '#c01a6b',
-        cyan: '#22d3ee',
-        'cyan-deep': '#0891b2',
-        violet: '#8b5cf6',
-        'violet-deep': '#6d28d9',
-        amber: '#ffb84a',
+        // Primary accent — terracotta
+        accent: '#C0683C',
+        'accent-ink': '#FFF7F0', // text/icons on top of the accent
+
+        // Legacy gradient tokens, repointed to warm earth tones so any
+        // lingering reference reads cohesively rather than neon.
+        magenta: '#C0683C',
+        'magenta-deep': '#8a4a2c',
+        cyan: '#5E7D86',
+        'cyan-deep': '#3f5b63',
+        violet: '#8a6d4f',
+        'violet-deep': '#5e4a35',
+        amber: '#d8a070',
       },
       fontFamily: {
-        display: ['"Bricolage Grotesque"', 'sans-serif'],
-        ui: ['"Hanken Grotesk"', 'sans-serif'],
+        display: ['Newsreader', 'Georgia', 'serif'],
+        ui: ['Manrope', 'system-ui', 'sans-serif'],
       },
       animation: {
         spin: 'spin 5s linear infinite',
