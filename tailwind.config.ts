@@ -17,15 +17,15 @@ const config: Config = {
         elev: '#2A261E', // hover surface
         'elev-hi': '#332E24',
         text: '#ECE7DC', // warm off-white ink
-        muted: '#9C968A', // dim text
-        'muted-2': '#6E695E',
+        muted: '#B3ADA0', // dim text — brightened for legibility on dark
+        'muted-2': '#847E72',
         line: '#312C22', // hairline rules
 
-        // Sidebar / menu — painted in the brand terracotta ("main color").
-        paneldark: '#C0683C', // menu surface
-        panelfg: '#FFF6EF', // text/icons on the menu
-        paneldim: '#F2CDB6', // muted text on the menu
-        panelline: '#A8572F', // hairlines on the menu
+        // Sidebar / menu — dark panel, a touch deeper than the content.
+        paneldark: '#100E09', // menu surface
+        panelfg: '#ECE7DC', // text/icons on the menu
+        paneldim: '#8E887C', // muted text on the menu
+        panelline: '#2A261E', // hairlines on the menu
 
         // Primary accent — terracotta, brightened slightly for dark surfaces
         accent: '#D67E4D',
