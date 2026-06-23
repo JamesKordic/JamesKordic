@@ -50,16 +50,6 @@ export function WorkCard({
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
           />
         )}
-
-        {/* Year pill */}
-        <span className="absolute top-3 right-3.5 z-[2] text-[12px] font-semibold tracking-[0.5px] text-white bg-[rgba(20,19,15,0.55)] backdrop-blur-[4px] rounded-full px-2.5 py-1">
-          {p.year}
-        </span>
-
-        {/* Category tag */}
-        <span className="absolute left-3.5 bottom-3.5 z-[2] text-[11px] uppercase tracking-[1.5px] text-white bg-[rgba(20,19,15,0.45)] backdrop-blur-[4px] rounded-full px-3 py-[5px]">
-          {p.tags[0]}
-        </span>
       </div>
 
       <div className="flex items-baseline justify-between gap-3.5 mt-4">

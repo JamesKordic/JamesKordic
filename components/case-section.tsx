@@ -89,7 +89,7 @@ export function CaseSection({
                 )}
               </div>
               <div className="lg:col-span-7 max-w-[640px]">
-                <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line">
+                <p className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line">
                   {deWidow(description[0])}
                 </p>
                 {description.length > 1 && (
@@ -99,7 +99,7 @@ export function CaseSection({
                         {description.slice(1).map((text, i) => (
                           <p
                             key={i}
-                            className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line"
+                            className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line"
                           >
                             {deWidow(text)}
                           </p>

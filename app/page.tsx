@@ -16,7 +16,7 @@ export default function HomePage() {
           Graphic &amp; motion design for brands that need to{' '}
           <em className="italic text-accent">move and make noise</em>.
         </h1>
-        <p className="text-[17px] text-muted mt-6">{T.home.cta.subhead}</p>
+        <p className="text-[17px] text-text/85 mt-6">{T.home.cta.subhead}</p>
       </section>
 
       {/* Selected work */}

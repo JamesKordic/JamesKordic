@@ -17,8 +17,8 @@ const config: Config = {
         elev: '#2A261E', // hover surface
         'elev-hi': '#332E24',
         text: '#ECE7DC', // warm off-white ink
-        muted: '#B3ADA0', // dim text — brightened for legibility on dark
-        'muted-2': '#847E72',
+        muted: '#C2BCAE', // dim text — brightened for legibility on dark
+        'muted-2': '#8E887C',
         line: '#312C22', // hairline rules
 
         // Sidebar / menu — dark panel, a touch deeper than the content.

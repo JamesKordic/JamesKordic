@@ -34,7 +34,7 @@ export default function AboutPage() {
               className={
                 i === 0
                   ? 'text-[19px] leading-[1.6] text-text mb-5'
-                  : 'text-[16px] leading-[1.65] text-muted mb-5 last:mb-0'
+                  : 'text-[16px] leading-[1.65] text-text/85 mb-5 last:mb-0'
               }
             >
               {paragraph}

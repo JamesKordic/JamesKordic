@@ -39,25 +39,12 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {/* Hero */}
       <header className="pb-10 border-b border-line">
         <div className="text-[12px] uppercase tracking-[2px] text-accent font-bold">
-          Case Study · {p.tags[0]}
+          Case Study
         </div>
         <h1 className="font-display font-normal text-[clamp(38px,5.5vw,76px)] leading-[1.04] tracking-[-0.5px] mt-4 mb-5">
           {p.title}
         </h1>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[14px] text-muted">
-          <span className="text-text font-semibold">{p.blurb}</span>
-          <span className="w-1 h-1 rounded-full bg-muted-2 inline-block" />
-          <span>{p.year}</span>
-          <span className="w-1 h-1 rounded-full bg-muted-2 inline-block" />
-          <span className="flex flex-wrap gap-x-1.5">
-            {p.tags.map((t, i) => (
-              <span key={t}>
-                {t}
-                {i < p.tags.length - 1 ? ',' : ''}
-              </span>
-            ))}
-          </span>
-        </div>
+        <div className="text-[15px] text-text font-medium">{p.blurb}</div>
       </header>
 
       {/* Cover */}
@@ -90,7 +77,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <h2 className="font-display font-normal text-[clamp(26px,3.5vw,40px)] tracking-[-0.5px] leading-[1.08] mb-6">
           Overview
         </h2>
-        <p className="text-[17px] leading-[1.7] text-muted max-w-[760px] whitespace-pre-line">
+        <p className="text-[17px] leading-[1.7] text-text/85 max-w-[760px] whitespace-pre-line">
           {deWidow(p.desc)}
         </p>
       </section>
