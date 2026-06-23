@@ -33,6 +33,17 @@ export function AppShell({ children }: { children: ReactNode }) {
     };
   }, [menuOpen]);
 
+  // The home route is a full-bleed, self-contained experience (its own nav +
+  // footer in the Louis Moss style), so it bypasses the editorial sidebar shell.
+  if (pathname === '/') {
+    return (
+      <>
+        {children}
+        <Lightbox />
+      </>
+    );
+  }
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-[340px_1fr] min-h-screen">
