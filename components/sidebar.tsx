@@ -44,10 +44,8 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
       <div>
         {/* Name mark */}
         <Link href="/" onClick={onClose} className="block">
-          <span className="font-display text-[30px] leading-[1.05] tracking-[-0.5px] text-panelfg">
-            {T.artist.firstName}
-            <br />
-            {T.artist.lastName}
+          <span className="font-display text-[26px] leading-[1.05] tracking-[-0.5px] text-panelfg whitespace-nowrap">
+            {T.artist.name}
           </span>
         </Link>
         <div className="text-[12px] uppercase tracking-[2px] text-paneldim mt-4">
