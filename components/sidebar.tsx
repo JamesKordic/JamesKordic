@@ -8,7 +8,7 @@ import { SITE_TEXT } from '@/lib/site-text';
 const T = SITE_TEXT;
 
 /**
- * Fixed editorial sidebar — dark panel with the name mark, availability
+ * Fixed editorial sidebar — terracotta panel with the name mark, availability
  * status, primary navigation, and contact details pinned to the bottom.
  * Sticky/full-height on desktop; a slide-in drawer on mobile (toggled from
  * the top bar in AppShell via the `open` / `onClose` props).
@@ -57,7 +57,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
 
         {/* Availability */}
         <div className="inline-flex items-center gap-2 text-[13px] mt-7 border border-panelline rounded-full px-3.5 py-[7px] text-panelfg">
-          <span className="w-[7px] h-[7px] rounded-full bg-accent" />
+          <span className="w-[7px] h-[7px] rounded-full bg-panelfg" />
           {T.home.cta.availability}
         </div>
 
@@ -71,7 +71,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
                 className="group flex items-center justify-between text-[15px] py-[7px] border-b border-panelline text-paneldim hover:text-panelfg hover:pl-2 transition-all"
               >
                 <span>{item.label}</span>
-                <span className="text-[11px] text-accent">{item.marker}</span>
+                <span className="text-[11px] text-panelfg">{item.marker}</span>
               </a>
             ) : (
               <Link
@@ -83,7 +83,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
                 }`}
               >
                 <span>{item.label}</span>
-                <span className="text-[11px] text-accent">{item.marker}</span>
+                <span className="text-[11px] text-panelfg">{item.marker}</span>
               </Link>
             )
           )}
@@ -96,7 +96,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
         <br />
         <a
           href={`mailto:${T.contact.email}`}
-          className="text-panelfg border-b border-panelline hover:border-accent transition-colors"
+          className="text-panelfg border-b border-panelline hover:border-panelfg transition-colors"
         >
           {T.contact.email}
         </a>

@@ -20,8 +20,8 @@ body {
 }
 
 body {
-  background: #fafaf8;
-  color: #1b1a16;
+  background: #15130e;
+  color: #ece7dc;
   font-family: 'Manrope', system-ui, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -40,8 +40,8 @@ p {
 
 /* Text selection — terracotta accent. */
 ::selection {
-  background: #c0683c;
-  color: #fff7f0;
+  background: #d67e4d;
+  color: #1b130d;
 }
 
 a {
@@ -68,13 +68,13 @@ video {
   width: 12px;
 }
 .scrollbar-styled::-webkit-scrollbar-thumb {
-  background: #d8d5cb;
+  background: #3a342a;
   border-radius: 10px;
   border: 3px solid transparent;
   background-clip: padding-box;
 }
 .scrollbar-styled::-webkit-scrollbar-thumb:hover {
-  background: #c3bfb2;
+  background: #4a4336;
   background-clip: padding-box;
 }
 .scrollbar-styled::-webkit-scrollbar-track {
@@ -85,7 +85,7 @@ video {
   width: 8px;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #d8d5cb;
+  background: #3a342a;
   border-radius: 8px;
 }
 .scrollbar-thin::-webkit-scrollbar-track {

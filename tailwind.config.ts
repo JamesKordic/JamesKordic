@@ -9,27 +9,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Editorial studio palette — warm cream base, ink text, terracotta accent.
-        // Light surfaces for the main content area.
-        bg: '#FAFAF8', // cream page background
-        panel: '#F1EFE8', // card / placeholder surface
-        'panel-2': '#E6E4DD', // image placeholder fill
-        elev: '#EDEAE0', // hover surface
-        'elev-hi': '#E6E4DD',
-        text: '#1B1A16', // ink
-        muted: '#7C7A72', // dim text
-        'muted-2': '#9A968A',
-        line: '#E6E4DD', // hairline rules
+        // Editorial studio palette — dark mode. Warm near-black base, soft
+        // off-white ink, terracotta accent.
+        bg: '#15130E', // warm near-black page background
+        panel: '#201D16', // card / placeholder surface
+        'panel-2': '#2A261E', // image placeholder fill
+        elev: '#2A261E', // hover surface
+        'elev-hi': '#332E24',
+        text: '#ECE7DC', // warm off-white ink
+        muted: '#9C968A', // dim text
+        'muted-2': '#6E695E',
+        line: '#312C22', // hairline rules
 
-        // Dark sidebar panel surfaces
-        paneldark: '#15140F',
-        panelfg: '#EDEAE0',
-        paneldim: '#9A968A',
-        panelline: '#33312a',
+        // Sidebar / menu — painted in the brand terracotta ("main color").
+        paneldark: '#C0683C', // menu surface
+        panelfg: '#FFF6EF', // text/icons on the menu
+        paneldim: '#F2CDB6', // muted text on the menu
+        panelline: '#A8572F', // hairlines on the menu
 
-        // Primary accent — terracotta
-        accent: '#C0683C',
-        'accent-ink': '#FFF7F0', // text/icons on top of the accent
+        // Primary accent — terracotta, brightened slightly for dark surfaces
+        accent: '#D67E4D',
+        'accent-ink': '#1B130D', // text/icons on top of the accent
 
         // Legacy gradient tokens, repointed to warm earth tones so any
         // lingering reference reads cohesively rather than neon.
