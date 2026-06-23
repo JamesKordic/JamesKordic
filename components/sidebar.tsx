@@ -27,9 +27,9 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
 
   return (
     <aside
-      className={`bg-paneldark text-panelfg flex flex-col justify-between gap-10 px-9 py-11
+      className={`bg-paneldark text-panelfg flex flex-col justify-between gap-10 px-9 py-12 sm:py-14 lg:py-16
         fixed inset-y-0 left-0 z-50 w-[300px] max-w-[85vw] overflow-y-auto transition-transform duration-300 ease-out
-        md:sticky md:top-0 md:z-auto md:h-screen md:w-auto md:max-w-none md:translate-x-0 md:py-12 md:border-r md:border-panelline
+        md:sticky md:top-0 md:z-auto md:h-screen md:w-auto md:max-w-none md:translate-x-0 md:border-r md:border-panelline
         ${open ? 'translate-x-0' : '-translate-x-full'}`}
     >
       {/* Close button — mobile drawer only */}
@@ -48,9 +48,6 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
             {T.artist.name}
           </span>
         </Link>
-        <div className="text-[12px] uppercase tracking-[2px] text-paneldim mt-4">
-          {T.artist.discipline}
-        </div>
 
         {/* Availability */}
         <div className="inline-flex items-center gap-2 text-[13px] mt-7 border border-panelline rounded-full px-3.5 py-[7px] text-panelfg">
