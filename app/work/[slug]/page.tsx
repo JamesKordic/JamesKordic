@@ -27,7 +27,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
 
   return (
-    <div className="max-w-[1100px]">
+    <div>
       {/* Back */}
       <Link
         href="/"

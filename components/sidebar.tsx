@@ -10,9 +10,10 @@ const T = SITE_TEXT;
 /**
  * Fixed editorial sidebar — dark panel with the name mark, availability
  * status, primary navigation, and contact details pinned to the bottom.
- * Sticky/full-height on desktop; stacks above the content on mobile.
+ * Sticky/full-height on desktop; a slide-in drawer on mobile (toggled from
+ * the top bar in AppShell via the `open` / `onClose` props).
  */
-export function Sidebar() {
+export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pathname = usePathname();
 
   const navItems: { label: string; href: string; marker: string; external?: boolean }[] = [
@@ -26,10 +27,24 @@ export function Sidebar() {
     href === '/' ? pathname === '/' : pathname?.startsWith(href);
 
   return (
-    <aside className="bg-paneldark text-panelfg md:sticky md:top-0 md:h-screen flex flex-col justify-between gap-10 px-9 py-11 md:py-12">
+    <aside
+      className={`bg-paneldark text-panelfg flex flex-col justify-between gap-10 px-9 py-11
+        fixed inset-y-0 left-0 z-50 w-[300px] max-w-[85vw] overflow-y-auto transition-transform duration-300 ease-out
+        md:sticky md:top-0 md:z-auto md:h-screen md:w-auto md:max-w-none md:translate-x-0 md:py-12
+        ${open ? 'translate-x-0' : '-translate-x-full'}`}
+    >
+      {/* Close button — mobile drawer only */}
+      <button
+        onClick={onClose}
+        aria-label="Close menu"
+        className="md:hidden absolute top-5 right-5 w-9 h-9 flex items-center justify-center text-paneldim hover:text-panelfg text-2xl leading-none"
+      >
+        ×
+      </button>
+
       <div>
         {/* Name mark */}
-        <Link href="/" className="block">
+        <Link href="/" onClick={onClose} className="block">
           <span className="font-display text-[30px] leading-[1.05] tracking-[-0.5px] text-panelfg">
             {T.artist.firstName}
             <br />
@@ -62,6 +77,7 @@ export function Sidebar() {
               <Link
                 key={item.label}
                 href={item.href}
+                onClick={onClose}
                 className={`group flex items-center justify-between text-[15px] py-[7px] border-b border-panelline hover:pl-2 transition-all ${
                   isActive(item.href) ? 'text-panelfg pl-2' : 'text-paneldim hover:text-panelfg'
                 }`}

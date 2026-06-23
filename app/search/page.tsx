@@ -23,7 +23,7 @@ export default function SearchPage() {
   }, [filter]);
 
   return (
-    <div className="max-w-[1100px]">
+    <div>
       {/* Intro */}
       <section className="max-w-[640px] pb-10 border-b border-line">
         <div className="text-[12px] uppercase tracking-[2px] text-accent font-bold mb-5">
@@ -57,7 +57,7 @@ export default function SearchPage() {
             {hits.length !== 1 ? 's' : ''}
           </h3>
           {hits.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-9">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-7 gap-y-9">
               {hits.map((p, i) => (
                 <WorkCard key={p.id} p={p} i={i} />
               ))}
@@ -90,7 +90,7 @@ export default function SearchPage() {
       <h3 className="text-[13px] uppercase tracking-[2px] text-muted mt-12 mb-6">
         {T.search.allProjects}
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-9">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-7 gap-y-9">
         {PROJECTS.map((p, i) => (
           <WorkCard key={p.id} p={p} i={i} />
         ))}

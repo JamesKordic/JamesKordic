@@ -21,7 +21,7 @@ export function WorkCard({
   return (
     <Link
       href={`/work/${p.id}`}
-      className={`stagger group block ${feature ? 'sm:col-span-2' : ''}`}
+      className={`stagger group block ${feature ? 'col-span-full' : ''}`}
       style={{ animationDelay: `${i * 70}ms` }}
     >
       <div

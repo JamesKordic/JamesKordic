@@ -6,7 +6,7 @@ const T = SITE_TEXT;
 
 export default function HomePage() {
   return (
-    <div className="max-w-[1100px]">
+    <div>
       {/* Intro */}
       <section className="max-w-[640px] pb-12 border-b border-line">
         <div className="text-[12px] uppercase tracking-[2px] text-accent font-bold mb-5">
@@ -25,7 +25,7 @@ export default function HomePage() {
         <span className="text-[13px] text-muted">2023 — 2025</span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-9">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-7 gap-y-9">
         {PROJECTS.map((p, i) => (
           <WorkCard key={p.id} p={p} i={i} feature={i === 0} />
         ))}
