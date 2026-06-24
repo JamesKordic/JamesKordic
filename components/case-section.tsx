@@ -36,10 +36,14 @@ function aspectStyle(aspect: AspectRatio | string | undefined) {
 export function CaseSection({
   section,
   index,
+  headerless = false,
 }: {
   section: Section;
   /** Optional 0-based section index, used to render a project number ("№ 01"). */
   index?: number;
+  /** When true, render only the media grid — the caller supplies its own
+   *  heading (used by the editorial project page's `.app` blocks). */
+  headerless?: boolean;
 }) {
   const { show } = useLightbox();
   const [expanded, setExpanded] = useState(false);
@@ -72,6 +76,43 @@ export function CaseSection({
   // section that includes multiple carousels). Project number still
   // shows on titled sections only.
   const isTitled = !!(section.title || section.eyebrow);
+
+  // Media-only render for the editorial project page — the `.app` wrapper
+  // supplies the reference-styled heading, so we emit just the grid.
+  const mediaGrid =
+    section.layout?.type === 'mixed' ? (
+      <MixedLayout rows={section.layout.rows} allImages={allImages} onLightbox={show} indexOf={indexOfImage} />
+    ) : section.layout?.type === 'carousel' ? (
+      <CarouselLayout
+        aspect={section.layout.aspect}
+        visible={section.layout.visible ?? 4}
+        media={section.media}
+        allImages={allImages}
+        onLightbox={show}
+        indexOf={indexOfImage}
+      />
+    ) : section.layout?.type === 'uniform' ? (
+      <UniformLayout
+        cols={section.layout.cols}
+        aspect={section.layout.aspect}
+        media={section.media}
+        allImages={allImages}
+        onLightbox={show}
+        indexOf={indexOfImage}
+      />
+    ) : (
+      <LegacyLayout
+        cols={section.cols || 1}
+        media={section.media}
+        allImages={allImages}
+        onLightbox={show}
+        indexOf={indexOfImage}
+      />
+    );
+
+  if (headerless) {
+    return mediaGrid;
+  }
 
   return (
     <section className="py-16 lg:py-20 border-b border-line last:border-b-0">
@@ -128,37 +169,7 @@ export function CaseSection({
       )}
 
       {/* Render based on layout type */}
-      {section.layout?.type === 'mixed' ? (
-        <MixedLayout rows={section.layout.rows} allImages={allImages} onLightbox={show} indexOf={indexOfImage} />
-      ) : section.layout?.type === 'carousel' ? (
-        <CarouselLayout
-          aspect={section.layout.aspect}
-          visible={section.layout.visible ?? 4}
-          media={section.media}
-          allImages={allImages}
-          onLightbox={show}
-          indexOf={indexOfImage}
-        />
-      ) : section.layout?.type === 'uniform' ? (
-        <UniformLayout
-          cols={section.layout.cols}
-          aspect={section.layout.aspect}
-          media={section.media}
-          allImages={allImages}
-          onLightbox={show}
-          indexOf={indexOfImage}
-        />
-      ) : (
-        /* Legacy: render using old cols prop, no fixed aspect (image's natural h-auto) */
-        <LegacyLayout
-          cols={section.cols || 1}
-          media={section.media}
-          allImages={allImages}
-          onLightbox={show}
-          indexOf={indexOfImage}
-        />
-      )}
-
+      {mediaGrid}
     </section>
   );
 }

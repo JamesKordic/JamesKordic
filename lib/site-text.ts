@@ -102,6 +102,17 @@ export const SITE_TEXT = {
 
   /* ---- ABOUT PAGE ---- */
   about: {
+    /** Punchy one-line headline above the bio in the About section. */
+    headline: 'I build brand systems and the motion that carries them.',
+
+    /** Sidecard rows shown beside the bio in the About section. */
+    sidecard: [
+      { label: 'Based in', value: 'New York, NY' },
+      { label: 'Education', value: 'BFA, Graphic Design — RIT' },
+      { label: 'Experience', value: 'Four years, professional' },
+      { label: 'Focus', value: 'Motion · Branding · Creative Direction · Marketing' },
+    ],
+
     /** Bio shown in the About panel — list of paragraphs.
      *  Each item becomes its own <p> tag.
      *  First paragraph is rendered slightly larger than the others. */
