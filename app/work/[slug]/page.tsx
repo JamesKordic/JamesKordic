@@ -132,7 +132,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <nav className="grid grid-cols-1 border-t border-line sm:grid-cols-2">
         <Link
           href={`/work/${prev.id}`}
-          className="group flex flex-col gap-2 px-6 py-12 transition-colors hover:bg-[#fafafa]"
+          className="group flex flex-col gap-2 px-6 py-12 transition-colors hover:bg-panel"
         >
           <span className="text-[12px] uppercase tracking-[0.09em] text-muted">
             Previous
@@ -143,7 +143,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </Link>
         <Link
           href={`/work/${next.id}`}
-          className="group flex flex-col gap-2 border-t border-line px-6 py-12 transition-colors hover:bg-[#fafafa] sm:items-end sm:border-l sm:border-t-0 sm:text-right"
+          className="group flex flex-col gap-2 border-t border-line px-6 py-12 transition-colors hover:bg-panel sm:items-end sm:border-l sm:border-t-0 sm:text-right"
         >
           <span className="text-[12px] uppercase tracking-[0.09em] text-muted">
             Next

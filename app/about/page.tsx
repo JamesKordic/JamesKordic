@@ -74,7 +74,7 @@ export default function AboutPage() {
           </div>
           <a
             href={`mailto:${T.contact.email}`}
-            className="self-start sm:self-auto inline-flex items-center gap-2 text-[14px] font-semibold border border-text rounded-full px-5 py-2.5 hover:bg-text hover:text-bg transition-colors whitespace-nowrap"
+            className="self-start sm:self-auto inline-flex items-center gap-2 text-[14px] font-semibold border border-accent text-accent rounded-md px-5 py-2.5 hover:bg-accent hover:text-accent-ink transition-colors whitespace-nowrap"
           >
             {T.about.availability.buttonLabel} →
           </a>

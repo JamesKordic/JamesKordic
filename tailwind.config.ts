@@ -9,38 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Pentagram-inspired editorial palette — light mode. Bright paper,
-        // near-black ink, hairline rules, one hot accent.
-        bg: '#FFFFFF', // paper page background
-        panel: '#F2F2F2', // card / placeholder surface
-        'panel-2': '#ECECEC', // image placeholder fill
-        elev: '#F2F2F2', // hover surface
-        'elev-hi': '#E9E9E9',
-        text: '#0A0A0A', // ink
-        muted: '#727272', // grey — secondary text
+        // Warm editorial palette — soft off-white paper, near-black ink,
+        // hairline rules in a warm grey, and a single interactive blue. Colour
+        // lives only in that accent; everything else is ink on paper.
+        bg: '#F7F6F3', // warm paper page background
+        panel: '#FFFFFF', // card surface
+        'panel-2': '#ECEAE3', // image placeholder fill (warm light grey)
+        elev: '#FFFFFF', // hover surface
+        'elev-hi': '#F0EEE8',
+        text: '#1A1A1A', // ink
+        muted: '#6B6B6B', // grey — secondary text
         'muted-2': '#9A9A9A',
-        line: '#E6E6E6', // hairline rules
+        line: '#E2E0DA', // warm hairline rules
 
         // Header / chrome — same paper as content, hairline divider.
-        paneldark: '#FFFFFF', // header surface
-        panelfg: '#0A0A0A', // text/icons in the header
-        paneldim: '#727272', // muted text in the header
-        panelline: '#E6E6E6', // hairlines in the header
+        paneldark: '#F7F6F3', // header surface
+        panelfg: '#1A1A1A', // text/icons in the header
+        paneldim: '#6B6B6B', // muted text in the header
+        panelline: '#E2E0DA', // hairlines in the header
 
-        // Pentagram has no single accent — chrome is pure black on white, and
-        // colour appears only in the discipline tags. "accent" is therefore
-        // ink, so any lingering text-accent / border-accent reads black.
-        accent: '#0A0A0A',
+        // The single interactive colour. Every link, hover, button, and
+        // eyebrow that needs emphasis reaches for this blue and nothing else.
+        accent: '#2A4CFF',
         'accent-ink': '#FFFFFF', // text/icons on top of the accent
 
         // Legacy gradient tokens, kept neutral so nothing reads as a stray hue.
-        magenta: '#0A0A0A',
+        magenta: '#1A1A1A',
         'magenta-deep': '#000000',
-        cyan: '#727272',
+        cyan: '#6B6B6B',
         'cyan-deep': '#4a4a4a',
         violet: '#9A9A9A',
         'violet-deep': '#6a6a6a',
-        amber: '#0A0A0A',
+        amber: '#1A1A1A',
       },
       fontFamily: {
         // Neue Haas Grotesk on the real site; Helvetica Neue is the closest

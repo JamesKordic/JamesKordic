@@ -405,12 +405,12 @@ export function VideoPlayer({
                 className="absolute inset-y-0 left-0 bg-white/30 rounded-full"
                 style={{ width: `${buffered * 100}%` }}
               />
-              {/* Played overlay — uses the site's signature gradient */}
+              {/* Played overlay — the site's single interactive blue */}
               <div
                 className="absolute inset-y-0 left-0 rounded-full"
                 style={{
                   width: `${progressFrac * 100}%`,
-                  background: '#0A0A0A',
+                  background: '#2A4CFF',
                 }}
               />
               {/* Scrub handle — appears on hover and during scrubbing */}

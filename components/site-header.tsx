@@ -25,13 +25,14 @@ export function SiteHeader() {
     href === '/' ? pathname === '/' : pathname?.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bg">
-      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-4 sm:px-8">
+    <header className="sticky top-0 z-50 border-b border-line bg-[rgba(247,246,243,0.88)] backdrop-blur-md backdrop-saturate-[1.4]">
+      <div className="mx-auto flex w-full max-w-[1200px] items-baseline justify-between gap-6 px-6 py-4 sm:px-8">
         <Link
           href="/"
-          className="text-[22px] sm:text-[26px] font-bold tracking-[-0.03em] leading-none"
+          className="text-[18px] sm:text-[20px] font-bold tracking-[-0.01em] leading-none"
         >
-          {T.artist.name}
+          {T.artist.name}{' '}
+          <span className="font-normal text-muted">— {T.artist.discipline}</span>
         </Link>
 
         <nav className="flex items-center gap-5 sm:gap-7">
@@ -40,7 +41,7 @@ export function SiteHeader() {
             <a
               key={l.label}
               href={l.href}
-              className="text-[15px] font-medium underline-offset-[3px] hover:underline"
+              className="text-[14px] font-medium text-muted transition-colors hover:text-accent"
             >
               {l.label}
             </a>
@@ -48,8 +49,8 @@ export function SiteHeader() {
             <Link
               key={l.label}
               href={l.href}
-              className={`text-[15px] font-medium underline-offset-[3px] hover:underline ${
-                isActive(l.href) ? 'underline' : ''
+              className={`text-[14px] font-medium transition-colors hover:text-accent ${
+                isActive(l.href) ? 'text-accent' : 'text-muted'
               }`}
             >
               {l.label}

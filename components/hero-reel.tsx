@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { PROJECTS, POPULAR, disciplineColor } from '@/lib/projects';
+import { PROJECTS, POPULAR } from '@/lib/projects';
 
 // Featured set for the reel, in POPULAR order.
 const FEATURED = POPULAR.map((id) => PROJECTS.find((p) => p.id === id)).filter(
@@ -52,7 +52,7 @@ export function HeroReel() {
       {/* Stage */}
       <Link
         href={`/work/${cur.id}`}
-        className="group relative block h-[clamp(240px,34vw,420px)] w-full overflow-hidden bg-panel-2"
+        className="group relative block h-[clamp(240px,34vw,420px)] w-full overflow-hidden rounded-md border border-line bg-panel-2"
       >
         {FEATURED.map((p, i) => (
           // eslint-disable-next-line @next/next/no-img-element
@@ -89,27 +89,15 @@ export function HeroReel() {
             {String(FEATURED.length).padStart(2, '0')}
           </div>
           <Link href={`/work/${cur.id}`} className="group inline-block">
-            <h2 className="text-[clamp(26px,3.6vw,46px)] font-bold leading-[1.04] tracking-[-0.02em] underline-offset-[3px] group-hover:underline">
+            <h2 className="text-[clamp(26px,3.6vw,46px)] font-bold leading-[1.04] tracking-[-0.02em] transition-colors group-hover:text-accent">
               {cur.title}
             </h2>
           </Link>
           <p className="mt-2 text-[15px] leading-[1.4] text-muted">
             {cur.blurb}
           </p>
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
-            {cur.tags.map((t) => (
-              <span
-                key={t}
-                className="inline-flex items-center gap-1.5 text-[13px] text-text"
-              >
-                <span
-                  className="h-[9px] w-[9px] flex-none"
-                  style={{ background: disciplineColor(t) }}
-                  aria-hidden
-                />
-                {t}
-              </span>
-            ))}
+          <div className="mt-3 text-[13px] text-muted">
+            {cur.tags.join(' · ')}
           </div>
         </div>
 
@@ -124,7 +112,7 @@ export function HeroReel() {
             >
               <span
                 className={`block h-[3px] w-9 transition-colors ${
-                  i === active ? 'bg-text' : 'bg-line group-hover:bg-muted'
+                  i === active ? 'bg-accent' : 'bg-line group-hover:bg-muted'
                 }`}
               />
             </button>

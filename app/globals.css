@@ -18,10 +18,10 @@ body {
 }
 
 body {
-  background: #ffffff;
-  color: #0a0a0a;
+  background: #f7f6f3;
+  color: #1a1a1a;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -36,9 +36,9 @@ p {
   text-wrap: pretty;
 }
 
-/* Text selection — ink on paper. */
+/* Text selection — the interactive blue on paper. */
 ::selection {
-  background: #0a0a0a;
+  background: #2a4cff;
   color: #ffffff;
 }
 

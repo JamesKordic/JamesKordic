@@ -51,6 +51,10 @@ export const SITE_TEXT = {
 
   /* ---- HOME PAGE ---- */
   home: {
+    /** Editorial intro headline at the very top of the home page. */
+    introHeadline:
+      'Graphic & motion design for brands that need to move and make noise.',
+
     /** Subtitle under the giant "James Kordic" headline on the home page.
      *  This is the canonical site tagline. */
     tagline:

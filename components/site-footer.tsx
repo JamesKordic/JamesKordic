@@ -85,7 +85,7 @@ function FooterLink({
   external?: boolean;
 }) {
   const cls =
-    'block py-[3px] text-[15px] font-medium underline-offset-2 hover:underline';
+    'block py-[3px] text-[15px] font-medium text-muted transition-colors hover:text-accent';
   if (external) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
