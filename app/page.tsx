@@ -2,18 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { PROJECTS, CATEGORIES } from '@/lib/projects';
+import { PROJECTS, disciplineColor } from '@/lib/projects';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
-
-// Discipline → colour, the Pentagram tag system. Built from the project
-// CATEGORIES, with a couple of fallbacks for tags outside that list.
-const TAG_COLORS: Record<string, string> = {
-  ...Object.fromEntries(CATEGORIES.map((c) => [c.name, c.c])),
-  'Social Media': '#2e6bff',
-  Conference: '#3c8fa0',
-};
-const tagColor = (t: string) => TAG_COLORS[t] ?? '#727272';
+import { HeroReel } from '@/components/hero-reel';
 
 // Curated discipline filters — one tidy row, covering every project.
 const FILTERS = [
@@ -43,8 +35,11 @@ export default function HomePage() {
     <div className="min-h-screen bg-bg text-text">
       <SiteHeader />
 
+      {/* Featured hero reel */}
+      <HeroReel />
+
       {/* Discipline filter row */}
-      <div className="flex flex-wrap gap-x-5 gap-y-2 px-6 pb-7 pt-8 text-[14px] font-medium sm:px-8">
+      <div className="mt-14 flex flex-wrap gap-x-5 gap-y-2 border-t border-line px-6 pb-7 pt-7 text-[14px] font-medium sm:px-8">
         {FILTERS.map((f) => (
           <button
             key={f}
@@ -88,7 +83,7 @@ export default function HomePage() {
                 >
                   <span
                     className="h-[9px] w-[9px] flex-none"
-                    style={{ background: tagColor(t) }}
+                    style={{ background: disciplineColor(t) }}
                     aria-hidden
                   />
                   {t}

@@ -1083,7 +1083,14 @@ export const CATEGORIES = [
   { name: '3D Design', c: '#7a4fd0' },
   { name: 'Concept Work', c: '#3c8fa0' },
   { name: 'Marketing', c: '#e25a26' },
+  { name: 'Social Media', c: '#0e8fd0' },
+  { name: 'Conference', c: '#caa23a' },
 ];
+
+/** Pentagram-style discipline tag colour. Falls back to grey for any tag
+ *  not present in CATEGORIES. */
+export const disciplineColor = (name: string) =>
+  CATEGORIES.find((c) => c.name === name)?.c ?? '#727272';
 
 // Artist name. Re-exported from SITE_TEXT so the name lives in one place
 // (lib/site-text.ts) and everything else that imports `ARTIST` still works.
