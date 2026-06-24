@@ -47,7 +47,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       </p>
 
       {/* Title + lede */}
-      <section className="mx-auto grid max-w-[1400px] grid-cols-1 items-end gap-7 border-b border-line px-6 pb-14 pt-9 md:grid-cols-[1.6fr_1fr] md:gap-12">
+      <section className="grid grid-cols-1 items-end gap-7 border-b border-line px-6 pb-14 pt-9 md:grid-cols-[1.6fr_1fr] md:gap-12">
         <h1 className="max-w-[14ch] text-[clamp(34px,5.4vw,76px)] font-semibold leading-[1.02] tracking-[-0.03em]">
           {p.title}
         </h1>
@@ -59,8 +59,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      {/* Media sequence */}
-      <div className="mx-auto max-w-[1400px]">
+      {/* Media sequence — full-bleed; reading blocks stay centered within. */}
+      <div>
         {/* Hero — full-bleed cover */}
         <div className="relative aspect-[16/9] overflow-hidden bg-panel-2">
           <Image
@@ -111,7 +111,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       </div>
 
       {/* Credits */}
-      <section className="mx-auto mt-16 grid max-w-[1400px] grid-cols-2 gap-8 border-t border-line px-6 py-12 md:grid-cols-4">
+      <section className="mt-16 grid grid-cols-2 gap-8 border-t border-line px-6 py-12 md:grid-cols-4">
         {credits.map((c) => (
           <div key={c.label}>
             <h4 className="mb-3.5 text-[12px] uppercase tracking-[0.09em] text-muted">
