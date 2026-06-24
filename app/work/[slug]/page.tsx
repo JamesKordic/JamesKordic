@@ -26,107 +26,149 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
 
-  return (
-    <div>
-      {/* Back */}
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 text-[13px] text-muted hover:text-accent transition-colors mb-9"
-      >
-        ← All work
-      </Link>
+  // Credits grid — only columns that actually have content, so projects
+  // without a named client/role don't leave empty cells.
+  const credits: { label: string; items: string[] }[] = [
+    p.client && { label: 'Client', items: [p.client] },
+    p.role && { label: 'Role', items: p.role.split(',').map((s) => s.trim()) },
+    p.year && { label: 'Year', items: [p.year] },
+    p.tags.length > 0 && { label: 'Disciplines', items: p.tags },
+  ].filter(Boolean) as { label: string; items: string[] }[];
 
-      {/* Hero */}
-      <header className="pb-10 border-b border-line">
-        <div className="text-[12px] uppercase tracking-[2px] text-accent font-bold">
-          Case Study
-        </div>
-        <h1 className="font-display font-normal text-[clamp(38px,5.5vw,76px)] leading-[1.04] tracking-[-0.5px] mt-4 mb-5">
+  return (
+    <article>
+      {/* Breadcrumb */}
+      <p className="px-6 pt-5 text-[14px] font-medium text-muted">
+        <Link href="/" className="hover:text-accent transition-colors">
+          ← Work
+        </Link>
+        <span className="px-2">/</span>
+        {p.tags.join(' · ')}
+      </p>
+
+      {/* Title + lede */}
+      <section className="mx-auto grid max-w-[1400px] grid-cols-1 items-end gap-7 border-b border-line px-6 pb-14 pt-9 md:grid-cols-[1.6fr_1fr] md:gap-12">
+        <h1 className="max-w-[14ch] text-[clamp(34px,5.4vw,76px)] font-semibold leading-[1.02] tracking-[-0.03em]">
           {p.title}
         </h1>
-        <div className="text-[15px] text-text font-medium">{p.blurb}</div>
-      </header>
-
-      {/* Cover */}
-      <div className="relative mt-10 overflow-hidden bg-panel-2 aspect-[16/9] border border-line">
-        <Image
-          src={p.cover}
-          alt={`${p.title} cover`}
-          fill
-          sizes="(max-width:1100px) 100vw, 1100px"
-          className="object-cover"
-          priority
-        />
-        {p.coverVideo && (
-          <video
-            src={p.coverVideo}
-            poster={p.cover}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-label={`${p.title} cover video`}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        )}
-      </div>
-
-      {/* Overview */}
-      <section className="py-14 lg:py-16 border-b border-line">
-        <h2 className="font-display font-normal text-[clamp(26px,3.5vw,40px)] tracking-[-0.5px] leading-[1.08] mb-6">
-          Overview
-        </h2>
-        <p className="text-[17px] leading-[1.7] text-text/85 max-w-[760px] whitespace-pre-line">
-          {deWidow(p.desc)}
-        </p>
+        <div className="text-[clamp(16px,1.5vw,20px)] leading-[1.45]">
+          <span className="mb-3 block text-[12px] uppercase tracking-[0.09em] text-muted">
+            About the project
+          </span>
+          {deWidow(p.blurb)}
+        </div>
       </section>
 
-      {/* Case study sections */}
-      {p.sections.map((sec, i) => (
-        <CaseSection key={i} section={sec} index={i} />
-      ))}
+      {/* Media sequence */}
+      <div className="mx-auto max-w-[1400px]">
+        {/* Hero — full-bleed cover */}
+        <div className="relative aspect-[16/9] overflow-hidden bg-panel-2">
+          <Image
+            src={p.cover}
+            alt={`${p.title} cover`}
+            fill
+            sizes="(max-width:1400px) 100vw, 1400px"
+            className="object-cover"
+            priority
+          />
+          {p.coverVideo && (
+            <video
+              src={p.coverVideo}
+              poster={p.cover}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={`${p.title} cover video`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          )}
+        </div>
+
+        {/* Opening pull-quote — drawn from the brief, when present */}
+        {p.brief?.lead && <PullQuote>{p.brief.lead}</PullQuote>}
+
+        {/* Overview prose */}
+        <div className="mx-auto max-w-[720px] px-6 py-6">
+          <h3 className="mb-3.5 mt-0 text-[13px] uppercase tracking-[0.09em] text-accent">
+            Overview
+          </h3>
+          <p className="whitespace-pre-line text-[17px] leading-[1.65] text-text/85">
+            {deWidow(p.desc)}
+          </p>
+        </div>
+
+        {/* Case-study sections (the real project media) */}
+        <div className="px-6">
+          {p.sections.map((sec, i) => (
+            <CaseSection key={i} section={sec} index={i} />
+          ))}
+        </div>
+
+        {/* Closing pull-quote — the recap headline, when present */}
+        {p.recap?.headline && <PullQuote>{p.recap.headline}</PullQuote>}
+      </div>
+
+      {/* Credits */}
+      <section className="mx-auto mt-16 grid max-w-[1400px] grid-cols-2 gap-8 border-t border-line px-6 py-12 md:grid-cols-4">
+        {credits.map((c) => (
+          <div key={c.label}>
+            <h4 className="mb-3.5 text-[12px] uppercase tracking-[0.09em] text-muted">
+              {c.label}
+            </h4>
+            <ul>
+              {c.items.map((item) => (
+                <li key={item} className="py-[3px] text-[15px] font-medium">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
 
       {/* Prev / Next */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-14">
+      <nav className="grid grid-cols-1 border-t border-line sm:grid-cols-2">
         <Link
           href={`/work/${prev.id}`}
-          className="group flex items-center gap-4 border border-line px-5 py-4 hover:border-accent transition-colors"
+          className="group flex flex-col gap-2 px-6 py-12 transition-colors hover:bg-[#fafafa]"
         >
-          <div className="w-[60px] h-[60px] overflow-hidden flex-none bg-panel-2 relative">
-            <Image src={prev.cover} alt="" fill sizes="60px" className="object-cover" />
-          </div>
-          <div>
-            <div className="text-[11px] tracking-[0.1em] uppercase text-muted-2">Previous</div>
-            <div className="font-display text-[18px] mt-0.5 group-hover:text-accent transition-colors">
-              {prev.title}
-            </div>
-          </div>
+          <span className="text-[12px] uppercase tracking-[0.09em] text-muted">
+            Previous
+          </span>
+          <span className="text-[clamp(22px,2.6vw,34px)] font-semibold tracking-[-0.02em] transition-colors group-hover:text-accent">
+            {prev.title}
+          </span>
         </Link>
         <Link
           href={`/work/${next.id}`}
-          className="group flex items-center gap-4 border border-line px-5 py-4 hover:border-accent transition-colors sm:flex-row-reverse sm:text-right"
+          className="group flex flex-col gap-2 border-t border-line px-6 py-12 transition-colors hover:bg-[#fafafa] sm:items-end sm:border-l sm:border-t-0 sm:text-right"
         >
-          <div className="w-[60px] h-[60px] overflow-hidden flex-none bg-panel-2 relative">
-            <Image src={next.cover} alt="" fill sizes="60px" className="object-cover" />
-          </div>
-          <div>
-            <div className="text-[11px] tracking-[0.1em] uppercase text-muted-2">Next</div>
-            <div className="font-display text-[18px] mt-0.5 group-hover:text-accent transition-colors">
-              {next.title}
-            </div>
-          </div>
+          <span className="text-[12px] uppercase tracking-[0.09em] text-muted">
+            Next
+          </span>
+          <span className="text-[clamp(22px,2.6vw,34px)] font-semibold tracking-[-0.02em] transition-colors group-hover:text-accent">
+            {next.title}
+          </span>
         </Link>
-      </div>
+      </nav>
+    </article>
+  );
+}
 
-      <div className="pt-12">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-[13px] font-semibold border border-text rounded-full px-5 py-2.5 hover:bg-text hover:text-bg transition-colors"
-        >
-          ← Back to all work
-        </Link>
-      </div>
-    </div>
+/**
+ * Oversized editorial pull-quote with accent quotation marks, centered in a
+ * 1000px measure. Mirrors the reference's `.quote` block.
+ */
+function PullQuote({ children }: { children: string }) {
+  return (
+    <blockquote className="mx-auto max-w-[1000px] px-6 py-[72px]">
+      <p className="text-[clamp(24px,3.2vw,42px)] font-semibold leading-[1.12] tracking-[-0.02em]">
+        <span className="text-accent">“</span>
+        {deWidow(children)}
+        <span className="text-accent">”</span>
+      </p>
+    </blockquote>
   );
 }

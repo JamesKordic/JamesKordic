@@ -24,16 +24,26 @@ export function AppShell({ children }: { children: ReactNode }) {
     );
   }
 
+  // Case-study pages are full-bleed editorial layouts that manage their own
+  // max-widths (matching the work reference), so they skip the narrow column.
+  const isWork = pathname?.startsWith('/work/');
+
   return (
     <div className="min-h-screen bg-bg text-text">
       <SiteHeader />
 
-      <main className="mx-auto max-w-[1100px] px-6 py-12 sm:px-8 sm:py-16">
-        {/* keyed on pathname so each route re-triggers the entrance fade */}
+      {isWork ? (
         <div key={pathname} className="view-anim">
           {children}
         </div>
-      </main>
+      ) : (
+        <main className="mx-auto max-w-[1100px] px-6 py-12 sm:px-8 sm:py-16">
+          {/* keyed on pathname so each route re-triggers the entrance fade */}
+          <div key={pathname} className="view-anim">
+            {children}
+          </div>
+        </main>
+      )}
 
       <SiteFooter />
       <Lightbox />
