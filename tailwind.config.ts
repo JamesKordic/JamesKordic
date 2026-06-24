@@ -27,23 +27,26 @@ const config: Config = {
         paneldim: '#727272', // muted text in the header
         panelline: '#E6E6E6', // hairlines in the header
 
-        // Primary accent — hot red-orange.
-        accent: '#FF3B1F',
+        // Pentagram has no single accent — chrome is pure black on white, and
+        // colour appears only in the discipline tags. "accent" is therefore
+        // ink, so any lingering text-accent / border-accent reads black.
+        accent: '#0A0A0A',
         'accent-ink': '#FFFFFF', // text/icons on top of the accent
 
-        // Legacy gradient tokens, repointed to the accent/neutral family so
-        // any lingering reference stays cohesive rather than neon.
-        magenta: '#FF3B1F',
-        'magenta-deep': '#c72d14',
+        // Legacy gradient tokens, kept neutral so nothing reads as a stray hue.
+        magenta: '#0A0A0A',
+        'magenta-deep': '#000000',
         cyan: '#727272',
         'cyan-deep': '#4a4a4a',
         violet: '#9A9A9A',
         'violet-deep': '#6a6a6a',
-        amber: '#FF3B1F',
+        amber: '#0A0A0A',
       },
       fontFamily: {
-        display: ['Inter', 'system-ui', 'sans-serif'],
-        ui: ['Inter', 'system-ui', 'sans-serif'],
+        // Neue Haas Grotesk on the real site; Helvetica Neue is the closest
+        // ubiquitous match (and is installed on the user's macOS).
+        display: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+        ui: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
       },
       animation: {
         spin: 'spin 5s linear infinite',

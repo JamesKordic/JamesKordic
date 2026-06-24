@@ -410,7 +410,7 @@ export function VideoPlayer({
                 className="absolute inset-y-0 left-0 rounded-full"
                 style={{
                   width: `${progressFrac * 100}%`,
-                  background: '#FF3B1F',
+                  background: '#0A0A0A',
                 }}
               />
               {/* Scrub handle — appears on hover and during scrubbing */}
