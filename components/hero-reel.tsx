@@ -52,7 +52,7 @@ export function HeroReel() {
       {/* Stage */}
       <Link
         href={`/work/${cur.id}`}
-        className="group relative block aspect-[16/9] w-full overflow-hidden bg-panel-2"
+        className="group relative block h-[clamp(240px,34vw,420px)] w-full overflow-hidden bg-panel-2"
       >
         {FEATURED.map((p, i) => (
           // eslint-disable-next-line @next/next/no-img-element

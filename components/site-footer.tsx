@@ -11,10 +11,8 @@ const T = SITE_TEXT;
  */
 export function SiteFooter() {
   return (
-    <footer
-      id="contact"
-      className="border-t border-line px-6 pb-12 pt-16 sm:px-8"
-    >
+    <footer id="contact" className="border-t border-line">
+      <div className="mx-auto max-w-[1200px] px-6 pb-12 pt-16 sm:px-8">
       <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
         <FooterCol title="Contact">
           <FooterLink href={`mailto:${T.contact.email}`} external>
@@ -54,6 +52,7 @@ export function SiteFooter() {
       <div className="mt-16 flex flex-wrap justify-between gap-3 border-t border-line pt-8 text-[13px] text-muted">
         <span>{T.footer.copyright}</span>
         <span>{T.artist.location}</span>
+      </div>
       </div>
     </footer>
   );

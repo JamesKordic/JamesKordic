@@ -35,6 +35,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-bg text-text">
       <SiteHeader />
 
+      <div className="mx-auto max-w-[1200px]">
       {/* Featured hero reel */}
       <HeroReel />
 
@@ -93,6 +94,7 @@ export default function HomePage() {
           </Link>
         ))}
       </main>
+      </div>
 
       <SiteFooter />
     </div>

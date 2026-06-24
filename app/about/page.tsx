@@ -7,7 +7,7 @@ const T = SITE_TEXT;
 
 export default function AboutPage() {
   return (
-    <div className="max-w-[1100px]">
+    <div className="max-w-[1200px]">
       {/* Intro */}
       <section className="max-w-[680px] pb-12 border-b border-line">
         <div className="text-[12px] uppercase tracking-[2px] text-accent font-bold mb-5">

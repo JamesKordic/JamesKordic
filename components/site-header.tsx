@@ -25,15 +25,16 @@ export function SiteHeader() {
     href === '/' ? pathname === '/' : pathname?.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between border-b border-line bg-bg px-6 py-4 sm:px-8">
-      <Link
-        href="/"
-        className="text-[22px] sm:text-[26px] font-bold tracking-[-0.03em] leading-none"
-      >
-        {T.artist.name}
-      </Link>
+    <header className="sticky top-0 z-50 border-b border-line bg-bg">
+      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-4 sm:px-8">
+        <Link
+          href="/"
+          className="text-[22px] sm:text-[26px] font-bold tracking-[-0.03em] leading-none"
+        >
+          {T.artist.name}
+        </Link>
 
-      <nav className="flex items-center gap-5 sm:gap-7">
+        <nav className="flex items-center gap-5 sm:gap-7">
         {links.map((l) =>
           l.external ? (
             <a
@@ -55,7 +56,8 @@ export function SiteHeader() {
             </Link>
           )
         )}
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 }

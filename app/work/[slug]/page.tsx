@@ -36,7 +36,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   ].filter(Boolean) as { label: string; items: string[] }[];
 
   return (
-    <article>
+    <article className="mx-auto max-w-[1200px]">
       {/* Breadcrumb */}
       <p className="px-6 pt-5 text-[14px] font-medium text-muted">
         <Link href="/" className="hover:text-accent transition-colors">
