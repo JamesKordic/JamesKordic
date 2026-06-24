@@ -501,7 +501,7 @@ function MediaTile({
     return (
       <button
         onClick={onLightbox}
-        className="relative w-full bg-panel-2 rounded-lg overflow-hidden cursor-zoom-in group block"
+        className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in group block"
         style={aspectStyle(media.aspect || aspect)}
       >
         <Image

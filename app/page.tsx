@@ -1,313 +1,213 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { JetBrains_Mono } from 'next/font/google';
 import { PROJECTS } from '@/lib/projects';
 import { SITE_TEXT } from '@/lib/site-text';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
 
-const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'] });
 const T = SITE_TEXT;
 
 /**
- * Home — a full-screen, monospaced poster band in the style of the
- * Louis Moss reference layout: black canvas, a centered horizontal row of
- * portrait poster cards with blue-dash hover labels, fixed nav, and a footer
- * carrying the live cursor coordinates and clock. Each poster links through to
- * its existing case-study page at /work/[slug].
+ * Home — a Pentagram-style editorial index: a paper canvas with a sticky name
+ * header, a single oversized intro line, a sticky discipline filter row, and a
+ * bordered grid of project tiles. Each tile shows its title over the cover and
+ * slides up a meta panel on hover, then links through to its case study.
  */
 export default function HomePage() {
-  const bandRef = useRef<HTMLDivElement>(null);
-  const [coords, setCoords] = useState('0, 0');
-  const [clock, setClock] = useState('00:00:00');
+  const [filter, setFilter] = useState('all');
 
-  // Cursor read-out, bottom-left — matches the reference's pixel coordinates.
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => setCoords(`${e.clientX}, ${e.clientY}`);
-    window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
+  // Discipline filters, derived from the projects' own tags so the bar always
+  // reflects the real catalog. "All" is prepended.
+  const filters = useMemo(() => {
+    const set = new Set<string>();
+    PROJECTS.forEach((p) => p.tags.forEach((t) => set.add(t)));
+    return ['all', ...Array.from(set)];
   }, []);
 
-  // Live clock.
-  useEffect(() => {
-    const pad = (n: number) => String(n).padStart(2, '0');
-    const tick = () => {
-      const d = new Date();
-      setClock(`${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`);
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  // Translate vertical wheel into horizontal scroll across the band so every
-  // poster stays reachable on wide screens without a visible scrollbar.
-  useEffect(() => {
-    const el = bandRef.current;
-    if (!el) return;
-    const onWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-      if (window.matchMedia('(max-width: 860px)').matches) return;
-      e.preventDefault();
-      el.scrollLeft += e.deltaY;
-    };
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
-  }, []);
+  const shown = PROJECTS.filter(
+    (p) => filter === 'all' || p.tags.includes(filter)
+  );
 
   return (
-    <div className={`${mono.className} jk-stage`}>
-      {/* Nav */}
-      <nav className="jk-nav">
-        <Link className="jk-logo" href="/">
-          {T.artist.name.toUpperCase()}
-        </Link>
-        <div className="jk-menu">
-          <Link href="/">WORKS</Link>
-          <Link href="/about">ABOUT</Link>
-          <a href={`mailto:${T.contact.email}`}>CONTACT</a>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-bg text-text">
+      <SiteHeader />
 
-      {/* Poster band */}
-      <div className="jk-band" ref={bandRef}>
-        {PROJECTS.map((p) => (
-          <Link className="jk-poster" key={p.id} href={`/work/${p.id}`}>
-            <div className="jk-label">
-              <span className="jk-dash" />
-              <span className="jk-tt">
-                {p.blurb.toUpperCase()}
-                <br />
-                <span className="jk-cl">{p.title.toUpperCase()}</span>
-              </span>
-            </div>
-            <div className="jk-img">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.cover} alt={p.title} />
-            </div>
-          </Link>
+      {/* Intro line */}
+      <section className="max-w-[1100px] border-b border-line px-6 pb-10 pt-16 sm:px-8">
+        <h1 className="text-[clamp(28px,4.4vw,58px)] font-semibold leading-[1.06] tracking-[-0.025em]">
+          {T.artist.name} is a graphic &amp; motion designer building brands,
+          campaigns and identities.{' '}
+          <em className="not-italic text-muted">
+            Selected work below — across music, entertainment, food and tech.
+          </em>
+        </h1>
+      </section>
+
+      {/* Filter row */}
+      <div className="sticky top-[61px] z-40 flex flex-wrap gap-x-5 gap-y-1.5 border-b border-line bg-bg px-6 py-[18px] text-[14px] font-medium sm:px-8">
+        {filters.map((f) => (
+          <button
+            key={f}
+            onClick={() => setFilter(f)}
+            className={`transition-colors ${
+              filter === f ? 'text-text' : 'text-muted hover:text-text'
+            }`}
+          >
+            {f === 'all' ? 'All' : f}
+          </button>
         ))}
       </div>
 
-      {/* Footer */}
-      <footer className="jk-foot">
-        <div className="jk-l">{coords}</div>
-        <div className="jk-c">
-          New York Based,
-          <br />
-          Working Globally
-          <br />
-          <span>{clock}</span>
-        </div>
-        <div className="jk-r">
-          © 2026
-          <br />
-          All Rights Reserved
-        </div>
-      </footer>
+      {/* Grid */}
+      <main className="jk-grid">
+        {shown.map((p) => (
+          <Link key={p.id} href={`/work/${p.id}`} className="jk-card">
+            <div className="jk-art">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={p.cover} alt={p.title} />
+            </div>
+            <div className="jk-always">
+              <h3>{p.title}</h3>
+              <p>{p.blurb}</p>
+            </div>
+            <div className="jk-meta">
+              <h3>{p.title}</h3>
+              <p>{p.blurb}</p>
+            </div>
+          </Link>
+        ))}
+      </main>
 
-      <style jsx global>{`
-        :root {
-          --jk-bg: #000;
-          --jk-fg: #f2f2f0;
-          --jk-dim: #7c7c78;
-          --jk-accent: #2b4cff;
-          --jk-band-h: 62vh;
-        }
-        html,
-        body {
-          height: 100%;
-        }
-        body {
-          background: var(--jk-bg);
-          overflow: hidden;
-        }
-      `}</style>
+      <SiteFooter />
 
       <style jsx>{`
-        .jk-stage {
-          position: fixed;
-          inset: 0;
-          background: var(--jk-bg);
-          color: var(--jk-fg);
-          font-family: ui-monospace, monospace;
-        }
-
-        .jk-nav {
-          position: fixed;
-          inset: 0 0 auto 0;
-          z-index: 60;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 22px 30px;
-          font-size: 13px;
-          letter-spacing: 0.14em;
-        }
-        .jk-logo {
-          font-weight: 500;
-        }
-        .jk-menu {
-          display: flex;
-          gap: 26px;
-        }
-        .jk-menu :global(a) {
-          transition: opacity 0.2s;
-        }
-        .jk-menu :global(a:hover) {
-          opacity: 0.5;
-        }
-
-        .jk-band {
-          position: absolute;
-          top: 50%;
-          left: 0;
-          right: 0;
-          transform: translateY(-50%);
-          height: var(--jk-band-h);
-          display: flex;
-          align-items: stretch;
+        .jk-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
           gap: 0;
-          padding: 0 30px;
-          overflow-x: auto;
-          overflow-y: hidden;
-          scrollbar-width: none;
-          -ms-overflow-style: none;
         }
-        .jk-band::-webkit-scrollbar {
-          display: none;
-        }
-
-        .jk-poster {
+        .jk-card {
           position: relative;
-          flex: 0 0 auto;
-          height: 100%;
-          aspect-ratio: 3 / 4;
-          cursor: pointer;
-        }
-        .jk-img {
-          position: relative;
-          width: 100%;
-          height: 100%;
+          display: block;
+          aspect-ratio: 1 / 1.04;
           overflow: hidden;
-          background: #0a0a0a;
+          border-right: 1px solid var(--jk-line);
+          border-bottom: 1px solid var(--jk-line);
         }
-        .jk-img :global(img) {
+        .jk-card:nth-child(3n) {
+          border-right: none;
+        }
+        .jk-art {
+          position: absolute;
+          inset: 0;
+          background: #ececec;
+          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .jk-art :global(img) {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 1.1s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .jk-poster:hover .jk-img :global(img) {
-          transform: scale(1.05);
+        .jk-card:hover .jk-art {
+          transform: scale(1.04);
         }
 
-        .jk-label {
+        .jk-always {
+          position: absolute;
+          left: 20px;
+          bottom: 18px;
+          right: 20px;
+          transition: opacity 0.25s;
+          pointer-events: none;
+        }
+        .jk-card:hover .jk-always {
+          opacity: 0;
+        }
+        .jk-always h3 {
+          font-size: 18px;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          color: #fff;
+          text-shadow: 0 1px 14px rgba(0, 0, 0, 0.5);
+        }
+        .jk-always p {
+          margin-top: 3px;
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.88);
+          text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .jk-meta {
           position: absolute;
           left: 0;
-          bottom: calc(100% + 12px);
-          display: flex;
-          align-items: flex-start;
-          gap: 12px;
-          opacity: 0;
-          transform: translateY(6px);
-          transition: opacity 0.3s ease, transform 0.3s ease;
-          pointer-events: none;
-          white-space: nowrap;
-          z-index: 2;
+          right: 0;
+          bottom: 0;
+          padding: 18px 20px;
+          background: var(--jk-paper);
+          border-top: 1px solid var(--jk-line);
+          transform: translateY(101%);
+          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .jk-poster:hover .jk-label {
-          opacity: 1;
+        .jk-card:hover .jk-meta {
           transform: translateY(0);
         }
-        .jk-dash {
-          width: 22px;
-          height: 2px;
-          background: var(--jk-accent);
-          margin-top: 7px;
+        .jk-meta h3 {
+          font-size: 18px;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          color: var(--jk-ink);
         }
-        .jk-tt {
-          font-size: 15px;
-          letter-spacing: 0.06em;
-          line-height: 1.5;
-        }
-        .jk-cl {
-          color: var(--jk-dim);
-        }
-
-        .jk-foot {
-          position: fixed;
-          inset: auto 0 0 0;
-          z-index: 55;
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          align-items: end;
-          padding: 22px 30px;
+        .jk-meta p {
+          margin-top: 3px;
           font-size: 13px;
-          letter-spacing: 0.08em;
-        }
-        .jk-l {
-          color: var(--jk-fg);
-          font-variant-numeric: tabular-nums;
-        }
-        .jk-c {
-          text-align: center;
-          line-height: 1.5;
-          text-transform: uppercase;
-        }
-        .jk-r {
-          text-align: right;
-          line-height: 1.5;
-          text-transform: uppercase;
+          color: var(--jk-grey);
         }
 
-        @media (max-width: 860px) {
-          .jk-stage {
-            position: static;
-            min-height: 100%;
+        @media (max-width: 880px) {
+          .jk-grid {
+            grid-template-columns: repeat(2, 1fr);
           }
-          :global(body) {
-            overflow-y: auto;
+          .jk-card:nth-child(3n) {
+            border-right: 1px solid var(--jk-line);
           }
-          .jk-nav {
-            padding: 18px 18px;
-            font-size: 12px;
-            letter-spacing: 0.1em;
+          .jk-card:nth-child(2n) {
+            border-right: none;
           }
-          .jk-menu {
-            gap: 16px;
-          }
-          .jk-band {
-            position: static;
-            transform: none;
-            height: auto;
-            flex-direction: column;
-            gap: 34px;
-            padding: 92px 18px 150px;
-            overflow: visible;
-          }
-          .jk-poster {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 3 / 4;
-          }
-          .jk-label {
-            position: static;
-            opacity: 1;
-            transform: none;
-            margin-top: 10px;
-          }
-          .jk-foot {
+        }
+        @media (max-width: 560px) {
+          .jk-grid {
             grid-template-columns: 1fr;
-            gap: 4px;
           }
-          .jk-l {
+          .jk-card {
+            aspect-ratio: 1 / 0.78;
+            border-right: none !important;
+          }
+          .jk-meta {
+            position: static;
+            transform: none;
+            border-top: 1px solid var(--jk-line);
+          }
+          .jk-always {
             display: none;
           }
-          .jk-c,
-          .jk-r {
-            text-align: left;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .jk-art,
+          .jk-meta,
+          .jk-always {
+            transition: none;
           }
+        }
+      `}</style>
+
+      <style jsx global>{`
+        :root {
+          --jk-ink: #0a0a0a;
+          --jk-paper: #ffffff;
+          --jk-grey: #727272;
+          --jk-line: #e6e6e6;
         }
       `}</style>
     </div>

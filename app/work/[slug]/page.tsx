@@ -48,7 +48,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       </header>
 
       {/* Cover */}
-      <div className="relative mt-10 rounded-[12px] overflow-hidden bg-panel-2 aspect-[16/9]">
+      <div className="relative mt-10 overflow-hidden bg-panel-2 aspect-[16/9] border border-line">
         <Image
           src={p.cover}
           alt={`${p.title} cover`}
@@ -91,9 +91,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-14">
         <Link
           href={`/work/${prev.id}`}
-          className="group flex items-center gap-4 border border-line rounded-[10px] px-5 py-4 hover:border-accent transition-colors"
+          className="group flex items-center gap-4 border border-line px-5 py-4 hover:border-accent transition-colors"
         >
-          <div className="w-[60px] h-[60px] rounded-[6px] overflow-hidden flex-none bg-panel-2 relative">
+          <div className="w-[60px] h-[60px] overflow-hidden flex-none bg-panel-2 relative">
             <Image src={prev.cover} alt="" fill sizes="60px" className="object-cover" />
           </div>
           <div>
@@ -105,9 +105,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </Link>
         <Link
           href={`/work/${next.id}`}
-          className="group flex items-center gap-4 border border-line rounded-[10px] px-5 py-4 hover:border-accent transition-colors sm:flex-row-reverse sm:text-right"
+          className="group flex items-center gap-4 border border-line px-5 py-4 hover:border-accent transition-colors sm:flex-row-reverse sm:text-right"
         >
-          <div className="w-[60px] h-[60px] rounded-[6px] overflow-hidden flex-none bg-panel-2 relative">
+          <div className="w-[60px] h-[60px] overflow-hidden flex-none bg-panel-2 relative">
             <Image src={next.cover} alt="" fill sizes="60px" className="object-cover" />
           </div>
           <div>

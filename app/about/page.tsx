@@ -104,8 +104,6 @@ export default function AboutPage() {
           <ContactRow label="Résumé" value="Download PDF" href={T.contact.resumeUrl} external />
         </ul>
       </section>
-
-      <p className="text-muted-2 text-[12px] mt-14">{T.footer.copyright}</p>
     </div>
   );
 }

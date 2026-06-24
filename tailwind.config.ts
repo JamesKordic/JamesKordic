@@ -9,41 +9,41 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Editorial studio palette — dark mode. Warm near-black base, soft
-        // off-white ink, terracotta accent.
-        bg: '#15130E', // warm near-black page background
-        panel: '#201D16', // card / placeholder surface
-        'panel-2': '#2A261E', // image placeholder fill
-        elev: '#2A261E', // hover surface
-        'elev-hi': '#332E24',
-        text: '#ECE7DC', // warm off-white ink
-        muted: '#C2BCAE', // dim text — brightened for legibility on dark
-        'muted-2': '#8E887C',
-        line: '#312C22', // hairline rules
+        // Pentagram-inspired editorial palette — light mode. Bright paper,
+        // near-black ink, hairline rules, one hot accent.
+        bg: '#FFFFFF', // paper page background
+        panel: '#F2F2F2', // card / placeholder surface
+        'panel-2': '#ECECEC', // image placeholder fill
+        elev: '#F2F2F2', // hover surface
+        'elev-hi': '#E9E9E9',
+        text: '#0A0A0A', // ink
+        muted: '#727272', // grey — secondary text
+        'muted-2': '#9A9A9A',
+        line: '#E6E6E6', // hairline rules
 
-        // Sidebar / menu — dark panel, a touch deeper than the content.
-        paneldark: '#100E09', // menu surface
-        panelfg: '#ECE7DC', // text/icons on the menu
-        paneldim: '#8E887C', // muted text on the menu
-        panelline: '#2A261E', // hairlines on the menu
+        // Header / chrome — same paper as content, hairline divider.
+        paneldark: '#FFFFFF', // header surface
+        panelfg: '#0A0A0A', // text/icons in the header
+        paneldim: '#727272', // muted text in the header
+        panelline: '#E6E6E6', // hairlines in the header
 
-        // Primary accent — terracotta, brightened slightly for dark surfaces
-        accent: '#D67E4D',
-        'accent-ink': '#1B130D', // text/icons on top of the accent
+        // Primary accent — hot red-orange.
+        accent: '#FF3B1F',
+        'accent-ink': '#FFFFFF', // text/icons on top of the accent
 
-        // Legacy gradient tokens, repointed to warm earth tones so any
-        // lingering reference reads cohesively rather than neon.
-        magenta: '#C0683C',
-        'magenta-deep': '#8a4a2c',
-        cyan: '#5E7D86',
-        'cyan-deep': '#3f5b63',
-        violet: '#8a6d4f',
-        'violet-deep': '#5e4a35',
-        amber: '#d8a070',
+        // Legacy gradient tokens, repointed to the accent/neutral family so
+        // any lingering reference stays cohesive rather than neon.
+        magenta: '#FF3B1F',
+        'magenta-deep': '#c72d14',
+        cyan: '#727272',
+        'cyan-deep': '#4a4a4a',
+        violet: '#9A9A9A',
+        'violet-deep': '#6a6a6a',
+        amber: '#FF3B1F',
       },
       fontFamily: {
-        display: ['Newsreader', 'Georgia', 'serif'],
-        ui: ['Manrope', 'system-ui', 'sans-serif'],
+        display: ['Inter', 'system-ui', 'sans-serif'],
+        ui: ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         spin: 'spin 5s linear infinite',
