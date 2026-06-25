@@ -42,7 +42,7 @@ export default function HomePage() {
           >
             {/* Cover — video when one is provided, otherwise the still image.
                 Normal-flow block on mobile; fills the tile from sm up. */}
-            <div className="relative aspect-[1/1.04] overflow-hidden bg-panel-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] sm:absolute sm:inset-0 sm:aspect-auto">
+            <div className="relative aspect-[1/1.04] transform-gpu overflow-hidden bg-panel-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:absolute sm:inset-0 sm:aspect-auto sm:scale-[1.02] sm:group-hover:scale-[1.06]">
               {p.coverVideo ? (
                 <video
                   src={p.coverVideo}
