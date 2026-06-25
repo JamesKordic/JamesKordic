@@ -2,8 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { PROJECTS, CATEGORIES } from '@/lib/projects';
-import { AlbumCard } from '@/components/album-card';
-import { SearchIcon } from '@/components/icons';
+import { WorkCard } from '@/components/work-card';
 import { SITE_TEXT } from '@/lib/site-text';
 
 const T = SITE_TEXT;
@@ -24,67 +23,80 @@ export default function SearchPage() {
   }, [filter]);
 
   return (
-    <div className="px-5 lg:px-8 pt-[78px] pb-[26px]">
-      <div className="flex items-center gap-3 bg-elev rounded-[30px] px-5 py-[13px] max-w-[380px] border border-transparent focus-within:border-text transition-colors">
-        <SearchIcon className="w-[22px] h-[22px] flex-none text-muted" />
+    <div>
+      {/* Intro */}
+      <section className="max-w-[640px] pb-10 border-b border-line">
+        <div className="text-[12px] uppercase tracking-[2px] text-accent font-bold mb-5">
+          Browse — {PROJECTS.length} projects
+        </div>
+        <h1 className="font-display font-normal text-[clamp(32px,4.2vw,52px)] leading-[1.1] tracking-[-0.5px]">
+          {T.search.heading}
+        </h1>
+      </section>
+
+      {/* Search field */}
+      <div className="mt-8 flex items-center gap-3 border-b border-text/30 focus-within:border-text pb-3 max-w-[440px] transition-colors">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 flex-none text-muted">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" strokeLinecap="round" />
+        </svg>
         <input
           type="text"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           placeholder={T.search.placeholder}
           autoComplete="off"
-          className="bg-transparent border-none outline-none text-text font-medium text-[15px] w-full placeholder:text-muted-2"
+          className="bg-transparent border-none outline-none text-text font-medium text-[16px] w-full placeholder:text-muted-2"
         />
       </div>
 
       {filter.trim() && (
         <>
-          <h3 className="font-display font-extrabold text-[23px] mt-[30px] mb-[14px]">
+          <h3 className="text-[13px] uppercase tracking-[2px] text-muted mt-10 mb-6">
             {hits.length} {T.search.resultLabel}
             {hits.length !== 1 ? 's' : ''}
           </h3>
           {hits.length > 0 ? (
-            <div className="grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-7 gap-y-9">
               {hits.map((p, i) => (
-                <AlbumCard key={p.id} p={p} i={i} />
+                <WorkCard key={p.id} p={p} i={i} />
               ))}
             </div>
           ) : (
-            <p className="text-muted">
+            <p className="text-muted text-[16px]">
               {T.search.noResults} &ldquo;{filter}&rdquo;.
             </p>
           )}
         </>
       )}
 
-      <h3 className="font-display font-extrabold text-[23px] mt-[30px] mb-[14px]">
+      {/* Browse by discipline */}
+      <h3 className="text-[13px] uppercase tracking-[2px] text-muted mt-12 mb-5">
         {T.search.browseByDiscipline}
       </h3>
-      <div className="grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-[14px]">
+      <div className="flex flex-wrap gap-2.5">
         {CATEGORIES.map((c) => (
           <button
             key={c.name}
             onClick={() => setFilter(c.name)}
-            style={{ background: c.c }}
-            className="relative aspect-[1.7] rounded-[9px] overflow-hidden p-4 font-display font-extrabold text-[20px] tracking-[-0.01em] hover:scale-[1.03] transition-transform text-left"
+            className="text-[14px] border border-line rounded-full px-4 py-2 text-muted hover:border-accent hover:text-accent transition-colors"
           >
             {c.name}
-            <span
-              className="absolute -right-[14px] -bottom-[14px] w-[84px] h-[84px] bg-[rgba(0,0,0,0.28)] rounded-[9px]"
-              style={{ transform: 'rotate(28deg)' }}
-            />
           </button>
         ))}
       </div>
 
-      <h3 className="font-display font-extrabold text-[23px] mt-[30px] mb-[14px]">
+      {/* All projects */}
+      <h3 className="text-[13px] uppercase tracking-[2px] text-muted mt-12 mb-6">
         {T.search.allProjects}
       </h3>
-      <div className="grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-7 gap-y-9">
         {PROJECTS.map((p, i) => (
-          <AlbumCard key={p.id} p={p} i={i} />
+          <WorkCard key={p.id} p={p} i={i} />
         ))}
       </div>
+
+      <p className="text-muted-2 text-[12px] mt-14">{T.footer.copyright}</p>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import type { Media, Section, GridRow, AspectRatio } from '@/lib/projects';
 import { useLightbox } from '@/lib/lightbox-context';
 import { VideoPlayer } from './video-player';
 import { EmbedFrame } from './embed-frame';
+import { deWidow } from '@/lib/typography';
 
 /* ============ HELPERS ============ */
 
@@ -82,14 +83,14 @@ export function CaseSection({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
               <div className="lg:col-span-5">
                 {section.title && (
-                  <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04]">
+                  <h2 className="font-display font-normal text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.5px] leading-[1.06]">
                     {section.title}
                   </h2>
                 )}
               </div>
               <div className="lg:col-span-7 max-w-[640px]">
-                <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line">
-                  {description[0]}
+                <p className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line">
+                  {deWidow(description[0])}
                 </p>
                 {description.length > 1 && (
                   <>
@@ -98,9 +99,9 @@ export function CaseSection({
                         {description.slice(1).map((text, i) => (
                           <p
                             key={i}
-                            className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line"
+                            className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line"
                           >
-                            {text}
+                            {deWidow(text)}
                           </p>
                         ))}
                       </div>
@@ -118,7 +119,7 @@ export function CaseSection({
             </div>
           ) : (
             section.title && (
-              <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] max-w-3xl">
+              <h2 className="font-display font-normal text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.5px] leading-[1.06] max-w-3xl">
                 {section.title}
               </h2>
             )
@@ -500,7 +501,7 @@ function MediaTile({
     return (
       <button
         onClick={onLightbox}
-        className="relative w-full bg-panel-2 rounded-lg overflow-hidden cursor-zoom-in group block"
+        className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in group block"
         style={aspectStyle(media.aspect || aspect)}
       >
         <Image

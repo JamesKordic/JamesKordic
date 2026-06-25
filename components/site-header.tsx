@@ -1,54 +1,62 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { SITE_TEXT } from '@/lib/site-text';
 
 const T = SITE_TEXT;
 
 /**
- * Sticky paper header ported from the reference design: a name mark on the
- * left (with a muted discipline suffix) and a minimal Work / About / Contact
- * text nav on the right that collapses behind a ☰ toggle on small screens.
- * About / Contact point at the home-page anchors, matching the reference's
- * single-page structure.
+ * Sticky paper header in the Pentagram editorial style: a name mark with a
+ * single accent dot on the left, and a minimal Work / About / Contact nav on
+ * the right. Shared by the home grid and the inner content pages so the
+ * chrome is identical everywhere.
  */
 export function SiteHeader() {
-  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
-  const links = [
+  const links: { label: string; href: string; external?: boolean }[] = [
     { label: 'Work', href: '/' },
-    { label: 'About', href: '/#about' },
-    { label: 'Contact', href: '/#contact' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: `mailto:${T.contact.email}`, external: true },
   ];
 
-  return (
-    <header className="site-header">
-      <div className="bar">
-        <Link className="brand" href="/">
-          {T.artist.name} <span>— {T.artist.discipline}</span>
-        </Link>
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname?.startsWith(href);
 
-        <nav className={open ? 'nav open' : 'nav'}>
-          <button
-            className="menu-toggle"
-            aria-label="Toggle menu"
-            aria-expanded={open}
-            onClick={() => setOpen((o) => !o)}
-          >
-            ☰
-          </button>
-          <ul>
-            {links.map((l) => (
-              <li key={l.label}>
-                <Link href={l.href} onClick={() => setOpen(false)}>
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+  return (
+    <header className="sticky top-0 z-50 flex items-baseline justify-between border-b border-line bg-bg px-6 py-[18px] sm:px-8">
+      <Link
+        href="/"
+        className="font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.02em] leading-none"
+      >
+        {T.artist.lastName}
+        <span className="text-accent">.</span>
+      </Link>
+
+      <nav className="flex items-center gap-5 sm:gap-7">
+        {links.map((l) =>
+          l.external ? (
+            <a
+              key={l.label}
+              href={l.href}
+              className="text-[14px] sm:text-[15px] font-medium text-muted transition-colors hover:text-accent"
+            >
+              {l.label}
+            </a>
+          ) : (
+            <Link
+              key={l.label}
+              href={l.href}
+              className={`text-[14px] sm:text-[15px] font-medium transition-colors hover:text-accent ${
+                isActive(l.href) ? 'text-text' : 'text-muted'
+              }`}
+            >
+              {l.label}
+            </Link>
+          )
+        )}
+      </nav>
     </header>
   );
 }

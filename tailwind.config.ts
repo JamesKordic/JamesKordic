@@ -9,33 +9,41 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Dark base — slightly cooler than pure black
-        bg: '#08080c',
-        panel: '#13131a',
-        'panel-2': '#1b1b25',
-        elev: '#252532',
-        'elev-hi': '#2e2e3e',
-        text: '#f3f1ec',
-        muted: '#a3a3a6',
-        'muted-2': '#74747a',
-        line: '#2a2a36',
+        // Pentagram-inspired editorial palette — light mode. Bright paper,
+        // near-black ink, hairline rules, one hot accent.
+        bg: '#FFFFFF', // paper page background
+        panel: '#F2F2F2', // card / placeholder surface
+        'panel-2': '#ECECEC', // image placeholder fill
+        elev: '#F2F2F2', // hover surface
+        'elev-hi': '#E9E9E9',
+        text: '#0A0A0A', // ink
+        muted: '#727272', // grey — secondary text
+        'muted-2': '#9A9A9A',
+        line: '#E6E6E6', // hairline rules
 
-        // Primary accent — kept the lime, slightly cooler
-        accent: '#c8f135',
-        'accent-ink': '#10130a',
+        // Header / chrome — same paper as content, hairline divider.
+        paneldark: '#FFFFFF', // header surface
+        panelfg: '#0A0A0A', // text/icons in the header
+        paneldim: '#727272', // muted text in the header
+        panelline: '#E6E6E6', // hairlines in the header
 
-        // New cooler accents for gradients
-        magenta: '#ff2d8a',
-        'magenta-deep': '#c01a6b',
-        cyan: '#22d3ee',
-        'cyan-deep': '#0891b2',
-        violet: '#8b5cf6',
-        'violet-deep': '#6d28d9',
-        amber: '#ffb84a',
+        // Primary accent — hot red-orange.
+        accent: '#FF3B1F',
+        'accent-ink': '#FFFFFF', // text/icons on top of the accent
+
+        // Legacy gradient tokens, repointed to the accent/neutral family so
+        // any lingering reference stays cohesive rather than neon.
+        magenta: '#FF3B1F',
+        'magenta-deep': '#c72d14',
+        cyan: '#727272',
+        'cyan-deep': '#4a4a4a',
+        violet: '#9A9A9A',
+        'violet-deep': '#6a6a6a',
+        amber: '#FF3B1F',
       },
       fontFamily: {
-        display: ['"Bricolage Grotesque"', 'sans-serif'],
-        ui: ['"Hanken Grotesk"', 'sans-serif'],
+        display: ['Inter', 'system-ui', 'sans-serif'],
+        ui: ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         spin: 'spin 5s linear infinite',

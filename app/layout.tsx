@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import { PlayerProvider } from '@/lib/player-context';
 import { LightboxProvider } from '@/lib/lightbox-context';
 import { AppShell } from '@/components/app-shell';
 import { SITE_TEXT } from '@/lib/site-text';
@@ -18,18 +17,16 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#08080c',
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <PlayerProvider>
-          <LightboxProvider>
-            <AppShell>{children}</AppShell>
-          </LightboxProvider>
-        </PlayerProvider>
+        <LightboxProvider>
+          <AppShell>{children}</AppShell>
+        </LightboxProvider>
       </body>
     </html>
   );
