@@ -9,44 +9,33 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Warm editorial palette — soft off-white paper, near-black ink,
-        // hairline rules in a warm grey, and a single interactive blue. Colour
-        // lives only in that accent; everything else is ink on paper.
-        bg: '#F7F6F3', // warm paper page background
-        panel: '#FFFFFF', // card surface
-        'panel-2': '#ECEAE3', // image placeholder fill (warm light grey)
-        elev: '#FFFFFF', // hover surface
-        'elev-hi': '#F0EEE8',
-        text: '#1A1A1A', // ink
-        muted: '#6B6B6B', // grey — secondary text
-        'muted-2': '#9A9A9A',
-        line: '#E2E0DA', // warm hairline rules
+        // Dark base — slightly cooler than pure black
+        bg: '#08080c',
+        panel: '#13131a',
+        'panel-2': '#1b1b25',
+        elev: '#252532',
+        'elev-hi': '#2e2e3e',
+        text: '#f3f1ec',
+        muted: '#a3a3a6',
+        'muted-2': '#74747a',
+        line: '#2a2a36',
 
-        // Header / chrome — same paper as content, hairline divider.
-        paneldark: '#F7F6F3', // header surface
-        panelfg: '#1A1A1A', // text/icons in the header
-        paneldim: '#6B6B6B', // muted text in the header
-        panelline: '#E2E0DA', // hairlines in the header
+        // Primary accent — kept the lime, slightly cooler
+        accent: '#c8f135',
+        'accent-ink': '#10130a',
 
-        // The single interactive colour. Every link, hover, button, and
-        // eyebrow that needs emphasis reaches for this blue and nothing else.
-        accent: '#2A4CFF',
-        'accent-ink': '#FFFFFF', // text/icons on top of the accent
-
-        // Legacy gradient tokens, kept neutral so nothing reads as a stray hue.
-        magenta: '#1A1A1A',
-        'magenta-deep': '#000000',
-        cyan: '#6B6B6B',
-        'cyan-deep': '#4a4a4a',
-        violet: '#9A9A9A',
-        'violet-deep': '#6a6a6a',
-        amber: '#1A1A1A',
+        // New cooler accents for gradients
+        magenta: '#ff2d8a',
+        'magenta-deep': '#c01a6b',
+        cyan: '#22d3ee',
+        'cyan-deep': '#0891b2',
+        violet: '#8b5cf6',
+        'violet-deep': '#6d28d9',
+        amber: '#ffb84a',
       },
       fontFamily: {
-        // Neue Haas Grotesk on the real site; Helvetica Neue is the closest
-        // ubiquitous match (and is installed on the user's macOS).
-        display: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
-        ui: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+        display: ['"Bricolage Grotesque"', 'sans-serif'],
+        ui: ['"Hanken Grotesk"', 'sans-serif'],
       },
       animation: {
         spin: 'spin 5s linear infinite',

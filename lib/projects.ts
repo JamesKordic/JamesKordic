@@ -131,13 +131,13 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 262,
     blurb: 'Music & Entertainment Marketing',
-    desc: "The Syndicate is a music and entertainment marketing agency, and this internship put me inside its day-to-day campaign work. I designed for indie and major label artists as well as TV, film, and comedy clients. I created digital assets, tour and promotional visuals, and event materials. The job, again and again, was to translate each artist's voice into design their audience would actually stop scrolling for, and to ship it at campaign speed.",
+    desc: "An exploration of music and entertainment marketing through collaborative campaign work at The Syndicate, this internship experience spanned projects across indie and major label artists as well as TV, film, and comedy. Responsibilities included creating digital assets, tour and promotional visuals, and event materials, translating each artist or project's unique voice into impactful, audience-driven design and storytelling campaigns.",
     sections: [
       {
         eyebrow: 'Music',
         title: "Guns N' Roses",
         context:
-          "A set of reels I created for Guns N' Roses to promote tours, music, and fan engagement across multiple digital platforms.",
+          "Instagram Reels created for Guns N' Roses, featuring dynamic visuals and music-driven edits to promote tours, music, and fan engagement.",
         // 3 vertical Reels — keep them small, 3 across
         media: [
           { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'), aspect: '9/16', poster: '/posters/TAsErfe3Mav2ZPK82B8hoA7HANs.jpg'},
@@ -150,7 +150,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Records',
         title: 'Killphonic Records',
         context:
-          "A promotional video I created for Killphonic Records to announce Heart of Gold: The Songs of Neil Young Vol. 1. It introduces the featured artists and pushes pre-orders across digital platforms.",
+          'Promotional video created for Killphonic Records to showcase Heart of Gold: The Songs of Neil Young Vol. 1. The video highlights featured artists and promotes pre-order availability across multiple digital platforms.',
         // Single horizontal promo video — full width 16:9
         media: [
           {
@@ -166,7 +166,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Comedy',
         title: 'Craig Ferguson',
         context:
-          "Social clips I cut and designed for Craig Ferguson, pulling the sharpest moments from his shows and reformatting them for vertical feeds.",
+          "Social media assets designed for Craig Ferguson, featuring curated show clips formatted for multiple digital platforms to highlight his comedic style and drive audience engagement.",
         // 4 vertical social clips — 4 across on desktop
         media: [
           { type: 'video', src: vid('AGvRC8ZeWglalhmRVoWrAenDbU'), aspect: '9/16' },
@@ -180,7 +180,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Records',
         title: 'Last Gang Records',
         context:
-          "Social posts I designed for Last Gang Records, spotlighting the label's music placements in video games, film, and other media.",
+          "Social media posts created for Last Gang Records, spotlighting music placements in video games, film, and other media, designed to drive engagement and showcase the label's cultural reach.",
         // 3 vertical items in a single row at native 4:5.
         // The video source is 9:16 but rendered at 4:5 with cover-crop so
         // it matches the image heights — no letterbox bars on top/bottom.
@@ -195,7 +195,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Conference',
         title: 'Indie Week',
         context:
-          "Branded assets I designed for Indie Week, covering speaker announcements, key dates, and on-site signage. The same system had to work in a feed before the conference and on a wall during it, so everything shares one type and color logic across digital and print.",
+          'Branded assets created for Indie Week to promote event speakers, key dates, and on-site signage. Designs supported both digital promotion and in-person visibility across the multi-day conference.',
         media: [],
         // Mixed aspects — group into:
         //  Row 1: 4 squares (speaker cards, 1:1)
@@ -249,18 +249,18 @@ export const PROJECTS: Project[] = [
     year: '2025',
     len: 268,
     blurb: 'Interactive Music Festival Concept',
-    desc: "WWIMF, the World Wide Interactive Music Festival, is a conceptual festival I built as my senior capstone at RIT. It started with a question: what would a festival look like if the audience became more than just spectators? Over a year, I answered that by building the complete brand: identity, stage environments, wearable tech, merchandise, marketing, motion, and a printed art book. I treated the festival as if it were real and designed everything it would need.",
+    desc: "An exploration of how design can support a more immersive and inclusive global festival where music, visual art, and innovation converge with guest engagement. Guests become active contributors through immersive environments, interactive stages, and participatory technology.\n\n| Presented at *Fusion: 2025 RIT Graphic Design Capstone*",
     brief: {
       eyebrow: 'The Brief',
-      lead: "What if a festival could be co-authored by its audience, not just attended by them? WWIMF is a year-long capstone exploring that question through brand, environment, and technology.",
+      lead: "What if a festival could be co-authored by its audience — not just attended by them? WWIMF is a year-long capstone exploring that question through brand, environment, and technology.",
       body: [
         'WWIMF is a conceptual global festival where music, visual art, and emerging tech converge with active guest participation. Audiences become contributors through immersive environments, interactive stages, and participatory wearables that influence what they see and hear in real time.',
-        'The project had to deliver as a complete brand system, spanning identity, environment design, merchandise, marketing, motion, and a printed art book, and stand up as a public-facing presentation at Fusion: the 2025 RIT Graphic Design Capstone show.',
+        'The project had to deliver as a complete brand system — identity, environment design, merchandise, marketing, motion, and a printed art book — and stand up as a public-facing presentation at Fusion: the 2025 RIT Graphic Design Capstone show.',
       ],
     },
     approach: {
       eyebrow: 'The Approach',
-      intro: 'Capstone work lives or dies on cohesion. I built WWIMF as a system from the inside out: identity first, then environments and objects designed against the identity, then marketing built against the environments. Every artifact had to feel like it came from the same festival.',
+      intro: 'Capstone work lives or dies on cohesion. I built WWIMF as a system from the inside out — identity first, then environments and objects designed against the identity, then marketing built against the environments. Every artifact had to feel like it came from the same festival.',
       steps: [
         { label: 'Step 01', title: 'Identify', body: 'Build the logo, type system, and visualizer motif that everything else inherits.' },
         { label: 'Step 02', title: 'Inhabit', body: 'Design the physical stages and interactive elements the brand would live in.' },
@@ -271,7 +271,7 @@ export const PROJECTS: Project[] = [
     },
     recap: {
       eyebrow: 'The Recap',
-      headline: "A festival that doesn't exist, built like it does.",
+      headline: "A festival that doesn't exist — built like it does.",
       stats: [
         { value: '1', label: 'Designed Festival' },
         { value: '28', label: 'Page art book', unit: 'PP' },
@@ -283,10 +283,10 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '01',
         title: 'Visual Identity',
-        context: "Everything in WWIMF starts from the same idea: the music should be visible in the brand itself, not just implied around it. The identity also had to survive everywhere the festival would live, from screens and signage to wristbands and a printed book, without losing its sense of motion.",
-        role: "I designed the primary wordmark, a secondary hand-mark, the type system, and the color palette. The most important decision turned out to be the modular visualizer bars, which end up in nearly every artifact that follows.",
-        body: "The wordmark is built around a music visualizer: bars rise and fall through the letterforms, so the logo reads like a track mid-play. The secondary mark is where the festival's whole premise lives. It merges those same bars with the shape of a hand, the simplest symbol I could find for participation, and it turns the visualizer from something you watch into something you play. A hand reaching into the music is exactly what WWIMF asks of its audience, so the logo isn't just decorating the idea of interactivity; it's demonstrating it. And because the bars inside the hand are modular, the mark can be redrawn endlessly without breaking the system, the same way no two audience interactions at the festival would ever look alike.\n\nFor type, I paired Cityburn with Courier New. Cityburn brings the loud, contemporary energy; Courier New grounds it with a structured, almost DAW-like technical feel. The palette is deliberately unconventional, full of high-energy combinations that feel closer to a stage rig than a corporate style guide. Every element was tested across digital and print before anything else got built on top of it.",
-        fieldNote: 'The visualizer bars became the load-bearing element of the whole system. Once they existed, every subsequent decision, from stage lighting to merch patterns to poster type, pointed back to them.',
+        context: "The festival needed an identity that could read across screens, signage, wristbands, and printed booklets without losing its sense of motion. Music had to be present in the mark itself — not just implied by the surrounding design.",
+        role: 'Built the primary wordmark, secondary hand-mark, type system (Cityburn + Courier New), and color palette. Designed the modular visualizer bars that show up in every other artifact downstream.',
+        body: "The primary logo for WWIMF was built around two core themes: interactivity and music. Bars integrated into the wordmark represent a music visualizer, emphasizing the dynamic and immersive nature of sound central to the festival experience.\n\nA secondary logo extends this concept by combining the visualizer motif with the shape of a hand, a symbol of human interaction, creativity, and expression. The modular design of the bars within the hand allows for customization, reflecting the festival's adaptable and participatory spirit.\n\nWWIMF's typography blends Cityburn Regular with Courier New, creating a balance between experimental energy and technical precision. Cityburn adds a bold, contemporary edge, while Courier New brings a structured, analog feel connecting the identity to both music production and digital interaction. The color system is bold, abstract, and high-energy, using unconventional combinations to echo the festival's immersive and boundary-pushing character. The overall visual system is designed to be flexible, expressive, and suitable across both digital and physical environments.",
+        fieldNote: 'The visualizer bars became the load-bearing element of the whole system. Once they existed, every subsequent decision — stage lighting, merch patterns, poster type — pointed back to them.',
         media: [{ type: 'image', src: img('UUebmgTykuRmwaxxSRK1LIPuAk', 1800) }],
         layout: {
           type: 'uniform',
@@ -297,9 +297,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '02',
         title: 'Stage Designs',
-        context: "If the premise is a festival the audience helps perform, a standard stage facing a standard crowd undermines it before the first set. The architecture itself had to do some of the inviting.",
-        role: "I concepted four stage typologies (biomorphic structures, projection-mapped facades, light-reactive frames, and stages that wrap around the audience) and rendered each as a photoreal mockup for the capstone show.",
-        body: "These studies explore how far a performance space can lean toward the crowd: structures that respond to movement, lighting that behaves like a participant, and layouts that put people inside the show rather than in front of it. I treated each render as a proof of concept, close enough to real that you could stand in front of it and argue about how to build it.",
+        context: 'The festival needed environments that justified the participatory premise. A normal stage with a normal crowd in front of it wouldn\'t do — the architecture itself had to invite audience interaction.',
+        role: "Concepted four distinct stage typologies — biomorphic structures, projection-mapped facades, light-reactive frames, and audience-immersive surrounds — and rendered them as photoreal mockups for the capstone show.",
+        body: "This spread showcases how architecture, lighting, and digital media can fuse to create fully immersive performance spaces. Through a series of conceptual mock-ups and visual studies, we explore biomorphic structures, theatrical light displays, augmented stages, and reactive installations that invite festival-goers to shape, and be shaped by their surroundings. Each design underscores WWIMF's commitment to interactivity and multisensory engagement, offering a blueprint for redefining the relationship between music, space, and audience participation on a global scale.",
         media: [
           { type: 'image', src: img('o97WGHUpa9ixF0VWB0k5MSLrfoo', 1600) },
           { type: 'image', src: img('qPQ3eQuaNTjJmIixnjmhqBpwd6Q', 1600) },
@@ -315,10 +315,10 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '03',
         title: 'Interactive Elements',
-        context: "\"Interactive festival\" stays an abstraction until there's something you can actually hold. This is the part of the project where participation becomes physical.",
-        role: "I designed the smart wristbands, a glow-in-the-dark pen system, and touch-responsive surfaces, plus the visual language they share, so picking up a pen feels like the same brand as wearing the wristband.",
-        body: "The wristband is the core of the kit: a wearable that lets guests influence the visuals and effects of a live set in real time. The pens are lower-tech but just as deliberate; they let people draw on the festival itself, leaving marks that accumulate over the weekend. The boldest concept is the under-stage view, an area built directly beneath the performance where guests watch the show from even closer than the front row, with the performers right above them. It flips the usual geometry of a concert: instead of looking up at a distant stage, you're inside it. Combined with touch-responsive walls and tunnels, these elements turn attendance into a kind of authorship: the festival looks different at the end of the night because of who was there.",
-        fieldNote: 'Designing for participation means designing the affordance, not the object. The wristband isn\'t a wristband; it\'s a permission slip to influence the show.',
+        context: 'The participation premise needed objects you could actually touch. Without physical artifacts, "interactive festival" stays an abstraction in a brand deck.',
+        role: 'Designed the wearable tech (smart wristbands), the glow-in-the-dark pen system, and the touch-responsive surfaces — including the visual language they share, so an attendee picking up a pen feels the same brand they felt on the wristband.',
+        body: "At WWIMF, interactivity is central to the experience, transforming attendees from passive spectators into active participants. From touch-responsive environments and immersive tunnels to motion-activated light displays and interactive stages that place audiences beneath the performance itself, every element is designed to react to presence, gesture, and movement.\n\nWearable tech like smart wristbands enables guests to influence live performances and trigger real-time effects. Glow-in-the-dark pens offer opportunities for spontaneous creativity, allowing attendees to leave their mark on the festival's physical environment. These tools, combined with collaborative interfaces, empower co-creation and personal expression.\n\nWWIMF reimagines the live music experience by making the audience an integral part of the performance, blurring the boundaries between art, technology, and human connection.",
+        fieldNote: 'Designing for participation means designing the affordance, not the object. The wristband isn\'t a wristband — it\'s a permission slip to influence the show.',
         media: [
           { type: 'image', src: img('aybJsg9p5A56xYuv6JKk8bLvM', 1600) },
           { type: 'image', src: img('Mgx0cinXenRjsIoslHuYLr8mg', 1600) },
@@ -330,9 +330,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '04',
         title: 'Merchandise',
-        context: "Merch is where a brand gets stress-tested. It has to read as flat artwork and survive being worn, stuffed in a bag, and rained on, with fabric, paper, and plastic all pulling from the same identity.",
-        role: "I designed the merch family of tote, shirt, and printed wristband, using the visualizer-bar pattern as the connective tissue so the pieces read as a set rather than three one-offs.",
-        body: "Each piece carries the bars differently: wrapped tight around the wristband, blown up large on the tote, run across the back of the shirt. The test I kept coming back to was simple: could you recognize WWIMF from across a field by pattern alone?",
+        context: 'Festival merch has a unique pressure: it has to look good as a flat artwork AND survive being worn / carried / wristed at full volume. The same identity has to translate to fabric, paper, and plastic.',
+        role: 'Designed the merch family — tote, shirt, and printed wristband — using the visualizer-bar pattern as the connective tissue so the pieces read as a set rather than three one-offs.',
+        body: "WWIMF's merchandise extends the festival's identity into wearable and collectible pieces that blend function, fashion, and interactivity. This section showcases examples including a tote bag, shirt, and festival wristband — each designed to reflect the bold, immersive aesthetic of the event.",
         media: [
           { type: 'image', src: '/projects/wwimf/merch-wristband-new.png' },
          { type: 'image', src: '/projects/wwimf/Totebag-cooler.png',  },
@@ -347,9 +347,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '05',
         title: 'Instagram Posts',
-        context: "Before a first festival exists, social media has to do two jobs at once: announce the lineup and prove the visual world is real before anyone has ever stood in it.",
-        role: "I built an artist-spotlight template flexible enough to carry any genre while staying unmistakably WWIMF: same grid, same type, swap the artist and the color block.",
-        body: "The series introduces artists joining the lineup, pairing photography with bold type and the visualizer pattern. Keeping the structure fixed lets the artists themselves provide the variety, so the feed stays cohesive no matter who gets announced next.",
+        context: "Pre-festival social had to do two jobs at once: announce the lineup and prove the festival's visual world before anyone had ever been to it.",
+        role: 'Designed an artist-spotlight template that could carry any genre while staying recognizably WWIMF — same grid, same type, swap the artist and the color block.',
+        body: "A series of Instagram posts designed to spotlight new artists joining the WWIMF lineup. Each visual pairs dynamic imagery with bold typography to capture the energy and diversity of the festival's global soundscape.",
         media: [
           { type: 'image', src: img('NXZFs92bNHiD1jXMWJevPDU') },
           { type: 'image', src: img('Y2ye6xXMz2HALEAzxNW0wpr4VA') },
@@ -365,9 +365,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '06',
         title: 'Marketing',
-        context: "The daily lineup posters had to work as schedules you could read at a glance and as artwork people would actually want to keep after the weekend was over.",
-        role: "I designed three posters around a shared grid: one per day, color-coded, with the visualizer pattern receding into background texture and the artist names doing the typographic heavy lifting.",
-        body: "Each poster organizes a full day of performances without going quiet: the hierarchy holds at street distance, and the details reward a closer read. They were built to live everywhere at once, across festival grounds, social feeds, and citywide print.",
+        context: 'The festival needed daily lineup posters that worked equally well as functional schedules and as decorative pieces fans would want to keep.',
+        role: 'Designed three daily posters around a shared grid, color-coded by day, with the visualizer pattern reading as a low-key background texture and the artist names doing the heavy typographic lifting.',
+        body: "Posters designed to showcase the WWIMF daily lineup, highlighting performance dates and featured artists. Each poster balances clarity and visual impact, using bold typography, color coding, and grid-based layouts to organize information while maintaining the festival's immersive aesthetic. These designs function both as promotional materials and informational tools, crafted to be displayed digitally and in print across festival spaces, social media, and citywide advertising. The goal: to communicate schedule details at a glance while reinforcing the identity of the WWIMF.",
         media: [
           { type: 'image', src: img('z95EhHshRBIBeZfkAkZ1bhkEONU', 1400) },
           { type: 'image', src: img('vuKP1K8MvNVJo8MiWI9lybFOvA', 1400) },
@@ -382,9 +382,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '07',
         title: 'Marketing Visualization',
-        context: "A poster that only ever lives on a screen hasn't proven anything. These mockups put the campaign out in the city, on bus shelters, subway panels, and plywood walls, to see if it survives.",
-        role: "I composited the lineup posters into photographed urban environments, choosing surfaces that match the festival's tone: street-level, a little chaotic, very public.",
-        body: "Seeing the work at scale, surrounded by real visual noise, was the honest test of the system. The bold type and day color-coding hold up in high-traffic settings, and the campaign starts doing what festival marketing actually has to do: catch someone mid-commute and make them look up the lineup.",
+        context: "A poster that lives only on a screen doesn't sell a festival. The visualizations had to prove the brand could survive in the city — bus shelters, subway panels, plywood walls.",
+        role: 'Composited the lineup posters into photographed urban environments, choosing surfaces and contexts that matched the festival\'s tone (street-level, slightly chaotic, public).',
+        body: "These urban mockups showcase how WWIMF's lineup posters function in real-world environments — integrated into cityscapes, transit stations, and public walls. The placements emphasize visibility, accessibility, and the posters' ability to stand out in diverse, high-traffic settings. Together, these visualizations present a cohesive strategy for extending festival branding beyond the digital space and into the streets, where curiosity, discovery, and engagement begin.",
         media: [
           { type: 'image', src: img('W2IZkcmxISHxaNSOWQ9F9Hv8', 1800) },
           { type: 'image', src: img('IBOdBrAVsLSNJPOK9RmgTbBuW8g', 1800) },
@@ -400,9 +400,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '08',
         title: 'Animations',
-        context: "A visualizer that doesn't move is just a pattern. The bars needed to come to life as motion pieces the festival could run across screens, stage visuals, and social.",
-        role: "I animated the visualizer system as audio-reactive motion, tuning the timing to feel rhythmic without being literally beat-matched, since the music it sits behind will always vary.",
-        body: "The animations pulse, shift, and respond the way a crowd does, carrying the brand's waveform pattern and color gradients into motion. This was also the brand's proof of concept: the identity wasn't borrowing the look of a music visualizer anymore; it was behaving like one.",
+        context: 'The visualizer bars existed as static elements in the brand sheet — but the whole point of a visualizer is movement. They needed to be brought to life as motion stings the festival could use across screens.',
+        role: 'Animated the visualizer pattern as an audio-reactive system, tuned the timing to feel rhythmic without being literally beat-matched (the music it accompanies will vary).',
+        body: "A series of animated visuals created to extend the WWIMF brand into motion. These animations bring the festival's identity to life through audio-reactive elements and dynamic transitions, mirroring the energy and interactivity at the heart of the event. Designed for use across screens, stage visuals, and social media, these animations reinforce the immersive nature of the festival. Visual motifs from the branding system, like the waveform-inspired pattern and bold color gradients, are animated to pulse, shift, and respond, echoing the rhythm of live music and crowd movement.",
         media: [{ type: 'video', src: vid('Pl1quVl6bu6Uo42E8OOl05tDSjc'), aspect: '16/9', poster: '/posters/Pl1quVl6bu6Uo42E8OOl05tDSjc.jpg'  }],
         layout: {
           type: 'uniform',
@@ -413,9 +413,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '09',
         title: 'Capstone Show Setup',
-        context: "Fusion is RIT's senior capstone show, and it gave WWIMF its one chance to exist physically. The booth had to translate a screen-based brand into a space people walk past in seconds.",
-        role: "I designed the booth: dual-screen animation loops, printed lineup posters, an info panel, and the WWIMF book on a plinth. I treated it as a small-scale stand-in for the festival itself.",
-        body: "A booth gets maybe eight seconds of someone's attention. The screens earn the stop, the posters hold it, and the book is there for anyone who wants to go deep. The conversations it started at the show were the closest the festival ever came to having a real audience, which, for a project about participation, felt like the right ending.",
+        context: "Fusion is RIT's senior capstone show. WWIMF needed to translate from screen-based brand work into a physical exhibition space without losing its energy.",
+        role: 'Designed the booth layout — dual-screen animation loops, printed lineup posters, info panel, and the WWIMF book on a plinth. Built the booth as a small-scale stand-in for the festival itself.',
+        body: 'Presented at Fusion: 2025 RIT Graphic Design Capstone, this installation showcased the WWIMF brand through a multi-sensory display. The setup included dual-screen animated visuals, printed posters, a branded info poster, and the WWIMF book. This exhibition space served as both a culmination of my senior capstone project and a branded environment in itself, bringing the WWIMF concept to life through spatial design.',
         fieldNote: 'A booth at a capstone show has eight seconds to communicate before someone walks past. Solve that and you can defend the whole rest of the project in the conversation it earns you.',
         media: [
           { type: 'image', src: img('Qy3WsjTQu7UQBnFGQ7BRQtxQT3Q', 1400) },
@@ -430,9 +430,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '10',
         title: 'WWIMF Book',
-        context: "Every part of the project needed a permanent home: one object where the identity, the environments, the interactive systems, and the case for the festival's existence could sit together.",
-        role: "I wrote, designed, and printed the art book that doubles as the brand's bible: identity, environments, interactive systems, marketing, and motion stills, all in one volume.",
-        body: "The book is the project's final word, part brand guide and part world-building document. It walks through how the festival looks, how it behaves, and why it should exist. Flipping through it is the closest thing to attending WWIMF; you can read it cover to cover below.",
+        context: "The brand needed a permanent, physical home — somewhere the visual language, the world-building, and the case for the festival's existence could live together in one object.",
+        role: "Wrote, designed, and printed a 60-page art book that doubles as the brand's bible: identity, environments, interactive systems, marketing, and motion stills, all in one volume.",
+        body: 'This conceptual art book serves as the visual heart of the World Wide Interactive Music Festival brand. Designed to express the spirit of global creativity, connection, and innovation, the book weaves together branding elements, motion stills, interactive concepts, and festival-worldbuilding into one cohesive narrative.',
         media: [
           {
             type: 'embed',
@@ -463,24 +463,24 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 188,
     blurb: 'Feed the Beat Campaign',
-    desc: "Feed The Beat is Taco Bell's program for spotlighting emerging musicians, and I spent a year designing its social campaigns. Every drop introduced a new batch of artists across genres, and every asset had to do two jobs at once: feel like Taco Bell at first glance and like the artist at second glance. The real work was building a visual system strong enough to carry roughly fifty artists without ever looking like a template.",
+    desc: "An exploration of how branded storytelling and visual identity can elevate emerging musical talent through Taco Bell's Feed The Beat program, where social media content and strategic partnerships amplify artist visibility and connect audiences through culture-driven design.",
     brief: {
       eyebrow: 'The Brief',
-      lead: "Feed The Beat is Taco Bell's ongoing platform for spotlighting emerging artists. The work had to feel like Taco Bell on first glance and like the artist on second glance. Both, every time, at scroll speed.",
+      lead: "Feed The Beat is Taco Bell's ongoing platform for spotlighting emerging artists. The work had to feel like Taco Bell on first glance and like the artist on second glance — both, every time, at scroll speed.",
       body: [
-        "Every drop introduced a new batch of artists across genres: indie rock, pop, hip-hop, electronic. The design had to flex enough to honor each artist's identity while staying recognizably Feed The Beat at a thumbnail size, on a vertical feed, in three seconds.",
-        "Output was high-volume and recurring: six campaign sets, around 50 individual assets, plus a longer-form motion piece. The system mattered more than any single post. Once the template was right, the work was about applying it consistently across artists without losing energy.",
+        "Every drop introduced a new batch of artists across genres — indie rock, pop, hip-hop, electronic. The design had to flex enough to honor each artist's identity while staying recognizably Feed The Beat at a thumbnail size, on a vertical feed, in three seconds.",
+        "Output was high-volume and recurring: six campaign sets, around 50 individual assets, plus a longer-form motion piece. The system mattered more than any single post — once the template was right, the work was about applying it consistently across artists without losing energy.",
       ],
     },
     approach: {
       eyebrow: 'The Approach',
-      intro: "Volume work needs a system. I designed Feed The Beat as a kit, not a campaign: a shared frame artists could be dropped into without redesigning the world each time. Then I refined the kit across six drops as I learned what landed.",
+      intro: "Volume work needs a system. I designed Feed The Beat as a kit, not a campaign — a shared frame artists could be dropped into without redesigning the world each time. Then I refined the kit across six drops as I learned what landed.",
       steps: [
         { label: 'Step 01', title: 'Frame', body: 'Lock the brand zone (Taco Bell mark, Feed The Beat lock-up, safe areas) before touching the artist content.' },
         { label: 'Step 02', title: 'Flex', body: "Build artist swap-in layers that adapt to portrait, full-body, or text-driven coverage." },
-        { label: 'Step 03', title: 'Color', body: 'Pull a 2–3 color palette from each artist\'s own world, never the same palette twice in a row.' },
-        { label: 'Step 04', title: 'Ship', body: 'Export per platform from a single source file: Reels, Stories, feed, all from one comp.' },
-        { label: 'Step 05', title: 'Refine', body: 'Each drop pulls one lesson from the last: type sizing, contrast, motion timing.' },
+        { label: 'Step 03', title: 'Color', body: 'Pull a 2–3 color palette from each artist\'s own world — never the same palette twice in a row.' },
+        { label: 'Step 04', title: 'Ship', body: 'Export per platform from a single source file — Reels, Stories, feed, all from one comp.' },
+        { label: 'Step 05', title: 'Refine', body: 'Each drop pulls one lesson from the last — type sizing, contrast, motion timing.' },
       ],
     },
     recap: {
@@ -500,7 +500,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Feed The Beat',
         title: 'Feed The Beat',
         context:
-          "Feed The Beat introduces new artists in batches, and these are the social campaigns that did it. I designed each drop as a kit: a locked Taco Bell frame with swap-in artist layers, so roughly fifty musicians could move through the system without it ever reading as a template. Beyond the social sets, I designed the motion graphic that hypes up the roster, built a poster carrying the names of every artist on it, and helped with the packaging side of the program as well. The carousels below show the campaign sets, grouped by their shared color palettes.",
+          "Social media content created for Taco Bell's Feed The Beat program, promoting emerging artists and bands through branded visuals that highlight them and their partnership with the campaign.",
         media: [],
         layout: {
           type: 'mixed',
@@ -608,22 +608,22 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 201,
     blurb: 'Social Media Design for a Metal Label',
-    desc: "MNRK Heavy is a metal and hard rock label with a roster that takes its visuals as seriously as its riffs. I designed a steady stream of social content for the label: anniversary posts, release announcements, artist spotlights, and banner artwork across platforms. The job was matching the intensity of the music without drowning out the individual bands underneath it.",
+    desc: "A series of digital design explorations supporting music promotion and fan engagement for MNRK Heavy. This project involved creating social media assets across multiple platforms to spotlight anniversaries, new releases, and artist milestones—capturing the intensity of heavy metal and hard rock through bold, audience focused visuals.",
     brief: {
       eyebrow: 'The Brief',
       lead: "MNRK Heavy needed a steady stream of social design that could sit next to album covers from Lowheaven, Lamb of God, and the rest of the roster without ever looking lighter than the music it was promoting.",
       body: [
-        "Heavy music has a distinctive visual culture: high contrast, texture-heavy, type that wants to be a logo. The challenge wasn't inventing that look; it was producing enough of it to keep up with a multi-artist label's release cadence without flattening the bands' individual identities.",
-        "Outputs spanned anniversary milestones, release-week stories, artist-spotlight series, and full-bleed header artwork for cross-platform branding. Every piece had to read as MNRK Heavy and as the specific artist underneath it.",
+        "Heavy music has a distinctive visual culture — high contrast, texture-heavy, type that wants to be a logo. The challenge wasn't inventing that look; it was producing enough of it to keep up with a multi-artist label's release cadence without flattening the bands' individual identities.",
+        "Outputs spanned anniversary milestones, release-week stories, artist-spotlight series, and full-bleed header artwork for cross-platform branding. Every piece had to read as MNRK Heavy AND as the specific artist underneath it.",
       ],
     },
     approach: {
       eyebrow: 'The Approach',
-      intro: "I treated each artist as its own visual world inside an MNRK Heavy frame. Type, texture, and color shifted between Lowheaven and an anniversary post; the label's framing stayed consistent, from the placement of the MNRK mark to the treatment of release info.",
+      intro: "I treated each artist as its own visual world inside an MNRK Heavy frame. Type, texture, and color shifted between Lowheaven and an anniversary post; the label's framing — placement of the MNRK mark, treatment of release info — stayed consistent.",
       steps: [
         { label: 'Step 01', title: 'Intake', body: 'Release date, format (single/EP/album), artist visual references.' },
         { label: 'Step 02', title: 'Visual', body: 'Pull the texture and palette directly from the artist\'s cover art.' },
-        { label: 'Step 03', title: 'Frame', body: 'Apply MNRK\'s framing rules (mark placement, release info, CTA) last.' },
+        { label: 'Step 03', title: 'Frame', body: 'Apply MNRK\'s framing rules — mark placement, release info, CTA — last.' },
         { label: 'Step 04', title: 'Cut', body: 'Build all platform variants from one master comp.' },
         { label: 'Step 05', title: 'Animate', body: 'Where the format allows, add a short motion treatment for Stories.' },
       ],
@@ -643,7 +643,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Social & Promo',
         title: 'Social Media & Promotional Design',
         context:
-          "The full range of social design I produced for MNRK Heavy: anniversary milestones, story-format release promos, album announcements, artist spotlights, and cross-platform banner artwork. Heavy music has its own visual culture, so every piece leans into high contrast and texture while pulling its palette from the artist's own album art. The label's frame stays consistent; the worlds inside it change with each band.",
+          'A range of social media designs created for MNRK Heavy across multiple platforms — anniversary posts, story-format release promos, album release announcements, artist spotlights, and cross-platform banner artwork. Each piece captures the intensity of heavy metal and hard rock while staying anchored in the label\'s identity.',
         media: [
           { type: 'image', src: img('9XqPreXztmx0ZFPcME8FfCynnVA', 1080) },
           { type: 'image', src: img('7Qjm7UkhPslMPlb3HtRA64T1QE', 1080) },
@@ -706,20 +706,20 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 236,
     blurb: 'Conference Creative & Motion',
-    desc: "Consensus by CoinDesk is one of the biggest conferences in crypto, and this work helped build the anticipation that fills it. I created the pre-event creative: animated promos spotlighting speakers and themes, stills to promote those same speakers, and partner-brand party announcements signaling its scale. Three different kinds of asset, one visual identity, all pointed at the same goal of getting people through the doors.",
+    desc: "A collection of event-driven digital assets developed for Consensus by CoinDesk, designed to build momentum and audience engagement leading up to the conference. This work highlighted featured speakers, partner brands, and key event moments—delivering a cohesive visual identity across social media and digital platforms to drive anticipation and attendance.",
     brief: {
       eyebrow: 'The Brief',
-      lead: "Consensus is CoinDesk's flagship conference, the biggest stage in crypto. The pre-event creative had to feel as serious as a Wall Street keynote and as urgent as a tech launch, all while pushing through a crowded feed.",
+      lead: "Consensus is CoinDesk's flagship conference — the biggest stage in crypto. The pre-event creative had to feel as serious as a Wall Street keynote and as urgent as a tech launch, all while pushing through a crowded feed.",
       body: [
         "Three asset families: animated promotional pieces highlighting speakers and themes, photographic stills showing the event in motion, and partner-brand cards positioning sponsors against the Consensus identity.",
-        "Everything had to read as one event despite being made of three different visual logics (motion, photography, and flat brand work) and had to ladder up to the conference's premium positioning.",
+        "Everything had to read as one event despite being made of three different visual logics — motion, photography, and flat brand work — and had to ladder up to the conference's premium positioning.",
       ],
     },
     approach: {
       eyebrow: 'The Approach',
-      intro: 'Conference creative is anticipation-building. The work isn\'t about the event yet; it\'s about making the audience want to be there. I built around three rhythms: motion to create urgency, stills to ground the event in reality, and partner cards to signal scale.',
+      intro: 'Conference creative is anticipation-building. The work isn\'t about the event yet — it\'s about making the audience want to be there. I built around three rhythms: motion to create urgency, stills to ground the event in reality, and partner cards to signal scale.',
       steps: [
-        { label: 'Step 01', title: 'Anchor', body: 'Lock the Consensus visual language (type, color, motion timing) before producing any individual piece.' },
+        { label: 'Step 01', title: 'Anchor', body: 'Lock the Consensus visual language — type, color, motion timing — before producing any individual piece.' },
         { label: 'Step 02', title: 'Motion', body: 'Build the animated promos around speaker reveals and date countdowns.' },
         { label: 'Step 03', title: 'Still', body: 'Compose the photographic visuals to ground the event in a real space.' },
         { label: 'Step 04', title: 'Partner', body: "Design brand-partner cards that honor each sponsor without flattening the event identity." },
@@ -741,7 +741,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Conference Creative',
         title: 'Pre-Event Creative for Consensus',
         context:
-          "Everything here was built to make the conference feel inevitable. The motion pieces announce speakers and themes with countdown urgency, the stills promote those same speakers in the event's visual language, and the partner-brand party announcements put sponsor names inside the Consensus identity without flattening either one. Together they ran across social and digital channels in the weeks leading up to the event.",
+          "A series of digital assets created for Consensus by CoinDesk — motion pieces promoting speakers and themes, photographic stills grounding the event in real space, and partner-brand cards positioning sponsors against the Consensus identity. The full set built anticipation across the weeks leading up to the conference.",
         // 5 conference promo videos at 16:9
         media: [
           { type: 'video', src: vid('FGmZ7d1wogIeSBmBUxRHuAypA'), aspect: '16/9', poster: '/posters/FGmZ7d1wogIeSBmBUxRHuAypA.jpg' },
@@ -787,24 +787,24 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 177,
     blurb: 'Series Launch Campaign',
-    desc: "Adults is an FX comedy about a group of twenty-somethings figuring it out together in New York, and this campaign carried its launch. I designed across every surface a series premiere touches: animated screens, reality check game video questions, polaroid prints, cast announcements, menus, posters, banners, and real world mockup examples.",
+    desc: "A promotional design campaign supporting the launch of FX's new series Adults. This work translated the show's tone and visual identity into cohesive assets across social media, digital platforms, and print—driving awareness and audience connection through bold, narrative-focused visuals.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Adults is a new FX series following a chosen-family of young roommates navigating their twenties in New York. The campaign had to translate its sharp, character-driven tone across every surface a show launch touches.",
       body: [
-        "The asset families spanned motion to print: animated screens, video questions for the show's reality check game, polaroid prints, cast announcements establishing the ensemble, menus, posters, ultra-wide banners, and real world mockups showing the work in place.",
-        "The whole system had to feel like one show. Whether you saw Adults on a banner, in your story feed, or printed on a menu, the brand had to land instantly: same color logic, same type, same ensemble framing.",
+        "Six asset families spanning motion to print: long-form trailers and promos, character key art establishing the ensemble, social cutdowns sized for feed, theatrical-style posters, ultra-wide OOH banners, and a sticker pack for fans.",
+        "The whole system had to feel like one show. Whether you saw Adults on a bus shelter, in your story feed, or on a friend's laptop sticker, the brand had to land instantly — same color logic, same type, same ensemble framing.",
       ],
     },
     approach: {
       eyebrow: 'The Approach',
-      intro: "Series launches are surface-multiplication problems. The character work is the source of truth. Get the cast positioned and styled right, and every downstream asset (animated screens, menus, posters, banners) inherits from that. Bottom of the stack are the real world mockups: proof the system holds up outside a feed.",
+      intro: "Series launches are surface-multiplication problems. The character work is the source of truth — get the cast positioned and styled right, and every downstream asset (trailers, posters, OOH) inherits from that. Bottom of the stack is the sticker pack: small, fast, fan-facing.",
       steps: [
-        { label: 'Step 01', title: 'Cast', body: 'Establish each cast member in the announcement art with one consistent treatment.' },
-        { label: 'Step 02', title: 'Motion', body: "Build the animated screens and the reality check game's video questions to match the still treatment." },
-        { label: 'Step 03', title: 'Polaroid', body: 'Translate the cast into polaroid prints and feed-ready social pieces.' },
-        { label: 'Step 04', title: 'Print', body: 'Compose the ensemble into menus and posters for paid and press use.' },
-        { label: 'Step 05', title: 'OOH', body: 'Stretch the system to ultra-wide banners and prove it with real world mockups.' },
+        { label: 'Step 01', title: 'Character', body: 'Establish each cast member as a single key-art unit with consistent treatment.' },
+        { label: 'Step 02', title: 'Trailer', body: 'Pull moments from the show into 16:9 cutdowns that match the still character treatment.' },
+        { label: 'Step 03', title: 'Social', body: 'Cut the character work down for vertical feed and stories.' },
+        { label: 'Step 04', title: 'Poster', body: 'Compose the ensemble into theatrical-style posters for paid and press use.' },
+        { label: 'Step 05', title: 'OOH + Swag', body: 'Stretch the system to ultra-wide billboards and tighten it down to stickers.' },
       ],
     },
     recap: {
@@ -820,9 +820,9 @@ export const PROJECTS: Project[] = [
     sections: [
       {
         eyebrow: 'Launch Campaign',
-        title: 'Launch Campaign',
+        title: 'Adults on FX — Launch Campaign',
         context:
-          "The full launch system for Adults, starting with the animated screens and video questions from the show's reality check game. From there the campaign fans out into cast announcements that establish the ensemble, polaroid prints, menus, posters, banners, and real world mockups that show the work in place. One tone carries through all of it: sharp, young, and a little chaotic, just like the show.",
+          "A promotional design campaign supporting the launch of FX's new series Adults. The system translated the show's tone and visual identity into cohesive assets across trailers, character key art, social, posters, out-of-home placements, and a fan sticker pack — every surface a show launch touches.",
         // 4 series trailers at 16:9 — 2 across
         media: [
           { type: 'video', src: vid('Yw37NLO1xKxuLc3BFLZZzWkgQc'), aspect: '16/9', poster: '/posters/Yw37NLO1xKxuLc3BFLZZzWkgQc.jpg' },
@@ -923,18 +923,18 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 189,
     blurb: 'Beverage Brand & 3D Packaging',
-    desc: "Voltage is a conceptual energy drink that mixes lemonade with energy-drink intensity. The idea started with a fact I liked too much to let go: lemons hold real electrical potential. From there I built the entire brand, from naming and identity through packaging, 3D product renders, marketing, and a launch video. The goal was to fill a genuine gap on the shelf, a flavor-forward energy drink that feels bright instead of aggressive, and to prove I could carry a product brand from end to end.",
+    desc: "An exploration of how energy and flavor converge through a reimagined beverage experience. Voltage is a conceptual energy drink brand merging the refreshing taste of lemonade with the bold intensity of an energy drink. Inspired by the electrical potential found in lemons, the brand identity channels a sense of power, clarity, and high-voltage impact across naming, packaging, and visual design. Developed to fill a market gap for flavor-forward options that feel both familiar and exciting, the project redefines what an energy drink can be through design and storytelling.",
     brief: {
       eyebrow: 'The Brief',
-      lead: "Voltage is a self-initiated beverage brand merging lemonade with energy-drink intensity. The project is part identity exercise, part 3D challenge, and part marketing studio, built to prove the whole product cycle from logo to billboard.",
+      lead: "Voltage is a self-initiated beverage brand merging lemonade with energy-drink intensity. The project is part identity exercise, part 3D challenge, and part marketing studio — built to prove the whole product cycle from logo to billboard.",
       body: [
-        "The opportunity: a brand category (energy drinks) where the design language is loud, masculine, and visually exhausting. Voltage carves out a different position (bright, citrus-led, electric) and a different aesthetic (clean type, a custom circuit-board pattern, color-coded flavors).",
+        "The opportunity: a brand category (energy drinks) where the design language is loud, masculine, and visually exhausting. Voltage carves out a different position — bright, citrus-led, electric — and a different aesthetic — clean type, custom circuit-board pattern, color-coded flavors.",
         "Output spanned identity (logo, type, color), packaging (four flavor labels), 3D production (Blender renders + animated rotations + process documentation), and marketing (posters, OOH mockups, promotional video). One brand, top to bottom.",
       ],
     },
     approach: {
       eyebrow: 'The Approach',
-      intro: "Voltage was built as a vertical pipeline where every stage feeds the next. Identity locks the visual rules, packaging applies them to the product, 3D production turns the product into renders, and marketing pushes the renders into the world. Each stage proves the one before it.",
+      intro: "Voltage was built as a vertical pipeline — every stage feeds the next. Identity locks the visual rules, packaging applies them to the product, 3D production turns the product into renders, and marketing pushes the renders into the world. Each stage proves the one before it.",
       steps: [
         { label: 'Step 01', title: 'Brand', body: 'Logo, type, color, circuit-board pattern. Lock the identity before anything else.' },
         { label: 'Step 02', title: 'Label', body: 'Apply the identity to four flavor labels, color-coded for instant shelf recognition.' },
@@ -957,10 +957,10 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '01',
         title: 'Visual Identity',
-        context: "A beverage brand's identity has to work three ways at once: as a logo, as a label wrapped around a can, and as a 3D render under studio lighting. Every type and color decision here had to survive all three.",
-        role: "I designed the wordmark with a lightning bolt built into the L, paired Azo Sans with Azo Sans Uber for the type system, and created the circuit-board pattern that becomes the brand's connective texture across everything that follows.",
-        fieldNote: "The bolt in the L isn't the joke; it's the wordmark's structural anchor. Once that idea existed, every other Voltage decision pointed back to it.",
-        body: "The logotype uses heavy geometric letterforms with sharp angles and strong contrast, built to read as power and clarity rather than caffeine jitters. The bolt in the \"L\" is a quiet double reference: the energy theme, and the lemon the whole brand runs on.\n\nAzo Sans and Azo Sans Uber carry the type system, and a stylized circuit-board pattern runs underneath everything, reinforcing the tagline at the center of the brand: \"Shockingly Refreshing.\"",
+        context: 'A new beverage brand needs an identity that works as a logo, as a label, AND as a 3D render. Type and color decisions made here would have to survive being printed, photographed, and rendered at production resolution.',
+        role: "Designed the wordmark with the bolt integrated into the L, paired Azo Sans with Azo Sans Uber for type, and built the circuit-board pattern that becomes the brand's connective texture across every later artifact.",
+        fieldNote: "The bolt in the L isn't the joke — it's the wordmark's structural anchor. Once that idea existed, every other Voltage decision pointed back to it.",
+        body: "Voltage's visual identity is built to reflect the bold, high-energy personality of the drink itself. The logotype features heavy geometric letterforms with sharp angles and strong contrast, evoking power and clarity. The custom wordmark is paired with an electric bolt icon integrated into the letter \"L,\" a subtle nod to the energy theme and the lemon-powered origin of the brand.\n\nAzo Sans and Azo Sans Uber serve as the primary typefaces. A stylized circuit-board pattern reinforces the brand's core message: \"Shockingly Refreshing.\"",
         // Tall 9:16 brand sheet — single column
         media: [{ type: 'image', src: img('JE4wdFyL0g8XA0wKwjzvL7Fr6Kw', 1800) }],
         layout: { type: 'uniform', cols: 1, aspect: '9/16' },
@@ -968,9 +968,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '02',
         title: 'Can Labels',
-        context: "Energy-drink shelf space is brutally competitive; a label has to register from across the aisle. Color does most of that work, and the type has to land at thumbnail size.",
-        role: "I designed four flavor labels (Strawberry, Blueberry, Peach, and Lemon) on a shared circuit-board base, each with its own palette. Same template, four entirely different shelf reads.",
-        body: "Each label combines bold typography, a vibrant flavor palette, and the electrified citrus theme. Hold any two cans side by side and they're unmistakably siblings; from across the aisle, the color tells you which one you're reaching for.",
+        context: "Energy-drink shelf space is brutally competitive — labels have to register from across an aisle. Color coding had to do most of the work; the type had to land at thumbnail size.",
+        role: 'Designed four flavor labels (Strawberry, Blueberry, Peach, Lemon) using a unified circuit-board base with flavor-specific color palettes. Same template, four entirely different shelf reads.',
+        body: 'Each Voltage flavor features a fully custom label combining bold typography, vibrant color palettes, and an electrified theme rooted in energy and citrus power. Each flavor (Strawberry, Blueberry, Peach, and Lemon) is color-coded for instant recognition.',
         // 4 labels at 4:3 landscape
         media: [
           { type: 'image', src: img('b0RISJkOQ06NfekAq9PGK7niGY', 1600) },
@@ -983,9 +983,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '03',
         title: '3D Can Models',
-        context: "The marketing needed photoreal product imagery, and there was no real can to photograph. 3D was the only path that offered both control and quality.",
-        role: "I modeled the can in Blender, applied each flavor label, then lit and rendered four production-quality hero shots. The materials (metallic finish, label print texture, condensation) are built to hold up under close inspection.",
-        body: "Each render features a different flavor: Lemonade, Strawberry Lemonade, Blueberry Lemonade, and Peach Lemonade. Beyond showing the product, the renders prove the pipeline. These are the same label files from the previous section, wrapped onto a can that doesn't exist, lit like it does.",
+        context: 'The brand needed photoreal product imagery the marketing could draw from — without ever photographing a real can. 3D was the only path that gave both control and quality.',
+        role: 'Modeled the can in Blender, applied each flavor label, lit and rendered four production-quality hero shots. Built the materials (metallic finish, label printing texture, condensation) so they hold up to close inspection.',
+        body: 'A full set of 3D can models built in Blender. Each render showcases a different flavor — Lemonade, Strawberry Lemonade, Blueberry Lemonade, and Peach Lemonade — highlighting the distinct color palette and unified circuit-inspired label design.',
         // 4 Blender renders at 16:9
         media: [
           { type: 'image', src: img('DQoikkO2pmXgGZqK0C4JXpTXjY4', 1600) },
@@ -998,10 +998,10 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '04',
         title: '3D Model Process',
-        context: "On personal work, process documentation is part of the deliverable. It proves the technical claim and shows the build underneath the render.",
-        role: "I captured the in-Blender setup at four stages (modeling, UVs, materials, lighting) so the documentation reads as a build log rather than a finished gallery.",
-        fieldNote: 'Showing process is its own design problem. I took the screenshots, then composed them as if they were finished artwork.',
-        body: "Screenshots from inside Blender, showing the can before the lighting flatters it. This is the honest part of 3D work: the geometry, the UV layout, and the scene setup that the final renders are built on.",
+        context: 'Process documentation is part of the deliverable on personal work — it proves the technical claim and shows the build under the render.',
+        role: 'Captured the in-Blender setup at four stages — modeling, UVs, materials, lighting — so the documentation reads as a build log, not a finished gallery.',
+        fieldNote: 'Showing process is a separate design problem. Took the screenshots, then composed them as if they were finished artwork.',
+        body: 'Inside-Blender screenshots showing visualization and process.',
         // 4 Blender screenshots — 16:9 close enough (4064×2334 ≈ 16:9.2)
         media: [
           { type: 'image', src: img('KUvAzmVSKQrKSfNJ68gGGnY3W1g', 1800) },
@@ -1014,9 +1014,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '05',
         title: '3D Animations',
-        context: "Looping product animations are the social currency of beverage brands: a few seconds, a full rotation, label legible at every angle.",
-        role: "I animated four looping can rotations, one per flavor, lit each one so the label stays readable through the full spin, and rendered them as GIFs for native feed performance.",
-        body: "Four looping rotations built in Blender, one per flavor. They showcase the label detail, the typography, and the metallic finish in exactly the format social feeds reward.",
+        context: 'Looping product animations are the social currency of beverage brands — 6 seconds, 360° rotation, label visible at every angle.',
+        role: 'Animated four looping can rotations, one per flavor. Lit each to hold the label legible across the full spin and rendered as GIFs for native feed performance.',
+        body: 'Animated 3D can rotations built in Blender — looping showcases highlighting label detail, bold typography, and metallic finish.',
         // 4 looping GIFs at 1:1
         media: [
           { type: 'image', src: gif('6idmvhzQMhJJb5FmolwQjv0Uk') },
@@ -1029,9 +1029,9 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '06',
         title: 'Marketing',
-        context: "The marketing posters had to use the 3D renders as their hero product, proof that the brand pipeline actually works end to end.",
-        role: "I composed four promotional posters with the renders layered over the circuit-board pattern, each one leading with a single flavor as the hero.",
-        body: "Each poster pairs one flavor's can with its palette and the circuit-board texture. By this point in the project every element already existed; the posters are the system showing off.",
+        context: 'Marketing posters had to use the 3D renders as their hero — proof that the brand pipeline actually works end-to-end.',
+        role: 'Composed four promotional posters with the renders layered over the circuit-board pattern. Each poster led with a single flavor as the hero product.',
+        body: 'Promotional posters built around 3D can renders layered over a custom circuit-board pattern.',
         // 4 tall posters at 2:3 (3300×5100)
         media: [
           { type: 'image', src: jpg('E8Yv14zoATUufB8yRHLhbxXD0', 1400) },
@@ -1045,8 +1045,8 @@ export const PROJECTS: Project[] = [
         eyebrow: '07',
         title: 'Marketing Visualization',
         context: 'A poster in isolation is a design exercise. A poster on a bus shelter is a brand. The mockups had to prove the marketing system would survive contact with the city.',
-        role: "I composited the posters into four real-world environments (outdoor walls, cafés, transit, sidewalks), choosing each surface to match Voltage's downtown, slightly electric tone.",
-        body: "The campaign placed where it would actually live: sidewalks, subway stations, cafés, and outdoor walls. Seeing the posters surrounded by real visual noise was the final check that the brand reads at street speed.",
+        role: "Composited the posters into four real-world environments — outdoor walls, cafés, transit, sidewalks — choosing each surface to match Voltage's downtown, slightly-electric tone.",
+        body: 'Mockups visualizing the Voltage campaign in real-world environments — sidewalks, subway stations, cafés, outdoor walls.',
         // 4 mockups in a 2x2 grid at 16:9
         // Note: the last image is natively 4:3 but renders cleanly cover-cropped to 16:9
         media: [
@@ -1060,13 +1060,116 @@ export const PROJECTS: Project[] = [
       {
         eyebrow: '08',
         title: 'Promotional Video',
-        context: "The brand needed a single closing piece: something that pulled the whole project together in thirty seconds.",
-        role: "I edited and animated the launch promo with kinetic type, 3D cans on rotation, the circuit pattern in motion, and an electronic soundtrack. The whole brand pipeline on display in one continuous video.",
-        fieldNote: "A launch video isn't a separate deliverable; it's a compression of everything else you made. I made it last so it could pull from everywhere.",
-        body: "A short-form launch video introducing Voltage: 3D cans, kinetic typography, and a pulsing electronic soundtrack. Every asset in it comes from earlier in the project, which was exactly the point.",
+        context: "The brand needed a single closing piece — something that pulled the whole project together in 30 seconds.",
+        role: 'Edited and animated the launch promo: kinetic type, 3D cans on rotation, circuit pattern in motion, electronic soundtrack. The whole brand pipeline on display in one continuous video.',
+        fieldNote: "A launch video isn't a separate deliverable — it's a compression of everything else you made. Made it last so it could pull from everywhere.",
+        body: 'Short-form video introducing the Voltage brand with bold energy — 3D cans, kinetic typography, and a pulsing electronic soundtrack.',
         // Promotional video at 16:9
         media: [{ type: 'video', src: vid('lt6cuzs8UMkuQy4AWDxo3d5Djpo'), aspect: '16/9', poster: '/posters/lt6cuzs8UMkuQy4AWDxo3d5Djpo.jpg' }],
         layout: { type: 'uniform', cols: 1, aspect: '16/9' },
+      },
+    ],
+  },
+  {
+    id: 'nike',
+    kind: 'personal',
+    title: 'Nike',
+    cover: '/covers/nike.jpg',
+    themeColor: '#7a2e14',
+    tags: ['Concept Work', 'Motion Design', '3D Design'],
+    client: 'Nike',
+    date: '2024–2025',
+    role: 'Graphic Design, Motion Design, 3D Design',
+    year: '2024–25',
+    len: 223,
+    blurb: 'Self Initiated Brand Exploration',
+    desc: "An exploration of Nike's dynamic visual language and culture-defining storytelling through self-initiated design work. This collection reimagines how the brand's iconic identity can extend across diverse mediums, highlighting the adaptability and energy that define Nike's voice.",
+    brief: {
+      eyebrow: 'The Brief',
+      lead: "No client. No deck. Just Nike — the brand that taught everyone how product design and graphic design can be the same conversation — and a sustained personal exploration of what it would look like to design for them.",
+      body: [
+        "Two threads: a high-fidelity 3D recreation of the Air Jordan 1 (full Blender pipeline — model, materials, lighting, render) and a poster series around the Air Max silhouette built as if for a campaign that doesn't exist.",
+        "The point of self-directed work is to use it as a sandbox — push craft, prove technical claims, and design against your own brief instead of someone else's. This is the file that gets pointed at when someone asks if I can really model in 3D.",
+      ],
+    },
+    approach: {
+      eyebrow: 'The Approach',
+      intro: "Personal work earns its keep two ways: by pushing skill or by proving range. I split this project into both — 3D as the technical proof, posters as the design-craft proof. Each one stress-tests a different muscle.",
+      steps: [
+        { label: 'Step 01', title: 'Model', body: 'Build the Air Jordan 1 in Blender from reference — geometry, panels, stitching, sole.' },
+        { label: 'Step 02', title: 'Material', body: 'Apply realistic leather, rubber, lace, and metal textures with proper UV mapping.' },
+        { label: 'Step 03', title: 'Render', body: 'Light four hero shots and document the process inside Blender as supporting artifacts.' },
+        { label: 'Step 04', title: 'Poster', body: 'Step away from 3D and design an Air Max poster series — gritty, retro, type-led.' },
+        { label: 'Step 05', title: 'Compose', body: 'Close with a wide banner that takes the poster system from print into out-of-home.' },
+      ],
+    },
+    recap: {
+      eyebrow: 'The Recap',
+      headline: 'No client. Full craft.',
+      stats: [
+        { value: '01', label: 'Full Blender shoe' },
+        { value: '04', label: '3D hero renders' },
+        { value: '04', label: 'Process screenshots' },
+        { value: '04', label: 'Air Max compositions' },
+      ],
+    },
+    sections: [
+      {
+        eyebrow: '3D',
+        title: 'Air Jordan 1',
+        context:
+          'A personal 3D project recreating the classic Air Jordan 1 in Blender. Focused on realistic textures, accurate proportions, and brand-authentic details for use in product visualization and other assets.',
+        // 4 Blender renders at 16:9
+        media: [
+          { type: 'image', src: jpg('j8y8xAfZOZidHy4aAQmt91XtGvI', 1600) },
+          { type: 'image', src: jpg('tpvT1204NNfrqGFeldX6NSly8k', 1600) },
+          { type: 'image', src: jpg('ukz59voeVUcYhAHEotViWcxeRU', 1600) },
+          { type: 'image', src: jpg('3NYPi1Ly6MIp21jM4cUIToSZSTc', 1600) },
+        ],
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
+      },
+      {
+        eyebrow: 'Process',
+        title: '3D Model Process',
+        context:
+          'Some inside Blender screenshots to show my visualization and process.',
+        // 4 Blender screenshots — 16:9 close enough
+        media: [
+          { type: 'image', src: img('cDhoWJ08o4OgQYnHNUuO8i1Otw', 1600) },
+          { type: 'image', src: img('Wu9K2XarX7icedaH1nC33q1XmXw', 1600) },
+          { type: 'image', src: img('9z7nH5jIOSAua7j4tov2b2zkK4c', 1600) },
+          { type: 'image', src: img('2YfGqZHq8Y8qiGth2KktSlXHDRU', 1600) },
+        ],
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
+      },
+      {
+        eyebrow: 'Posters',
+        title: 'Air Max Posters',
+        context:
+          'A bold, stylized poster campaign celebrating the iconic Air Max silhouette. Each composition emphasizes a unique colorway with expressive typography, gritty textures, and retro-inspired energy, channeling the raw streetwear culture that defines the Nike brand.',
+        // Mixed: 3 tall posters at 2:3 + 1 ultra-wide banner at 2:1
+        media: [],
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 3,
+              aspect: '2/3',
+              media: [
+                { type: 'image', src: jpg('A5Se6fUdCaMnLFO6jkdvMdiS23A', 1200) },
+                { type: 'image', src: jpg('zkXcQf10CivlKH176ChPC2biPI', 1200) },
+                { type: 'image', src: jpg('woPn8PRw8tjGw0aaU6zCjZt4oKo', 1200) },
+              ],
+            },
+            {
+              cols: 1,
+              aspect: '2/1',
+              media: [
+                { type: 'image', src: jpg('02d64IOjIvc0yd2SQnEAoNdjm8', 2000) },
+              ],
+            },
+          ],
+        },
       },
     ],
   },
@@ -1083,14 +1186,7 @@ export const CATEGORIES = [
   { name: '3D Design', c: '#7a4fd0' },
   { name: 'Concept Work', c: '#3c8fa0' },
   { name: 'Marketing', c: '#e25a26' },
-  { name: 'Social Media', c: '#0e8fd0' },
-  { name: 'Conference', c: '#caa23a' },
 ];
-
-/** Pentagram-style discipline tag colour. Falls back to grey for any tag
- *  not present in CATEGORIES. */
-export const disciplineColor = (name: string) =>
-  CATEGORIES.find((c) => c.name === name)?.c ?? '#727272';
 
 // Artist name. Re-exported from SITE_TEXT so the name lives in one place
 // (lib/site-text.ts) and everything else that imports `ARTIST` still works.

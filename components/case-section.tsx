@@ -6,7 +6,6 @@ import type { Media, Section, GridRow, AspectRatio } from '@/lib/projects';
 import { useLightbox } from '@/lib/lightbox-context';
 import { VideoPlayer } from './video-player';
 import { EmbedFrame } from './embed-frame';
-import { deWidow } from '@/lib/typography';
 
 /* ============ HELPERS ============ */
 
@@ -36,14 +35,10 @@ function aspectStyle(aspect: AspectRatio | string | undefined) {
 export function CaseSection({
   section,
   index,
-  headerless = false,
 }: {
   section: Section;
   /** Optional 0-based section index, used to render a project number ("№ 01"). */
   index?: number;
-  /** When true, render only the media grid — the caller supplies its own
-   *  heading (used by the editorial project page's `.app` blocks). */
-  headerless?: boolean;
 }) {
   const { show } = useLightbox();
   const [expanded, setExpanded] = useState(false);
@@ -77,43 +72,6 @@ export function CaseSection({
   // shows on titled sections only.
   const isTitled = !!(section.title || section.eyebrow);
 
-  // Media-only render for the editorial project page — the `.app` wrapper
-  // supplies the reference-styled heading, so we emit just the grid.
-  const mediaGrid =
-    section.layout?.type === 'mixed' ? (
-      <MixedLayout rows={section.layout.rows} allImages={allImages} onLightbox={show} indexOf={indexOfImage} />
-    ) : section.layout?.type === 'carousel' ? (
-      <CarouselLayout
-        aspect={section.layout.aspect}
-        visible={section.layout.visible ?? 4}
-        media={section.media}
-        allImages={allImages}
-        onLightbox={show}
-        indexOf={indexOfImage}
-      />
-    ) : section.layout?.type === 'uniform' ? (
-      <UniformLayout
-        cols={section.layout.cols}
-        aspect={section.layout.aspect}
-        media={section.media}
-        allImages={allImages}
-        onLightbox={show}
-        indexOf={indexOfImage}
-      />
-    ) : (
-      <LegacyLayout
-        cols={section.cols || 1}
-        media={section.media}
-        allImages={allImages}
-        onLightbox={show}
-        indexOf={indexOfImage}
-      />
-    );
-
-  if (headerless) {
-    return mediaGrid;
-  }
-
   return (
     <section className="py-16 lg:py-20 border-b border-line last:border-b-0">
       {/* Section header — two-column on desktop (heading left, description right),
@@ -124,14 +82,14 @@ export function CaseSection({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
               <div className="lg:col-span-5">
                 {section.title && (
-                  <h2 className="font-display font-normal text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.5px] leading-[1.06]">
+                  <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04]">
                     {section.title}
                   </h2>
                 )}
               </div>
               <div className="lg:col-span-7 max-w-[640px]">
-                <p className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line">
-                  {deWidow(description[0])}
+                <p className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line">
+                  {description[0]}
                 </p>
                 {description.length > 1 && (
                   <>
@@ -140,9 +98,9 @@ export function CaseSection({
                         {description.slice(1).map((text, i) => (
                           <p
                             key={i}
-                            className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line"
+                            className="text-[15px] lg:text-[16px] leading-[1.62] text-muted whitespace-pre-line"
                           >
-                            {deWidow(text)}
+                            {text}
                           </p>
                         ))}
                       </div>
@@ -160,7 +118,7 @@ export function CaseSection({
             </div>
           ) : (
             section.title && (
-              <h2 className="font-display font-normal text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.5px] leading-[1.06] max-w-3xl">
+              <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.025em] leading-[1.04] max-w-3xl">
                 {section.title}
               </h2>
             )
@@ -169,7 +127,37 @@ export function CaseSection({
       )}
 
       {/* Render based on layout type */}
-      {mediaGrid}
+      {section.layout?.type === 'mixed' ? (
+        <MixedLayout rows={section.layout.rows} allImages={allImages} onLightbox={show} indexOf={indexOfImage} />
+      ) : section.layout?.type === 'carousel' ? (
+        <CarouselLayout
+          aspect={section.layout.aspect}
+          visible={section.layout.visible ?? 4}
+          media={section.media}
+          allImages={allImages}
+          onLightbox={show}
+          indexOf={indexOfImage}
+        />
+      ) : section.layout?.type === 'uniform' ? (
+        <UniformLayout
+          cols={section.layout.cols}
+          aspect={section.layout.aspect}
+          media={section.media}
+          allImages={allImages}
+          onLightbox={show}
+          indexOf={indexOfImage}
+        />
+      ) : (
+        /* Legacy: render using old cols prop, no fixed aspect (image's natural h-auto) */
+        <LegacyLayout
+          cols={section.cols || 1}
+          media={section.media}
+          allImages={allImages}
+          onLightbox={show}
+          indexOf={indexOfImage}
+        />
+      )}
+
     </section>
   );
 }
@@ -512,7 +500,7 @@ function MediaTile({
     return (
       <button
         onClick={onLightbox}
-        className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in group block"
+        className="relative w-full bg-panel-2 rounded-lg overflow-hidden cursor-zoom-in group block"
         style={aspectStyle(media.aspect || aspect)}
       >
         <Image

@@ -13,6 +13,7 @@ export function Lightbox() {
   return (
     <div
       className="fixed inset-0 bg-[rgba(0,0,0,0.94)] z-[200] flex items-center justify-center p-4 sm:p-10 animate-fadein"
+      data-lenis-prevent
       onClick={close}
     >
       {/* Close button — fixed positioning, lifted to z-[210] so it always

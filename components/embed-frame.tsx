@@ -41,19 +41,28 @@ export function EmbedFrame({
       ) : (
         <button
           onClick={() => setLoaded(true)}
-          className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-panel hover:bg-elev transition-colors"
+          className="absolute inset-0 flex flex-col items-center justify-center gap-4 hover:bg-elev/30 transition-colors"
         >
-          <div className="relative w-20 h-20 rounded-full bg-accent flex items-center justify-center shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)]">
+          {/* Aurora gradient backdrop */}
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              background:
+                'radial-gradient(circle at 30% 40%, rgba(255,45,138,0.4), transparent 60%), radial-gradient(circle at 70% 60%, rgba(34,211,238,0.4), transparent 60%)',
+            }}
+            aria-hidden
+          />
+          <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-accent via-cyan to-magenta flex items-center justify-center shadow-[0_8px_32px_-4px_rgba(0,0,0,0.6)]">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-7 h-7 text-accent-ink">
               <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
               <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
             </svg>
           </div>
           <div className="relative text-center">
-            <div className="font-display text-[24px] tracking-[-0.5px]">
+            <div className="font-display font-bold text-[22px] tracking-[-0.01em]">
               Click to open the book
             </div>
-            <div className="text-[11px] tracking-[0.14em] uppercase text-muted mt-2">
+            <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-muted mt-2">
               Interactive preview · FlipHTML5
             </div>
           </div>
@@ -66,7 +75,7 @@ export function EmbedFrame({
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
-        className="absolute top-3 right-3 z-10 text-[10px] tracking-[0.14em] uppercase bg-bg/85 backdrop-blur-md text-text px-3 py-1.5 rounded-full hover:bg-accent hover:text-accent-ink transition-colors"
+        className="absolute top-3 right-3 z-10 font-mono text-[10px] tracking-[0.14em] uppercase bg-bg/80 backdrop-blur-md text-text px-3 py-1.5 rounded-full hover:bg-gradient-to-r hover:from-accent hover:via-cyan hover:to-magenta hover:text-accent-ink transition-colors"
       >
         {label}
       </a>

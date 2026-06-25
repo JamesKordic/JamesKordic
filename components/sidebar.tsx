@@ -2,117 +2,196 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { PROJECTS } from '@/lib/projects';
+import Image from 'next/image';
+import { PROJECTS, ARTIST } from '@/lib/projects';
+import { usePlayer } from '@/lib/player-context';
+import { HomeIcon, SearchIcon, UserIcon, LibraryIcon } from './icons';
+import { ProjectMonogram } from './project-monogram';
 import { SITE_TEXT } from '@/lib/site-text';
 
 const T = SITE_TEXT;
 
-/**
- * Fixed editorial sidebar — dark panel with the name mark, availability
- * status, primary navigation, and contact details pinned to the bottom.
- * Sticky/full-height on desktop; a slide-in drawer on mobile (toggled from
- * the top bar in AppShell via the `open` / `onClose` props).
- */
-export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function Sidebar({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
   const pathname = usePathname();
+  const { state } = usePlayer();
 
-  const navItems: { label: string; href: string; marker: string; external?: boolean }[] = [
-    { label: 'Work', href: '/', marker: String(PROJECTS.length).padStart(2, '0') },
-    { label: 'About', href: '/about', marker: '↓' },
-    { label: 'Contact', href: `mailto:${T.contact.email}`, marker: '↗', external: true },
-  ];
-
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname?.startsWith(href);
+  const isActive = (path: string) => {
+    if (path === '/') return pathname === '/';
+    return pathname?.startsWith(path);
+  };
 
   return (
     <aside
-      className={`bg-paneldark text-panelfg flex flex-col justify-between gap-10 px-9 py-12 sm:py-14 lg:py-16
-        fixed inset-y-0 left-0 z-50 w-[300px] max-w-[85vw] overflow-y-auto transition-transform duration-300 ease-out
-        md:sticky md:top-0 md:z-auto md:h-screen md:w-auto md:max-w-none md:translate-x-0 md:border-r md:border-panelline
-        ${open ? 'translate-x-0' : '-translate-x-full'}`}
+      className={`flex flex-col gap-2 min-h-0 fixed lg:static top-0 bottom-0 left-0 w-[280px] lg:w-[248px] z-[130] p-2 lg:p-0 lg:row-start-1 lg:col-start-1 bg-bg lg:bg-transparent transition-transform duration-[260ms] ${
+        open ? 'translate-x-0' : '-translate-x-[104%] lg:translate-x-0'
+      }`}
     >
-      {/* Close button — mobile drawer only */}
-      <button
-        onClick={onClose}
-        aria-label="Close menu"
-        className="md:hidden absolute top-5 right-5 w-9 h-9 flex items-center justify-center text-paneldim hover:text-panelfg text-2xl leading-none"
-      >
-        ×
-      </button>
-
-      <div>
-        {/* Name mark */}
-        <Link href="/" onClick={onClose} className="block">
-          <span className="font-display text-[26px] leading-[1.05] tracking-[-0.5px] text-panelfg whitespace-nowrap">
-            {T.artist.name}
+      {/* Brand */}
+      <div className="bg-panel rounded-[11px] px-[18px] py-[20px] pb-[18px]">
+        <Link href="/" onClick={onClose} className="flex items-center gap-[10px] group">
+          {/* Custom logo — replaces the spinning disc.
+              On hover, gets a soft gradient glow.
+              When player is playing, gets a subtle pulse. */}
+          <span className="relative w-9 h-9 flex-none flex items-center justify-center">
+            <span
+              className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md ${state.playing ? 'opacity-60' : ''}`}
+              style={{
+                background:
+                  'conic-gradient(from 0deg, #c8f135, #22d3ee, #ff2d8a, #c8f135)',
+              }}
+              aria-hidden
+            />
+            <Image
+              src="/logo.png"
+              alt="James Kordic logo"
+              width={36}
+              height={36}
+              className="relative w-9 h-9 object-contain"
+              priority
+            />
+          </span>
+          <span>
+            <span className="block font-display font-extrabold text-[15px] tracking-[-0.02em] leading-none">
+              {ARTIST}
+            </span>
+            <span className="block text-[10px] tracking-[0.22em] uppercase text-muted-2 mt-[3px]">
+              {T.artist.discipline}
+            </span>
           </span>
         </Link>
+      </div>
 
-        {/* Availability */}
-        <div className="inline-flex items-center gap-2 text-[13px] mt-7 border border-panelline rounded-full px-3.5 py-[7px] text-panelfg">
-          <span className="w-[7px] h-[7px] rounded-full bg-accent" />
-          {T.home.cta.availability}
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex flex-col mt-9">
-          {navItems.map((item) =>
-            item.external ? (
-              <a
-                key={item.label}
-                href={item.href}
-                className="group flex items-center justify-between text-[15px] py-[7px] border-b border-panelline text-paneldim hover:text-panelfg hover:pl-2 transition-all"
-              >
-                <span>{item.label}</span>
-                <span className="text-[11px] text-accent">{item.marker}</span>
-              </a>
-            ) : (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={onClose}
-                className={`group flex items-center justify-between text-[15px] py-[7px] border-b border-panelline hover:pl-2 transition-all ${
-                  isActive(item.href) ? 'text-panelfg pl-2' : 'text-paneldim hover:text-panelfg'
-                }`}
-              >
-                <span>{item.label}</span>
-                <span className="text-[11px] text-accent">{item.marker}</span>
-              </Link>
-            )
-          )}
+      {/* Nav */}
+      <div className="bg-panel rounded-[11px]">
+        <nav className="px-[10px] pt-[6px] pb-3">
+          <NavItem
+            href="/"
+            icon={<HomeIcon className="w-[21px] h-[21px]" />}
+            active={isActive('/')}
+            onClick={onClose}
+          >
+            {T.sidebar.home}
+          </NavItem>
+          <NavItem
+            href="/search"
+            icon={<SearchIcon className="w-[21px] h-[21px]" />}
+            active={isActive('/search')}
+            onClick={onClose}
+          >
+            {T.sidebar.browse}
+          </NavItem>
+          <NavItem
+            href="/about"
+            icon={<UserIcon className="w-[21px] h-[21px]" />}
+            active={isActive('/about')}
+            onClick={onClose}
+          >
+            {T.sidebar.about}
+          </NavItem>
         </nav>
       </div>
 
-      {/* Bottom — location + contact */}
-      <div className="text-[12px] text-paneldim leading-[2]">
-        Based in {T.artist.location}
-        <br />
-        <a
-          href={`mailto:${T.contact.email}`}
-          className="text-panelfg border-b border-panelline hover:border-accent transition-colors"
-        >
-          {T.contact.email}
-        </a>
-        <br />
-        <a
-          href={T.contact.instagramUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-panelfg transition-colors"
-        >
-          Instagram
-        </a>
-        {' · '}
-        <a
-          href={T.contact.linkedinUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-panelfg transition-colors"
-        >
-          LinkedIn
-        </a>
+      {/* Library */}
+      <div className="bg-panel rounded-[11px] flex-1 min-h-0 flex flex-col pt-[14px] px-[6px] pb-[6px]">
+        <div className="flex items-center justify-between px-3 pb-3">
+          <span className="flex items-center gap-[11px] font-bold text-[14px] text-muted">
+            <LibraryIcon className="w-5 h-5" />
+            {T.sidebar.library}
+          </span>
+          <span className="text-[11px] text-muted-2 border border-line rounded-[20px] px-[9px] py-[3px]">
+            {PROJECTS.length} {T.sidebar.libraryCountSuffix}
+          </span>
+        </div>
+        <div className="overflow-y-auto flex-1 px-[6px] pb-[6px] scrollbar-thin">
+          {PROJECTS.map((p) => {
+            const isPlayingThis = state.id === p.id && state.playing;
+            const isOnThisPage = pathname === `/work/${p.id}`;
+            return (
+              <Link
+                key={p.id}
+                href={`/work/${p.id}`}
+                onClick={onClose}
+                className={`flex items-center gap-[11px] w-full text-left p-2 rounded-lg transition-colors ${
+                  isOnThisPage ? 'bg-elev' : 'hover:bg-elev'
+                }`}
+              >
+                <ProjectMonogram p={p} size={46} />
+                <div className="min-w-0">
+                  <div
+                    className={`font-semibold text-[13.5px] truncate ${
+                      // Both "currently on this page" and "currently playing"
+                      // get the gradient treatment — keeps the palette
+                      // consistent and avoids any solid green
+                      isOnThisPage || isPlayingThis ? 'gradient-text-static' : ''
+                    }`}
+                  >
+                    {p.title}
+                  </div>
+                  <div className="text-[11.5px] text-muted-2 truncate mt-[2px]">
+                    {T.sidebar.libraryItemSubtitle} · {ARTIST}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </aside>
+  );
+}
+
+/**
+ * Sidebar nav item.
+ *
+ * When active (the current page):
+ *  - A vertical gradient bar appears on the left edge
+ *  - The text uses gradient-text-static (lime → cyan → magenta)
+ *  - A subtle background pill highlights the row
+ *
+ * When inactive:
+ *  - Muted grey text
+ *  - On hover, brightens to full white
+ */
+function NavItem({
+  href,
+  icon,
+  active,
+  children,
+  onClick,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  active: boolean;
+  children: React.ReactNode;
+  onClick: () => void;
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className={`relative flex items-center gap-[15px] w-full px-3 py-[11px] rounded-lg font-bold text-[14px] transition-all ${
+        active ? 'bg-elev/60' : 'text-muted hover:text-text hover:bg-elev/30'
+      }`}
+    >
+      {/* Active-state indicator bar on the left edge */}
+      {active && (
+        <span
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[18px] rounded-full"
+          style={{
+            background:
+              'linear-gradient(180deg, #c8f135 0%, #22d3ee 50%, #ff2d8a 100%)',
+          }}
+          aria-hidden
+        />
+      )}
+      <span className={active ? 'text-cyan' : ''}>{icon}</span>
+      <span className={active ? 'gradient-text-static' : ''}>{children}</span>
+    </Link>
   );
 }
