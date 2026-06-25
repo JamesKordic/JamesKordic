@@ -66,8 +66,8 @@ export default function HomePage() {
               )}
             </div>
 
-            {/* Meta panel — sits below the image on mobile; slides up on hover from sm up */}
-            <div className="relative border-t border-line bg-bg px-5 py-[18px] sm:absolute sm:inset-x-0 sm:bottom-0 sm:translate-y-full sm:transition-transform sm:duration-[350ms] sm:ease-[cubic-bezier(0.16,1,0.3,1)] sm:group-hover:translate-y-0">
+            {/* Meta panel — sits below the image on mobile; slides down from the top on hover from sm up */}
+            <div className="relative border-t border-line bg-bg px-5 py-[18px] sm:absolute sm:inset-x-0 sm:top-0 sm:bottom-auto sm:-translate-y-full sm:border-b sm:border-t-0 sm:transition-transform sm:duration-[350ms] sm:ease-[cubic-bezier(0.16,1,0.3,1)] sm:group-hover:translate-y-0">
               <h3 className="text-[18px] font-semibold tracking-[-0.01em] text-text">
                 {p.title}
               </h3>
