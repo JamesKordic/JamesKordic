@@ -21,9 +21,9 @@ export default function HomePage() {
     <div className="min-h-screen bg-bg text-text">
       <SiteHeader />
 
-      {/* Intro line */}
-      <section className="max-w-[1100px] border-b border-line px-6 pb-10 pt-16 sm:px-8">
-        <h1 className="text-[clamp(28px,4.4vw,58px)] font-semibold leading-[1.06] tracking-[-0.025em]">
+      {/* Intro line — full-width hairline, content capped at 1100px */}
+      <section className="border-b border-line px-6 pb-10 pt-16 sm:px-8">
+        <h1 className="max-w-[1100px] text-[clamp(28px,4.4vw,58px)] font-semibold leading-[1.06] tracking-[-0.025em]">
           {T.artist.name} is a graphic &amp; motion designer for music,
           entertainment, food and tech brands.{' '}
           <em className="not-italic text-muted">Selected work below.</em>
