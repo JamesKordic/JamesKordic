@@ -74,14 +74,26 @@ export default function HomePage() {
               sm:border-r sm:[&:nth-child(2n)]:border-r-0
               lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
           >
-            {/* Cover */}
+            {/* Cover — video when one is provided, otherwise the still image */}
             <div className="absolute inset-0 bg-panel-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={p.cover}
-                alt={p.title}
-                className="h-full w-full object-cover"
-              />
+              {p.coverVideo ? (
+                <video
+                  src={p.coverVideo}
+                  poster={p.cover}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={p.cover}
+                  alt={p.title}
+                  className="h-full w-full object-cover"
+                />
+              )}
             </div>
 
             {/* Meta panel — slides up on hover */}
