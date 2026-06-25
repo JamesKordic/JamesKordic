@@ -44,12 +44,14 @@ export default function HomePage() {
           <Link
             key={p.id}
             href={`/work/${p.id}`}
-            className="group relative block aspect-[1/1.04] overflow-hidden border-b border-line
+            className="group relative block border-b border-line
+              sm:aspect-[1/1.04] sm:overflow-hidden
               sm:border-r sm:[&:nth-child(2n)]:border-r-0
               lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
           >
-            {/* Cover — video when one is provided, otherwise the still image */}
-            <div className="absolute inset-0 bg-panel-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]">
+            {/* Cover — video when one is provided, otherwise the still image.
+                Normal-flow block on mobile; fills the tile from sm up. */}
+            <div className="relative aspect-[1/1.04] overflow-hidden bg-panel-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] sm:absolute sm:inset-0 sm:aspect-auto">
               {p.coverVideo ? (
                 <video
                   src={p.coverVideo}
@@ -70,8 +72,8 @@ export default function HomePage() {
               )}
             </div>
 
-            {/* Meta panel — shown by default on mobile; slides up on hover from sm up */}
-            <div className="absolute inset-x-0 bottom-0 translate-y-0 border-t border-line bg-bg px-5 py-[18px] transition-transform duration-[350ms] ease-[cubic-bezier(0.16,1,0.3,1)] sm:translate-y-full group-hover:translate-y-0">
+            {/* Meta panel — sits below the image on mobile; slides up on hover from sm up */}
+            <div className="relative border-t border-line bg-bg px-5 py-[18px] sm:absolute sm:inset-x-0 sm:bottom-0 sm:translate-y-full sm:transition-transform sm:duration-[350ms] sm:ease-[cubic-bezier(0.16,1,0.3,1)] sm:group-hover:translate-y-0">
               <h3 className="text-[18px] font-semibold tracking-[-0.01em] text-text">
                 {p.title}
               </h3>
