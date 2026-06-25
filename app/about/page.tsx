@@ -38,7 +38,10 @@ export default function AboutPage() {
       <section className="grid items-start gap-x-10 gap-y-8 md:grid-cols-12 md:items-stretch">
         {/* Text */}
         <div className="order-2 md:order-1 md:col-span-8">
-          <p className="font-display text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.5px]">
+          <div className="mb-5 text-[12px] uppercase tracking-[2px] text-accent font-bold">
+            About
+          </div>
+          <p className="font-display font-normal text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.5px]">
             Hi, I’m {T.artist.firstName} — feel free to reach out anytime.
           </p>
 
@@ -157,7 +160,7 @@ function Row({
 }) {
   return (
     <section className="mt-12 grid border-t border-line pt-8 md:mt-14 md:grid-cols-12 md:gap-x-8 md:pt-9">
-      <h2 className="mb-5 text-[14px] text-muted md:col-span-3 md:mb-0">
+      <h2 className="mb-5 text-[13px] uppercase tracking-[2px] text-muted md:col-span-3 md:mb-0">
         {label}
       </h2>
       <div className="md:col-span-7">{children}</div>
