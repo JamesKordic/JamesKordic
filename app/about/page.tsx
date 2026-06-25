@@ -35,7 +35,7 @@ export default function AboutPage() {
   return (
     <div className="pb-4">
       {/* Intro + headshot */}
-      <section className="grid items-start gap-x-10 gap-y-8 md:grid-cols-12">
+      <section className="grid items-start gap-x-10 gap-y-8 md:grid-cols-12 md:items-stretch">
         {/* Text */}
         <div className="order-2 md:order-1 md:col-span-8">
           <p className="font-display text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.5px]">
@@ -71,7 +71,7 @@ export default function AboutPage() {
 
         {/* Headshot */}
         <div className="order-1 md:order-2 md:col-span-4">
-          <div className="relative aspect-[4/5] w-full overflow-hidden border border-line bg-panel">
+          <div className="relative aspect-[4/5] w-full overflow-hidden border border-line bg-panel md:aspect-auto md:h-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/about/headshot.jpg"
@@ -84,7 +84,7 @@ export default function AboutPage() {
               href={T.contact.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute inset-x-4 bottom-4 inline-flex items-center justify-center gap-2 rounded-full bg-text px-5 py-3 text-[14px] font-semibold text-bg shadow-lg transition-colors hover:bg-accent"
+              className="absolute inset-x-4 bottom-4 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-[14px] font-semibold text-text shadow-lg transition-colors hover:bg-accent hover:text-white"
             >
               ⤓ Résumé
             </a>
