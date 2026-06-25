@@ -17,9 +17,15 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const links: { label: string; href: string; external?: boolean }[] = [
+  const links: {
+    label: string;
+    href: string;
+    external?: boolean;
+    newTab?: boolean;
+  }[] = [
     { label: 'Work', href: '/' },
     { label: 'About', href: '/about' },
+    { label: 'Résumé', href: T.contact.resumeUrl, external: true, newTab: true },
     { label: 'Contact', href: `mailto:${T.contact.email}`, external: true },
   ];
 
@@ -44,6 +50,8 @@ export function SiteHeader() {
               <a
                 key={l.label}
                 href={l.href}
+                target={l.newTab ? '_blank' : undefined}
+                rel={l.newTab ? 'noopener noreferrer' : undefined}
                 className="text-[14px] sm:text-[15px] font-medium text-muted transition-colors hover:text-accent"
               >
                 {l.label}
@@ -96,6 +104,8 @@ export function SiteHeader() {
               <a
                 key={l.label}
                 href={l.href}
+                target={l.newTab ? '_blank' : undefined}
+                rel={l.newTab ? 'noopener noreferrer' : undefined}
                 onClick={() => setOpen(false)}
                 className="py-3 text-[16px] font-medium text-muted transition-colors hover:text-accent"
               >

@@ -69,14 +69,15 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Headshot — placeholder for now. Swap the inner div for:
-            <img src="/about/headshot.jpg" alt="James Kordic" className="h-full w-full object-cover" /> */}
+        {/* Headshot */}
         <div className="order-1 md:order-2 md:col-span-4">
           <div className="relative aspect-[4/5] w-full overflow-hidden border border-line bg-panel">
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-muted-2">
-              <span className="text-[28px] leading-none">☺</span>
-              <span className="text-[11px] uppercase tracking-[1.5px]">Headshot</span>
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/about/headshot.jpg"
+              alt={`${T.artist.name}, ${T.artist.discipline}`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
 
             {/* Résumé button — overlaid near the bottom of the image */}
             <a
