@@ -77,6 +77,16 @@ export default function AboutPage() {
               <span className="text-[28px] leading-none">☺</span>
               <span className="text-[11px] uppercase tracking-[1.5px]">Headshot</span>
             </div>
+
+            {/* Résumé button — overlaid near the bottom of the image */}
+            <a
+              href={T.contact.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-x-4 bottom-4 inline-flex items-center justify-center gap-2 rounded-full bg-text px-5 py-3 text-[14px] font-semibold text-bg shadow-lg transition-colors hover:bg-accent"
+            >
+              ⤓ Résumé
+            </a>
           </div>
         </div>
       </section>
