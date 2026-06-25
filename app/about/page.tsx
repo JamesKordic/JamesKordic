@@ -1,19 +1,26 @@
 'use client';
 
-import { PROJECTS } from '@/lib/projects';
 import { SITE_TEXT } from '@/lib/site-text';
 
 const T = SITE_TEXT;
 
 /**
  * About — a résumé-style editorial profile (à la kimeunsoo.com/About):
- * a friendly first-person intro, then left-label / right-content rows
- * (Selected Work, Education, Capabilities, Contact) each topped by a hairline.
- * Everything is left-aligned and monochrome with one accent on link hover.
- * Copy lives in lib/site-text.ts; the work list is data-driven from PROJECTS.
+ * a friendly first-person intro with a headshot to the side, then left-label /
+ * right-content rows (Experience, Education, Capabilities, Contact) each topped
+ * by a hairline. Left-aligned and monochrome with one accent on link hover.
+ * Copy lives in lib/site-text.ts; experience/education mirror the résumé.
  */
 
-/** Disciplines worked across the catalog (drawn from the projects' roles). */
+/** Roles + dates from the résumé (no descriptions, per the design). */
+const EXPERIENCE = [
+  { role: 'Senior Designer Consultant', company: 'THE·TEAM', date: 'Apr 2026 – Present' },
+  { role: 'Freelance Graphic & Motion Designer', company: 'The Syndicate', date: 'May 2025 – Mar 2026' },
+  { role: 'Video, Motion, Design & Content Intern', company: 'The Syndicate', date: 'Aug 2024 – May 2025' },
+  { role: 'Visual Designer', company: 'Rochester Institute of Technology', date: 'Oct 2022 – May 2025' },
+];
+
+/** Disciplines drawn from the résumé skill set. */
 const CAPABILITIES = [
   'Creative Direction',
   'Motion Design',
@@ -27,14 +34,15 @@ const CAPABILITIES = [
 export default function AboutPage() {
   return (
     <div className="pb-4">
-      {/* Intro */}
-      <section className="grid md:grid-cols-12 md:gap-x-8">
-        <div className="md:col-span-9">
+      {/* Intro + headshot */}
+      <section className="grid items-start gap-x-10 gap-y-8 md:grid-cols-12">
+        {/* Text */}
+        <div className="order-2 md:order-1 md:col-span-8">
           <p className="font-display text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.5px]">
             Hi, I’m {T.artist.firstName} — feel free to reach out anytime.
           </p>
 
-          <div className="mt-8 max-w-[700px] space-y-5">
+          <div className="mt-8 max-w-[680px] space-y-5">
             {T.about.bio.map((paragraph, i) => (
               <p
                 key={i}
@@ -60,29 +68,32 @@ export default function AboutPage() {
             </IntroLink>
           </div>
         </div>
+
+        {/* Headshot — placeholder for now. Swap the inner div for:
+            <img src="/about/headshot.jpg" alt="James Kordic" className="h-full w-full object-cover" /> */}
+        <div className="order-1 md:order-2 md:col-span-4">
+          <div className="relative aspect-[4/5] w-full overflow-hidden border border-line bg-panel">
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-muted-2">
+              <span className="text-[28px] leading-none">☺</span>
+              <span className="text-[11px] uppercase tracking-[1.5px]">Headshot</span>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Selected Work */}
-      <Row label="Selected Work">
-        {PROJECTS.map((p) => {
-          const name = p.client || p.title;
-          const project = p.client && p.client !== p.title ? p.title : null;
-          const detail = [p.role, p.year].filter(Boolean).join(' · ');
-          return (
-            <Entry
-              key={p.id}
-              name={name}
-              lines={[project, detail].filter(Boolean) as string[]}
-            />
-          );
-        })}
+      {/* Experience */}
+      <Row label="Experience">
+        {EXPERIENCE.map((e, i) => (
+          <Entry key={i} name={e.role} lines={[e.company]} meta={e.date} />
+        ))}
       </Row>
 
       {/* Education */}
       <Row label="Education">
         <Entry
-          name="Rochester Institute of Technology"
-          lines={['BFA, Graphic Design']}
+          name="BFA, Graphic Design"
+          lines={['Rochester Institute of Technology']}
+          meta="Aug 2021 – May 2025"
         />
       </Row>
 
@@ -143,11 +154,26 @@ function Row({
   );
 }
 
-function Entry({ name, lines }: { name: string; lines: string[] }) {
+function Entry({
+  name,
+  lines,
+  meta,
+}: {
+  name: string;
+  lines: string[];
+  meta?: string;
+}) {
   return (
     <div className="mb-7 last:mb-0">
-      <div className="font-display text-[clamp(20px,2.2vw,26px)] tracking-[-0.3px] leading-tight">
-        {name}
+      <div className="flex items-baseline justify-between gap-4">
+        <div className="font-display text-[clamp(20px,2.2vw,26px)] tracking-[-0.3px] leading-tight">
+          {name}
+        </div>
+        {meta && (
+          <div className="flex-none text-[13px] tabular-nums text-muted-2">
+            {meta}
+          </div>
+        )}
       </div>
       {lines.length > 0 && (
         <div className="mt-1.5 text-[15px] leading-[1.5] text-muted">
