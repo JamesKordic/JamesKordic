@@ -31,12 +31,6 @@ export default function HomePage() {
         </h1>
       </section>
 
-      {/* Spacer row — keeps the filter-bar height and full-width hairline
-          even though the filters themselves were removed. */}
-      <div className="sticky top-[59px] z-40 border-b border-line bg-bg px-6 py-[18px] text-[14px] font-medium sm:px-8">
-        <span aria-hidden className="invisible">&nbsp;</span>
-      </div>
-
       {/* Grid — hairlines only between cells (no outer frame), like the
           reference. Right borders are toggled per breakpoint via nth-child. */}
       <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">

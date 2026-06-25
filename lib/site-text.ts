@@ -266,7 +266,7 @@ export const SITE_TEXT = {
   /* ---- FOOTER ---- */
   footer: {
     /** Copyright line shown at the bottom of pages */
-    copyright: '©2026 James Kordic · Graphic Design',
+    copyright: '©2026 James Kordic',
   },
 
   /* ---- META (browser tab title + meta description) ---- */

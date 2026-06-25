@@ -40,7 +40,7 @@ export function SiteFooter() {
 
       <div>
         <h4 className="mb-3.5 text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">
-          Studio
+          Here
         </h4>
         <FooterLink href="/about">About</FooterLink>
         <FooterLink href="/">Work</FooterLink>
@@ -66,7 +66,7 @@ export function SiteFooter() {
 
       <div className="col-span-full mt-6 flex flex-col gap-2 border-t border-line pt-12 text-[13px] text-muted sm:flex-row sm:justify-between">
         <span>{T.footer.copyright}</span>
-        <span>Available for select commissions · {T.artist.location}</span>
+        <span>{T.artist.location}</span>
       </div>
     </footer>
   );
