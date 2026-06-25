@@ -28,7 +28,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-bg text-text">
       <SiteHeader />
 
-      <main className="mx-auto max-w-[1100px] px-6 py-12 sm:px-8 sm:py-16">
+      <main className="mx-auto max-w-[1280px] px-6 py-12 sm:px-8 sm:py-16">
         {/* keyed on pathname so each route re-triggers the entrance fade */}
         <div key={pathname} className="view-anim">
           {children}

@@ -53,7 +53,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           src={p.cover}
           alt={`${p.title} cover`}
           fill
-          sizes="(max-width:1100px) 100vw, 1100px"
+          sizes="(max-width:1280px) 100vw, 1280px"
           className="object-cover"
           priority
         />
