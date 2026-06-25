@@ -38,10 +38,7 @@ export default function HomePage() {
           <Link
             key={p.id}
             href={`/work/${p.id}`}
-            className="group relative block border-b border-line
-              sm:aspect-[1/1.04] sm:overflow-hidden
-              sm:border-r sm:[&:nth-child(2n)]:border-r-0
-              lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
+            className="group relative block sm:aspect-[1/1.04] sm:overflow-hidden"
           >
             {/* Cover — video when one is provided, otherwise the still image.
                 Normal-flow block on mobile; fills the tile from sm up. */}
