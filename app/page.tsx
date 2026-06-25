@@ -24,7 +24,7 @@ export default function HomePage() {
       {/* Intro line — full-width hairline, content capped at 1100px.
           Equal top/bottom padding centers the headline between the hairlines. */}
       <section className="border-b border-line px-6 py-14 sm:px-8">
-        <h1 className="max-w-[1100px] font-display font-normal text-[clamp(28px,4.4vw,58px)] leading-[1.06] tracking-[-0.5px]">
+        <h1 className="max-w-[1100px] font-display font-semibold text-[clamp(28px,4.4vw,58px)] leading-[1.06] tracking-[-0.025em]">
           {T.artist.name} is a graphic &amp; motion designer for music,
           entertainment, food and tech brands.{' '}
           <em className="not-italic text-muted">Selected work below.</em>

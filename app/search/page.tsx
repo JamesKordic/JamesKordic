@@ -29,7 +29,7 @@ export default function SearchPage() {
         <div className="text-[12px] uppercase tracking-[2px] text-accent font-bold mb-5">
           Browse — {PROJECTS.length} projects
         </div>
-        <h1 className="font-display font-normal text-[clamp(32px,4.2vw,52px)] leading-[1.1] tracking-[-0.5px]">
+        <h1 className="font-display font-semibold text-[clamp(32px,4.2vw,52px)] leading-[1.1] tracking-[-0.025em]">
           {T.search.heading}
         </h1>
       </section>

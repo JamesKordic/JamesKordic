@@ -41,7 +41,7 @@ export default function AboutPage() {
           <div className="mb-5 text-[12px] uppercase tracking-[2px] text-accent font-bold">
             About
           </div>
-          <p className="font-display font-normal text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.5px]">
+          <p className="font-display font-semibold text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.025em]">
             Hi, I’m {T.artist.firstName} — feel free to reach out anytime.
           </p>
 
