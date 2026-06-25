@@ -28,7 +28,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg">
-      <div className="flex items-baseline justify-between px-6 py-[18px] sm:px-8">
+      <div className="flex items-center justify-between px-6 py-[18px] sm:px-8">
         <Link
           href="/"
           className="font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.02em] leading-none"
@@ -68,7 +68,7 @@ export function SiteHeader() {
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="-mr-1 flex h-8 w-8 flex-col items-center justify-center gap-[5px] self-center sm:hidden"
+          className="-mr-1.5 flex h-8 w-8 flex-col items-center justify-center gap-[5px] sm:hidden"
         >
           <span
             className={`block h-[2px] w-5 bg-text transition-transform duration-200 ${

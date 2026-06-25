@@ -20,9 +20,21 @@ export function SiteFooter() {
         Have a project?{' '}
         <a
           href={`mailto:${T.contact.email}`}
-          className="border-b-2 border-accent"
+          className="group relative inline-flex items-baseline gap-1.5 text-accent"
         >
-          Get in touch.
+          <span className="relative">
+            Get in touch.
+            {/* Resting underline — collapses off to the right on hover */}
+            <span className="absolute inset-x-0 -bottom-0.5 h-[2px] origin-right bg-accent transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-0" />
+            {/* Incoming underline — wipes in from the left after the first leaves */}
+            <span className="absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 bg-accent transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 group-hover:delay-200" />
+          </span>
+          <span
+            aria-hidden
+            className="-translate-x-1.5 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:opacity-100"
+          >
+            →
+          </span>
         </a>
       </h2>
 
