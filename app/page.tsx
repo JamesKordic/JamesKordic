@@ -21,8 +21,9 @@ export default function HomePage() {
     <div className="min-h-screen bg-bg text-text">
       <SiteHeader />
 
-      {/* Intro line — full-width hairline, content capped at 1100px */}
-      <section className="border-b border-line px-6 pb-10 pt-16 sm:px-8">
+      {/* Intro line — full-width hairline, content capped at 1100px.
+          Equal top/bottom padding centers the headline between the hairlines. */}
+      <section className="border-b border-line px-6 py-14 sm:px-8">
         <h1 className="max-w-[1100px] text-[clamp(28px,4.4vw,58px)] font-semibold leading-[1.06] tracking-[-0.025em]">
           {T.artist.name} is a graphic &amp; motion designer for music,
           entertainment, food and tech brands.{' '}
@@ -69,8 +70,8 @@ export default function HomePage() {
               )}
             </div>
 
-            {/* Meta panel — slides up on hover */}
-            <div className="absolute inset-x-0 bottom-0 translate-y-full border-t border-line bg-bg px-5 py-[18px] transition-transform duration-[350ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0">
+            {/* Meta panel — shown by default on mobile; slides up on hover from sm up */}
+            <div className="absolute inset-x-0 bottom-0 translate-y-0 border-t border-line bg-bg px-5 py-[18px] transition-transform duration-[350ms] ease-[cubic-bezier(0.16,1,0.3,1)] sm:translate-y-full group-hover:translate-y-0">
               <h3 className="text-[18px] font-semibold tracking-[-0.01em] text-text">
                 {p.title}
               </h3>
