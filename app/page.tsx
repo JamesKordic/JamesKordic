@@ -84,16 +84,6 @@ export default function HomePage() {
               />
             </div>
 
-            {/* Title over the image — fades out on hover */}
-            <div className="pointer-events-none absolute inset-x-5 bottom-[18px] transition-opacity duration-200 group-hover:opacity-0">
-              <h3 className="text-[18px] font-semibold tracking-[-0.01em] text-white [text-shadow:0_1px_14px_rgba(0,0,0,0.55)]">
-                {p.title}
-              </h3>
-              <p className="mt-0.5 text-[13px] text-white/85 [text-shadow:0_1px_12px_rgba(0,0,0,0.55)]">
-                {p.blurb}
-              </p>
-            </div>
-
             {/* Meta panel — slides up on hover */}
             <div className="absolute inset-x-0 bottom-0 translate-y-full border-t border-line bg-bg px-5 py-[18px] transition-transform duration-[350ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0">
               <h3 className="text-[18px] font-semibold tracking-[-0.01em] text-text">
