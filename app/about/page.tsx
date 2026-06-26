@@ -42,7 +42,7 @@ export default function AboutPage() {
             About
           </div>
           <p className="font-display font-semibold text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.025em]">
-            Hi, I’m {T.artist.firstName}, it’s nice to meet you!
+            Hi, I’m {T.artist.firstName}; it’s nice to meet you!
           </p>
 
           <div className="mt-8 max-w-[680px] space-y-5">
