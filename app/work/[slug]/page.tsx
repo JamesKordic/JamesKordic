@@ -47,32 +47,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <div className="text-[15px] text-text font-medium">{p.blurb}</div>
       </header>
 
-      {/* Cover */}
-      <div className="relative mt-10 overflow-hidden bg-panel-2 aspect-[16/9] border border-line">
-        <Image
-          src={p.heroImage ?? p.cover}
-          alt={`${p.title} cover`}
-          fill
-          sizes="(max-width:1280px) 100vw, 1280px"
-          className="object-cover"
-          priority
-        />
-        {p.coverVideo && (
-          <video
-            src={p.coverVideo}
-            poster={p.cover}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-label={`${p.title} cover video`}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        )}
-      </div>
-
-      {/* Overview */}
+      {/* Overview — centered between the header hairline and its own hairline */}
       <section className="py-14 lg:py-16 border-b border-line">
         <h2 className="font-display font-normal text-[clamp(26px,3.5vw,40px)] tracking-[-0.5px] leading-[1.08] mb-6">
           Overview
