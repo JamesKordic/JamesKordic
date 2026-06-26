@@ -42,7 +42,7 @@ export default function AboutPage() {
             About
           </div>
           <p className="font-display font-semibold text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.025em]">
-            Hi, I’m {T.artist.firstName} — feel free to reach out anytime.
+            Hi, I’m {T.artist.firstName}, it’s nice to meet you!
           </p>
 
           <div className="mt-8 max-w-[680px] space-y-5">
@@ -57,7 +57,7 @@ export default function AboutPage() {
           </div>
 
           <p className="mt-8 text-[16px] md:text-[17px] text-text">
-            Get in touch to chat more!
+            Connect with me!
           </p>
           <div className="mt-3 flex flex-wrap gap-x-7 gap-y-2 text-[15px]">
             <IntroLink href={`mailto:${T.contact.email}`}>
