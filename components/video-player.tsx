@@ -426,7 +426,7 @@ export function VideoPlayer({
 
           {/* Bottom row: play • time • spacer • mute • fullscreen */}
           <div
-            className="flex items-center gap-3 text-text"
+            className="flex items-center gap-3 text-white [filter:drop-shadow(0_1px_2px_rgba(0,0,0,0.5))]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -449,8 +449,8 @@ export function VideoPlayer({
               )}
             </button>
 
-            <span className="text-[11px] sm:text-[12px] font-mono tabular-nums text-text/90">
-              {fmt(currentTime)} <span className="text-text/40">/</span>{' '}
+            <span className="text-[11px] sm:text-[12px] font-mono tabular-nums text-white/90">
+              {fmt(currentTime)} <span className="text-white/40">/</span>{' '}
               {fmt(duration)}
             </span>
 
