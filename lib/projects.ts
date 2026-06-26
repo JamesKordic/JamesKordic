@@ -89,6 +89,10 @@ export type Project = {
   kind: ProjectKind;
   title: string;
   cover: string;
+  /** Optional still image shown as the project-page hero only. When set, the
+   *  project page uses this instead of `cover`; `cover` is still used
+   *  everywhere else (homepage card, thumbnails, prev/next, search, etc.). */
+  heroImage?: string;
   /** Optional looping hero video shown on the project page only.
    *  The `cover` image is still used everywhere else (thumbnails,
    *  sidebar, prev/next, player bar, search) AND as this video's
@@ -779,6 +783,7 @@ export const PROJECTS: Project[] = [
     kind: 'professional',
     title: 'Adults on FX',
     cover: '/covers/adults.jpg',
+    heroImage: '/projects/adults/hero.jpg',
     themeColor: '#7a1a14',
     tags: ['Creative Direction', 'Interactive Design', 'Marketing'],
     client: 'FX',

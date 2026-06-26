@@ -50,7 +50,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {/* Cover */}
       <div className="relative mt-10 overflow-hidden bg-panel-2 aspect-[16/9] border border-line">
         <Image
-          src={p.cover}
+          src={p.heroImage ?? p.cover}
           alt={`${p.title} cover`}
           fill
           sizes="(max-width:1280px) 100vw, 1280px"
