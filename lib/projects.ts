@@ -783,7 +783,7 @@ export const PROJECTS: Project[] = [
     kind: 'professional',
     title: 'Adults on FX',
     cover: '/covers/adults.jpg',
-    heroImage: '/projects/adults/hero.jpg',
+    coverVideo: '/projects/adults/hero.mp4',
     themeColor: '#7a1a14',
     tags: ['Creative Direction', 'Interactive Design', 'Marketing'],
     client: 'FX',
