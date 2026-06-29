@@ -14,7 +14,7 @@ const T = SITE_TEXT;
 
 /** Roles + dates from the résumé (no descriptions, per the design). */
 const EXPERIENCE = [
-  { role: 'Senior Designer Consultant', company: 'THE·TEAM', date: 'Apr 2026 – Present' },
+  { role: 'Senior Designer Consultant', company: 'THE·TEAM', date: 'Apr 2026' },
   { role: 'Freelance Graphic & Motion Designer', company: 'The Syndicate', date: 'May 2025 – Mar 2026' },
   { role: 'Video, Motion, Design & Content Intern', company: 'The Syndicate', date: 'Aug 2024 – May 2025' },
   { role: 'Visual Designer', company: 'Rochester Institute of Technology', date: 'Oct 2022 – May 2025' },
