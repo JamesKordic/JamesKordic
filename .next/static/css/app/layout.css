@@ -2702,6 +2702,10 @@ video {
     margin-top: 3.5rem;
   }
 
+  .md\:-mt-\[0\.25em\]{
+    margin-top: -0.25em;
+  }
+
   .md\:hidden{
     display: none;
   }

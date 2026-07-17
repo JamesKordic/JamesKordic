@@ -38,7 +38,7 @@ export default function AboutPage() {
       <section className="grid items-start gap-x-10 gap-y-8 md:grid-cols-12 md:items-stretch">
         {/* Text */}
         <div className="order-2 md:order-1 md:col-span-8">
-          <p className="font-display font-semibold text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.025em]">
+          <p className="font-display font-semibold text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.025em] md:-mt-[0.25em]">
             Hi, I’m {T.artist.firstName}!
           </p>
 
