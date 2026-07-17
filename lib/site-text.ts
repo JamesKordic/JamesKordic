@@ -102,9 +102,10 @@ export const SITE_TEXT = {
      *  Each item becomes its own <p> tag.
      *  First paragraph is rendered slightly larger than the others. */
     bio: [
-      'I’m a Graphic and Motion Designer based in New York, creating digital ads, social content, and motion graphics for brands and agencies. I’ve produced work for Taco Bell, FX, and The Syndicate, along with large-scale campaigns for the Rochester Institute of Technology.',
-      'I graduated from the Rochester Institute of Technology with a BFA in Graphic Design and have been designing brands professionally for four years.',
-      'When I’m not behind a computer screen, I’m usually diving into music or experimenting with film photography.',
+      'I’m a New York-based Graphic and Motion Designer who designs for music, entertainment, food, and tech brands.',
+      'During my design career, I have worked with The Syndicate, THE·TEAM, Guns N’ Roses, Taco Bell, MNRK Heavy, CoinDesk, FX, and more.',
+      'I graduated from the Rochester Institute of Technology with a Bachelor of Fine Arts (BFA) in Graphic Design and a minor in Photography.',
+      'When I’m not behind a screen, you can usually find me jamming out on my guitar or photographing the world around me.',
     ],
 
     /** "Released projects" / "Designing professionally" / etc. factoid panel.
