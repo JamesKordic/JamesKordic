@@ -38,11 +38,8 @@ export default function AboutPage() {
       <section className="grid items-start gap-x-10 gap-y-8 md:grid-cols-12 md:items-stretch">
         {/* Text */}
         <div className="order-2 md:order-1 md:col-span-8">
-          <div className="mb-5 text-[12px] uppercase tracking-[2px] text-accent font-bold">
-            About
-          </div>
           <p className="font-display font-semibold text-[clamp(24px,3vw,38px)] leading-[1.3] tracking-[-0.025em]">
-            Hi, I’m {T.artist.firstName}; it’s nice to meet you!
+            Hi, I’m {T.artist.firstName}!
           </p>
 
           <div className="mt-8 max-w-[680px] space-y-5">
@@ -79,7 +76,7 @@ export default function AboutPage() {
             <img
               src="/about/headshot.jpg"
               alt={`${T.artist.name}, ${T.artist.discipline}`}
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover object-top"
             />
 
             {/* Résumé button — overlaid near the bottom of the image */}
