@@ -16,7 +16,15 @@ export type Media =
        *  image in `/public/posters/`). */
       poster?: string;
     }
-  | { type: 'embed'; src: string; aspect?: AspectRatio; label?: string };
+  | {
+      type: 'embed';
+      src: string;
+      aspect?: AspectRatio;
+      label?: string;
+      /** Load the iframe immediately (no click-to-open overlay). The frame
+       *  still uses native lazy loading, so it only fetches near-viewport. */
+      autoload?: boolean;
+    };
 
 /* Allowed aspect ratios — keeps the visual rhythm controllable */
 export type AspectRatio =
@@ -445,6 +453,7 @@ export const PROJECTS: Project[] = [
             src: 'https://online.fliphtml5.com/gwqwl/oqte/index.html',
             aspect: '16/9',
             label: 'Open in new tab →',
+            autoload: true,
           },
         ],
         layout: {

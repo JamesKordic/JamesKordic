@@ -491,6 +491,7 @@ function MediaTile({
         src={media.src}
         aspect={media.aspect || aspect || '16/9'}
         label={media.label}
+        autoload={media.autoload}
       />
     );
   }

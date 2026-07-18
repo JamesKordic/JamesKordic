@@ -4,27 +4,33 @@ import { useState } from 'react';
 
 /**
  * Embeds external interactive content (like the FlipHTML5 WWIMF book).
- * Shows a poster/preview state until the user clicks to load,
+ * By default shows a poster/preview state until the user clicks to load,
  * then swaps in an iframe. This pattern:
  *  - Keeps the case study page fast (no auto-loaded third-party iframes)
  *  - Lets the user choose to open the heavy embed
  *  - Always offers a "Open in new tab" fallback link
  *
+ * With `autoload` the iframe mounts immediately (no overlay); its native
+ * loading="lazy" still defers the actual fetch until it nears the viewport.
+ *
  * Props:
  *  - src: URL to embed
  *  - aspect: CSS aspect-ratio
  *  - label: text shown on the open-in-new-tab link
+ *  - autoload: skip the click-to-open overlay
  */
 export function EmbedFrame({
   src,
   aspect = '16/9',
   label = 'Open in new tab →',
+  autoload = false,
 }: {
   src: string;
   aspect?: string;
   label?: string;
+  autoload?: boolean;
 }) {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(autoload);
 
   return (
     <div
@@ -34,6 +40,7 @@ export function EmbedFrame({
       {loaded ? (
         <iframe
           src={src}
+          loading="lazy"
           className="absolute inset-0 w-full h-full border-0"
           allow="fullscreen"
           title="Embedded content"
