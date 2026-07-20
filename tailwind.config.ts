@@ -9,23 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Pentagram-inspired editorial palette — light mode. Bright paper,
-        // near-black ink, hairline rules, one hot accent.
-        bg: '#FFFFFF', // paper page background
-        panel: '#F2F2F2', // card / placeholder surface
-        'panel-2': '#ECECEC', // image placeholder fill
-        elev: '#F2F2F2', // hover surface
-        'elev-hi': '#E9E9E9',
-        text: '#0A0A0A', // ink
-        muted: '#727272', // grey — secondary text
-        'muted-2': '#9A9A9A',
-        line: '#E6E6E6', // hairline rules
+        // Pentagram-inspired editorial palette — dark mode. Near-black ink
+        // page, light type, hairline rules, one hot accent.
+        bg: '#0A0A0A', // ink page background
+        panel: '#161616', // card / placeholder surface
+        'panel-2': '#1D1D1D', // image placeholder fill
+        elev: '#191919', // hover surface
+        'elev-hi': '#232323',
+        text: '#F2F2F2', // paper-white type
+        muted: '#A3A3A3', // grey — secondary text
+        'muted-2': '#6F6F6F',
+        line: '#262626', // hairline rules
 
-        // Header / chrome — same paper as content, hairline divider.
-        paneldark: '#FFFFFF', // header surface
-        panelfg: '#0A0A0A', // text/icons in the header
-        paneldim: '#727272', // muted text in the header
-        panelline: '#E6E6E6', // hairlines in the header
+        // Header / chrome — same ink as content, hairline divider.
+        paneldark: '#0A0A0A', // header surface
+        panelfg: '#F2F2F2', // text/icons in the header
+        paneldim: '#A3A3A3', // muted text in the header
+        panelline: '#262626', // hairlines in the header
 
         // Primary accent — hot red-orange.
         accent: '#FF3B1F',
@@ -35,10 +35,10 @@ const config: Config = {
         // any lingering reference stays cohesive rather than neon.
         magenta: '#FF3B1F',
         'magenta-deep': '#c72d14',
-        cyan: '#727272',
-        'cyan-deep': '#4a4a4a',
-        violet: '#9A9A9A',
-        'violet-deep': '#6a6a6a',
+        cyan: '#A3A3A3',
+        'cyan-deep': '#CFCFCF',
+        violet: '#6F6F6F',
+        'violet-deep': '#8F8F8F',
         amber: '#FF3B1F',
       },
       fontFamily: {

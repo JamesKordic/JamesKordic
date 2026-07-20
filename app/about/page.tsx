@@ -87,7 +87,7 @@ export default function AboutPage() {
               href={T.contact.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute inset-x-4 bottom-4 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-[14px] font-semibold text-text shadow-lg transition-colors hover:bg-accent hover:text-white"
+              className="absolute inset-x-4 bottom-4 inline-flex items-center justify-center gap-2 rounded-full bg-text px-5 py-3 text-[14px] font-semibold text-bg shadow-lg transition-colors hover:bg-accent hover:text-accent-ink"
             >
               ⤓ Résumé
             </a>
