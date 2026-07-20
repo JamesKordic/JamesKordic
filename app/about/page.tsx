@@ -117,9 +117,12 @@ function IntroLink({
       href={href}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener noreferrer' : undefined}
-      className="text-text underline decoration-line underline-offset-[5px] transition-colors hover:text-accent hover:decoration-accent"
+      className="group text-text underline decoration-line underline-offset-[5px] transition-colors hover:text-accent hover:decoration-accent"
     >
-      {children} <span className="text-muted-2">↗</span>
+      {children}{' '}
+      <span className="text-muted-2 transition-colors group-hover:text-accent">
+        ↗
+      </span>
     </a>
   );
 }

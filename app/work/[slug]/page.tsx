@@ -55,7 +55,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
       {/* Hero */}
       <header className="pb-10 border-b border-line">
-        <h1 className="font-display font-semibold text-[clamp(38px,5.5vw,76px)] leading-[1.04] tracking-[-0.025em] mb-5">
+        <h1 className="font-display font-semibold text-[clamp(38px,5.5vw,76px)] leading-[1.04] tracking-[-0.025em] mb-5 lg:-mt-[0.1em]">
           {p.title}
         </h1>
         <div className="text-[15px] text-text font-medium">{p.blurb}</div>
