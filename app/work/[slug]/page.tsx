@@ -3,6 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PROJECTS, getProject, ARTIST } from '@/lib/projects';
 import { CaseSection } from '@/components/case-section';
+import { ProjectSwitcher } from '@/components/project-switcher';
+import { ProjectSidebar } from '@/components/project-sidebar';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
 import { deWidow } from '@/lib/typography';
 
 export async function generateStaticParams() {
@@ -27,11 +31,24 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
 
   return (
-    <div>
-      {/* Back */}
+    <div className="flex min-h-screen flex-col bg-bg text-text">
+      <SiteHeader />
+
+      {/* Split screen — menu takes the left quarter, the work the right
+          three quarters, edge to edge. Stacks to one column below lg. */}
+      <div className="flex-1 lg:grid lg:grid-cols-[1fr_3fr]">
+        {/* Always-open project menu — sticky within its full-height column */}
+        <ProjectSidebar currentId={p.id} />
+
+        {/* The work — min-w-0 so wide media (carousels) can't blow the grid open */}
+        <div className="view-anim min-w-0 px-6 py-10 sm:px-8 lg:py-12">
+      {/* Floating switcher — the mobile stand-in for the sidebar */}
+      <ProjectSwitcher currentId={p.id} />
+
+      {/* Back — the sidebar carries this link from lg up */}
       <Link
         href="/"
-        className="inline-flex items-center gap-2 text-[13px] text-muted hover:text-accent transition-colors mb-9"
+        className="inline-flex items-center gap-2 text-[13px] text-muted hover:text-accent transition-colors mb-9 lg:hidden"
       >
         ← All work
       </Link>
@@ -99,6 +116,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           ← Back to all work
         </Link>
       </div>
+        </div>
+      </div>
+
+      <SiteFooter />
     </div>
   );
 }

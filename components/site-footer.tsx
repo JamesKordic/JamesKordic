@@ -9,10 +9,9 @@ export function SiteFooter() {
   return (
     <footer
       id="contact"
-      className="flex flex-col gap-2 border-t border-line px-6 pb-14 pt-12 text-[13px] text-muted sm:flex-row sm:justify-between sm:px-8"
+      className="border-t border-line px-6 py-7 text-[13px] text-muted sm:px-8"
     >
       <span>{T.footer.copyright}</span>
-      <span>{T.artist.location}</span>
     </footer>
   );
 }

@@ -8,6 +8,15 @@ import { SiteFooter } from '@/components/site-footer';
 
 const T = SITE_TEXT;
 
+/** Headline split into words for the staggered mask reveal. The closing
+ *  "Selected work below." keeps its muted treatment via the `muted` flag. */
+const HEADLINE_WORDS = [
+  ...`${T.artist.name} is a graphic & motion designer for music, entertainment, food and tech brands.`
+    .split(' ')
+    .map((t) => ({ t, muted: false })),
+  ...'Selected work below.'.split(' ').map((t) => ({ t, muted: true })),
+];
+
 /**
  * Home — a Pentagram-style editorial index: a paper canvas with a sticky name
  * header, a single oversized intro line, and a bordered grid of project tiles.
@@ -25,20 +34,30 @@ export default function HomePage() {
           Equal top/bottom padding centers the headline between the hairlines. */}
       <section className="border-b border-line px-6 py-14 sm:px-8">
         <h1 className="max-w-[1100px] font-display font-semibold text-[clamp(28px,4.4vw,58px)] leading-[1.06] tracking-[-0.025em]">
-          {T.artist.name} is a graphic &amp; motion designer for music,
-          entertainment, food and tech brands.{' '}
-          <em className="not-italic text-muted">Selected work below.</em>
+          {HEADLINE_WORDS.map((w, i) => (
+            <span key={i}>
+              <span className="word-reveal">
+                <span
+                  className={w.muted ? 'text-muted' : undefined}
+                  style={{ animationDelay: `${i * 32}ms` }}
+                >
+                  {w.t}
+                </span>
+              </span>{' '}
+            </span>
+          ))}
         </h1>
       </section>
 
       {/* Grid — hairlines only between cells (no outer frame), like the
           reference. Right borders are toggled per breakpoint via nth-child. */}
       <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {shown.map((p) => (
+        {shown.map((p, i) => (
           <Link
             key={p.id}
             href={`/work/${p.id}`}
-            className="group relative block sm:aspect-[1/1.04] sm:overflow-hidden"
+            className="stagger group relative block sm:aspect-[1/1.04] sm:overflow-hidden"
+            style={{ animationDelay: `${300 + i * 55}ms` }}
           >
             {/* Cover — video when one is provided, otherwise the still image.
                 Normal-flow block on mobile; fills the tile from sm up. */}
