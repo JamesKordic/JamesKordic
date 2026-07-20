@@ -22,14 +22,20 @@ export function ProjectSwitcher({ currentId }: { currentId: string }) {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      {/* Panel — opens upward from the pill */}
+      {/* Panel — opens upward from the pill. The wrapper's padding (not a
+          margin) forms the visual gap, so the mouse never crosses a dead
+          zone travelling pill → panel; a margin there would fire the nav's
+          mouseleave mid-journey and close the menu before it could be used. */}
       <div
-        className={`absolute bottom-full right-0 mb-3 w-[320px] border border-line bg-bg shadow-[0_24px_64px_-16px_rgba(0,0,0,0.25)] transition-all duration-200 ease-out ${
-          open
-            ? 'pointer-events-auto translate-y-0 opacity-100'
-            : 'pointer-events-none translate-y-2 opacity-0'
+        className={`absolute bottom-full right-0 pb-3 ${
+          open ? '' : 'pointer-events-none'
         }`}
       >
+        <div
+          className={`w-[320px] border border-line bg-bg shadow-[0_24px_64px_-16px_rgba(0,0,0,0.25)] transition-all duration-200 ease-out ${
+            open ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
+          }`}
+        >
         <div className="border-b border-line px-4 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-muted-2">
           All projects
         </div>
@@ -65,17 +71,22 @@ export function ProjectSwitcher({ currentId }: { currentId: string }) {
             );
           })}
         </ul>
+        </div>
       </div>
 
       {/* Pill — hover (wrapper) opens for mouse users, and their clicks only
           ever open (mouseleave closes), so hover-then-click doesn't cancel
-          itself. Touch taps, which have no hover, toggle. */}
+          itself. Touch/pen taps, which have no hover, toggle. Browsers whose
+          click events carry no pointerType are treated as mouse. */}
       <button
         type="button"
         onClick={(e) => {
           const pointerType = (e.nativeEvent as PointerEvent).pointerType;
-          if (pointerType === 'mouse') setOpen(true);
-          else setOpen((v) => !v);
+          if (pointerType === 'touch' || pointerType === 'pen') {
+            setOpen((v) => !v);
+          } else {
+            setOpen(true);
+          }
         }}
         aria-expanded={open}
         className="flex items-center gap-2.5 rounded-full border border-line bg-bg/90 px-4 py-2.5 text-[12px] font-semibold shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] backdrop-blur-md transition-colors hover:border-accent"

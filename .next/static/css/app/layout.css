@@ -547,9 +547,6 @@ video {
 .pointer-events-none{
   pointer-events: none;
 }
-.pointer-events-auto{
-  pointer-events: auto;
-}
 .visible{
   visibility: visible;
 }
@@ -645,9 +642,6 @@ video {
 }
 .top-5{
   top: 1.25rem;
-}
-.top-\[95px\]{
-  top: 95px;
 }
 .top-\[63px\]{
   top: 63px;
@@ -1251,10 +1245,10 @@ video {
 .gap-y-9{
   row-gap: 2.25rem;
 }
-.space-y-0\.5 > :not([hidden]) ~ :not([hidden]){
+.space-y-1 > :not([hidden]) ~ :not([hidden]){
   --tw-space-y-reverse: 0;
-  margin-top: calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.125rem * var(--tw-space-y-reverse));
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
 .space-y-3 > :not([hidden]) ~ :not([hidden]){
   --tw-space-y-reverse: 0;
@@ -1265,11 +1259,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-.space-y-1 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
 .overflow-hidden{
   overflow: hidden;
@@ -1333,11 +1322,11 @@ video {
 .border-l-2{
   border-left-width: 2px;
 }
-.border-t{
-  border-top-width: 1px;
-}
 .border-r{
   border-right-width: 1px;
+}
+.border-t{
+  border-top-width: 1px;
 }
 .border-none{
   border-style: none;
@@ -1644,14 +1633,11 @@ video {
 .pt-12{
   padding-top: 3rem;
 }
-.pt-4{
-  padding-top: 1rem;
+.pt-5{
+  padding-top: 1.25rem;
 }
 .pt-6{
   padding-top: 1.5rem;
-}
-.pt-5{
-  padding-top: 1.25rem;
 }
 .text-left{
   text-align: left;
@@ -2943,10 +2929,6 @@ video {
     grid-template-columns: 1fr 2fr 1fr;
   }
 
-  .lg\:grid-cols-\[200px_minmax\(0\2c 1fr\)\]{
-    grid-template-columns: 200px minmax(0,1fr);
-  }
-
   .lg\:grid-cols-\[1fr_3fr\]{
     grid-template-columns: 1fr 3fr;
   }
@@ -2957,11 +2939,6 @@ video {
 
   .lg\:gap-4{
     gap: 1rem;
-  }
-
-  .lg\:gap-x-14{
-    -moz-column-gap: 3.5rem;
-         column-gap: 3.5rem;
   }
 
   .lg\:space-y-4 > :not([hidden]) ~ :not([hidden]){
@@ -2986,6 +2963,11 @@ video {
     padding: 1.25rem;
   }
 
+  .lg\:py-12{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
   .lg\:py-16{
     padding-top: 4rem;
     padding-bottom: 4rem;
@@ -2994,11 +2976,6 @@ video {
   .lg\:py-20{
     padding-top: 5rem;
     padding-bottom: 5rem;
-  }
-
-  .lg\:py-12{
-    padding-top: 3rem;
-    padding-bottom: 3rem;
   }
 
   .lg\:text-\[16px\]{
