@@ -11,7 +11,7 @@ const config: Config = {
       colors: {
         // Pentagram-inspired editorial palette — dark mode. Near-black ink
         // page, light type, hairline rules, one hot accent.
-        bg: '#0A0A0A', // ink page background
+        bg: '#111111', // ink page background
         panel: '#161616', // card / placeholder surface
         'panel-2': '#1D1D1D', // image placeholder fill
         elev: '#191919', // hover surface
@@ -22,7 +22,7 @@ const config: Config = {
         line: '#262626', // hairline rules
 
         // Header / chrome — same ink as content, hairline divider.
-        paneldark: '#0A0A0A', // header surface
+        paneldark: '#111111', // header surface
         panelfg: '#F2F2F2', // text/icons in the header
         paneldim: '#A3A3A3', // muted text in the header
         panelline: '#262626', // hairlines in the header

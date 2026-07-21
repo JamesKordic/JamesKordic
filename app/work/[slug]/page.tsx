@@ -86,7 +86,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <Image src={prev.cover} alt="" fill sizes="60px" className="object-cover" />
           </div>
           <div>
-            <div className="text-[11px] tracking-[0.1em] uppercase text-muted-2">Previous</div>
+            <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-accent">Previous</div>
             <div className="font-display text-[18px] mt-0.5 group-hover:text-accent transition-colors">
               {prev.title}
             </div>
@@ -100,7 +100,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <Image src={next.cover} alt="" fill sizes="60px" className="object-cover" />
           </div>
           <div>
-            <div className="text-[11px] tracking-[0.1em] uppercase text-muted-2">Next</div>
+            <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-accent">Next</div>
             <div className="font-display text-[18px] mt-0.5 group-hover:text-accent transition-colors">
               {next.title}
             </div>
@@ -111,7 +111,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <div className="pt-12">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-[13px] font-semibold border border-text rounded-full px-5 py-2.5 hover:bg-text hover:text-bg transition-colors"
+          className="inline-flex items-center gap-2 text-[13px] font-semibold border border-text rounded-full px-5 py-2.5 hover:border-accent hover:bg-accent hover:text-accent-ink transition-colors"
         >
           ← Back to all work
         </Link>

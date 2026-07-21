@@ -28,7 +28,7 @@ export function ProjectSidebar({ currentId }: { currentId: string }) {
                   className={`-ml-3 flex items-baseline gap-3.5 border-l-2 py-2 pl-3 transition-colors ${
                     active
                       ? 'border-accent text-accent'
-                      : 'border-transparent text-muted hover:text-text'
+                      : 'border-transparent text-muted hover:text-accent'
                   }`}
                 >
                   <span

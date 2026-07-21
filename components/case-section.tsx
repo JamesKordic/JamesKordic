@@ -109,7 +109,7 @@ export function CaseSection({
                     <button
                       onClick={() => setExpanded((v) => !v)}
                       aria-expanded={expanded}
-                      className="mt-4 text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2 hover:text-text transition-colors"
+                      className="mt-4 text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2 hover:text-accent transition-colors"
                     >
                       {expanded ? 'Read Less' : 'Read More'}
                     </button>
