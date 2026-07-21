@@ -1232,12 +1232,8 @@ video {
   -moz-column-gap: 1.75rem;
        column-gap: 1.75rem;
 }
-.gap-x-8{
-  -moz-column-gap: 2rem;
-       column-gap: 2rem;
-}
-.gap-y-2{
-  row-gap: 0.5rem;
+.gap-y-2\.5{
+  row-gap: 0.625rem;
 }
 .gap-y-8{
   row-gap: 2rem;
@@ -2620,6 +2616,10 @@ video {
     flex-direction: row-reverse;
   }
 
+  .sm\:flex-wrap{
+    flex-wrap: wrap;
+  }
+
   .sm\:items-end{
     align-items: flex-end;
   }
@@ -2642,6 +2642,15 @@ video {
 
   .sm\:gap-\[14px\]{
     gap: 14px;
+  }
+
+  .sm\:gap-x-8{
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
+  }
+
+  .sm\:gap-y-2{
+    row-gap: 0.5rem;
   }
 
   .sm\:overflow-hidden{

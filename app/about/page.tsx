@@ -58,7 +58,7 @@ export default function AboutPage() {
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-accent">
               Connect with me
             </p>
-            <div className="mt-3.5 flex flex-wrap gap-x-8 gap-y-2 text-[16px] md:text-[17px]">
+            <div className="mt-3.5 flex flex-col items-start gap-y-2.5 text-[16px] sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-2 md:text-[17px]">
               <IntroLink href={`mailto:${T.contact.email}`}>
                 {T.contact.email}
               </IntroLink>
