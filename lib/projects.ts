@@ -115,6 +115,8 @@ export type Project = {
   len: number;
   blurb: string;
   desc: string;
+  /** When true, section headers render without their description text. */
+  hideSectionText?: boolean;
   /** Optional case-study sections — when present, render before the work. */
   brief?: { eyebrow?: string; lead: string; body: string[] };
   approach?: { eyebrow?: string; intro: string; steps: ApproachStep[] };
@@ -133,6 +135,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'the-syndicate',
     kind: 'professional',
+    hideSectionText: true,
     title: 'The Syndicate',
     cover: '/covers/the-syndicate.jpg',
     coverVideo: '/projects/the-syndicate/hero.mp4',
@@ -252,6 +255,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'wwimf',
     kind: 'personal',
+    hideSectionText: true,
     title: 'WWIMF',
     cover: '/covers/wwimf.jpg',
     coverVideo: '/projects/wwimf/hero.mp4',
@@ -711,7 +715,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 236,
     blurb: 'Conference Creative & Motion',
-    desc: "Consensus by CoinDesk is one of the biggest conferences in crypto, and this work helped build the anticipation that fills it. I created the pre-event creative: animated promos spotlighting speakers and themes, stills to promote those same speakers, and partner-brand party announcements signaling its scale.",
+    desc: "Consensus by CoinDesk is one of the biggest conferences in crypto, and this work helped build the anticipation that fills it. I designed: animated promos spotlighting speakers and themes, stills to promote those same speakers, and partner-brand party announcements signaling its scale.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Consensus is CoinDesk's flagship conference, the biggest stage in crypto. The pre-event creative had to feel as serious as a Wall Street keynote and as urgent as a tech launch, all while pushing through a crowded feed.",
@@ -920,6 +924,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'voltage',
     kind: 'personal',
+    hideSectionText: true,
     title: 'Voltage',
     cover: '/covers/voltage.jpg',
     coverVideo: '/projects/voltage/hero.mp4',

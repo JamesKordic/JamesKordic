@@ -36,10 +36,13 @@ function aspectStyle(aspect: AspectRatio | string | undefined) {
 export function CaseSection({
   section,
   index,
+  hideText = false,
 }: {
   section: Section;
   /** Optional 0-based section index, used to render a project number ("№ 01"). */
   index?: number;
+  /** When true, suppress the section description — headers only. */
+  hideText?: boolean;
 }) {
   const { show } = useLightbox();
   const [expanded, setExpanded] = useState(false);
@@ -64,7 +67,10 @@ export function CaseSection({
 
   // Merge context + role + body into a single flowing description.
   // Authored order is context (what the brief was) → role (what I did) → body (deeper detail).
-  const description = [section.context, section.role, section.body].filter(Boolean) as string[];
+  // `hideText` suppresses it entirely so titled sections render as header-only.
+  const description = hideText
+    ? []
+    : ([section.context, section.role, section.body].filter(Boolean) as string[]);
 
   // A section is "titled" if it has any header content. Untitled sections
   // render as pure media — used for multi-part groupings where a single
@@ -78,7 +84,7 @@ export function CaseSection({
       {/* Section header — two-column on desktop (heading left, description right),
           stacked on mobile. Extra paragraphs collapse behind a "Read more" toggle. */}
       {isTitled && (
-        <div className="mb-10 lg:mb-12">
+        <div className={description.length > 0 ? 'mb-10 lg:mb-12' : 'mb-16 lg:mb-20'}>
           {description.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
               <div className="lg:col-span-5">

@@ -73,7 +73,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
       {/* Case study sections */}
       {p.sections.map((sec, i) => (
-        <CaseSection key={i} section={sec} index={i} />
+        <CaseSection key={i} section={sec} index={i} hideText={p.hideSectionText} />
       ))}
 
       {/* Prev / Next */}
