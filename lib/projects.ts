@@ -144,7 +144,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 262,
     blurb: 'Music & Entertainment Marketing',
-    desc: "The Syndicate is a music and entertainment marketing agency, and this internship put me inside its day-to-day campaign work. I designed for indie and major label artists as well as TV, film, and comedy clients. I created digital assets, tour and promotional visuals, and event materials. The job, again and again, was to translate each artist's voice into design their audience would actually stop scrolling for, and to ship it at campaign speed.",
+    desc: "The Syndicate is a music and entertainment marketing agency based in Weehawken, NJ. During my internship, and freelance contract with them, I designed for indie and major label artists as well as TV, film, and comedy clients. I created digital assets, tour and promotional visuals, event materials, and more.",
     sections: [
       {
         eyebrow: 'Music',
@@ -208,7 +208,7 @@ export const PROJECTS: Project[] = [
         eyebrow: 'Conference',
         title: 'Indie Week',
         context:
-          "Branded assets I designed for Indie Week, covering speaker announcements, key dates, and on-site signage. The same system had to work in a feed before the conference and on a wall during it, so everything shares one type and color logic across digital and print.",
+          "Branded assets I designed for Indie Week, covering speaker announcements, key dates, and on-site signage.",
         media: [],
         // Mixed aspects — group into:
         //  Row 1: 4 squares (speaker cards, 1:1)
@@ -478,7 +478,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 188,
     blurb: 'Feed the Beat Campaign',
-    desc: "Feed The Beat is Taco Bell's program for spotlighting emerging musicians, and I spent a year designing its social campaigns. Every drop introduced a new batch of artists across genres, and every asset had to do two jobs at once: feel like Taco Bell at first glance and like the artist at second glance. The real work was building a visual system strong enough to carry roughly fifty artists without ever looking like a template.",
+    desc: "Feed The Beat is Taco Bell's program for spotlighting emerging musicians. I designed promotional materials for the lineup, as well as vertical reels that showed off every band and artist that made the cut.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Feed The Beat is Taco Bell's ongoing platform for spotlighting emerging artists. The work had to feel like Taco Bell on first glance and like the artist on second glance. Both, every time, at scroll speed.",
@@ -512,10 +512,7 @@ export const PROJECTS: Project[] = [
       // 1. THE VIDEO + FLANKING STILLS — now the lead section, carries the
       //    "Feed The Beat" heading and the canonical description.
       {
-        eyebrow: 'Feed The Beat',
-        title: 'Feed The Beat',
-        context:
-          "Feed The Beat introduces new artists in batches, and these are the social campaigns that did it. I designed each drop as a kit: a locked Taco Bell frame with swap-in artist layers, so roughly fifty musicians could move through the system without it ever reading as a template. Beyond the social sets, I designed the motion graphic that hypes up the roster, built a poster carrying the names of every artist on it, and helped with the packaging side of the program as well. The carousels below show the campaign sets, grouped by their shared color palettes.",
+        title: '',
         media: [],
         layout: {
           type: 'mixed',
@@ -532,13 +529,7 @@ export const PROJECTS: Project[] = [
           ],
         },
       },
-      // 2. HERO IMAGE — sits directly under the video section
-      {
-        title: '',
-        media: [{ type: 'image', src: jpg('63aOXKIxowYxm2ZkN1iAs800E', 2000) }],
-        layout: { type: 'uniform', cols: 1, aspect: '16/9' },
-      },
-      // 3-5. CAROUSELS — three merged carousels combining color-matched
+      // CAROUSELS — three merged carousels combining color-matched
       //      campaign sets (live site had 6 carousels; these merge the
       //      paired sets that share the same color palette).
       //
@@ -624,7 +615,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 201,
     blurb: 'Social Media Design for a Metal Label',
-    desc: "MNRK Heavy is a metal and hard rock label with a roster that takes its visuals as seriously as its riffs. I designed a steady stream of social content for the label: anniversary posts, release announcements, artist spotlights, and banner artwork across platforms. The job was matching the intensity of the music without drowning out the individual bands underneath it.",
+    desc: "MNRK Heavy is a metal and hard rock label with a roster that takes its visuals as seriously as its riffs. I designed a steady stream of social content for the label: anniversary posts, release announcements, artist spotlights, and banner artwork across platforms.",
     brief: {
       eyebrow: 'The Brief',
       lead: "MNRK Heavy needed a steady stream of social design that could sit next to album covers from Lowheaven, Lamb of God, and the rest of the roster without ever looking lighter than the music it was promoting.",
@@ -656,10 +647,7 @@ export const PROJECTS: Project[] = [
     },
     sections: [
       {
-        eyebrow: 'Social & Promo',
-        title: 'Social Media & Promotional Design',
-        context:
-          "The full range of social design I produced for MNRK Heavy: anniversary milestones, story-format release promos, album announcements, artist spotlights, and cross-platform banner artwork. Heavy music has its own visual culture, so every piece leans into high contrast and texture while pulling its palette from the artist's own album art. The label's frame stays consistent; the worlds inside it change with each band.",
+        title: '',
         media: [
           { type: 'image', src: img('9XqPreXztmx0ZFPcME8FfCynnVA', 1080) },
           { type: 'image', src: img('7Qjm7UkhPslMPlb3HtRA64T1QE', 1080) },
@@ -696,7 +684,7 @@ export const PROJECTS: Project[] = [
           { type: 'image', src: img('yPZFXNjclLlWDlt68KG5yKV8tLA', 1000) },
           { type: 'image', src: img('PPdTtg6dUObxX4DSpZNpuvop8', 1000) },
         ],
-        layout: { type: 'uniform', cols: 4, aspect: '4/5' },
+        layout: { type: 'uniform', cols: 2, aspect: '4/5' },
       },
       // Ultra-wide header banners — 3:1 ratio
       {
@@ -723,7 +711,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 236,
     blurb: 'Conference Creative & Motion',
-    desc: "Consensus by CoinDesk is one of the biggest conferences in crypto, and this work helped build the anticipation that fills it. I created the pre-event creative: animated promos spotlighting speakers and themes, stills to promote those same speakers, and partner-brand party announcements signaling its scale. Three different kinds of asset, one visual identity, all pointed at the same goal of getting people through the doors.",
+    desc: "Consensus by CoinDesk is one of the biggest conferences in crypto, and this work helped build the anticipation that fills it. I created the pre-event creative: animated promos spotlighting speakers and themes, stills to promote those same speakers, and partner-brand party announcements signaling its scale.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Consensus is CoinDesk's flagship conference, the biggest stage in crypto. The pre-event creative had to feel as serious as a Wall Street keynote and as urgent as a tech launch, all while pushing through a crowded feed.",
@@ -755,10 +743,7 @@ export const PROJECTS: Project[] = [
     },
     sections: [
       {
-        eyebrow: 'Conference Creative',
-        title: 'Pre-Event Creative for Consensus',
-        context:
-          "Everything here was built to make the conference feel inevitable. The motion pieces announce speakers and themes with countdown urgency, the stills promote those same speakers in the event's visual language, and the partner-brand party announcements put sponsor names inside the Consensus identity without flattening either one. Together they ran across social and digital channels in the weeks leading up to the event.",
+        title: '',
         // 5 conference promo videos at 16:9
         media: [
           { type: 'video', src: vid('FGmZ7d1wogIeSBmBUxRHuAypA'), aspect: '16/9', poster: '/posters/FGmZ7d1wogIeSBmBUxRHuAypA.jpg' },
@@ -837,14 +822,18 @@ export const PROJECTS: Project[] = [
     },
     sections: [
       {
-        eyebrow: 'Launch Campaign',
-        title: 'Launch Campaign',
-        context:
-          "The full launch system for Adults, starting with the animated screens and video questions from the show's reality check game. From there the campaign fans out into cast announcements that establish the ensemble, polaroid prints, menus, posters, banners, and real world mockups that show the work in place. One tone carries through all of it: sharp, young, and a little chaotic, just like the show.",
-        // 4 series trailers at 16:9 — 2 across
+        title: '',
+        // 2 series trailers at 16:9 — 2 across
         media: [
           { type: 'video', src: vid('Yw37NLO1xKxuLc3BFLZZzWkgQc'), aspect: '16/9', poster: '/posters/Yw37NLO1xKxuLc3BFLZZzWkgQc.jpg' },
           { type: 'video', src: vid('XaZegHDXqqcBixPkXhxX95UQzI'), aspect: '16/9', poster: '/posters/XaZegHDXqqcBixPkXhxX95UQzI.jpg' },
+        ],
+        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
+      },
+      // Reality check game — 2 videos at 16:9
+      {
+        title: '',
+        media: [
           { type: 'video', src: vid('GloFwqsAum9l3DuM2l44DzuPqcQ'), aspect: '16/9', poster: '/posters/GloFwqsAum9l3DuM2l44DzuPqcQ.jpg' },
           { type: 'video', src: vid('UVgNZoOfRtVKhXN11dlMQJP3Ck'), aspect: '16/9', poster: '/posters/UVgNZoOfRtVKhXN11dlMQJP3Ck.jpg' },
         ],
@@ -887,22 +876,23 @@ export const PROJECTS: Project[] = [
         ],
         layout: { type: 'uniform', cols: 2, aspect: '4/5' },
       },
-      // Out-of-home — ultra-wide banners + city panels
+      // Out-of-home — ultra-wide banners
+      {
+        title: '',
+        media: [
+          { type: 'image', src: img('z0afQQwRMQKAw09abIdxjsfMb8', 2000) },
+          { type: 'image', src: img('sprEA0UyYz69wnpzHP7eaTwWd0', 2000) },
+          { type: 'image', src: img('bOjBtqPB9WtPirF6EOC9NiBYT8', 2000) },
+        ],
+        layout: { type: 'uniform', cols: 1, aspect: '3/1' },
+      },
+      // Real-world mockups (city panels) + sticker set
       {
         title: '',
         media: [],
         layout: {
           type: 'mixed',
           rows: [
-            {
-              cols: 1,
-              aspect: '3/1',
-              media: [
-                { type: 'image', src: img('z0afQQwRMQKAw09abIdxjsfMb8', 2000) },
-                { type: 'image', src: img('sprEA0UyYz69wnpzHP7eaTwWd0', 2000) },
-                { type: 'image', src: img('bOjBtqPB9WtPirF6EOC9NiBYT8', 2000) },
-              ],
-            },
             {
               cols: 2,
               aspect: '4/3',
@@ -913,18 +903,17 @@ export const PROJECTS: Project[] = [
                 { type: 'image', src: img('TClLg2aOR9Kwk0OOuXBiYS1x6I', 1600) },
               ],
             },
+            {
+              cols: 3,
+              aspect: '1/1',
+              media: [
+                { type: 'image', src: img('9ZD5RETiuyP0dfDMRgRfC00j9SQ', 800) },
+                { type: 'image', src: img('6sWKyIr98rlHBt0xBlKoMOOM6c', 800) },
+                { type: 'image', src: img('OA0jQ6JMkcnNBZOE1RFM7hN0E7M', 800) },
+              ],
+            },
           ],
         },
-      },
-      // Sticker set — 3 small square pieces
-      {
-        title: '',
-        media: [
-          { type: 'image', src: img('9ZD5RETiuyP0dfDMRgRfC00j9SQ', 800) },
-          { type: 'image', src: img('6sWKyIr98rlHBt0xBlKoMOOM6c', 800) },
-          { type: 'image', src: img('OA0jQ6JMkcnNBZOE1RFM7hN0E7M', 800) },
-        ],
-        layout: { type: 'uniform', cols: 3, aspect: '1/1' },
       },
     ],
   },
@@ -942,7 +931,7 @@ export const PROJECTS: Project[] = [
     year: '2024–25',
     len: 189,
     blurb: 'Beverage Brand & 3D Packaging',
-    desc: "Voltage is a conceptual energy drink that mixes lemonade with energy-drink intensity. The idea started with a fact I liked too much to let go: lemons hold real electrical potential. From there I built the entire brand, from naming and identity through packaging, 3D product renders, marketing, and a launch video. The goal was to fill a genuine gap on the shelf, a flavor-forward energy drink that feels bright instead of aggressive, and to prove I could carry a product brand from end to end.",
+    desc: "Voltage is a conceptual beverage brand that is a cross between lemonade and an energy drink. The idea came about during my research phase, when I found out that a lemon can generate around 0.5 to 1.0 volts of electricity. From there, I built the entire brand, from naming and identity to packaging, 3D product renders, and marketing. The goal was to fill a gap on the shelf and create something that would stand out against its competitors, as well as to prove I could develop a brand from scratch.",
     brief: {
       eyebrow: 'The Brief',
       lead: "Voltage is a self-initiated beverage brand merging lemonade with energy-drink intensity. The project is part identity exercise, part 3D challenge, and part marketing studio, built to prove the whole product cycle from logo to billboard.",
@@ -1075,17 +1064,6 @@ export const PROJECTS: Project[] = [
           { type: 'image', src: img('B0dJI8FyWq9UYskJ7JsR3oWxVgI', 1800) },
         ],
         layout: { type: 'uniform', cols: 2, aspect: '16/9' },
-      },
-      {
-        eyebrow: '08',
-        title: 'Promotional Video',
-        context: "The brand needed a single closing piece: something that pulled the whole project together in thirty seconds.",
-        role: "I edited and animated the launch promo with kinetic type, 3D cans on rotation, the circuit pattern in motion, and an electronic soundtrack. The whole brand pipeline on display in one continuous video.",
-        fieldNote: "A launch video isn't a separate deliverable; it's a compression of everything else you made. I made it last so it could pull from everywhere.",
-        body: "A short-form launch video introducing Voltage: 3D cans, kinetic typography, and a pulsing electronic soundtrack. Every asset in it comes from earlier in the project, which was exactly the point.",
-        // Promotional video at 16:9
-        media: [{ type: 'video', src: vid('lt6cuzs8UMkuQy4AWDxo3d5Djpo'), aspect: '16/9', poster: '/posters/lt6cuzs8UMkuQy4AWDxo3d5Djpo.jpg' }],
-        layout: { type: 'uniform', cols: 1, aspect: '16/9' },
       },
     ],
   },

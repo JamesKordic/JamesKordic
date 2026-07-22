@@ -361,7 +361,7 @@ function CarouselLayout({
         onClick={() => scrollByOne(-1)}
         disabled={atStart}
         aria-label="Previous"
-        className={`absolute top-1/2 -translate-y-1/2 left-2 w-10 h-10 rounded-full bg-bg/85 backdrop-blur-md flex items-center justify-center shadow-[0_4px_12px_-2px_rgba(0,0,0,0.5)] transition-opacity hover:scale-110 ${
+        className={`absolute top-1/2 -translate-y-1/2 left-2 w-10 h-10 rounded-full text-accent-ink bg-accent flex items-center justify-center shadow-[0_4px_12px_-2px_rgba(0,0,0,0.5)] transition-opacity hover:scale-110 ${
           atStart ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
@@ -375,7 +375,7 @@ function CarouselLayout({
         onClick={() => scrollByOne(1)}
         disabled={atEnd}
         aria-label="Next"
-        className={`absolute top-1/2 -translate-y-1/2 right-2 w-10 h-10 rounded-full bg-bg/85 backdrop-blur-md flex items-center justify-center shadow-[0_4px_12px_-2px_rgba(0,0,0,0.5)] transition-opacity hover:scale-110 ${
+        className={`absolute top-1/2 -translate-y-1/2 right-2 w-10 h-10 rounded-full text-accent-ink bg-accent flex items-center justify-center shadow-[0_4px_12px_-2px_rgba(0,0,0,0.5)] transition-opacity hover:scale-110 ${
           atEnd ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >

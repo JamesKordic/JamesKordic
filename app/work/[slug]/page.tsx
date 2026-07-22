@@ -111,7 +111,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <div className="pt-12">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-[13px] font-semibold border border-text rounded-full px-5 py-2.5 hover:border-accent hover:bg-accent hover:text-accent-ink transition-colors"
+          className="inline-flex items-center gap-2 text-[13px] font-semibold border border-line rounded-full px-5 py-2.5 hover:border-accent hover:text-accent transition-colors"
         >
           ← Back to all work
         </Link>
