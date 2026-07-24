@@ -9,7 +9,7 @@ import { SiteFooter } from '@/components/site-footer';
  *  in the accent color. */
 const ACCENT_WORDS = new Set(['music,', 'entertainment,', 'food', 'tech']);
 const TAGLINE_WORDS =
-  'A graphic & motion designer for music, entertainment, food and tech brands.'
+  'Is a graphic & motion designer for music, entertainment, food and tech brands.'
     .split(' ')
     .map((t) => ({ t, cls: ACCENT_WORDS.has(t) ? 'text-accent' : undefined }));
 
@@ -48,9 +48,11 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Tagline — bottom-right */}
-        <div className="mt-7 flex sm:mt-9 sm:justify-end">
-          <h1 className="max-w-[900px] font-display font-semibold text-[clamp(22px,2.8vw,40px)] leading-[1.1] tracking-[-0.02em] sm:text-right">
+        {/* Tagline — reads on from the wordmark. From lg up it's sized in cqw
+            so it spans the same edge-to-edge measure on one line; below that
+            it falls back to a wrapping clamp so it stays legible. */}
+        <div className="mt-7 sm:mt-9 [container-type:inline-size]">
+          <h1 className="max-w-[900px] font-display font-semibold text-[clamp(22px,2.8vw,40px)] leading-[1.1] tracking-[-0.02em] lg:max-w-none lg:whitespace-nowrap lg:text-[2.74cqw]">
             {TAGLINE_WORDS.map((w, i) => (
               <span key={i}>
                 <span className="word-reveal">
