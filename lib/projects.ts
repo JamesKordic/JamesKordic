@@ -134,9 +134,7 @@ const vid = (id: string) => `${FRAMER}/assets/${id}.mp4`;
 export const PROJECTS: Project[] = [
   {
     id: 'the-syndicate',
-    kind: 'professional',
-    hideSectionText: true,
-    title: 'The Syndicate',
+    kind: 'professional',    title: 'The Syndicate',
     cover: '/covers/the-syndicate.jpg',
     coverVideo: '/projects/the-syndicate/hero.mp4',
     themeColor: '#3c3a4a',
@@ -254,9 +252,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'wwimf',
-    kind: 'personal',
-    hideSectionText: true,
-    title: 'WWIMF',
+    kind: 'personal',    title: 'WWIMF',
     cover: '/covers/wwimf.jpg',
     coverVideo: '/projects/wwimf/hero.mp4',
     themeColor: '#1d2f7a',
@@ -513,10 +509,11 @@ export const PROJECTS: Project[] = [
       ],
     },
     sections: [
-      // 1. THE VIDEO + FLANKING STILLS — now the lead section, carries the
-      //    "Feed The Beat" heading and the canonical description.
+      // Lead section — lineup promotion posts
       {
-        title: '',
+        title: 'Lineup Promotion Posts',
+        context:
+          'Social media content built to generate hype and drive engagement for the Feed The Beat program, spanning the full "Class of 2025" lineup, a "Coming Soon" reel, and promotional packaging photography.',
         media: [],
         layout: {
           type: 'mixed',
@@ -539,7 +536,9 @@ export const PROJECTS: Project[] = [
       //
       // Carousel 1: sets 1 + 4 merged (16 images)
       {
-        title: '',
+        title: 'Vertical Reel Set 1',
+        context:
+          'The first set of featured artists and bands, adapted to a vertical format for digital platforms. I built the reusable template system and populated each piece with artist names and photography.',
         media: [
           { type: 'image', src: img('WJoqOnXjeHEhfNWLt27wGXvkTwg', 800) },
           { type: 'image', src: img('QinypJ6EZZl2PxsikGi8LxH7rI', 800) },
@@ -562,7 +561,9 @@ export const PROJECTS: Project[] = [
       },
       // Carousel 2: sets 2 + 5 merged (13 images)
       {
-        title: '',
+        title: 'Vertical Reel Set 2',
+        context:
+          'The second set of featured artists and bands in vertical format, given a distinct colorway to differentiate it from the first.',
         media: [
           { type: 'image', src: img('CpK6sL4Ca8n0g1rDyovBAbI7M4', 800) },
           { type: 'image', src: img('vNUDzO04xvQcoZ9krMjzUziqKw', 800) },
@@ -582,7 +583,9 @@ export const PROJECTS: Project[] = [
       },
       // Carousel 3: sets 3 + 6 merged (16 images)
       {
-        title: '',
+        title: 'Vertical Reel Set 3',
+        context:
+          'The third set of featured artists and bands in vertical format, given a distinct colorway to differentiate it from the second.',
         media: [
           { type: 'image', src: img('FaBFN1wAQD4SBQtyw4qBlTm9Vug', 800) },
           { type: 'image', src: img('LRzQBS1vj7Nk6N8NLk4DSVSDn8', 800) },
@@ -650,28 +653,41 @@ export const PROJECTS: Project[] = [
       ],
     },
     sections: [
+      // Section 1 + 2 merged — square posts (row 1) + vertical story promos (row 2)
       {
-        title: '',
-        media: [
-          { type: 'image', src: img('9XqPreXztmx0ZFPcME8FfCynnVA', 1080) },
-          { type: 'image', src: img('7Qjm7UkhPslMPlb3HtRA64T1QE', 1080) },
-          { type: 'image', src: img('xA6rDRB3b4PRoj1L2MANFaoWVCo', 1080) },
-        ],
-        layout: { type: 'uniform', cols: 3, aspect: '1/1' },
-      },
-      // Continuation media — vertical story-format release promos
-      {
-        title: '',
-        media: [
-          { type: 'image', src: img('9UI8emR67MioNNc1UoERq8vMz0', 800) },
-          { type: 'image', src: img('SgEyMzySbt9AZN27bElzAGXEmE', 800) },
-          { type: 'image', src: img('apktAu1lcj3lC6YY3hUbyyvyLw', 800) },
-        ],
-        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
+        title: 'Social Media Posts',
+        context:
+          'Social content designed to celebrate record anniversaries and run giveaways for MNRK Heavy artists, including Judas Priest and Kirk Windstein.',
+        media: [],
+        layout: {
+          type: 'mixed',
+          rows: [
+            {
+              cols: 3,
+              aspect: '1/1',
+              media: [
+                { type: 'image', src: img('9XqPreXztmx0ZFPcME8FfCynnVA', 1080) },
+                { type: 'image', src: img('7Qjm7UkhPslMPlb3HtRA64T1QE', 1080) },
+                { type: 'image', src: img('xA6rDRB3b4PRoj1L2MANFaoWVCo', 1080) },
+              ],
+            },
+            {
+              cols: 3,
+              aspect: '9/16',
+              media: [
+                { type: 'image', src: img('9UI8emR67MioNNc1UoERq8vMz0', 800) },
+                { type: 'image', src: img('SgEyMzySbt9AZN27bElzAGXEmE', 800) },
+                { type: 'image', src: img('apktAu1lcj3lC6YY3hUbyyvyLw', 800) },
+              ],
+            },
+          ],
+        },
       },
       // Lowheaven trio — two stills flanking a vertical video
       {
-        title: '',
+        title: 'Lowheaven Vinyl Release',
+        context:
+          'Posts designed to drive engagement and pre-orders, and to announce the availability of Lowheaven’s "Ritual Decay" vinyl.',
         media: [
           { type: 'image', src: img('NMFZUWif8OdwlGY2I1fN82EFbM', 800) },
           { type: 'video', src: vid('FK55AYBGIvyG941MP5Y6r210WQ'), aspect: '9/16' },
@@ -681,7 +697,9 @@ export const PROJECTS: Project[] = [
       },
       // Portrait release announcements — 4-up
       {
-        title: '',
+        title: 'Thanksgiving Recipes',
+        context:
+          'A Thanksgiving-themed social campaign featuring recipes contributed by artists from across the roster.',
         media: [
           { type: 'image', src: img('ehNHhSGMI7HnTwITsjX9yhvXU4', 1000) },
           { type: 'image', src: img('HMVx8iZd2TefUWO8Vz6jRNfXXY', 1000) },
@@ -692,7 +710,9 @@ export const PROJECTS: Project[] = [
       },
       // Ultra-wide header banners — 3:1 ratio
       {
-        title: '',
+        title: 'MNRK Music Group',
+        context:
+          'Carousels and headers designed for Instagram and other social platforms, promoting artists across the MNRK Music Group roster.',
         media: [
           { type: 'image', src: img('q67CSkcAjKBKwr5vmOJvUNJMvg', 2000) },
           { type: 'image', src: img('r5HqxivM3ZGsL1vwlto2nKbRPMo', 2000) },
@@ -747,7 +767,9 @@ export const PROJECTS: Project[] = [
     },
     sections: [
       {
-        title: '',
+        title: 'Motion Graphics',
+        context:
+          'Motion graphics created to promote the conference, highlighting dates, locations, speakers, sponsors, and more.',
         // 5 conference promo videos at 16:9
         media: [
           { type: 'video', src: vid('FGmZ7d1wogIeSBmBUxRHuAypA'), aspect: '16/9', poster: '/posters/FGmZ7d1wogIeSBmBUxRHuAypA.jpg' },
@@ -760,7 +782,9 @@ export const PROJECTS: Project[] = [
       },
       // Continuation media — photographic stills at 16:9
       {
-        title: '',
+        title: 'Speaker Announcements',
+        context:
+          'Announcement graphics introducing each new conference speaker: their name, company, and role, along with when and where they would be speaking.',
         media: [
           { type: 'image', src: img('bfBUPwtLvvm6QWSoaVBGhuEezw', 1600) },
           { type: 'image', src: img('A9M3tgXxg68c2DqXVP5B7peoU0', 1600) },
@@ -771,7 +795,9 @@ export const PROJECTS: Project[] = [
       },
       // Partner brand cards — square format
       {
-        title: '',
+        title: 'Opening Night Party',
+        context:
+          'Social media graphics promoting the official Consensus opening night party, its sponsors, and date.',
         media: [
           { type: 'image', src: img('hccJPn12kNmnUnlQCi3wpIp7dUI', 1600) },
           { type: 'image', src: img('IGB6zWcaQxm6ReXNgvoF3LOt8', 1600) },
@@ -826,7 +852,9 @@ export const PROJECTS: Project[] = [
     },
     sections: [
       {
-        title: '',
+        title: 'Animated Screens',
+        context:
+          'Animated screens designed for in-person activations as signage for snack bars.',
         // 2 series trailers at 16:9 — 2 across
         media: [
           { type: 'video', src: vid('Yw37NLO1xKxuLc3BFLZZzWkgQc'), aspect: '16/9', poster: '/posters/Yw37NLO1xKxuLc3BFLZZzWkgQc.jpg' },
@@ -836,7 +864,9 @@ export const PROJECTS: Project[] = [
       },
       // Reality check game — 2 videos at 16:9
       {
-        title: '',
+        title: 'Reality Check Game Show',
+        context:
+          'An interactive game show staged at in-person events, for which I designed the on-screen question graphics.',
         media: [
           { type: 'video', src: vid('GloFwqsAum9l3DuM2l44DzuPqcQ'), aspect: '16/9', poster: '/posters/GloFwqsAum9l3DuM2l44DzuPqcQ.jpg' },
           { type: 'video', src: vid('UVgNZoOfRtVKhXN11dlMQJP3Ck'), aspect: '16/9', poster: '/posters/UVgNZoOfRtVKhXN11dlMQJP3Ck.jpg' },
@@ -845,7 +875,9 @@ export const PROJECTS: Project[] = [
       },
       // Continuation media — 6-character key art at 4:5
       {
-        title: '',
+        title: 'Cast Polaroids',
+        context:
+          'Polaroid-style cast portraits created as inserts for event merchandise and packaging.',
         media: [
           { type: 'image', src: img('sKtr7uRzmThZzKQB0Y4tvdWaAkY', 1000) },
           { type: 'image', src: img('RsyuUFxNSyuC3LfDBe67S2O2l2U', 1000) },
@@ -858,7 +890,9 @@ export const PROJECTS: Project[] = [
       },
       // Social posts — 6 at 4:5
       {
-        title: '',
+        title: 'Cast Announcements',
+        context:
+          'Social media announcement posts introducing the cast and the roles they play.',
         media: [
           { type: 'image', src: jpg('pAGwmQHK4M9NgVDsrOOtKUazUM', 1000) },
           { type: 'image', src: jpg('BnguCFt7PUDPd5DTfJTRVwvEQY', 1000) },
@@ -871,7 +905,9 @@ export const PROJECTS: Project[] = [
       },
       // Theatrical posters — 4 tall posters at 4:5
       {
-        title: '',
+        title: 'Suds and Sounds',
+        context:
+          'Bar menus and event signage designed for Suds and Sounds, an in-person activation promoting the show.',
         media: [
           { type: 'image', src: img('kWR3a7VWmOGOLt89uoLR3ik37hM', 1500) },
           { type: 'image', src: img('CrPZChQ4g0OQ4xC6ksAsCyUKB2s', 1500) },
@@ -882,7 +918,9 @@ export const PROJECTS: Project[] = [
       },
       // Out-of-home — ultra-wide banners
       {
-        title: '',
+        title: 'Banners',
+        context:
+          'Promotional banners designed to build awareness for the show.',
         media: [
           { type: 'image', src: img('z0afQQwRMQKAw09abIdxjsfMb8', 2000) },
           { type: 'image', src: img('sprEA0UyYz69wnpzHP7eaTwWd0', 2000) },
@@ -892,7 +930,9 @@ export const PROJECTS: Project[] = [
       },
       // Real-world mockups (city panels) + sticker set
       {
-        title: '',
+        title: 'Pre-Production Mockups',
+        context:
+          'Pre-production mockups for a laundromat installation concept designed to promote the show.',
         media: [],
         layout: {
           type: 'mixed',
@@ -923,9 +963,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'voltage',
-    kind: 'personal',
-    hideSectionText: true,
-    title: 'Voltage',
+    kind: 'personal',    title: 'Voltage',
     cover: '/covers/voltage.jpg',
     coverVideo: '/projects/voltage/hero.mp4',
     themeColor: '#7a6a0e',

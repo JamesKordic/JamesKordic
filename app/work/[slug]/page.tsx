@@ -53,23 +53,15 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         ← All work
       </Link>
 
-      {/* Hero */}
-      <header className="pb-10 border-b border-line">
+      {/* Hero — title with the overview text directly beneath it */}
+      <header className="pb-10 lg:pb-12 border-b border-line">
         <h1 className="font-display font-semibold text-[clamp(38px,5.5vw,76px)] leading-[1.04] tracking-[-0.025em] mb-5 lg:-mt-[0.1em]">
           {p.title}
         </h1>
-        <div className="text-[15px] text-text font-medium">{p.blurb}</div>
-      </header>
-
-      {/* Overview — centered between the header hairline and its own hairline */}
-      <section className="py-14 lg:py-16 border-b border-line">
-        <h2 className="font-display font-normal text-[clamp(26px,3.5vw,40px)] tracking-[-0.5px] leading-[1.08] mb-6">
-          Overview
-        </h2>
         <p className="text-[17px] leading-[1.7] text-text/85 max-w-[760px] whitespace-pre-line">
           {deWidow(p.desc)}
         </p>
-      </section>
+      </header>
 
       {/* Case study sections */}
       {p.sections.map((sec, i) => (

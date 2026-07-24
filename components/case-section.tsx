@@ -84,44 +84,40 @@ export function CaseSection({
       {/* Section header — two-column on desktop (heading left, description right),
           stacked on mobile. Extra paragraphs collapse behind a "Read more" toggle. */}
       {isTitled && (
-        <div className={description.length > 0 ? 'mb-10 lg:mb-12' : 'mb-16 lg:mb-20'}>
+        <div className="mb-16 lg:mb-20">
           {description.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
-              <div className="lg:col-span-5">
-                {section.title && (
-                  <h2 className="font-display font-normal text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.5px] leading-[1.06]">
-                    {section.title}
-                  </h2>
-                )}
-              </div>
-              <div className="lg:col-span-7 max-w-[640px]">
-                <p className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line">
-                  {deWidow(description[0])}
-                </p>
-                {description.length > 1 && (
-                  <>
-                    {expanded && (
-                      <div className="mt-4 space-y-4">
-                        {description.slice(1).map((text, i) => (
-                          <p
-                            key={i}
-                            className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line"
-                          >
-                            {deWidow(text)}
-                          </p>
-                        ))}
-                      </div>
-                    )}
-                    <button
-                      onClick={() => setExpanded((v) => !v)}
-                      aria-expanded={expanded}
-                      className="mt-4 text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2 hover:text-accent transition-colors"
-                    >
-                      {expanded ? 'Read Less' : 'Read More'}
-                    </button>
-                  </>
-                )}
-              </div>
+            <div className="max-w-[760px]">
+              {section.title && (
+                <h2 className="font-display font-normal text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.5px] leading-[1.06] mb-5">
+                  {section.title}
+                </h2>
+              )}
+              <p className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line">
+                {deWidow(description[0])}
+              </p>
+              {description.length > 1 && (
+                <>
+                  {expanded && (
+                    <div className="mt-4 space-y-4">
+                      {description.slice(1).map((text, i) => (
+                        <p
+                          key={i}
+                          className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line"
+                        >
+                          {deWidow(text)}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                  <button
+                    onClick={() => setExpanded((v) => !v)}
+                    aria-expanded={expanded}
+                    className="mt-4 text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2 hover:text-accent transition-colors"
+                  >
+                    {expanded ? 'Read Less' : 'Read More'}
+                  </button>
+                </>
+              )}
             </div>
           ) : (
             section.title && (
