@@ -151,13 +151,28 @@ video {
   }
 }
 
+/* Oversized hero wordmark — rises up from behind its clipping mask. */
+.bigmark {
+  transform: translateY(108%);
+  animation: bigRise 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+@keyframes bigRise {
+  from {
+    transform: translateY(108%);
+  }
+  to {
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .view-anim,
   .stagger,
-  .word-reveal > span {
+  .word-reveal > span,
+  .bigmark {
     animation: none;
     opacity: 1;
     transform: none;

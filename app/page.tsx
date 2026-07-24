@@ -2,26 +2,21 @@
 
 import Link from 'next/link';
 import { PROJECTS } from '@/lib/projects';
-import { SITE_TEXT } from '@/lib/site-text';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 
-const T = SITE_TEXT;
-
-/** Headline split into words for the staggered mask reveal. The closing
- *  "Selected work below." keeps its muted treatment via the `muted` flag. */
-const HEADLINE_WORDS = [
-  ...`${T.artist.name} is a graphic & motion designer for music, entertainment, food and tech brands.`
+/** Tagline words for the staggered mask reveal — the four industries pop
+ *  in the accent color. */
+const ACCENT_WORDS = new Set(['music,', 'entertainment,', 'food', 'tech']);
+const TAGLINE_WORDS =
+  'A graphic & motion designer for music, entertainment, food and tech brands.'
     .split(' ')
-    .map((t) => ({ t, muted: false })),
-  ...'Selected work below.'.split(' ').map((t) => ({ t, muted: true })),
-];
+    .map((t) => ({ t, cls: ACCENT_WORDS.has(t) ? 'text-accent' : undefined }));
 
 /**
- * Home — a Pentagram-style editorial index: a paper canvas with a sticky name
- * header, a single oversized intro line, and a bordered grid of project tiles.
- * Each tile shows its cover and slides up a meta panel on hover, then links
- * through to its case study.
+ * Home — a bold typographic hero: an oversized "James Kordic." wordmark that
+ * fills the width and rises in, with the tagline beneath it, then a
+ * Pentagram-style editorial grid of project tiles.
  */
 export default function HomePage() {
   const shown = PROJECTS;
@@ -30,23 +25,46 @@ export default function HomePage() {
     <div className="min-h-screen bg-bg text-text">
       <SiteHeader />
 
-      {/* Intro line — full-width hairline, content capped at 1100px.
-          Equal top/bottom padding centers the headline between the hairlines. */}
-      <section className="border-b border-line px-6 py-14 sm:px-8">
-        <h1 className="max-w-[1100px] font-display font-semibold text-[clamp(28px,4.4vw,58px)] leading-[1.06] tracking-[-0.025em]">
-          {HEADLINE_WORDS.map((w, i) => (
-            <span key={i}>
-              <span className="word-reveal">
-                <span
-                  className={w.muted ? 'text-muted' : undefined}
-                  style={{ animationDelay: `${i * 32}ms` }}
-                >
-                  {w.t}
-                </span>
-              </span>{' '}
-            </span>
-          ))}
-        </h1>
+      {/* Hero — giant wordmark, then the tagline */}
+      <section className="overflow-hidden border-b border-line px-6 pt-6 pb-9 sm:px-8 sm:pt-8">
+        {/* Oversized wordmark — full-bleed (breaks out of the section
+            padding) and clipped so it can rise in from below. Sized in vw so
+            it spans edge to edge on one line at any breakpoint. */}
+        <div className="overflow-hidden pb-[0.08em] pt-[0.05em] [container-type:inline-size]">
+          <div
+            aria-hidden
+            className="bigmark whitespace-nowrap text-left font-display font-extrabold leading-[0.82] tracking-[-0.05em] text-[15.3cqw]"
+          >
+            {'James Kordic.'.split('').map((ch, i) => (
+              <span
+                key={i}
+                className={`inline-block cursor-default transition-all duration-200 ease-out hover:-skew-x-6 hover:[-webkit-text-stroke:0.025em_currentColor]${
+                  ch === '.' ? ' text-accent' : ''
+                }`}
+              >
+                {ch === ' ' ? ' ' : ch}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Tagline — bottom-right */}
+        <div className="mt-7 flex sm:mt-9 sm:justify-end">
+          <h1 className="max-w-[900px] font-display font-semibold text-[clamp(22px,2.8vw,40px)] leading-[1.1] tracking-[-0.02em] sm:text-right">
+            {TAGLINE_WORDS.map((w, i) => (
+              <span key={i}>
+                <span className="word-reveal">
+                  <span
+                    className={w.cls}
+                    style={{ animationDelay: `${350 + i * 30}ms` }}
+                  >
+                    {w.t}
+                  </span>
+                </span>{' '}
+              </span>
+            ))}
+          </h1>
+        </div>
       </section>
 
       {/* Grid — hairlines only between cells (no outer frame), like the
