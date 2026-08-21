@@ -56,6 +56,30 @@ export const SITE_TEXT = {
     tagline:
       'New York Based Graphic & Motion Designer.',
 
+    /* ---- HOME MASTHEAD (the ABOUT column at the top of the home page) ---- */
+    masthead: {
+      /** Opening line — who you are and who you design for */
+      intro:
+        'NYC based graphic and motion designer who designs for music, entertainment, food, and tech brands.',
+      /** Availability line shown under the intro */
+      availability: 'Looking for new freelance or full-time roles.',
+      /** Heading above the roles list */
+      previouslyLabel: 'Previously:',
+      /** Education line, shown under the roles */
+      education: 'BFA in Graphic Design from The Rochester Institute of Technology',
+      /** Past roles — each becomes its own bulleted line */
+      previously: [
+        'Design Consultant @ THE·TEAM',
+        'Freelance Graphic & Motion Designer @ The Syndicate',
+        'Visual Designer @ The Rochester Institute of Technology',
+      ],
+    },
+
+    /** Label above the featured project's reel at the top of the work */
+    featuredLabel: 'Featured Project',
+    /** Label above the grid of remaining projects */
+    otherWorksLabel: 'Other Works',
+
     /** Section heading for the top-of-page "Featured" row */
     featuredHeading: 'Featured work',
 
@@ -259,6 +283,15 @@ export const SITE_TEXT = {
     instagramHandle: 'jameskordic',
     /** Instagram full URL */
     instagramUrl: 'https://www.instagram.com/jameskordic/',
+    /** Formspree endpoint for the contact dialog — the URL shown on the form's
+     *  page in the Formspree dashboard, e.g.
+     *  'https://formspree.io/f/xyzabcde'.
+     *
+     *  Leave it empty and the dialog falls back to opening the visitor's mail
+     *  app with the message prefilled, which needs no service at all. The ID
+     *  is designed to be public, so it's safe to keep here in the repo. */
+    formspreeEndpoint: 'https://formspree.io/f/mwlearky',
+
     /** Resume — Google Drive shareable link */
     resumeUrl:
       'https://drive.google.com/file/d/1aOrLnw0KhQX29Er3OL7VwbVrweBD0YZV/view?usp=sharing',
@@ -266,6 +299,10 @@ export const SITE_TEXT = {
 
   /* ---- FOOTER ---- */
   footer: {
+    /** The question that opens the footer, set large */
+    headline: 'Interested in working together?',
+    /** The answer to it — the link that opens the contact form */
+    cta: 'Let’s Talk',
     /** Copyright line shown at the bottom of pages */
     copyright: '©2026 James Kordic',
   },

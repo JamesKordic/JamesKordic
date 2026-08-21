@@ -345,9 +345,14 @@ export function VideoPlayer({
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-7 h-7 sm:w-8 sm:h-8 text-text translate-x-[2px]"
+              className="w-7 h-7 sm:w-8 sm:h-8 text-text"
             >
-              <path d="M8 5v14l11-7z" />
+              {/* Centred on the triangle's centroid — (8+8+19)/3 lands at
+                  11.67, so the whole shape shifts a third of a unit right to
+                  sit on the box's centre. A bounding-box centre would read as
+                  too far left, which is why this had a hand-tuned nudge
+                  before; the nudge overshot. */}
+              <path d="M8.33 5v14l11-7z" />
             </svg>
           </div>
         </div>
@@ -444,7 +449,7 @@ export function VideoPlayer({
                 </svg>
               ) : (
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                  <path d="M8 5v14l11-7z" />
+                  <path d="M8.33 5v14l11-7z" />
                 </svg>
               )}
             </button>

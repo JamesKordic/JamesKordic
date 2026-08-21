@@ -7,6 +7,7 @@ import { useLightbox } from '@/lib/lightbox-context';
 import { VideoPlayer } from './video-player';
 import { EmbedFrame } from './embed-frame';
 import { deWidow } from '@/lib/typography';
+import { LABEL } from '@/lib/ui';
 
 /* ============ HELPERS ============ */
 
@@ -35,16 +36,14 @@ function aspectStyle(aspect: AspectRatio | string | undefined) {
 
 export function CaseSection({
   section,
-  index,
   hideText = false,
 }: {
   section: Section;
-  /** Optional 0-based section index, used to render a project number ("№ 01"). */
-  index?: number;
   /** When true, suppress the section description — headers only. */
   hideText?: boolean;
 }) {
   const { show } = useLightbox();
+  /** Only the opening paragraph shows; the rest wait behind "Read more". */
   const [expanded, setExpanded] = useState(false);
 
   /* Flatten all images in this section for lightbox navigation,
@@ -63,7 +62,6 @@ export function CaseSection({
   }
   const indexOfImage = (m: Media) => allImages.indexOf(m);
 
-  const projectNumber = typeof index === 'number' ? String(index + 1).padStart(2, '0') : null;
 
   // Merge context + role + body into a single flowing description.
   // Authored order is context (what the brief was) → role (what I did) → body (deeper detail).
@@ -72,63 +70,56 @@ export function CaseSection({
     ? []
     : ([section.context, section.role, section.body].filter(Boolean) as string[]);
 
-  // A section is "titled" if it has any header content. Untitled sections
-  // render as pure media — used for multi-part groupings where a single
-  // heading spans several layout blocks (e.g. Taco Bell's Feed The Beat
-  // section that includes multiple carousels). Project number still
-  // shows on titled sections only.
-  const isTitled = !!(section.title || section.eyebrow);
+  // A section is "titled" if it names itself. Untitled sections render as pure
+  // media — used for multi-part groupings where a single heading spans several
+  // layout blocks (e.g. Taco Bell's Feed The Beat section, which includes
+  // multiple carousels).
+  const isTitled = !!section.title;
 
   return (
-    <section className="py-16 lg:py-20 border-b border-line last:border-b-0">
-      {/* Section header — two-column on desktop (heading left, description right),
-          stacked on mobile. Extra paragraphs collapse behind a "Read more" toggle. */}
+    // The spacing lives on the header's padding, so the text sits in an even
+    // band. A section with no header carries that gap itself, otherwise its
+    // media would butt against whatever came before.
+    <section className={isTitled ? undefined : 'pt-10 lg:pt-12'}>
+      {/* Section header — title and copy stacked at the page's left edge,
+          above the media they belong to. Every paragraph is shown; a case
+          study shouldn't hide half its own reasoning behind a toggle. */}
       {isTitled && (
-        <div className="mb-16 lg:mb-20">
-          {description.length > 0 ? (
-            <div className="max-w-[760px]">
-              {section.title && (
-                <h2 className="font-display font-normal text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.5px] leading-[1.06] mb-5">
-                  {section.title}
-                </h2>
-              )}
-              <p className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line">
-                {deWidow(description[0])}
+        <div className="px-5 py-10 sm:px-7 lg:py-12">
+          <div className="max-w-[640px] space-y-4">
+            {section.title && <p className="text-text">{section.title}</p>}
+
+            {description.slice(0, 1).map((text, i) => (
+              <p key={i} className="whitespace-pre-line text-muted">
+                {deWidow(text)}
               </p>
-              {description.length > 1 && (
-                <>
-                  {expanded && (
-                    <div className="mt-4 space-y-4">
-                      {description.slice(1).map((text, i) => (
-                        <p
-                          key={i}
-                          className="text-[15px] lg:text-[16px] leading-[1.62] text-text/85 whitespace-pre-line"
-                        >
-                          {deWidow(text)}
-                        </p>
-                      ))}
-                    </div>
-                  )}
-                  <button
-                    onClick={() => setExpanded((v) => !v)}
-                    aria-expanded={expanded}
-                    className="mt-4 text-[11px] font-bold tracking-[0.18em] uppercase text-muted-2 hover:text-accent transition-colors"
-                  >
-                    {expanded ? 'Read Less' : 'Read More'}
-                  </button>
-                </>
-              )}
-            </div>
-          ) : (
-            section.title && (
-              <h2 className="font-display font-normal text-[28px] sm:text-[36px] lg:text-[44px] tracking-[-0.5px] leading-[1.06] max-w-3xl">
-                {section.title}
-              </h2>
-            )
-          )}
+            ))}
+
+            {description.length > 1 && (
+              <>
+                {expanded &&
+                  description.slice(1).map((text, i) => (
+                    <p key={i} className="whitespace-pre-line text-muted">
+                      {deWidow(text)}
+                    </p>
+                  ))}
+
+                <button
+                  type="button"
+                  onClick={() => setExpanded((v) => !v)}
+                  aria-expanded={expanded}
+                  className={`${LABEL} block pt-1 transition-colors hover:text-accent`}
+                >
+                  {expanded ? 'Read less' : 'Read more'}
+                </button>
+              </>
+            )}
+          </div>
         </div>
       )}
 
+      {/* Media — full width, aligned to the same edges as the home rows. */}
+      <div className="px-5 sm:px-7">
       {/* Render based on layout type */}
       {section.layout?.type === 'mixed' ? (
         <MixedLayout rows={section.layout.rows} allImages={allImages} onLightbox={show} indexOf={indexOfImage} />
@@ -160,7 +151,7 @@ export function CaseSection({
           indexOf={indexOfImage}
         />
       )}
-
+      </div>
     </section>
   );
 }
@@ -363,7 +354,7 @@ function CarouselLayout({
         onClick={() => scrollByOne(-1)}
         disabled={atStart}
         aria-label="Previous"
-        className={`absolute top-1/2 -translate-y-1/2 left-2 w-10 h-10 rounded-full text-accent-ink bg-accent flex items-center justify-center shadow-[0_4px_12px_-2px_rgba(0,0,0,0.5)] transition-opacity hover:scale-110 ${
+        className={`absolute top-1/2 -translate-y-1/2 left-2 w-10 h-10 rounded-full bg-elev-hi/80 backdrop-blur flex items-center justify-center transition-colors hover:text-accent ${
           atStart ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
@@ -377,7 +368,7 @@ function CarouselLayout({
         onClick={() => scrollByOne(1)}
         disabled={atEnd}
         aria-label="Next"
-        className={`absolute top-1/2 -translate-y-1/2 right-2 w-10 h-10 rounded-full text-accent-ink bg-accent flex items-center justify-center shadow-[0_4px_12px_-2px_rgba(0,0,0,0.5)] transition-opacity hover:scale-110 ${
+        className={`absolute top-1/2 -translate-y-1/2 right-2 w-10 h-10 rounded-full bg-elev-hi/80 backdrop-blur flex items-center justify-center transition-colors hover:text-accent ${
           atEnd ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
@@ -523,7 +514,7 @@ function MediaTile({
   return (
     <button
       onClick={onLightbox}
-      className="relative w-full bg-panel-2 rounded-lg overflow-hidden cursor-zoom-in group block"
+      className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in group block"
     >
       <Image
         src={media.src}

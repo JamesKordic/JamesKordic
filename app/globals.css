@@ -20,7 +20,7 @@ body {
 }
 
 body {
-  background: #111111;
+  background: #0C0C0C;
   color: #f2f2f2;
   font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.6;
@@ -161,5 +161,34 @@ video {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Horizontal reels on the home page scroll without a visible track. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Home reel tiles. `--ar` is the tile's own aspect ratio, set per tile.
+ *
+ * Widths divide each line in proportion to `--ar`, which lands every tile on
+ * that line at one height while each keeps its exact aspect. Nothing is ever
+ * cropped and nothing scrolls sideways, so a line always reaches both edges
+ * with every piece on it visible.
+ *
+ * Below xl the line only holds three, and anything past that takes a full-width
+ * line of its own — dividing the whole row among four pieces at tablet width
+ * left them too small to read. */
+.strip-tile {
+  flex: var(--ar) 1 0;
+  height: auto;
+}
+@media (max-width: 1279.98px) {
+  .strip-tile:nth-child(n + 4) {
+    flex-basis: 100%;
   }
 }

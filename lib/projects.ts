@@ -109,6 +109,11 @@ export type Project = {
   themeColor: string;
   tags: string[];
   client: string;
+  /** The client's field — shown as INDUSTRY in the project page credits.
+   *  Leave empty and the label is left out entirely. */
+  industry?: string;
+  /** Who else worked on it — one name per line under TEAM in the credits. */
+  team?: string[];
   date: string;
   role: string;
   year: string;
@@ -136,16 +141,25 @@ export const PROJECTS: Project[] = [
     id: 'the-syndicate',
     kind: 'professional',    title: 'The Syndicate',
     cover: '/covers/the-syndicate.jpg',
+    heroImage: '/projects/the-syndicate/hero.png',
     coverVideo: '/projects/the-syndicate/hero.mp4',
     themeColor: '#3c3a4a',
     tags: ['Creative Direction', 'Marketing', 'Motion Design'],
-    client: '',
+    client:
+      "The Syndicate, Guns N' Roses, Killphonic Records, Craig Ferguson, Last Gang Records, Indie Week",
+    industry: 'Music, Entertainment, Comedy',
+    team: ['Molly Brooks', 'Sarah Whitty'],
     date: '',
-    role: '',
+    role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 262,
     blurb: 'Music & Entertainment Marketing',
     desc: "The Syndicate is a music and entertainment marketing agency based in Weehawken, NJ. During my internship, and freelance contract with them, I designed for indie and major label artists as well as TV, film, and comedy clients. I created digital assets, tour and promotional visuals, event materials, and more.",
+    /* Empty scaffolding, ready for copy. A section with nothing written in it
+     * is skipped on the page, so each heading appears as soon as it's filled. */
+    brief: { lead: '', body: [] },
+    approach: { intro: '', steps: [] },
+    recap: { headline: '', stats: [] },
     sections: [
       {
         eyebrow: 'Music',
@@ -254,10 +268,12 @@ export const PROJECTS: Project[] = [
     id: 'wwimf',
     kind: 'personal',    title: 'WWIMF',
     cover: '/covers/wwimf.jpg',
+    heroImage: '/projects/wwimf/hero.png',
     coverVideo: '/projects/wwimf/hero.mp4',
     themeColor: '#1d2f7a',
     tags: ['Concept Work', 'Branding', 'Interactive Design'],
     client: 'Senior Capstone',
+    industry: '',
     date: '2025',
     role: 'Graphic Design, Motion Design',
     year: '2025',
@@ -473,10 +489,12 @@ export const PROJECTS: Project[] = [
     kind: 'professional',
     title: 'Taco Bell',
     cover: img('WJoqOnXjeHEhfNWLt27wGXvkTwg', 800),
+    heroImage: '/projects/taco-bell/hero.png',
     coverVideo: '/projects/taco-bell/hero.mp4',
     themeColor: '#7a2e8a',
     tags: ['Creative Direction', 'Marketing', 'Motion Design'],
     client: 'Taco Bell',
+    industry: '',
     date: '2024–2025',
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
@@ -617,10 +635,12 @@ export const PROJECTS: Project[] = [
     kind: 'professional',
     title: 'MNRK Heavy',
     cover: '/covers/mnrk-heavy.jpg',
+    heroImage: '/projects/mnrk-heavy/hero.png',
     coverVideo: '/projects/mnrk-heavy/hero.mp4',
     themeColor: '#7a0e0e',
     tags: ['Creative Direction', 'Social Media', 'Marketing'],
     client: 'MNRK Heavy',
+    industry: '',
     date: '2024–2025',
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
@@ -730,10 +750,12 @@ export const PROJECTS: Project[] = [
     kind: 'professional',
     title: 'Consensus',
     cover: '/covers/consensus.jpg',
+    heroImage: '/projects/consensus/hero.png',
     coverVideo: '/projects/consensus/hero.mp4',
     themeColor: '#0e2e7a',
     tags: ['Creative Direction', 'Motion Design', 'Conference'],
     client: 'CoinDesk',
+    industry: '',
     date: '2024–2025',
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
@@ -815,10 +837,12 @@ export const PROJECTS: Project[] = [
     kind: 'professional',
     title: 'Adults on FX',
     cover: '/covers/adults.jpg',
+    heroImage: '/projects/adults/hero.jpg',
     coverVideo: '/projects/adults/hero.mp4',
     themeColor: '#7a1a14',
     tags: ['Creative Direction', 'Interactive Design', 'Marketing'],
     client: 'FX',
+    industry: '',
     date: '2024–2025',
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
@@ -969,10 +993,12 @@ export const PROJECTS: Project[] = [
     id: 'voltage',
     kind: 'personal',    title: 'Voltage',
     cover: '/covers/voltage.jpg',
+    heroImage: '/projects/voltage/hero.png',
     coverVideo: '/projects/voltage/hero.mp4',
     themeColor: '#7a6a0e',
     tags: ['Concept Work', 'Branding', 'Packaging'],
     client: 'Rochester Institute of Technology',
+    industry: '',
     date: '2024–2025',
     role: 'Graphic Design, Motion Design, 3D Design',
     year: '2024–25',

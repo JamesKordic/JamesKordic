@@ -89,7 +89,7 @@ export default function AboutPage() {
               rel="noopener noreferrer"
               className="absolute inset-x-4 bottom-4 inline-flex items-center justify-center gap-2 rounded-full bg-text px-5 py-3 text-[14px] font-semibold text-bg shadow-lg transition-colors hover:bg-accent hover:text-accent-ink"
             >
-              ⤓ Résumé
+              ⤓ Resume
             </a>
           </div>
         </div>

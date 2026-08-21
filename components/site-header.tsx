@@ -25,7 +25,7 @@ export function SiteHeader() {
   }[] = [
     { label: 'Work', href: '/' },
     { label: 'About', href: '/about' },
-    { label: 'Résumé', href: T.contact.resumeUrl, external: true, newTab: true },
+    { label: 'Resume', href: T.contact.resumeUrl, external: true, newTab: true },
     { label: 'Contact', href: `mailto:${T.contact.email}`, external: true },
   ];
 

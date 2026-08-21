@@ -1,13 +1,21 @@
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import { PROJECTS, getProject, ARTIST } from '@/lib/projects';
+import { SITE_TEXT } from '@/lib/site-text';
+import { AboutProject } from '@/components/about-project';
 import { CaseSection } from '@/components/case-section';
-import { ProjectSwitcher } from '@/components/project-switcher';
-import { ProjectSidebar } from '@/components/project-sidebar';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
+import { ProjectHeader } from '@/components/project-header';
+import { PageFooter } from '@/components/page-footer';
+import { StarRule } from '@/components/star-rule';
 import { deWidow } from '@/lib/typography';
+import { HEADING, LABEL } from '@/lib/ui';
+
+const T = SITE_TEXT;
+
+/** Challenge, Goal, and Results are held back until their copy is written.
+ *  The data behind them is untouched in `projects.ts` — flip this to true and
+ *  all three fill in from the same fields as before. */
+const SHOW_FULL_STORY = false;
 
 export async function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.id }));
@@ -22,6 +30,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
+/**
+ * Project page — a case study read top to bottom: the project named over its
+ * headline, its write-up folded away behind a toggle, a full-width hero, the
+ * work itself, and the projects either side.
+ *
+ * Not every project carries every part — `brief`, `approach`, and `recap` are
+ * optional in the data, and a project with only sections still reads as a
+ * complete page.
+ */
 export default function ProjectPage({ params }: { params: { slug: string } }) {
   const p = getProject(params.slug);
   if (!p) notFound();
@@ -30,88 +47,177 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
 
+  /* Credits — one line per value, the way a colophon lists them. Several
+   * projects leave fields blank, so a label with nothing behind it is left
+   * out rather than printed empty. */
+  const lines = (value: string) =>
+    value
+      .split(',')
+      .map((part) => part.trim())
+      .filter(Boolean);
+
+  const credits = [
+    { label: 'Client', values: lines(p.client) },
+    // Industry reads as one phrase rather than a list, so it isn't split.
+    { label: 'Industry', values: p.industry ? [p.industry] : [] },
+    { label: 'Deliverables', values: p.tags },
+    { label: 'Role', values: lines(p.role) },
+    { label: 'Team', values: p.team ?? [] },
+  ].filter((c) => c.values.length);
+
+  /* The narrative, in the order it should be read. Each entry is a heading and
+   * the paragraphs under it; anything the project doesn't carry drops out. */
+  /* The write-up, in the order it should be read. Four fixed headings —
+   * what the project was, what stood in the way, what it set out to do, and
+   * what came of it — each filled from the field that answers it. A project
+   * missing one of those fields simply drops that heading. */
+  type Part = { heading: string; body: string[]; bullets?: string[] };
+
+  const story: Part[] = [
+    { heading: 'Overview', body: [p.desc] },
+    ...(SHOW_FULL_STORY && p.brief
+      ? [{ heading: 'Challenge', body: [p.brief.lead, ...p.brief.body] }]
+      : []),
+    ...(SHOW_FULL_STORY && p.approach
+      ? [
+          {
+            heading: 'Goal',
+            body: [p.approach.intro],
+            bullets: p.approach.steps.map((step) => `${step.title} — ${step.body}`),
+          },
+        ]
+      : []),
+    ...(SHOW_FULL_STORY && p.recap
+      ? [
+          {
+            heading: 'Results',
+            body: [p.recap.headline],
+            bullets: p.recap.stats.map((stat) =>
+              [stat.value, stat.unit, stat.label].filter(Boolean).join(' ')
+            ),
+          },
+        ]
+      : []),
+    // A heading with nothing written under it is dropped, so a half-filled
+    // project never shows a bare label.
+  ].filter((part) => part.body.some((t) => t.trim()) || part.bullets?.length);
+
   return (
-    <div className="flex min-h-screen flex-col bg-bg text-text">
-      <SiteHeader />
+    <div className="min-h-screen bg-bg text-[15px] leading-[1.45] text-text sm:text-[17px]">
+      <ProjectHeader />
 
-      {/* Split screen — menu takes the left quarter, the work the right
-          three quarters, edge to edge. Stacks to one column below lg. */}
-      <div className="flex-1 lg:grid lg:grid-cols-[1fr_3fr]">
-        {/* Always-open project menu — sticky within its full-height column */}
-        <ProjectSidebar currentId={p.id} />
+      {/* Tucked between the header and the title with the same air on both
+          sides; everything below moves up with it. */}
+      {/* Flush under the header, then the page's usual gap below — trimmed by
+          the 5.5px the title's own line box adds above its capitals, so the
+          band reads even against the tighter gap under the disciplines line
+          rather than merely measuring even. */}
+      <StarRule className="mb-[37px] mt-0 lg:mb-[42px]" />
 
-        {/* The work — min-w-0 so wide media (carousels) can't blow the grid open */}
-        <div className="view-anim min-w-0 px-6 py-10 sm:px-8 lg:py-12">
-      {/* Floating switcher — the mobile stand-in for the sidebar */}
-      <ProjectSwitcher currentId={p.id} />
-
-      {/* Back — the sidebar carries this link from lg up */}
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 text-[13px] text-muted hover:text-accent transition-colors mb-9 lg:hidden"
-      >
-        ← All work
-      </Link>
-
-      {/* Hero — title with the overview text directly beneath it */}
-      <header className="pb-10 lg:pb-12 border-b border-line">
-        <h1 className="font-display font-semibold text-[clamp(38px,5.5vw,76px)] leading-[1.04] tracking-[-0.025em] mb-5 lg:-mt-[0.1em]">
-          {p.title}
+      {/* Title — the project named above the line that says what it was. The
+          rule's margin sets the space above it, so its own padding only has to
+          match that underneath. */}
+      <div className="px-5 pb-10 sm:px-7 lg:pb-12">
+        <h1 className="max-w-[22ch] text-[clamp(28px,3.6vw,46px)] leading-[1.08] tracking-[-0.03em]">
+          <span className="block text-muted-2">{p.title}</span>
+          {p.blurb}
         </h1>
-        <p className="text-[17px] leading-[1.7] text-text/85 max-w-[760px] whitespace-pre-line">
-          {deWidow(p.desc)}
-        </p>
-      </header>
 
-      {/* Case study sections */}
-      {p.sections.map((sec, i) => (
-        <CaseSection key={i} section={sec} index={i} hideText={p.hideSectionText} />
-      ))}
+        <div className="pt-8 lg:pt-10">
+          <AboutProject disciplines={p.tags.join(' · ')}>
+            {/* Credits pinned to the left while the story runs beside them. */}
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[22%_1fr] lg:gap-10">
+              <dl className="space-y-5 self-start lg:sticky lg:top-8">
+                {credits.map((c) => (
+                  <div key={c.label}>
+                    <dt className={LABEL}>{c.label}</dt>
+                    {c.values.map((value) => (
+                      <dd key={value}>{value}</dd>
+                    ))}
+                  </div>
+                ))}
+              </dl>
 
-      {/* Prev / Next */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-14">
-        <Link
-          href={`/work/${prev.id}`}
-          className="group flex items-center gap-4 border border-line px-5 py-4 hover:border-accent transition-colors"
-        >
-          <div className="w-[60px] h-[60px] overflow-hidden flex-none bg-panel-2 relative">
-            <Image src={prev.cover} alt="" fill sizes="60px" className="object-cover" />
-          </div>
-          <div>
-            <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-accent">Previous</div>
-            <div className="font-display text-[18px] mt-0.5 group-hover:text-accent transition-colors">
-              {prev.title}
+              <div className="max-w-[640px] space-y-10">
+                {story.map((part) => (
+                  <div key={part.heading} className="space-y-4">
+                    <h2 className={HEADING}>{part.heading}</h2>
+                    {part.body.map((text, i) => (
+                      <p key={i} className={i === 0 ? undefined : 'text-muted'}>
+                        {deWidow(text)}
+                      </p>
+                    ))}
+                    {part.bullets && (
+                      <ul className="space-y-1 text-muted">
+                        {part.bullets.map((line) => (
+                          <li key={line}>• {deWidow(line)}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </Link>
-        <Link
-          href={`/work/${next.id}`}
-          className="group flex items-center gap-4 border border-line px-5 py-4 hover:border-accent transition-colors sm:flex-row-reverse sm:text-right"
-        >
-          <div className="w-[60px] h-[60px] overflow-hidden flex-none bg-panel-2 relative">
-            <Image src={next.cover} alt="" fill sizes="60px" className="object-cover" />
-          </div>
-          <div>
-            <div className="text-[11px] font-bold tracking-[0.1em] uppercase text-accent">Next</div>
-            <div className="font-display text-[18px] mt-0.5 group-hover:text-accent transition-colors">
-              {next.title}
-            </div>
-          </div>
-        </Link>
-      </div>
-
-      <div className="pt-12">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-[13px] font-semibold border border-line rounded-full px-5 py-2.5 hover:border-accent hover:text-accent transition-colors"
-        >
-          ← Back to all work
-        </Link>
-      </div>
+          </AboutProject>
         </div>
       </div>
 
-      <SiteFooter />
+      {/* Hero — the project's own cover, full width. */}
+      <div className="px-5 sm:px-7">
+        {/* `heroImage` wins over `coverVideo`: a project that names a still
+            for its hero means it, and the video stays the thumbnail. */}
+        <div className="relative aspect-[16/9] overflow-hidden bg-panel-2">
+          {!p.heroImage && p.coverVideo ? (
+            <video
+              src={p.coverVideo}
+              poster={p.cover}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={p.heroImage ?? p.cover}
+              alt={p.title}
+              className="h-full w-full object-cover"
+            />
+          )}
+        </div>
+      </div>
+
+      {/* The work itself — unlabelled; the sections speak for it. Its own
+          padding would stack on top of the first section's, leaving a gap over
+          the opening text that no other text block has. */}
+      <section>
+        {p.sections.map((sec, i) => (
+          <CaseSection key={i} section={sec} hideText={p.hideSectionText} />
+        ))}
+      </section>
+
+      <StarRule className="my-10 sm:my-12" />
+
+      {/* The way on in both directions — back to the previous project on the
+          left, forward to the next on the right. */}
+      <nav className="flex items-start justify-between gap-6 px-5 sm:px-7">
+        <Link href={`/work/${prev.id}`} className="group/prev">
+          <span className={`${LABEL} block`}>Previous project</span>
+          <span className="mt-2 block text-[clamp(28px,3.6vw,46px)] leading-[1.08] tracking-[-0.03em] transition-colors group-hover/prev:text-accent">
+            {prev.title}
+          </span>
+        </Link>
+
+        <Link href={`/work/${next.id}`} className="group/next text-right">
+          <span className={`${LABEL} block`}>Next project</span>
+          <span className="mt-2 block text-[clamp(28px,3.6vw,46px)] leading-[1.08] tracking-[-0.03em] transition-colors group-hover/next:text-accent">
+            {next.title}
+          </span>
+        </Link>
+      </nav>
+
+      <PageFooter />
     </div>
   );
 }
