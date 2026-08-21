@@ -7,6 +7,12 @@
       "runtimeArgs": ["run", "dev"],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "frame-grabber",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["/Users/jameskordic/yt-frame-grabber/src/server.js"],
+      "port": 4321
     }
   ]
 }
