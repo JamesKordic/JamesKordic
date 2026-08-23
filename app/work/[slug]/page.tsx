@@ -119,8 +119,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           match that underneath. */}
       <div className="px-5 pb-10 sm:px-7 lg:pb-12">
         <h1 className="max-w-[22ch] text-[clamp(28px,3.6vw,46px)] leading-[1.08] tracking-[-0.03em]">
-          <span className="block text-muted-2">{p.title}</span>
-          {p.blurb}
+          {/* The project's name carries the line; what it was reads quieter
+              beneath it. */}
+          <span className="block">{p.title}</span>
+          <span className="text-muted-2">{p.blurb}</span>
         </h1>
 
         <div className="pt-8 lg:pt-10">
