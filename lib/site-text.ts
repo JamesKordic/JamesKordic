@@ -279,10 +279,6 @@ export const SITE_TEXT = {
     linkedinHandle: 'jameskordic',
     /** LinkedIn full URL */
     linkedinUrl: 'https://www.linkedin.com/in/jameskordic/',
-    /** Instagram handle (without the @) */
-    instagramHandle: 'jameskordic',
-    /** Instagram full URL */
-    instagramUrl: 'https://www.instagram.com/jameskordic/',
     /** Formspree endpoint for the contact dialog — the URL shown on the form's
      *  page in the Formspree dashboard, e.g.
      *  'https://formspree.io/f/xyzabcde'.

@@ -96,15 +96,6 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
         </a>
         <br />
         <a
-          href={T.contact.instagramUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-panelfg transition-colors"
-        >
-          Instagram
-        </a>
-        {' · '}
-        <a
           href={T.contact.linkedinUrl}
           target="_blank"
           rel="noopener noreferrer"

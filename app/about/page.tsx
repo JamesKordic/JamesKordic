@@ -65,9 +65,6 @@ export default function AboutPage() {
               <IntroLink href={T.contact.linkedinUrl} external>
                 LinkedIn
               </IntroLink>
-              <IntroLink href={T.contact.instagramUrl} external>
-                Instagram
-              </IntroLink>
             </div>
           </div>
         </div>

@@ -32,7 +32,7 @@ The file is one big `SITE_TEXT = { ... }` object with sections for each part of 
 | `cards` | "Featured" badge, "View case study →" link |
 | `projectPage` | Section headings on each project page (The Brief / Approach / Recap), labels like Client / Date / Role |
 | `videoPlayer` | "Loading…" text |
-| `contact` | Your email, phone, LinkedIn, Instagram handles + URLs — used everywhere |
+| `contact` | Your email, phone, LinkedIn handles + URLs — used everywhere |
 | `footer` | Copyright line at the bottom of pages |
 | `meta` | Browser tab title + meta description |
 

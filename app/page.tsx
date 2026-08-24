@@ -98,16 +98,6 @@ export default function HomePage() {
             </li>
             <li>
               <a
-                href={T.contact.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={LINK}
-              >
-                Instagram
-              </a>
-            </li>
-            <li>
-              <a
                 href={T.contact.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
