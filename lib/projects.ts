@@ -145,8 +145,7 @@ export const PROJECTS: Project[] = [
     coverVideo: '/projects/the-syndicate/hero.mp4',
     themeColor: '#3c3a4a',
     tags: ['Creative Direction', 'Marketing', 'Motion Design'],
-    client:
-      "The Syndicate, Guns N' Roses, Killphonic Records, Craig Ferguson, Last Gang Records, Indie Week",
+    client: 'The Syndicate',
     industry: 'Music, Entertainment, Comedy',
     team: ['Molly Brooks', 'Sarah Whitty'],
     date: '',
