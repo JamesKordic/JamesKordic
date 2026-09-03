@@ -20,8 +20,8 @@ body {
 }
 
 body {
-  background: #0C0C0C;
-  color: #f2f2f2;
+  background: #ffffff;
+  color: #111111;
   font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -68,13 +68,13 @@ video {
   width: 12px;
 }
 .scrollbar-styled::-webkit-scrollbar-thumb {
-  background: #cfcfcf;
+  background: #c9c7c4;
   border-radius: 10px;
   border: 3px solid transparent;
   background-clip: padding-box;
 }
 .scrollbar-styled::-webkit-scrollbar-thumb:hover {
-  background: #b3b3b3;
+  background: #a9a7a4;
   background-clip: padding-box;
 }
 .scrollbar-styled::-webkit-scrollbar-track {
@@ -85,7 +85,7 @@ video {
   width: 8px;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #cfcfcf;
+  background: #c9c7c4;
   border-radius: 8px;
 }
 .scrollbar-thin::-webkit-scrollbar-track {
@@ -130,6 +130,18 @@ video {
   animation: fadein 0.25s ease;
 }
 
+/* A new keyed bar is mounted for each slide, so the fill restarts in sync
+ * with the ten-second interval. */
+.carousel-progress {
+  width: 0;
+  animation: carouselProgress 10s linear forwards;
+}
+@keyframes carouselProgress {
+  to {
+    width: 100%;
+  }
+}
+
 /* Headline word reveal — each word rises from behind its own line mask.
  * The wrapper clips; the padding/negative-margin pair gives descenders
  * (g, p, y) room inside the clip so they don't get shaved once settled. */
@@ -161,6 +173,10 @@ video {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+  .carousel-progress {
+    animation: none;
+    width: 100%;
   }
 }
 

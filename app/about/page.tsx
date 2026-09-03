@@ -20,76 +20,62 @@ export default function AboutPage() {
     <div className="flex min-h-screen flex-col bg-bg text-text">
       <SiteHeader />
 
-      {/* Intro + headshot — flex-1 stretches the section to fill the
-          viewport between header and footer on desktop */}
-      <main className="view-anim flex flex-1 flex-col px-6 py-10 sm:px-8 sm:py-12">
-        <section className="grid flex-1 items-start gap-x-10 gap-y-8 md:grid-cols-12 md:items-stretch">
-        {/* Text — a flex column so the composition fills the full height:
-            headline at the top, bio in the middle, Connect pinned to the
-            bottom (mirroring the résumé button at the headshot's foot) */}
-        <div className="order-2 flex flex-col md:order-1 md:col-span-8">
-          <p className="font-display font-semibold text-[clamp(32px,4.2vw,60px)] leading-[1.15] tracking-[-0.025em] md:-mt-[0.25em]">
-            Hi, I’m {T.artist.firstName}!
-          </p>
-
-          {/* Bio — first paragraph as an oversized display lead, the rest
-              as larger editorial body. flex-1 pushes Connect down. */}
-          <div className="mt-8 flex-1 md:mt-10">
-            {T.about.bio.map((paragraph, i) =>
-              i === 0 ? (
-                <p
-                  key={i}
-                  className="max-w-[900px] font-display text-[clamp(20px,2.2vw,30px)] leading-[1.4] tracking-[-0.015em]"
-                >
-                  {paragraph}
-                </p>
-              ) : (
-                <p
-                  key={i}
-                  className="mt-6 max-w-[760px] text-[16px] leading-[1.7] text-text/80 md:text-[18px]"
-                >
-                  {paragraph}
-                </p>
-              )
-            )}
-          </div>
-
-          <div className="mt-10 md:mt-8">
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-accent">
-              Connect with me
-            </p>
-            <div className="mt-3.5 flex flex-col items-start gap-y-2.5 text-[16px] sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-2 md:text-[17px]">
-              <IntroLink href={`mailto:${T.contact.email}`}>
-                {T.contact.email}
-              </IntroLink>
-              <IntroLink href={T.contact.linkedinUrl} external>
-                LinkedIn
-              </IntroLink>
-            </div>
-          </div>
+      <main className="view-anim flex-1">
+        <div className="border-b border-line px-5 py-10 sm:px-7 sm:py-14 lg:py-16">
+          <h1 className="font-display text-[clamp(56px,11vw,164px)] font-semibold uppercase leading-[0.8] tracking-[-0.075em]">
+            Info
+          </h1>
         </div>
 
-        {/* Headshot */}
-        <div className="order-1 md:order-2 md:col-span-4">
-          <div className="relative aspect-[4/5] w-full overflow-hidden border border-line bg-panel md:aspect-auto md:h-full">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/about/headshot.jpg"
-              alt={`${T.artist.name}, ${T.artist.discipline}`}
-              className="absolute inset-0 h-full w-full object-cover object-top"
-            />
+        <section className="grid lg:grid-cols-[minmax(0,1.25fr)_minmax(340px,0.75fr)]">
+          <div className="order-2 lg:order-1">
+            <div className="border-b border-line px-5 py-10 sm:px-7 sm:py-14">
+              <p className="max-w-[900px] font-display text-[clamp(28px,4vw,58px)] font-medium leading-[1.1] tracking-[-0.045em]">
+                Graphic designer and motion artist working at the intersection of music, culture, and brand storytelling.
+              </p>
+            </div>
 
-            {/* Résumé button — overlaid near the bottom of the image */}
+            <dl className="grid sm:grid-cols-2">
+              <AboutFact label="Previously">
+                The Syndicate<br />THE·TEAM<br />Rochester Institute of Technology
+              </AboutFact>
+              <AboutFact label="Education">BFA Graphic Design<br />Rochester Institute of Technology</AboutFact>
+              <AboutFact label="Based">New York City</AboutFact>
+              <AboutFact label="Currently">Available for selected freelance and full-time opportunities</AboutFact>
+            </dl>
+
             <a
               href={T.contact.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute inset-x-4 bottom-4 inline-flex items-center justify-center gap-2 rounded-full bg-text px-5 py-3 text-[14px] font-semibold text-bg shadow-lg transition-colors hover:bg-accent hover:text-accent-ink"
+              className="group relative -mt-px block overflow-hidden border-y border-line"
             >
-              ⤓ Resume
+              <span className="absolute inset-0 origin-left scale-x-0 bg-accent transition-transform duration-700 ease-out group-hover:scale-x-100" />
+              <span className="relative z-10 grid min-h-[150px] grid-cols-[1fr_92px] sm:min-h-[180px] sm:grid-cols-[1fr_150px]">
+                <span className="flex items-center overflow-hidden px-5 py-8 sm:px-7">
+                  <span className="font-display text-[clamp(32px,5vw,68px)] font-semibold uppercase leading-[0.86] tracking-[-0.06em] transition-all duration-500 group-hover:translate-x-2 group-hover:text-accent-ink">
+                    Download My Resume!
+                  </span>
+                </span>
+                <span className="flex items-center justify-center border-l border-line transition-colors duration-500 group-hover:border-accent-ink/45">
+                  <span className="flex h-14 w-14 items-center justify-center border border-line text-3xl transition-all duration-500 group-hover:-rotate-45 group-hover:border-accent-ink group-hover:text-accent-ink sm:h-20 sm:w-20 sm:text-5xl">
+                    →
+                  </span>
+                </span>
+              </span>
             </a>
           </div>
-        </div>
+
+          <div className="order-1 border-b border-line lg:order-2 lg:border-b-0 lg:border-l">
+            <div className="relative aspect-[4/5] overflow-hidden bg-panel lg:aspect-auto lg:h-full lg:min-h-[520px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/about/headshot.jpg"
+                alt={`${T.artist.name}, ${T.artist.discipline}`}
+                className="absolute inset-0 h-full w-full object-cover object-top grayscale transition-[filter] duration-500 hover:grayscale-0"
+              />
+            </div>
+          </div>
         </section>
       </main>
 
@@ -98,28 +84,11 @@ export default function AboutPage() {
   );
 }
 
-/* ---- Building blocks ---- */
-
-function IntroLink({
-  href,
-  children,
-  external = false,
-}: {
-  href: string;
-  children: React.ReactNode;
-  external?: boolean;
-}) {
+function AboutFact({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <a
-      href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
-      className="group text-text underline decoration-line underline-offset-[5px] transition-colors hover:text-accent hover:decoration-accent"
-    >
-      {children}{' '}
-      <span className="text-muted-2 transition-colors group-hover:text-accent">
-        ↗
-      </span>
-    </a>
+    <div className="border-b border-line px-5 py-7 last:border-b-0 sm:min-h-[170px] sm:border-r sm:px-7 sm:py-8 sm:[&:nth-last-child(-n+2)]:border-b-0 sm:[&:nth-child(2n)]:border-r-0">
+      <dt className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-accent">{label}</dt>
+      <dd className="text-[16px] leading-[1.55] text-text sm:text-[18px]">{children}</dd>
+    </div>
   );
 }

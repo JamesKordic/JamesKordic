@@ -1,131 +1,140 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { SITE_TEXT } from '@/lib/site-text';
 
 const T = SITE_TEXT;
 
-/**
- * Sticky paper header in the Pentagram editorial style: a name mark with a
- * single accent dot on the left, and a minimal Work / About / Contact nav on
- * the right. On mobile the nav collapses behind a hamburger menu. Shared by the
- * home grid and the inner content pages so the chrome is identical everywhere.
- */
+/** The shared site header. It stays visible while the work scrolls underneath
+ * and collapses into a compact menu on small screens. */
 export function SiteHeader() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const itemClass =
+    'relative flex min-h-[60px] items-center justify-center border-r border-line px-3 text-[10px] font-semibold uppercase tracking-[0.11em] text-muted transition-colors last:border-r-0 hover:text-accent sm:text-[12px]';
 
-  const links: {
-    label: string;
-    href: string;
-    external?: boolean;
-    newTab?: boolean;
-  }[] = [
-    { label: 'Work', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Resume', href: T.contact.resumeUrl, external: true, newTab: true },
-    { label: 'Contact', href: `mailto:${T.contact.email}`, external: true },
-  ];
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname?.startsWith(href);
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bg">
-      <div className="flex items-center justify-between px-6 py-[18px] sm:px-8">
+    <header className="sticky top-0 z-50 border-b border-line bg-bg/95 backdrop-blur-md">
+      <div className="grid grid-cols-[minmax(0,1fr)_60px] md:grid-cols-[minmax(92px,1fr)_repeat(4,minmax(54px,auto))]">
         <Link
-          href="/"
-          className="font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.02em] leading-none"
+          href="/work"
+          aria-label={`${T.artist.name}, work`}
+          onClick={() => setMenuOpen(false)}
+          className="flex min-h-[60px] items-center border-r border-line px-5 font-display text-[clamp(18px,5vw,20px)] font-semibold leading-none tracking-[-0.025em] transition-colors hover:text-accent sm:px-7 md:text-[19px]"
         >
           {T.artist.name}
-          <span className="text-accent">.</span>
         </Link>
-
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-5 sm:flex sm:gap-7">
-          {links.map((l) =>
-            l.external ? (
-              <a
-                key={l.label}
-                href={l.href}
-                target={l.newTab ? '_blank' : undefined}
-                rel={l.newTab ? 'noopener noreferrer' : undefined}
-                className="text-[14px] sm:text-[15px] font-medium text-muted transition-colors hover:text-accent"
-              >
-                {l.label}
-              </a>
-            ) : (
-              <Link
-                key={l.label}
-                href={l.href}
-                className={`text-[14px] sm:text-[15px] font-medium transition-colors hover:text-accent ${
-                  isActive(l.href) ? 'text-text' : 'text-muted'
-                }`}
-              >
-                {l.label}
-              </Link>
-            )
-          )}
-        </nav>
-
-        {/* Mobile hamburger toggle */}
         <button
           type="button"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="-mr-1.5 flex h-8 w-8 flex-col items-center justify-center gap-[5px] sm:hidden"
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
+          className="relative flex min-h-[60px] items-center justify-center md:hidden"
         >
-          <span
-            className={`block h-[2px] w-5 bg-text transition-transform duration-200 ${
-              open ? 'translate-y-[7px] rotate-45' : ''
-            }`}
-          />
-          <span
-            className={`block h-[2px] w-5 bg-text transition-opacity duration-200 ${
-              open ? 'opacity-0' : ''
-            }`}
-          />
-          <span
-            className={`block h-[2px] w-5 bg-text transition-transform duration-200 ${
-              open ? '-translate-y-[7px] -rotate-45' : ''
-            }`}
-          />
+          <span className="relative block h-4 w-6" aria-hidden="true">
+            <span className={`absolute left-0 top-0 h-px w-full bg-current transition-transform duration-300 ${menuOpen ? 'translate-y-[7.5px] rotate-45' : ''}`} />
+            <span className={`absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current transition-opacity duration-200 ${menuOpen ? 'opacity-0' : ''}`} />
+            <span className={`absolute bottom-0 left-0 h-px w-full bg-current transition-transform duration-300 ${menuOpen ? '-translate-y-[7.5px] -rotate-45' : ''}`} />
+          </span>
         </button>
+
+        <nav aria-label="Primary navigation" className="hidden md:contents">
+        <Link
+          href="/work"
+          className={`${itemClass} ${pathname?.startsWith('/work') ? 'text-accent' : ''}`}
+        >
+          Work
+          {pathname?.startsWith('/work') && (
+            <span className="absolute inset-x-0 bottom-0 h-px bg-accent" />
+          )}
+        </Link>
+        <Link
+          href="/about"
+          className={`${itemClass} ${pathname?.startsWith('/about') ? 'text-accent' : ''}`}
+        >
+          Info
+          {pathname?.startsWith('/about') && (
+            <span className="absolute inset-x-0 bottom-0 h-px bg-accent" />
+          )}
+        </Link>
+        <a
+          href={T.contact.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={itemClass}
+        >
+          Resume
+        </a>
+        <Link
+          href="/contact"
+          className={`${itemClass} ${pathname?.startsWith('/contact') ? 'text-accent' : ''}`}
+        >
+          Contact
+          {pathname?.startsWith('/contact') && (
+            <span className="absolute inset-x-0 bottom-0 h-px bg-accent" />
+          )}
+        </Link>
+        </nav>
       </div>
 
-      {/* Mobile dropdown menu */}
-      {open && (
-        <nav className="flex flex-col border-t border-line px-6 py-2 sm:hidden">
-          {links.map((l) =>
-            l.external ? (
-              <a
-                key={l.label}
-                href={l.href}
-                target={l.newTab ? '_blank' : undefined}
-                rel={l.newTab ? 'noopener noreferrer' : undefined}
-                onClick={() => setOpen(false)}
-                className="py-3 text-[16px] font-medium text-muted transition-colors hover:text-accent"
-              >
-                {l.label}
-              </a>
-            ) : (
-              <Link
-                key={l.label}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className={`py-3 text-[16px] font-medium transition-colors hover:text-accent ${
-                  isActive(l.href) ? 'text-text' : 'text-muted'
-                }`}
-              >
-                {l.label}
-              </Link>
-            )
-          )}
-        </nav>
-      )}
+      <nav
+        id="mobile-navigation"
+        aria-label="Mobile navigation"
+        aria-hidden={!menuOpen}
+        className={`absolute inset-x-0 top-full border-b border-line bg-bg transition-[opacity,transform,visibility] duration-300 md:hidden ${
+          menuOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'
+        }`}
+      >
+        <Link
+          href="/work"
+          tabIndex={menuOpen ? 0 : -1}
+          className={`flex min-h-[72px] items-center justify-between border-b border-line px-5 text-[13px] font-semibold uppercase tracking-[0.1em] ${pathname?.startsWith('/work') ? 'text-accent' : ''}`}
+        >
+          Work <span aria-hidden="true">↗</span>
+        </Link>
+        <Link
+          href="/about"
+          tabIndex={menuOpen ? 0 : -1}
+          className={`flex min-h-[72px] items-center justify-between border-b border-line px-5 text-[13px] font-semibold uppercase tracking-[0.1em] ${pathname?.startsWith('/about') ? 'text-accent' : ''}`}
+        >
+          Info <span aria-hidden="true">↗</span>
+        </Link>
+        <a
+          href={T.contact.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={menuOpen ? 0 : -1}
+          onClick={() => setMenuOpen(false)}
+          className="flex min-h-[72px] items-center justify-between border-b border-line px-5 text-[13px] font-semibold uppercase tracking-[0.1em]"
+        >
+          Resume <span aria-hidden="true">↗</span>
+        </a>
+        <Link
+          href="/contact"
+          tabIndex={menuOpen ? 0 : -1}
+          className={`flex min-h-[72px] items-center justify-between px-5 text-[13px] font-semibold uppercase tracking-[0.1em] ${pathname?.startsWith('/contact') ? 'text-accent' : ''}`}
+        >
+          Contact <span aria-hidden="true">↗</span>
+        </Link>
+      </nav>
     </header>
   );
 }

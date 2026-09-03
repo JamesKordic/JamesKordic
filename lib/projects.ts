@@ -51,14 +51,16 @@ export type GridRow = {
   media: Media[];
 };
 
-/* Three layout flavors for the new system:
+/* Layout flavors for the media system:
  *  - uniform: every tile shares one column count and aspect ratio (clean grid)
  *  - mixed: rows with different col/aspect combos for mixed media
+ *  - feature-grid: a level row with one intentionally dominant image
  *  - legacy: the old `cols` number, used by projects not yet migrated
  */
 export type Layout =
   | { type: 'uniform'; cols: 1 | 2 | 3 | 4; aspect: AspectRatio }
   | { type: 'mixed'; rows: GridRow[] }
+  | { type: 'feature-grid'; featuredIndex?: number }
   /** Horizontally scrolling row of fixed-width cards.
    *  - `aspect`: aspect ratio of each card
    *  - `visible`: how many cards fit in the viewport at desktop sizes
@@ -106,6 +108,11 @@ export type Project = {
    *  sidebar, prev/next, player bar, search) AND as this video's
    *  poster while it loads. */
   coverVideo?: string;
+  /** Optional homepage-carousel override; other project previews continue to
+   *  use `coverVideo`. */
+  carouselVideo?: string;
+  /** Optional starting position, in seconds, for the homepage carousel only. */
+  carouselStartAt?: number;
   themeColor: string;
   tags: string[];
   client: string;
@@ -136,13 +143,74 @@ const jpg = (id: string, w = 1200) => `${FRAMER}/images/${id}.jpg?width=${w}`;
 const gif = (id: string, w = 540) => `${FRAMER}/images/${id}.gif?width=${w}`;
 const vid = (id: string) => `${FRAMER}/assets/${id}.mp4`;
 
-export const PROJECTS: Project[] = [
+const PROJECT_CATALOG: Project[] = [
+  {
+    id: 'guns-n-roses',
+    kind: 'professional',
+    title: "Guns N' Roses",
+    cover: '/covers/guns-n-roses-iphone-mockup.png',
+    coverVideo: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'),
+    carouselVideo: '/covers/guns-n-roses-carousel.mp4',
+    themeColor: '#b51d18',
+    tags: ['Motion Design', 'Social Campaign', 'Music'],
+    client: "Guns N' Roses",
+    industry: 'Music & Entertainment',
+    team: ['The Syndicate'],
+    date: '2024–2025',
+    role: 'Graphic Design, Motion Design',
+    year: '2024–25',
+    len: 86,
+    blurb: 'Social Video & Motion',
+    desc:
+      "High-impact social video and motion content created with The Syndicate to connect Guns N' Roses with more than 9 million Instagram followers.",
+    brief: {
+      eyebrow: 'The Brief',
+      lead:
+        "While at The Syndicate, I supported the Guns N' Roses social media team by creating high-impact video content that helps fans connect with the band and builds momentum around tour dates and GNR's music. The work sits at the intersection of rock legacy and platform-native storytelling, reaching an Instagram audience of more than 9 million followers.",
+      body: [],
+    },
+    approach: {
+      eyebrow: 'The Approach',
+      intro:
+        'The reels use sharp pacing, archival imagery, and hard-cut typography to keep the band’s visual history intact while making each piece feel native to contemporary vertical feeds.',
+      steps: [],
+    },
+    recap: { headline: '', stats: [] },
+    sections: [
+      {
+        eyebrow: '01 / Motion System',
+        title: 'Tour & Fan Engagement',
+        context:
+          "A set of vertical reels designed to promote Guns N' Roses tours, music, and fan engagement while keeping the band recognizable within seconds.",
+        fieldNote:
+          'The motion had to feel current without sanding down the grit, scale, and visual history that make the band immediately recognizable.',
+        media: [
+          { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'), aspect: '9/16', poster: '/posters/TAsErfe3Mav2ZPK82B8hoA7HANs.jpg' },
+          { type: 'video', src: vid('c5CmANQj9sWEtQAUdOy0dVCRan8'), aspect: '9/16', poster: '/posters/c5CmANQj9sWEtQAUdOy0dVCRan8.jpg' },
+          { type: 'video', src: vid('m4aBld36mXRoGXa41tRbBPqFMs'), aspect: '9/16', poster: '/posters/m4aBld36mXRoGXa41tRbBPqFMs.jpg' },
+          {
+            type: 'video',
+            src: '/projects/guns-n-roses/social-reel.mp4',
+            aspect: '9/16',
+            poster: '/projects/guns-n-roses/social-reel-cover.jpg',
+          },
+          { type: 'video', src: '/projects/guns-n-roses/social-reel-02.mp4', aspect: '9/16', poster: '/projects/guns-n-roses/social-reel-02-cover.jpg' },
+          { type: 'video', src: '/projects/guns-n-roses/social-reel-03.mp4', aspect: '9/16', poster: '/projects/guns-n-roses/social-reel-03-cover.jpg' },
+          { type: 'video', src: '/projects/guns-n-roses/social-reel-04.mp4', aspect: '9/16', poster: '/projects/guns-n-roses/social-reel-04-cover.jpg' },
+          { type: 'video', src: '/projects/guns-n-roses/social-reel-05.mp4', aspect: '9/16', poster: '/projects/guns-n-roses/social-reel-05-cover.jpg' },
+        ],
+        layout: { type: 'uniform', cols: 4, aspect: '9/16' },
+      },
+    ],
+  },
   {
     id: 'the-syndicate',
     kind: 'professional',    title: 'The Syndicate',
-    cover: '/covers/the-syndicate.jpg',
+    cover: '/covers/the-syndicate-arena-mockup.png',
     heroImage: '/projects/the-syndicate/hero.png',
     coverVideo: '/projects/the-syndicate/hero.mp4',
+    carouselVideo: '/covers/the-syndicate-sizzle-reel.mp4',
+    carouselStartAt: 2,
     themeColor: '#3c3a4a',
     tags: ['Creative Direction', 'Marketing', 'Motion Design'],
     client: 'The Syndicate',
@@ -156,23 +224,13 @@ export const PROJECTS: Project[] = [
     desc: "The Syndicate is a music and entertainment marketing agency based in Weehawken, NJ. During my internship, and freelance contract with them, I designed for indie and major label artists as well as TV, film, and comedy clients. I created digital assets, tour and promotional visuals, event materials, and more.",
     /* Empty scaffolding, ready for copy. A section with nothing written in it
      * is skipped on the page, so each heading appears as soon as it's filled. */
-    brief: { lead: '', body: [] },
+    brief: {
+      lead: 'The Syndicate is a music and entertainment marketing agency working across artists, labels, television, film, comedy, and major cultural events. During my internship and freelance contract, I supported a wide range of client work—from social campaigns and tour promotion to event graphics and conference systems. Moving between audiences and formats taught me how to make fast, brand-aware work without losing the personality that makes each project distinct.',
+      body: [],
+    },
     approach: { intro: '', steps: [] },
     recap: { headline: '', stats: [] },
     sections: [
-      {
-        eyebrow: 'Music',
-        title: "Guns N' Roses",
-        context:
-          "A set of reels I created for Guns N' Roses to promote tours, music, and fan engagement across multiple digital platforms.",
-        // 3 vertical Reels — keep them small, 3 across
-        media: [
-          { type: 'video', src: vid('TAsErfe3Mav2ZPK82B8hoA7HANs'), aspect: '9/16', poster: '/posters/TAsErfe3Mav2ZPK82B8hoA7HANs.jpg'},
-          { type: 'video', src: vid('c5CmANQj9sWEtQAUdOy0dVCRan8'), aspect: '9/16', poster: '/posters/c5CmANQj9sWEtQAUdOy0dVCRan8.jpg' },
-          { type: 'video', src: vid('m4aBld36mXRoGXa41tRbBPqFMs'), aspect: '9/16', poster: '/posters/m4aBld36mXRoGXa41tRbBPqFMs.jpg' },
-        ],
-        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
-      },
       {
         eyebrow: 'Records',
         title: 'Killphonic Records',
@@ -269,6 +327,7 @@ export const PROJECTS: Project[] = [
     cover: '/covers/wwimf.jpg',
     heroImage: '/projects/wwimf/hero.png',
     coverVideo: '/projects/wwimf/hero.mp4',
+    carouselVideo: '/covers/wwimf-carousel.mp4',
     themeColor: '#1d2f7a',
     tags: ['Concept Work', 'Branding', 'Interactive Design'],
     client: 'Senior Capstone',
@@ -281,7 +340,7 @@ export const PROJECTS: Project[] = [
     desc: "WWIMF, the World Wide Interactive Music Festival, is a conceptual festival I built as my senior capstone at RIT. It started with a question: what would a festival look like if the audience became more than just spectators? Over a year, I answered that by building the complete brand: identity, stage environments, wearable tech, merchandise, marketing, motion, and a printed art book. I treated the festival as if it were real and designed everything it would need.",
     brief: {
       eyebrow: 'The Brief',
-      lead: "What if a festival could be co-authored by its audience, not just attended by them? WWIMF is a year-long capstone exploring that question through brand, environment, and technology.",
+      lead: 'WWIMF—World Wide Interactive Music Festival—is a conceptual festival I developed over the course of my senior capstone at RIT. The project began with a question: what would a music festival look like if the audience helped shape the experience instead of simply watching it? I built the answer as a complete festival world spanning identity, stages, interactive wearables, motion, campaign, merchandise, and a printed art book.',
       body: [
         'WWIMF is a conceptual global festival where music, visual art, and emerging tech converge with active guest participation. Audiences become contributors through immersive environments, interactive stages, and participatory wearables that influence what they see and hear in real time.',
         'The project had to deliver as a complete brand system, spanning identity, environment design, merchandise, marketing, motion, and a printed art book, and stand up as a public-facing presentation at Fusion: the 2025 RIT Graphic Design Capstone show.',
@@ -487,9 +546,10 @@ export const PROJECTS: Project[] = [
     id: 'taco-bell',
     kind: 'professional',
     title: 'Taco Bell',
-    cover: img('WJoqOnXjeHEhfNWLt27wGXvkTwg', 800),
+    cover: '/covers/taco-bell-outdoor-mockup.png',
     heroImage: '/projects/taco-bell/hero.png',
     coverVideo: '/projects/taco-bell/hero.mp4',
+    carouselVideo: '/covers/taco-bell-carousel-v2.mp4',
     themeColor: '#7a2e8a',
     tags: ['Creative Direction', 'Marketing', 'Motion Design'],
     client: 'Taco Bell',
@@ -502,7 +562,7 @@ export const PROJECTS: Project[] = [
     desc: "Feed The Beat is Taco Bell's program for spotlighting emerging musicians. I designed promotional materials for the lineup, as well as vertical reels that showed off every band and artist that made the cut.",
     brief: {
       eyebrow: 'The Brief',
-      lead: "Feed The Beat is Taco Bell's ongoing platform for spotlighting emerging artists. The work had to feel like Taco Bell on first glance and like the artist on second glance. Both, every time, at scroll speed.",
+      lead: "Feed The Beat is Taco Bell's long-running platform for championing emerging artists. Through The Syndicate, I helped translate each artist's visual identity into a campaign system that could move quickly across social while still feeling unmistakably Taco Bell. The work covered recurring lineup announcements and vertical motion assets for a roster spanning indie rock, pop, hip-hop, and electronic music.",
       body: [
         "Every drop introduced a new batch of artists across genres: indie rock, pop, hip-hop, electronic. The design had to flex enough to honor each artist's identity while staying recognizably Feed The Beat at a thumbnail size, on a vertical feed, in three seconds.",
         "Output was high-volume and recurring: six campaign sets, around 50 individual assets, plus a longer-form motion piece. The system mattered more than any single post. Once the template was right, the work was about applying it consistently across artists without losing energy.",
@@ -644,7 +704,7 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 201,
-    blurb: 'Social Media Design for a Metal Label',
+    blurb: 'Social Media Design',
     desc: "MNRK Heavy is a metal and hard rock label with a roster that takes its visuals as seriously as its riffs. I designed a steady stream of social content for the label: anniversary posts, release announcements, artist spotlights, and banner artwork across platforms.",
     brief: {
       eyebrow: 'The Brief',
@@ -835,9 +895,10 @@ export const PROJECTS: Project[] = [
     id: 'adults',
     kind: 'professional',
     title: 'Adults on FX',
-    cover: '/covers/adults.jpg',
+    cover: '/covers/adults-culver-city.jpg',
     heroImage: '/projects/adults/hero.jpg',
     coverVideo: '/projects/adults/hero.mp4',
+    carouselVideo: '/covers/adults-carousel.mp4',
     themeColor: '#7a1a14',
     tags: ['Creative Direction', 'Interactive Design', 'Marketing'],
     client: 'FX',
@@ -846,11 +907,11 @@ export const PROJECTS: Project[] = [
     role: 'Graphic Design, Motion Design',
     year: '2024–25',
     len: 177,
-    blurb: 'Series Launch Campaign',
-    desc: "Adults is an FX comedy about a group of twenty-somethings figuring it out together in New York, and this campaign carried its launch. I designed across every surface a series premiere touches: animated screens, reality check game video questions, polaroid prints, cast announcements, menus, posters, banners, and real world mockup examples.",
+    blurb: 'Suds and Sounds Event',
+    desc: "A music-driven launch activation for FX's Adults that transformed neighborhood laundromats in New York City and Los Angeles into community pop-ups by day and live events by night.",
     brief: {
       eyebrow: 'The Brief',
-      lead: "Adults is a new FX series following a chosen-family of young roommates navigating their twenties in New York. The campaign had to translate its sharp, character-driven tone across every surface a show launch touches.",
+      lead: "To launch FX's new comedy Adults, The Syndicate transformed neighborhood laundromats in New York City and Los Angeles into music-driven pop-up parties that turned an everyday chore into the event to be at. By day, guests enjoyed free washes, coffee, snacks, and curated DJ sets—a community-focused experience that reflected the show's take on modern adulthood. By night, the spaces became high-energy venues with live music and drinks, blending nightlife with the mundane in a way that felt distinctly Adults. The campaign required custom creative for two markets across multi-day runs, and the Culver City activation drew the cast of FX's Adults.",
       body: [
         "The asset families spanned motion to print: animated screens, video questions for the show's reality check game, polaroid prints, cast announcements establishing the ensemble, menus, posters, ultra-wide banners, and real world mockups showing the work in place.",
         "The whole system had to feel like one show. Whether you saw Adults on a banner, in your story feed, or printed on a menu, the brand had to land instantly: same color logic, same type, same ensemble framing.",
@@ -878,6 +939,28 @@ export const PROJECTS: Project[] = [
       ],
     },
     sections: [
+      {
+        title: 'Campaign Films',
+        media: [
+          {
+            type: 'video',
+            src: '/projects/adults/fx-adults-showreel.mp4',
+            aspect: '16/9',
+            fit: 'cover',
+            poster: '/projects/adults/culver-city-cover.jpg',
+          },
+        ],
+        layout: { type: 'uniform', cols: 1, aspect: '16/9' },
+      },
+      {
+        title: 'Suds and Sounds Event',
+        media: [
+          { type: 'image', src: '/projects/adults/laundromat-interior.avif' },
+          { type: 'image', src: '/projects/adults/culver-city-exterior.avif' },
+          { type: 'image', src: '/projects/adults/custom-neon-dryer-clings.avif' },
+        ],
+        layout: { type: 'feature-grid', featuredIndex: 1 },
+      },
       {
         title: 'Animated Screens',
         context:
@@ -1140,7 +1223,57 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-export const POPULAR = ['the-syndicate', 'wwimf', 'taco-bell', 'mnrk-heavy', 'consensus'];
+/** Editorial order: lead with recognizable, range-heavy client work, then
+ * establish entertainment experience before the self-directed projects. */
+const PROJECT_ORDER = [
+  'guns-n-roses',
+  'taco-bell',
+  'adults',
+  'the-syndicate',
+  'wwimf',
+];
+
+export const PROJECTS: Project[] = PROJECT_ORDER.map((id) => {
+  const project = PROJECT_CATALOG.find((item) => item.id === id);
+  if (!project) throw new Error(`Missing project: ${id}`);
+
+  if (id === 'the-syndicate') {
+    const consensus = PROJECT_CATALOG.find((item) => item.id === 'consensus');
+    const mnrkHeavy = PROJECT_CATALOG.find((item) => item.id === 'mnrk-heavy');
+    if (!consensus) throw new Error('Missing project: consensus');
+    if (!mnrkHeavy) throw new Error('Missing project: mnrk-heavy');
+
+    const consensusSections = consensus.sections.map((section, index) => ({
+      ...section,
+      eyebrow: `Consensus / ${String(index + 1).padStart(2, '0')}`,
+      title: `Consensus — ${section.title}`,
+      context: `Work created through The Syndicate for Consensus by CoinDesk. ${section.context ?? ''}`.trim(),
+    }));
+
+    const mnrkSections = mnrkHeavy.sections.map((section, index) => ({
+      ...section,
+      eyebrow: `MNRK Heavy / ${String(index + 1).padStart(2, '0')}`,
+      title: `MNRK Heavy — ${section.title}`,
+      context: `Work created through The Syndicate for MNRK Heavy. ${section.context ?? ''}`.trim(),
+    }));
+
+    return {
+      ...project,
+      tags: [...new Set([...project.tags, 'Social Media', 'Conference'])],
+      desc:
+        'The Syndicate is a music and entertainment marketing agency. During my internship and freelance contract, I designed for artists, labels, television, film, comedy, and major conference clients—including MNRK Heavy and Consensus by CoinDesk.',
+      sections: [
+        ...project.sections.filter((section) => section.title !== 'Last Gang Records'),
+        ...mnrkSections,
+        ...consensusSections,
+      ],
+    };
+  }
+
+  return project;
+});
+
+export const POPULAR = ['guns-n-roses', 'taco-bell', 'adults', 'the-syndicate', 'wwimf'];
 
 export const CATEGORIES = [
   { name: 'Motion Design', c: '#d8392c' },

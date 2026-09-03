@@ -114,9 +114,9 @@ export const SITE_TEXT = {
       /** Primary button text (email address) */
       emailButton: 'Jkordic@me.com',
       /** Secondary button text */
-      resumeButton: 'Download résumé',
+      resumeButton: 'Resume',
       /** Tertiary "Full about / contact" link */
-      aboutLink: 'Full about / contact',
+      aboutLink: 'Full info / contact',
     },
   },
 
@@ -144,7 +144,7 @@ export const SITE_TEXT = {
 
     /** Section headings on the about page */
     headings: {
-      about: 'About',
+      about: 'Info',
       currently: 'Currently',
       connect: 'Connect',
     },
@@ -160,7 +160,7 @@ export const SITE_TEXT = {
     /** Action row buttons under the giant name */
     actionRow: {
       getInTouchLabel: 'Get in touch',
-      resumeLabel: '⤓  Download résumé',
+      resumeLabel: 'Resume',
     },
   },
 
@@ -186,7 +186,7 @@ export const SITE_TEXT = {
     /** Nav link labels */
     home: 'Home',
     browse: 'Browse Work',
-    about: 'About / Contact',
+    about: 'Info / Contact',
     /** Library section header */
     library: 'Your Library',
     /** Suffix shown after the project count in the library header pill */
@@ -212,7 +212,7 @@ export const SITE_TEXT = {
         subtitle: 'Search the catalog',
       },
       about: {
-        title: 'About / Contact',
+        title: 'Info / Contact',
         subtitle: 'James Kordic',
       },
     },
@@ -290,7 +290,7 @@ export const SITE_TEXT = {
 
     /** Resume — Google Drive shareable link */
     resumeUrl:
-      'https://drive.google.com/file/d/1aOrLnw0KhQX29Er3OL7VwbVrweBD0YZV/view?usp=sharing',
+      'https://drive.google.com/file/d/19NG_IWgLOZMpsoZrlccHL0BLN64NBU-K/view?usp=sharing',
   },
 
   /* ---- FOOTER ---- */

@@ -32,7 +32,7 @@ export function AboutProject({
           aria-label="Toggle project description"
           className={BUTTON}
         >
-          About the project
+          Project info
           {/* Drawn rather than typed: `+` and `×` sit on the font's math axis,
               which is higher than the cap-height centre the label reads on, so
               a glyph never quite lines up beside it. A square SVG centres on

@@ -6,8 +6,6 @@ import type { Media, Section, GridRow, AspectRatio } from '@/lib/projects';
 import { useLightbox } from '@/lib/lightbox-context';
 import { VideoPlayer } from './video-player';
 import { EmbedFrame } from './embed-frame';
-import { deWidow } from '@/lib/typography';
-import { LABEL } from '@/lib/ui';
 
 /* ============ HELPERS ============ */
 
@@ -34,17 +32,8 @@ function aspectStyle(aspect: AspectRatio | string | undefined) {
 
 /* ============ COMPONENT ============ */
 
-export function CaseSection({
-  section,
-  hideText = false,
-}: {
-  section: Section;
-  /** When true, suppress the section description — headers only. */
-  hideText?: boolean;
-}) {
+export function CaseSection({ section }: { section: Section }) {
   const { show } = useLightbox();
-  /** Only the opening paragraph shows; the rest wait behind "Read more". */
-  const [expanded, setExpanded] = useState(false);
 
   /* Flatten all images in this section for lightbox navigation,
    * traversing both top-level media and any nested row media. */
@@ -62,67 +51,21 @@ export function CaseSection({
   }
   const indexOfImage = (m: Media) => allImages.indexOf(m);
 
-
-  // Merge context + role + body into a single flowing description.
-  // Authored order is context (what the brief was) → role (what I did) → body (deeper detail).
-  // `hideText` suppresses it entirely so titled sections render as header-only.
-  const description = hideText
-    ? []
-    : ([section.context, section.role, section.body].filter(Boolean) as string[]);
-
-  // A section is "titled" if it names itself. Untitled sections render as pure
-  // media — used for multi-part groupings where a single heading spans several
-  // layout blocks (e.g. Taco Bell's Feed The Beat section, which includes
-  // multiple carousels).
-  const isTitled = !!section.title;
-
   return (
-    // The spacing lives on the header's padding, so the text sits in an even
-    // band. A section with no header carries that gap itself, otherwise its
-    // media would butt against whatever came before.
-    <section className={isTitled ? undefined : 'pt-10 lg:pt-12'}>
-      {/* Section header — title and copy stacked at the page's left edge,
-          above the media they belong to. Every paragraph is shown; a case
-          study shouldn't hide half its own reasoning behind a toggle. */}
-      {isTitled && (
-        <div className="px-5 py-10 sm:px-7 lg:py-12">
-          <div className="max-w-[640px] space-y-4">
-            {section.title && <p className="text-text">{section.title}</p>}
-
-            {description.slice(0, 1).map((text, i) => (
-              <p key={i} className="whitespace-pre-line text-muted">
-                {deWidow(text)}
-              </p>
-            ))}
-
-            {description.length > 1 && (
-              <>
-                {expanded &&
-                  description.slice(1).map((text, i) => (
-                    <p key={i} className="whitespace-pre-line text-muted">
-                      {deWidow(text)}
-                    </p>
-                  ))}
-
-                <button
-                  type="button"
-                  onClick={() => setExpanded((v) => !v)}
-                  aria-expanded={expanded}
-                  className={`${LABEL} block pt-1 transition-colors hover:text-accent`}
-                >
-                  {expanded ? 'Read less' : 'Read more'}
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
+    <section className="pt-10 lg:pt-12">
       {/* Media — full width, aligned to the same edges as the home rows. */}
       <div className="px-5 sm:px-7">
       {/* Render based on layout type */}
       {section.layout?.type === 'mixed' ? (
         <MixedLayout rows={section.layout.rows} allImages={allImages} onLightbox={show} indexOf={indexOfImage} />
+      ) : section.layout?.type === 'feature-grid' ? (
+        <FeatureGrid
+          featuredIndex={section.layout.featuredIndex ?? 1}
+          media={section.media}
+          allImages={allImages}
+          onLightbox={show}
+          indexOf={indexOfImage}
+        />
       ) : section.layout?.type === 'carousel' ? (
         <CarouselLayout
           aspect={section.layout.aspect}
@@ -453,6 +396,47 @@ function LegacyLayout({
         />
       ))}
     </div>
+  );
+}
+
+/** A clean, top-aligned row where the featured image owns most of the width.
+ *  Desktop ratios are coordinated so every tile shares one exact height. */
+function FeatureGrid({
+  featuredIndex,
+  media,
+  allImages,
+  onLightbox,
+  indexOf,
+}: {
+  featuredIndex: number;
+  media: Media[];
+  allImages: Media[];
+  onLightbox: (items: Media[], i: number) => void;
+  indexOf: (m: Media) => number;
+}) {
+  return (
+    <>
+      <div className="sm:hidden">
+        <LegacyLayout
+          cols={1}
+          media={media}
+          allImages={allImages}
+          onLightbox={onLightbox}
+          indexOf={indexOf}
+        />
+      </div>
+
+      <div className="hidden items-start gap-3 sm:grid sm:grid-cols-[1fr_3fr_1fr] lg:gap-4">
+        {media.map((m, i) => (
+          <MediaTile
+            key={i}
+            media={m}
+            aspect={i === featuredIndex ? '3/2' : '1/2'}
+            onLightbox={() => onLightbox(allImages, Math.max(0, indexOf(m)))}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 

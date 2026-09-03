@@ -9,36 +9,35 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Pentagram-inspired editorial palette — dark mode. Near-black ink
-        // page, light type, hairline rules, one hot accent.
-        bg: '#0C0C0C', // ink page background
-        panel: '#161616', // card / placeholder surface
-        'panel-2': '#1D1D1D', // image placeholder fill
-        elev: '#191919', // hover surface
-        'elev-hi': '#232323',
-        text: '#F2F2F2', // paper-white type
-        muted: '#A3A3A3', // grey — secondary text
-        'muted-2': '#6F6F6F',
-        line: '#262626', // hairline rules
+        // Light editorial palette: white paper, black type, warm-gray rules.
+        bg: '#FFFFFF',
+        panel: '#F7F7F5',
+        'panel-2': '#F1F1EF',
+        elev: '#F5F5F3',
+        'elev-hi': '#ECECEA',
+        text: '#111111',
+        muted: '#6E6E6A',
+        'muted-2': '#9A9A95',
+        line: '#E4E1DF',
 
-        // Header / chrome — same ink as content, hairline divider.
-        paneldark: '#0C0C0C', // header surface
-        panelfg: '#F2F2F2', // text/icons in the header
-        paneldim: '#A3A3A3', // muted text in the header
-        panelline: '#262626', // hairlines in the header
+        // Header / chrome — white with black type and warm-gray rules.
+        paneldark: '#FFFFFF',
+        panelfg: '#111111',
+        paneldim: '#6E6E6A',
+        panelline: '#E4E1DF',
 
-        // Primary accent — hot red-orange.
+        // Primary interaction accent.
         accent: '#FF3B1F',
-        'accent-ink': '#FFFFFF', // text/icons on top of the accent
+        'accent-ink': '#FFFFFF',
 
         // Legacy gradient tokens, repointed to the accent/neutral family so
         // any lingering reference stays cohesive rather than neon.
         magenta: '#FF3B1F',
-        'magenta-deep': '#c72d14',
-        cyan: '#A3A3A3',
-        'cyan-deep': '#CFCFCF',
-        violet: '#6F6F6F',
-        'violet-deep': '#8F8F8F',
+        'magenta-deep': '#C72D14',
+        cyan: '#6E6E6A',
+        'cyan-deep': '#8A8A85',
+        violet: '#9A9A95',
+        'violet-deep': '#7A7A75',
         amber: '#FF3B1F',
       },
       fontFamily: {

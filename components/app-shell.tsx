@@ -18,6 +18,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   if (
     pathname === '/' ||
     pathname === '/about' ||
+    pathname === '/contact' ||
     pathname?.startsWith('/work')
   ) {
     return (
