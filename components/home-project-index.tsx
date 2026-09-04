@@ -3,18 +3,23 @@ import type { Project } from '@/lib/projects';
 
 export function HomeProjectIndex({ projects }: { projects: Project[] }) {
   const hasTwoCardFinalRow = projects.length % 3 === 2;
+  const hasSingleCardFinalRowAtTablet = projects.length % 2 === 1;
 
   return (
-    <div className="grid grid-cols-1 gap-px border-b border-line bg-line md:grid-cols-6">
+    <div className="grid grid-cols-1 gap-px border-b border-line bg-line sm:grid-cols-2 md:grid-cols-6">
       {projects.map((project, index) => {
         const isWide = hasTwoCardFinalRow && index >= projects.length - 2;
+        const isTabletWide = hasSingleCardFinalRowAtTablet && index === projects.length - 1;
 
         return (
           <ProjectCover
             key={project.id}
             project={project}
             isWide={isWide}
-            className={isWide ? 'md:col-span-3' : 'md:col-span-2'}
+            isTabletWide={isTabletWide}
+            className={`${isTabletWide ? 'sm:col-span-2' : ''} ${
+              isWide ? 'md:col-span-3' : 'md:col-span-2'
+            }`}
           />
         );
       })}
@@ -26,10 +31,12 @@ function ProjectCover({
   project,
   className,
   isWide,
+  isTabletWide,
 }: {
   project: Project;
   className: string;
   isWide: boolean;
+  isTabletWide: boolean;
 }) {
   return (
     <article className={`min-w-0 bg-bg ${className}`}>
@@ -39,8 +46,8 @@ function ProjectCover({
       >
         <div
           className={`relative aspect-[16/10] overflow-hidden bg-panel-2 ${
-            isWide ? 'md:aspect-[12/5]' : ''
-          }`}
+            isTabletWide ? 'sm:aspect-[12/5]' : ''
+          } ${isWide ? 'md:aspect-[12/5]' : ''}`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

@@ -288,15 +288,15 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
         {archive.length > 0 && (
           <details className="group/archive mt-10 border-y border-line sm:mt-12">
-            <summary className="group/archive-trigger relative grid min-h-[140px] cursor-pointer list-none grid-cols-[1fr_92px] overflow-hidden [&::-webkit-details-marker]:hidden sm:min-h-[180px] sm:grid-cols-[1fr_150px]">
+            <summary className="group/archive-trigger relative grid min-h-[132px] cursor-pointer list-none grid-cols-[minmax(0,1fr)_76px] overflow-hidden [&::-webkit-details-marker]:hidden sm:min-h-[180px] sm:grid-cols-[minmax(0,1fr)_150px]">
               <span className="absolute inset-0 origin-left scale-x-0 bg-accent transition-transform duration-700 ease-out group-hover/archive-trigger:scale-x-100" />
-              <span className="relative z-10 flex items-center overflow-hidden px-5 py-8 sm:px-7">
-                <span className="font-display text-[clamp(36px,6vw,88px)] font-semibold uppercase leading-[0.82] tracking-[-0.065em] transition-all duration-500 group-hover/archive-trigger:translate-x-2 group-hover/archive-trigger:text-accent-ink">
+              <span className="relative z-10 flex min-w-0 items-center overflow-hidden px-5 py-7 sm:px-7 sm:py-8">
+                <span className="font-display text-[clamp(30px,6vw,88px)] font-semibold uppercase leading-[0.84] tracking-[-0.06em] transition-all duration-500 group-hover/archive-trigger:translate-x-2 group-hover/archive-trigger:text-accent-ink sm:leading-[0.82] sm:tracking-[-0.065em]">
                   {archiveLabel}
                 </span>
               </span>
               <span className="relative z-10 flex items-center justify-center border-l border-line transition-colors duration-500 group-hover/archive-trigger:border-accent-ink/45">
-                <span className="relative flex h-14 w-14 items-center justify-center border border-line transition-all duration-500 group-hover/archive-trigger:rotate-90 group-hover/archive-trigger:border-accent-ink group-hover/archive-trigger:text-accent-ink group-open/archive:rotate-45 sm:h-20 sm:w-20">
+                <span className="relative flex h-12 w-12 items-center justify-center border border-line transition-all duration-500 group-hover/archive-trigger:rotate-90 group-hover/archive-trigger:border-accent-ink group-hover/archive-trigger:text-accent-ink group-open/archive:rotate-45 sm:h-20 sm:w-20">
                   <span className="absolute left-1/2 top-1/2 h-px w-5 -translate-x-1/2 -translate-y-1/2 bg-current sm:w-7" />
                   <span className="absolute left-1/2 top-1/2 h-5 w-px -translate-x-1/2 -translate-y-1/2 bg-current sm:h-7" />
                 </span>
