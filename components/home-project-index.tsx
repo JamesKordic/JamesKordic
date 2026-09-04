@@ -5,7 +5,7 @@ export function HomeProjectIndex({ projects }: { projects: Project[] }) {
   const hasTwoCardFinalRow = projects.length % 3 === 2;
 
   return (
-    <div className="grid grid-cols-1 gap-px border-y border-line bg-line md:grid-cols-6">
+    <div className="grid grid-cols-1 gap-px border-b border-line bg-line md:grid-cols-6">
       {projects.map((project, index) => {
         const isWide = hasTwoCardFinalRow && index >= projects.length - 2;
 

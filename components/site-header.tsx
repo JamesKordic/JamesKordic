@@ -32,10 +32,10 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg/95 backdrop-blur-md">
-      <div className="grid grid-cols-[minmax(0,1fr)_60px] md:grid-cols-[minmax(92px,1fr)_repeat(4,minmax(54px,auto))]">
+      <div className="grid grid-cols-[minmax(0,1fr)_60px] md:grid-cols-[minmax(92px,1fr)_repeat(3,minmax(70px,auto))]">
         <Link
-          href="/work"
-          aria-label={`${T.artist.name}, work`}
+          href="/"
+          aria-label={`${T.artist.name}, home`}
           onClick={() => setMenuOpen(false)}
           className="flex min-h-[60px] items-center border-r border-line px-5 font-display text-[clamp(18px,5vw,20px)] font-semibold leading-none tracking-[-0.025em] transition-colors hover:text-accent sm:px-7 md:text-[19px]"
         >
@@ -58,20 +58,11 @@ export function SiteHeader() {
 
         <nav aria-label="Primary navigation" className="hidden md:contents">
         <Link
-          href="/work"
+          href="/#work"
           className={`${itemClass} ${pathname?.startsWith('/work') ? 'text-accent' : ''}`}
         >
           Work
           {pathname?.startsWith('/work') && (
-            <span className="absolute inset-x-0 bottom-0 h-px bg-accent" />
-          )}
-        </Link>
-        <Link
-          href="/about"
-          className={`${itemClass} ${pathname?.startsWith('/about') ? 'text-accent' : ''}`}
-        >
-          Info
-          {pathname?.startsWith('/about') && (
             <span className="absolute inset-x-0 bottom-0 h-px bg-accent" />
           )}
         </Link>
@@ -83,15 +74,9 @@ export function SiteHeader() {
         >
           Resume
         </a>
-        <Link
-          href="/contact"
-          className={`${itemClass} ${pathname?.startsWith('/contact') ? 'text-accent' : ''}`}
-        >
+        <a href={`mailto:${T.contact.email}`} className={itemClass}>
           Contact
-          {pathname?.startsWith('/contact') && (
-            <span className="absolute inset-x-0 bottom-0 h-px bg-accent" />
-          )}
-        </Link>
+        </a>
         </nav>
       </div>
 
@@ -104,18 +89,11 @@ export function SiteHeader() {
         }`}
       >
         <Link
-          href="/work"
+          href="/#work"
           tabIndex={menuOpen ? 0 : -1}
           className={`flex min-h-[72px] items-center justify-between border-b border-line px-5 text-[13px] font-semibold uppercase tracking-[0.1em] ${pathname?.startsWith('/work') ? 'text-accent' : ''}`}
         >
           Work <span aria-hidden="true">↗</span>
-        </Link>
-        <Link
-          href="/about"
-          tabIndex={menuOpen ? 0 : -1}
-          className={`flex min-h-[72px] items-center justify-between border-b border-line px-5 text-[13px] font-semibold uppercase tracking-[0.1em] ${pathname?.startsWith('/about') ? 'text-accent' : ''}`}
-        >
-          Info <span aria-hidden="true">↗</span>
         </Link>
         <a
           href={T.contact.resumeUrl}
@@ -127,13 +105,14 @@ export function SiteHeader() {
         >
           Resume <span aria-hidden="true">↗</span>
         </a>
-        <Link
-          href="/contact"
+        <a
+          href={`mailto:${T.contact.email}`}
           tabIndex={menuOpen ? 0 : -1}
-          className={`flex min-h-[72px] items-center justify-between px-5 text-[13px] font-semibold uppercase tracking-[0.1em] ${pathname?.startsWith('/contact') ? 'text-accent' : ''}`}
+          onClick={() => setMenuOpen(false)}
+          className="flex min-h-[72px] items-center justify-between px-5 text-[13px] font-semibold uppercase tracking-[0.1em]"
         >
           Contact <span aria-hidden="true">↗</span>
-        </Link>
+        </a>
       </nav>
     </header>
   );

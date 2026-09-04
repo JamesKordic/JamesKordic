@@ -7,7 +7,7 @@ import { SiteFooter } from './site-footer';
 import { Lightbox } from './lightbox';
 
 /**
- * Site shell. The home, about, and work routes are full, self-contained pages
+ * Site shell. The home and work routes are full, self-contained pages
  * (their own header, full-bleed layout, and footer in the Pentagram style),
  * so they bypass the shell. Every other route gets the shared sticky header,
  * a centered content column, and the editorial footer.
@@ -17,8 +17,6 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   if (
     pathname === '/' ||
-    pathname === '/about' ||
-    pathname === '/contact' ||
     pathname?.startsWith('/work')
   ) {
     return (

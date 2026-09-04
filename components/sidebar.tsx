@@ -18,7 +18,6 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
 
   const navItems: { label: string; href: string; marker: string; external?: boolean }[] = [
     { label: 'Work', href: '/', marker: String(PROJECTS.length).padStart(2, '0') },
-    { label: 'Info', href: '/about', marker: '↓' },
     { label: 'Contact', href: `mailto:${T.contact.email}`, marker: '↗', external: true },
   ];
 

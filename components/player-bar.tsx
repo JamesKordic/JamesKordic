@@ -18,11 +18,10 @@ import {
   VolumeIcon,
   HomeIcon,
   SearchIcon,
-  UserIcon,
 } from './icons';
 
 /* Synthetic "page" descriptors — render in the player bar when the
- * visitor is on a non-project page (home, search, about). Each one has
+ * visitor is on a non-project page (home or search). Each one has
  * its own title, subtitle, link, gradient stops, and inline icon. This
  * lets the player bar reflect the current route in the same way it
  * reflects a project, while keeping the visual language consistent. */
@@ -51,14 +50,6 @@ const PAGE_ENTRIES: Record<string, PageEntry> = {
     from: '#22d3ee',
     to: '#8b5cf6',
     Icon: SearchIcon,
-  },
-  '/about': {
-    title: SITE_TEXT.player.pages.about.title,
-    subtitle: SITE_TEXT.player.pages.about.subtitle,
-    href: '/about',
-    from: '#8b5cf6',
-    to: '#ff2d8a',
-    Icon: UserIcon,
   },
 };
 
@@ -107,7 +98,7 @@ export function PlayerBar() {
   const p = getProject(state.id);
   if (!p && !isPageMode) return null;
 
-  /* PAGE MODE — visitor is on home/about/search. Render a simplified bar
+  /* PAGE MODE — visitor is on home/search. Render a simplified bar
    *  with the synthetic page entry on the left and no playback controls.
    *  The bar still occupies its grid row in the layout so the page below
    *  doesn't reflow; it just shows a different identity. */
