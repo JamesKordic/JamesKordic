@@ -113,14 +113,14 @@ export function HomeVideoCarousel({ projects }: { projects: Project[] }) {
         className="absolute inset-0 z-10 cursor-pointer"
       />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex flex-col items-stretch gap-3 p-5 text-white sm:flex-row sm:items-end sm:justify-between sm:gap-6 sm:p-7">
-        <Link href={`/work/${project.id}`} className="pointer-events-auto block w-full min-w-0 sm:max-w-[70%]">
-          <h1 className="font-display text-[clamp(30px,8vw,48px)] font-semibold leading-[0.92] tracking-[-0.045em] transition-colors group-hover:text-accent sm:text-[clamp(30px,5vw,72px)] sm:leading-[0.95]">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-3 p-5 text-white sm:gap-6 sm:p-7">
+        <Link href={`/work/${project.id}`} className="pointer-events-auto block min-w-0 flex-1 sm:max-w-[70%]">
+          <h1 className="font-display text-[clamp(26px,7vw,48px)] font-semibold leading-[0.92] tracking-[-0.045em] transition-colors group-hover:text-accent sm:text-[clamp(30px,5vw,72px)] sm:leading-[0.95]">
             {project.title}
           </h1>
         </Link>
 
-        <div className="pointer-events-auto flex shrink-0 self-end items-center gap-1.5 sm:gap-2">
+        <div className="pointer-events-auto flex shrink-0 items-center gap-1 sm:gap-2">
           <button
             type="button"
             onClick={previous}
@@ -131,7 +131,7 @@ export function HomeVideoCarousel({ projects }: { projects: Project[] }) {
           </button>
           <span
             aria-live="polite"
-            className="flex h-10 min-w-[66px] items-center justify-center border-y border-white/40 px-2 text-[11px] font-semibold tracking-[0.12em] sm:h-11 sm:min-w-[74px]"
+            className="flex h-10 min-w-[56px] items-center justify-center border-y border-white/40 px-1.5 text-[10px] font-semibold tracking-[0.1em] sm:h-11 sm:min-w-[74px] sm:px-2 sm:text-[11px] sm:tracking-[0.12em]"
           >
             {String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
           </span>
