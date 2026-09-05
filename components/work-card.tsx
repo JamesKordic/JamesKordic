@@ -25,7 +25,7 @@ export function WorkCard({
       style={{ animationDelay: `${i * 70}ms` }}
     >
       <div
-        className={`relative overflow-hidden rounded-[10px] bg-panel-2 ${
+        className={`relative overflow-hidden bg-panel-2 ${
           feature ? 'aspect-[21/9]' : 'aspect-[4/3]'
         }`}
       >

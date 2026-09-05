@@ -5,6 +5,7 @@ import { CaseSection } from '@/components/case-section';
 import { SiteHeader } from '@/components/site-header';
 import { PageFooter } from '@/components/page-footer';
 import { LABEL } from '@/lib/ui';
+import { SITE_TEXT } from '@/lib/site-text';
 
 type ProjectDetail = {
   agency?: string;
@@ -106,11 +107,11 @@ function editorialSections(project: Project): { visible: Section[]; archive: Sec
   }
 
   if (project.id === 'adults') {
-    const [campaignFilm, eventPhotography, ...campaignArchive] = project.sections;
+    const [campaignFilm, eventPhotography] = project.sections;
 
     return {
       visible: [campaignFilm, eventPhotography],
-      archive: campaignArchive,
+      archive: [],
     };
   }
 
@@ -189,6 +190,92 @@ function editorialSections(project: Project): { visible: Section[]; archive: Sec
         ...sections,
       ];
     }
+
+    const removedVisibleItems = new Set([
+      3, 5, 9, 11, 12, 13, 14, 15, 16, 17, 19,
+    ]);
+    let visibleItemNumber = 0;
+
+    sections = sections
+      .map((section) => {
+        if (section.layout?.type === 'mixed') {
+          const rows = section.layout.rows
+            .map((row) => ({
+              ...row,
+              media: row.media.filter(() => {
+                visibleItemNumber += 1;
+                return !removedVisibleItems.has(visibleItemNumber);
+              }),
+            }))
+            .filter((row) => row.media.length > 0);
+
+          return { ...section, layout: { ...section.layout, rows } };
+        }
+
+        return {
+          ...section,
+          media: section.media.filter(() => {
+            visibleItemNumber += 1;
+            return !removedVisibleItems.has(visibleItemNumber);
+          }),
+        };
+      })
+      .filter((section) => (
+        section.layout?.type === 'mixed'
+          ? section.layout.rows.some((row) => row.media.length > 0)
+          : section.media.length > 0
+      ));
+
+    const remainingMedia = sections.flatMap((section) => (
+      section.layout?.type === 'mixed'
+        ? section.layout.rows.flatMap((row) => row.media)
+        : section.media
+    ));
+    const finalPair = remainingMedia.slice(7).map((media, index) => ({
+      ...media,
+      aspect: index === 0 ? '16/9' as const : '1/1' as const,
+    }));
+    const socialVideos = remainingMedia.slice(1, 4);
+    [socialVideos[0], socialVideos[1]] = [socialVideos[1], socialVideos[0]];
+
+    sections = [
+      {
+        title: 'The Syndicate Sizzle Reel',
+        media: remainingMedia.slice(0, 1),
+        layout: { type: 'uniform', cols: 1, aspect: '16/9' },
+      },
+      {
+        title: 'Social Video',
+        media: socialVideos,
+        layout: { type: 'feature-grid', featuredIndex: 2 },
+      },
+      {
+        title: 'Social Campaigns',
+        media: remainingMedia.slice(4, 7),
+        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
+      },
+      {
+        title: 'MNRK Heavy Mockups',
+        media: [
+          {
+            type: 'image',
+            src: '/projects/the-syndicate/mnrk-heavy-social-mockup.png',
+            aspect: '4/3',
+          },
+          {
+            type: 'image',
+            src: '/projects/the-syndicate/mnrk-heavy-band-mockup.png',
+            aspect: '4/3',
+          },
+        ],
+        layout: { type: 'uniform', cols: 2, aspect: '4/3' },
+      },
+      {
+        title: 'Conference Creative',
+        media: finalPair,
+        layout: { type: 'feature-grid', featuredIndex: 0 },
+      },
+    ].filter((section) => section.media.length > 0) as Section[];
   }
 
   if (project.id === 'wwimf') {
@@ -308,6 +395,18 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               ))}
             </div>
           </details>
+        )}
+
+        {p.id === 'the-syndicate' && (
+          <p className="px-5 pt-10 font-display text-[clamp(28px,4vw,54px)] font-semibold uppercase leading-[0.92] tracking-[-0.045em] sm:px-7 sm:pt-12">
+            Want to see more?{' '}
+            <a
+              href={`mailto:${SITE_TEXT.contact.email}`}
+              className="text-accent underline decoration-2 underline-offset-[0.14em] transition-colors hover:text-text"
+            >
+              Contact me.
+            </a>
+          </p>
         )}
       </section>
 

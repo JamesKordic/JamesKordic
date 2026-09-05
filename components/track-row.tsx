@@ -25,7 +25,7 @@ export function TrackRow({ p, i }: { p: Project; i: number }) {
         </span>
       </div>
       <div className="flex items-center gap-[13px] min-w-0">
-        <div className="w-[42px] h-[42px] rounded-[5px] flex-none overflow-hidden bg-panel-2 relative">
+        <div className="w-[42px] h-[42px] flex-none overflow-hidden bg-panel-2 relative">
           <Image src={p.cover} alt="" fill sizes="42px" className="object-cover" />
         </div>
         <div className="min-w-0">

@@ -21,7 +21,7 @@ export function AlbumCard({ p, i = 0 }: { p: Project; i?: number }) {
         href={`/work/${p.id}`}
         className="group block bg-panel hover:bg-elev rounded-[10px] p-3 lg:p-4 transition-colors text-left cursor-pointer"
       >
-        <div className="relative mb-4 rounded-md overflow-hidden shadow-[0_9px_22px_-8px_rgba(0,0,0,0.65)] aspect-square bg-panel-2">
+        <div className="relative mb-4 overflow-hidden shadow-[0_9px_22px_-8px_rgba(0,0,0,0.65)] aspect-square bg-panel-2">
           <ProjectCover
             p={p}
             sizes="(max-width:560px) 50vw, (max-width:1100px) 33vw, 25vw"
@@ -95,7 +95,7 @@ export function FeaturedCard({ p, i = 0 }: { p: Project; i?: number }) {
           aria-hidden
         />
 
-        <div className="relative mb-5 rounded-lg overflow-hidden shadow-[0_16px_40px_-12px_rgba(0,0,0,0.7)] aspect-square bg-panel-2">
+        <div className="relative mb-5 overflow-hidden shadow-[0_16px_40px_-12px_rgba(0,0,0,0.7)] aspect-square bg-panel-2">
           <ProjectCover
             p={p}
             sizes="(max-width:768px) 100vw, 33vw"
@@ -182,7 +182,7 @@ export function ComingSoonCard({ i = 0 }: { i?: number }) {
          *  Under NDA badge are layered on top as gradient overlays so
          *  they pop against the dark cover the same way the play button
          *  and Side A label do elsewhere on the site. */}
-        <div className="relative mb-4 rounded-md overflow-hidden shadow-[0_9px_22px_-8px_rgba(0,0,0,0.65)] aspect-square bg-panel-2">
+        <div className="relative mb-4 overflow-hidden shadow-[0_9px_22px_-8px_rgba(0,0,0,0.65)] aspect-square bg-panel-2">
           {/* The logo cover image */}
           <Image
             src="/covers/the-team.png"

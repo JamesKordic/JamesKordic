@@ -34,7 +34,7 @@ export function EmbedFrame({
 
   return (
     <div
-      className="relative w-full rounded-lg overflow-hidden bg-bg group"
+      className="relative w-full overflow-hidden bg-bg group"
       style={{ aspectRatio: aspect }}
     >
       {loaded ? (

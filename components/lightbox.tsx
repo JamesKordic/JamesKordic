@@ -75,7 +75,7 @@ export function Lightbox() {
             controls
             autoPlay
             playsInline
-            className="max-w-[96vw] max-h-[90vh] rounded-lg shadow-[0_24px_60px_-14px_rgba(0,0,0,0.7)]"
+            className="max-w-[96vw] max-h-[90vh] shadow-[0_24px_60px_-14px_rgba(0,0,0,0.7)]"
           />
         ) : it.type === 'image' ? (
           // Using a regular <img> in the lightbox so we don't fight next/image sizing
@@ -83,7 +83,7 @@ export function Lightbox() {
           <img
             src={it.src}
             alt=""
-            className="max-w-[96vw] max-h-[90vh] rounded-lg shadow-[0_24px_60px_-14px_rgba(0,0,0,0.7)]"
+            className="max-w-[96vw] max-h-[90vh] shadow-[0_24px_60px_-14px_rgba(0,0,0,0.7)]"
           />
         ) : null}
       </div>

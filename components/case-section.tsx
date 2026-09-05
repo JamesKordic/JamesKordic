@@ -414,6 +414,16 @@ function FeatureGrid({
   onLightbox: (items: Media[], i: number) => void;
   indexOf: (m: Media) => number;
 }) {
+  const desktopColumns = media.length === 2
+    ? featuredIndex === 0
+      ? 'sm:grid-cols-[16fr_9fr]'
+      : 'sm:grid-cols-[9fr_16fr]'
+    : featuredIndex === 0
+      ? 'sm:grid-cols-[3.1605fr_1fr_1fr]'
+      : featuredIndex === 2
+        ? 'sm:grid-cols-[1fr_1fr_3.1605fr]'
+        : 'sm:grid-cols-[1fr_3fr_1fr]';
+
   return (
     <>
       <div className="sm:hidden">
@@ -426,7 +436,7 @@ function FeatureGrid({
         />
       </div>
 
-      <div className="hidden items-start gap-3 sm:grid sm:grid-cols-[1fr_3fr_1fr] lg:gap-4">
+      <div className={`hidden items-start gap-3 sm:grid lg:gap-4 ${desktopColumns}`}>
         {media.map((m, i) => (
           <MediaTile
             key={i}

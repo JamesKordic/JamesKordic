@@ -310,7 +310,7 @@ export function VideoPlayer({
   return (
     <div
       ref={containerRef}
-      className="relative w-full bg-black rounded-lg overflow-hidden group cursor-pointer select-none"
+      className="relative w-full bg-black overflow-hidden group cursor-pointer select-none"
       style={{ aspectRatio: aspect }}
       onClick={togglePlay}
       onMouseEnter={() => setHovering(true)}
