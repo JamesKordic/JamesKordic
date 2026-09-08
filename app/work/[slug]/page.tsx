@@ -340,23 +340,23 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <SiteHeader />
 
       <section className="border-b border-line">
-        <div className="px-5 py-10 sm:px-7 sm:py-14 lg:py-16">
-          <h1 className="max-w-[11ch] font-display text-[clamp(56px,11vw,164px)] font-semibold uppercase leading-[0.8] tracking-[-0.075em]">
+        <div className="px-4 py-8 sm:px-7 sm:py-14 lg:py-16">
+          <h1 className="max-w-[11ch] font-display text-[clamp(42px,13vw,56px)] font-semibold uppercase leading-[0.82] tracking-[-0.065em] sm:text-[clamp(56px,11vw,164px)] sm:leading-[0.8] sm:tracking-[-0.075em]">
             {p.title}
           </h1>
-          <p className="mt-6 max-w-[720px] text-[clamp(18px,2.3vw,32px)] leading-[1.18] tracking-[-0.025em] text-muted">
+          <p className="mt-4 max-w-[720px] text-[clamp(16px,4.8vw,20px)] leading-[1.22] tracking-[-0.02em] text-muted sm:mt-6 sm:text-[clamp(18px,2.3vw,32px)] sm:leading-[1.18] sm:tracking-[-0.025em]">
             {p.blurb}{detail.agency ? ` | ${detail.agency}` : ''}
           </p>
         </div>
 
         <div className="grid border-t border-line lg:grid-cols-2">
-          <div className="px-5 py-7 sm:px-7 sm:py-8 lg:pr-12">
+          <div className="px-4 py-6 sm:px-7 sm:py-8 lg:pr-12">
             <p className={`${LABEL} mb-2 text-accent`}>Overview</p>
             <p className="max-w-[760px] text-[14px] leading-[1.5] sm:text-[16px]">
               {summary}
             </p>
           </div>
-          <div className="border-t border-line px-5 py-7 sm:px-7 sm:py-8 lg:border-l lg:border-t-0 lg:pl-12">
+          <div className="border-t border-line px-4 py-6 sm:px-7 sm:py-8 lg:border-l lg:border-t-0 lg:pl-12">
             <p className={`${LABEL} mb-2 text-accent`}>My role</p>
             <p className="max-w-[760px] text-[14px] leading-[1.5] sm:text-[16px]">
               {detail.contribution}
@@ -375,15 +375,15 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
         {archive.length > 0 && (
           <details className="group/archive mt-10 border-y border-line sm:mt-12">
-            <summary className="group/archive-trigger relative grid min-h-[132px] cursor-pointer list-none grid-cols-[minmax(0,1fr)_76px] overflow-hidden [&::-webkit-details-marker]:hidden sm:min-h-[180px] sm:grid-cols-[minmax(0,1fr)_150px]">
+            <summary className="group/archive-trigger relative grid min-h-[116px] cursor-pointer list-none grid-cols-[minmax(0,1fr)_64px] overflow-hidden [&::-webkit-details-marker]:hidden sm:min-h-[180px] sm:grid-cols-[minmax(0,1fr)_150px]">
               <span className="absolute inset-0 origin-left scale-x-0 bg-accent transition-transform duration-700 ease-out group-hover/archive-trigger:scale-x-100" />
               <span className="relative z-10 flex min-w-0 items-center overflow-hidden px-5 py-7 sm:px-7 sm:py-8">
-                <span className="font-display text-[clamp(30px,6vw,88px)] font-semibold uppercase leading-[0.84] tracking-[-0.06em] transition-all duration-500 group-hover/archive-trigger:translate-x-2 group-hover/archive-trigger:text-accent-ink sm:leading-[0.82] sm:tracking-[-0.065em]">
+                <span className="font-display text-[clamp(24px,7vw,30px)] font-semibold uppercase leading-[0.88] tracking-[-0.045em] transition-all duration-500 group-hover/archive-trigger:translate-x-2 group-hover/archive-trigger:text-accent-ink sm:text-[clamp(30px,6vw,88px)] sm:leading-[0.82] sm:tracking-[-0.065em]">
                   {archiveLabel}
                 </span>
               </span>
               <span className="relative z-10 flex items-center justify-center border-l border-line transition-colors duration-500 group-hover/archive-trigger:border-accent-ink/45">
-                <span className="relative flex h-12 w-12 items-center justify-center border border-line transition-all duration-500 group-hover/archive-trigger:rotate-90 group-hover/archive-trigger:border-accent-ink group-hover/archive-trigger:text-accent-ink group-open/archive:rotate-45 sm:h-20 sm:w-20">
+                <span className="relative flex h-10 w-10 items-center justify-center border border-line transition-all duration-500 group-hover/archive-trigger:rotate-90 group-hover/archive-trigger:border-accent-ink group-hover/archive-trigger:text-accent-ink group-open/archive:rotate-45 sm:h-20 sm:w-20">
                   <span className="absolute left-1/2 top-1/2 h-px w-5 -translate-x-1/2 -translate-y-1/2 bg-current sm:w-7" />
                   <span className="absolute left-1/2 top-1/2 h-5 w-px -translate-x-1/2 -translate-y-1/2 bg-current sm:h-7" />
                 </span>
@@ -412,20 +412,20 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
       {/* The way on in both directions — back to the previous project on the
           left, forward to the next on the right. */}
-      <nav className="mt-10 grid border-y border-line sm:mt-12 sm:grid-cols-2">
+      <nav className="mt-10 grid grid-cols-2 border-y border-line sm:mt-12">
         <Link
           href={`/work/${prev.id}`}
-          className="group/prev relative flex min-h-[240px] flex-col justify-between overflow-hidden border-b border-line px-5 py-6 sm:min-h-[300px] sm:border-b-0 sm:px-7 sm:py-8"
+          className="group/prev relative flex min-h-[180px] min-w-0 flex-col justify-between overflow-hidden px-3 py-5 sm:min-h-[300px] sm:px-7 sm:py-8"
         >
           <span className="absolute inset-0 origin-right scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover/prev:scale-x-100" />
-          <span className={`${LABEL} relative z-10 transition-colors group-hover/prev:text-accent-ink`}>
+          <span className={`${LABEL} relative z-10 text-[9px] leading-none transition-colors group-hover/prev:text-accent-ink sm:text-[inherit]`}>
             Previous project
           </span>
-          <span className="relative z-10 flex items-end justify-between gap-5">
-            <span className="max-w-[10ch] text-[clamp(32px,4.5vw,68px)] font-semibold uppercase leading-[0.86] tracking-[-0.06em] transition-colors group-hover/prev:text-accent-ink">
+          <span className="relative z-10 flex min-w-0 items-end justify-between gap-2 sm:gap-5">
+            <span className="min-w-0 max-w-[8ch] break-words text-[clamp(18px,5.5vw,24px)] font-semibold uppercase leading-[0.9] tracking-[-0.045em] transition-colors group-hover/prev:text-accent-ink sm:max-w-[10ch] sm:text-[clamp(32px,4.5vw,68px)] sm:leading-[0.86] sm:tracking-[-0.06em]">
               {prev.title}
             </span>
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-line text-2xl transition-all group-hover/prev:-translate-x-1 group-hover/prev:border-accent-ink group-hover/prev:text-accent-ink sm:h-14 sm:w-14">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-line text-lg transition-all group-hover/prev:-translate-x-1 group-hover/prev:border-accent-ink group-hover/prev:text-accent-ink sm:h-14 sm:w-14 sm:text-2xl">
               ←
             </span>
           </span>
@@ -433,17 +433,17 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
         <Link
           href={`/work/${next.id}`}
-          className="group/next relative flex min-h-[240px] flex-col justify-between overflow-hidden px-5 py-6 text-right sm:min-h-[300px] sm:border-l sm:border-line sm:px-7 sm:py-8"
+          className="group/next relative flex min-h-[180px] min-w-0 flex-col justify-between overflow-hidden border-l border-line px-3 py-5 text-right sm:min-h-[300px] sm:px-7 sm:py-8"
         >
           <span className="absolute inset-0 origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover/next:scale-x-100" />
-          <span className={`${LABEL} relative z-10 transition-colors group-hover/next:text-accent-ink`}>
+          <span className={`${LABEL} relative z-10 text-[9px] leading-none transition-colors group-hover/next:text-accent-ink sm:text-[inherit]`}>
             Next project
           </span>
-          <span className="relative z-10 flex flex-row-reverse items-end justify-between gap-5">
-            <span className="max-w-[10ch] text-[clamp(32px,4.5vw,68px)] font-semibold uppercase leading-[0.86] tracking-[-0.06em] transition-colors group-hover/next:text-accent-ink">
+          <span className="relative z-10 flex min-w-0 flex-row-reverse items-end justify-between gap-2 sm:gap-5">
+            <span className="min-w-0 max-w-[8ch] break-words text-[clamp(18px,5.5vw,24px)] font-semibold uppercase leading-[0.9] tracking-[-0.045em] transition-colors group-hover/next:text-accent-ink sm:max-w-[10ch] sm:text-[clamp(32px,4.5vw,68px)] sm:leading-[0.86] sm:tracking-[-0.06em]">
               {next.title}
             </span>
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-line text-2xl transition-all group-hover/next:translate-x-1 group-hover/next:border-accent-ink group-hover/next:text-accent-ink sm:h-14 sm:w-14">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-line text-lg transition-all group-hover/next:translate-x-1 group-hover/next:border-accent-ink group-hover/next:text-accent-ink sm:h-14 sm:w-14 sm:text-2xl">
               →
             </span>
           </span>

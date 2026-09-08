@@ -206,7 +206,7 @@ const PROJECT_CATALOG: Project[] = [
   {
     id: 'the-syndicate',
     kind: 'professional',    title: 'The Syndicate',
-    cover: '/covers/the-syndicate-arena-mockup.png',
+    cover: '/covers/the-syndicate-logo.jpg',
     heroImage: '/projects/the-syndicate/hero.png',
     coverVideo: '/projects/the-syndicate/hero.mp4',
     carouselVideo: '/covers/the-syndicate-sizzle-reel.mp4',
@@ -895,7 +895,7 @@ const PROJECT_CATALOG: Project[] = [
     id: 'adults',
     kind: 'professional',
     title: 'Adults on FX',
-    cover: '/covers/adults-cast-title.png',
+    cover: '/covers/adults-culver-city.jpg',
     heroImage: '/projects/adults/hero.jpg',
     coverVideo: '/projects/adults/hero.mp4',
     carouselVideo: '/covers/adults-carousel.mp4',
