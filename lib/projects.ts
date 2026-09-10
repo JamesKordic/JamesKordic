@@ -2,7 +2,7 @@
 // Assets are served from Framer's CDN; swap to local paths if you self-host.
 
 /* ============ MEDIA TYPES ============ */
-export type Media =
+export type Media = (
   | { type: 'image'; src: string; aspect?: AspectRatio }
   | {
       type: 'video';
@@ -24,7 +24,7 @@ export type Media =
       /** Load the iframe immediately (no click-to-open overlay). The frame
        *  still uses native lazy loading, so it only fetches near-viewport. */
       autoload?: boolean;
-    };
+    }) & { alt?: string; caption?: string };
 
 /* Allowed aspect ratios — keeps the visual rhythm controllable */
 export type AspectRatio =
@@ -524,20 +524,41 @@ const PROJECT_CATALOG: Project[] = [
         context:
           "I wrote, designed, and printed the art book that doubles as the brand's bible: identity, environments, interactive systems, marketing, and motion stills in one volume.",
         body:
-          "Part brand guide and part world-building document, it walks through how the festival looks, how it behaves, and why it should exist. Flipping through it is the closest thing to attending WWIMF; you can read it cover to cover below.",
+          "Part brand guide and part world-building document, it walks through how the festival looks, how it behaves, and why it should exist. Every spread is below, in order, cover to cover.",
         media: [
-          {
-            type: 'embed',
-            src: 'https://online.fliphtml5.com/gwqwl/oqte/index.html',
-            aspect: '16/9',
-            label: 'Open in new tab →',
-            autoload: true,
-          },
+          { type: 'image', src: '/projects/wwimf/book/page-01.jpg', alt: 'WWIMF book, page 1' },
+          { type: 'image', src: '/projects/wwimf/book/page-02.jpg', alt: 'WWIMF book, page 2' },
+          { type: 'image', src: '/projects/wwimf/book/page-03.jpg', alt: 'WWIMF book, page 3' },
+          { type: 'image', src: '/projects/wwimf/book/page-04.jpg', alt: 'WWIMF book, page 4' },
+          { type: 'image', src: '/projects/wwimf/book/page-05.jpg', alt: 'WWIMF book, page 5' },
+          { type: 'image', src: '/projects/wwimf/book/page-06.jpg', alt: 'WWIMF book, page 6' },
+          { type: 'image', src: '/projects/wwimf/book/page-07.jpg', alt: 'WWIMF book, page 7' },
+          { type: 'image', src: '/projects/wwimf/book/page-08.jpg', alt: 'WWIMF book, page 8' },
+          { type: 'image', src: '/projects/wwimf/book/page-09.jpg', alt: 'WWIMF book, page 9' },
+          { type: 'image', src: '/projects/wwimf/book/page-10.jpg', alt: 'WWIMF book, page 10' },
+          { type: 'image', src: '/projects/wwimf/book/page-11.jpg', alt: 'WWIMF book, page 11' },
+          { type: 'image', src: '/projects/wwimf/book/page-12.jpg', alt: 'WWIMF book, page 12' },
+          { type: 'image', src: '/projects/wwimf/book/page-13.jpg', alt: 'WWIMF book, page 13' },
+          { type: 'image', src: '/projects/wwimf/book/page-14.jpg', alt: 'WWIMF book, page 14' },
+          { type: 'image', src: '/projects/wwimf/book/page-15.jpg', alt: 'WWIMF book, page 15' },
+          { type: 'image', src: '/projects/wwimf/book/page-16.jpg', alt: 'WWIMF book, page 16' },
+          { type: 'image', src: '/projects/wwimf/book/page-17.jpg', alt: 'WWIMF book, page 17' },
+          { type: 'image', src: '/projects/wwimf/book/page-18.jpg', alt: 'WWIMF book, page 18' },
+          { type: 'image', src: '/projects/wwimf/book/page-19.jpg', alt: 'WWIMF book, page 19' },
+          { type: 'image', src: '/projects/wwimf/book/page-20.jpg', alt: 'WWIMF book, page 20' },
+          { type: 'image', src: '/projects/wwimf/book/page-21.jpg', alt: 'WWIMF book, page 21' },
+          { type: 'image', src: '/projects/wwimf/book/page-22.jpg', alt: 'WWIMF book, page 22' },
+          { type: 'image', src: '/projects/wwimf/book/page-23.jpg', alt: 'WWIMF book, page 23' },
+          { type: 'image', src: '/projects/wwimf/book/page-24.jpg', alt: 'WWIMF book, page 24' },
+          { type: 'image', src: '/projects/wwimf/book/page-25.jpg', alt: 'WWIMF book, page 25' },
+          { type: 'image', src: '/projects/wwimf/book/page-26.jpg', alt: 'WWIMF book, page 26' },
+          { type: 'image', src: '/projects/wwimf/book/page-27.jpg', alt: 'WWIMF book, page 27' },
+          { type: 'image', src: '/projects/wwimf/book/page-28.jpg', alt: 'WWIMF book, page 28' },
         ],
         layout: {
-          type: 'uniform',
-          cols: 1,
-          aspect: '16/9',
+          type: 'carousel',
+          aspect: '3/4',
+          visible: 4,
         },
       },
     ],

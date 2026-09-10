@@ -10,24 +10,24 @@ const config: Config = {
     extend: {
       colors: {
         // Light editorial palette: white paper, black type, warm-gray rules.
-        bg: '#FFFFFF',
+        bg: '#FAF9F6',
         panel: '#F7F7F5',
         'panel-2': '#F1F1EF',
         elev: '#F5F5F3',
         'elev-hi': '#ECECEA',
-        text: '#111111',
-        muted: '#6E6E6A',
+        text: '#191918',
+        muted: '#66635C',
         'muted-2': '#9A9A95',
-        line: '#E4E1DF',
+        line: '#D8D5CE',
 
         // Header / chrome — white with black type and warm-gray rules.
         paneldark: '#FFFFFF',
         panelfg: '#111111',
         paneldim: '#6E6E6A',
-        panelline: '#E4E1DF',
+        panelline: '#D8D5CE',
 
         // Primary interaction accent.
-        accent: '#FF3B1F',
+        accent: '#B94324',
         'accent-ink': '#FFFFFF',
 
         // Legacy gradient tokens, repointed to the accent/neutral family so
@@ -41,8 +41,10 @@ const config: Config = {
         amber: '#FF3B1F',
       },
       fontFamily: {
-        display: ['Inter', 'system-ui', 'sans-serif'],
-        ui: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Archivo', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        ui: ['Archivo', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        body: ['Newsreader', 'Georgia', 'Times New Roman', 'serif'],
+        mono: ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       animation: {
         spin: 'spin 5s linear infinite',

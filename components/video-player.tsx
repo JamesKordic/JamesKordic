@@ -46,6 +46,7 @@ export function VideoPlayer({
   const videoRef = useRef<HTMLVideoElement>(null);
   const scrubRef = useRef<HTMLDivElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const [muted, setMuted] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [thumbnailReady, setThumbnailReady] = useState(false);
@@ -64,6 +65,17 @@ export function VideoPlayer({
    *  player). Also drives the bar's 4px → 6px height growth on hover. */
   const [barHover, setBarHover] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
+
+  // Defer offscreen and collapsed-archive videos until they approach the viewport.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setShouldLoad(true); observer.disconnect(); }
+    }, { rootMargin: '300px' });
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   // Keep DOM muted attribute in sync with state
   useEffect(() => {
@@ -319,7 +331,7 @@ export function VideoPlayer({
     >
       <video
         ref={videoRef}
-        src={src}
+        src={shouldLoad ? src : undefined}
         poster={poster}
         preload="metadata"
         playsInline

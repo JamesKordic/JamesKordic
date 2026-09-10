@@ -288,7 +288,18 @@ export const SITE_TEXT = {
      *  is designed to be public, so it's safe to keep here in the repo. */
     formspreeEndpoint: 'https://formspree.io/f/mwlearky',
 
-    /** Resume — Google Drive shareable link */
+    /** Résumé link, used in the header, the About page and the footer.
+     *
+     *  TO SELF-HOST (recommended): export the résumé as `resume.pdf`, drop it
+     *  in `public/`, and change this line to:
+     *      resumeUrl: '/resume.pdf',
+     *
+     *  A Drive link costs you two things. It looks provisional next to a site
+     *  on your own domain, and it depends on sharing staying set to "anyone
+     *  with the link" — if that ever flips, or the file is moved into a
+     *  different Drive, every résumé link on the site silently becomes a
+     *  Google sign-in wall and you never find out. Until this is swapped,
+     *  open the URL below in a private window every so often. */
     resumeUrl:
       'https://drive.google.com/file/d/19NG_IWgLOZMpsoZrlccHL0BLN64NBU-K/view?usp=sharing',
   },
@@ -305,8 +316,24 @@ export const SITE_TEXT = {
 
   /* ---- META (browser tab title + meta description) ---- */
   meta: {
-    title: 'James Kordic Portfolio',
+    /** Browser tab and search-result title. Leads with the name, then the
+     *  discipline — that ordering is what someone scanning a tab bar or a
+     *  results page actually needs. */
+    title: 'James Kordic — Graphic & Motion Designer',
     description:
       'New York-based Graphic & Motion Designer. Work for Taco Bell, FX, MNRK Heavy, Consensus, and The Syndicate.',
+    /** Canonical origin. Required for share cards: it turns the relative
+     *  OG image path into an absolute URL. No trailing slash. */
+    siteUrl: 'https://www.jameskordic.com',
+    /** Search keywords. Kept short — long lists are ignored. */
+    keywords: [
+      'graphic designer',
+      'motion designer',
+      'New York',
+      'campaign design',
+      'entertainment marketing',
+      'music marketing',
+      'James Kordic',
+    ],
   },
 };

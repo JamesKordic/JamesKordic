@@ -1,18 +1,28 @@
 'use client';
 
-import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 import { useLightbox } from '@/lib/lightbox-context';
 import { BackIcon, ForwardIcon } from './icons';
 
 export function Lightbox() {
   const { items, index, open, close, step } = useLightbox();
 
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    if (open && items.length && dialogRef.current && !dialogRef.current.open) {
+      dialogRef.current.showModal();
+    }
+  }, [open, items.length]);
+
   if (!open || items.length === 0) return null;
   const it = items[index];
 
   return (
-    <div
-      className="fixed inset-0 bg-[rgba(0,0,0,0.94)] z-[200] flex items-center justify-center p-4 sm:p-10 animate-fadein"
+    <dialog
+      ref={dialogRef}
+      aria-label="Project artwork viewer"
+      onCancel={(event) => { event.preventDefault(); close(); }}
+      className="m-0 h-screen w-screen max-h-none max-w-none border-0 fixed inset-0 bg-[rgba(0,0,0,0.94)] z-[200] flex items-center justify-center p-4 sm:p-10 animate-fadein"
       onClick={close}
     >
       {/* Close button — fixed positioning, lifted to z-[210] so it always
@@ -82,7 +92,7 @@ export function Lightbox() {
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={it.src}
-            alt=""
+            alt={it.alt || "Project artwork"}
             className="max-w-[96vw] max-h-[90vh] shadow-[0_24px_60px_-14px_rgba(0,0,0,0.7)]"
           />
         ) : null}
@@ -91,6 +101,6 @@ export function Lightbox() {
       <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-[210] text-white/70 text-[12px] sm:text-[13px] tabular-nums px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md">
         {index + 1} / {items.length}
       </div>
-    </div>
+    </dialog>
   );
 }

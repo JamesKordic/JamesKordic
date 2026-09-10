@@ -7,3 +7,9 @@ out
 
 # Local env — never commit API keys
 .env*.local
+
+# Isolate the local preview from production builds
+.next-preview
+
+# Local editor/agent settings
+.claude/settings.local.json
