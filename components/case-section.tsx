@@ -32,7 +32,7 @@ function aspectStyle(aspect: AspectRatio | string | undefined) {
 
 /* ============ COMPONENT ============ */
 
-export function CaseSection({ section, showHeading = true }: { section: Section; showHeading?: boolean }) {
+export function CaseSection({ section }: { section: Section }) {
   const { show } = useLightbox();
 
   /* Flatten all images in this section for lightbox navigation,
@@ -52,10 +52,9 @@ export function CaseSection({ section, showHeading = true }: { section: Section;
   const indexOfImage = (m: Media) => allImages.indexOf(m);
 
   return (
-    <section className="case-section">
-      {showHeading && <div className="case-section-heading"><h2>{section.title}</h2>{section.context && <p>{section.context}</p>}</div>}
+    <section className="pt-10 lg:pt-12">
       {/* Media — full width, aligned to the same edges as the home rows. */}
-      <div className="case-section-media">
+      <div className="px-5 sm:px-7">
       {/* Render based on layout type */}
       {section.layout?.type === 'mixed' ? (
         <MixedLayout rows={section.layout.rows} allImages={allImages} onLightbox={show} indexOf={indexOfImage} />
@@ -453,11 +452,7 @@ function FeatureGrid({
 
 /* ============ TILE ============ */
 
-function MediaTile(props: { media: Media; aspect?: AspectRatio; onLightbox: () => void }) {
-  return <figure className="media-figure"><MediaContent {...props} />{props.media.caption && <figcaption>{props.media.caption}</figcaption>}</figure>;
-}
-
-function MediaContent({
+function MediaTile({
   media,
   aspect,
   onLightbox,
@@ -494,16 +489,15 @@ function MediaContent({
     return (
       <button
         onClick={onLightbox}
-        aria-label={`Enlarge ${media.alt || "project artwork"}`}
         className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in group block"
         style={aspectStyle(media.aspect || aspect)}
       >
         <Image
           src={media.src}
-          alt={media.alt || "Project artwork"}
+          alt=""
           fill
           sizes="(max-width:600px) 100vw, (max-width:1200px) 50vw, 800px"
-          className="object-contain"
+          className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
           unoptimized
         />
       </button>
@@ -514,16 +508,15 @@ function MediaContent({
   return (
     <button
       onClick={onLightbox}
-        aria-label={`Enlarge ${media.alt || "project artwork"}`}
       className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in group block"
     >
       <Image
         src={media.src}
-        alt={media.alt || "Project artwork"}
+        alt=""
         width={1600}
         height={1000}
         sizes="(max-width:600px) 100vw, (max-width:1200px) 50vw, 800px"
-        className="w-full h-auto object-contain"
+        className="w-full h-auto object-cover"
         unoptimized
       />
     </button>
