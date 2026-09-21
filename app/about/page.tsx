@@ -58,7 +58,7 @@ export default function AboutPage() {
           <img
             src="/about/headshot.jpg"
             alt={T.artist.name}
-            className="aspect-[4/5] w-full rounded-[14px] object-cover"
+            className="aspect-[4/5] w-full object-cover"
           />
         </div>
       </main>

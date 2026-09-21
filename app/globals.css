@@ -215,8 +215,6 @@ video {
 
 
 /* ---- Simple redesign ---- */
-/* Case-study media gets the same soft corners as the homepage tiles. */
-.case-media .overflow-hidden { border-radius: 12px; }
 
 /* Homepage reel: clips fade between each other. */
 .reel-clip { opacity: 0; transition: opacity .6s ease; }

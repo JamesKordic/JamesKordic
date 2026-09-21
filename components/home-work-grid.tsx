@@ -2,13 +2,13 @@ import Link from 'next/link';
 import type { Project } from '@/lib/projects';
 import { BLOCK_GAP_Y, GAP_X, STACK } from '@/lib/spacing';
 
-/** Two-column list of projects: image, name, one line. */
+/** Project grid — three across on desktop, two on tablet, one on phones. */
 export function HomeWorkGrid({ projects }: { projects: Project[] }) {
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-2 ${GAP_X} ${BLOCK_GAP_Y}`}>
+    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${GAP_X} ${BLOCK_GAP_Y}`}>
       {projects.map((project) => (
         <Link key={project.id} href={`/work/${project.id}`} className="group block">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[12px] bg-panel">
+          <div className="relative aspect-[4/3] overflow-hidden bg-panel">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={project.cover}

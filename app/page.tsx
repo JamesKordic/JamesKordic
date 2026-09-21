@@ -3,7 +3,7 @@ import { HomeWorkGrid } from '@/components/home-work-grid';
 import { PageFooter } from '@/components/page-footer';
 import { SiteHeader } from '@/components/site-header';
 import { PROJECTS } from '@/lib/projects';
-import { BLOCK_PB, BLOCK_PT, GUTTER_X, LABEL, SECTION_T } from '@/lib/spacing';
+import { BLOCK_PB, BLOCK_PT, GUTTER_X, SECTION_T } from '@/lib/spacing';
 
 /** Home — one line about the work, the reel, then the projects. */
 export default function HomePage() {
@@ -21,7 +21,6 @@ export default function HomePage() {
         <HomeReel projects={PROJECTS.filter((p) => p.carouselVideo ?? p.coverVideo)} />
 
         <section id="work" className={`${SECTION_T} scroll-mt-24`}>
-          <h2 className={`${LABEL} mb-5`}>Selected work</h2>
           <HomeWorkGrid projects={PROJECTS} />
         </section>
       </main>
