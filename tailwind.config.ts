@@ -41,8 +41,8 @@ const config: Config = {
         amber: '#FF3B1F',
       },
       fontFamily: {
-        display: ['DM Sans', 'system-ui', 'sans-serif'],
-        ui: ['DM Sans', 'system-ui', 'sans-serif'],
+        display: ['Inter', 'system-ui', 'sans-serif'],
+        ui: ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         spin: 'spin 5s linear infinite',
