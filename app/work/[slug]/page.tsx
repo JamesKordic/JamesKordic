@@ -4,7 +4,6 @@ import { PROJECTS, getProject, ARTIST, type Project, type Section } from '@/lib/
 import { CaseSection } from '@/components/case-section';
 import { SiteHeader } from '@/components/site-header';
 import { PageFooter } from '@/components/page-footer';
-import { LABEL } from '@/lib/ui';
 import { SITE_TEXT } from '@/lib/site-text';
 
 type ProjectDetail = {
@@ -336,119 +335,90 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const archiveLabel = p.id === 'adults' ? 'What I worked on' : 'View full campaign archive';
 
   return (
-    <div className="min-h-screen bg-bg text-[15px] leading-[1.45] text-text sm:text-[17px]">
+    <div className="min-h-screen bg-bg text-[17px] leading-[1.6] text-text">
       <SiteHeader />
 
-      <section className="border-b border-line">
-        <div className="px-4 py-8 sm:px-7 sm:py-14 lg:py-16">
-          <h1 className="max-w-[11ch] font-display text-[clamp(42px,13vw,56px)] font-semibold uppercase leading-[0.82] tracking-[-0.065em] sm:text-[clamp(56px,11vw,164px)] sm:leading-[0.8] sm:tracking-[-0.075em]">
-            {p.title}
-          </h1>
-          <p className="mt-4 max-w-[720px] text-[clamp(16px,4.8vw,20px)] leading-[1.22] tracking-[-0.02em] text-muted sm:mt-6 sm:text-[clamp(18px,2.3vw,32px)] sm:leading-[1.18] sm:tracking-[-0.025em]">
-            {p.blurb}{detail.agency ? ` | ${detail.agency}` : ''}
-          </p>
-        </div>
+      <main className="mx-auto max-w-[1120px] px-6">
+        <Link href="/#work" className="mt-10 inline-block text-[15px] text-muted transition-colors hover:text-text">
+          ← All work
+        </Link>
+        <h1 className="mt-3.5 text-[clamp(34px,5.4vw,62px)] font-semibold leading-[1.05] tracking-[-0.03em]">
+          {p.title}
+        </h1>
+        <p className="mt-4 max-w-[60ch] text-[clamp(18px,1.9vw,21px)] leading-[1.5]">{summary}</p>
 
-        <div className="grid border-t border-line lg:grid-cols-2">
-          <div className="px-4 py-6 sm:px-7 sm:py-8 lg:pr-12">
-            <p className={`${LABEL} mb-2 text-accent`}>Overview</p>
-            <p className="max-w-[760px] text-[14px] leading-[1.5] sm:text-[16px]">
-              {summary}
-            </p>
+        <dl className="my-8 grid grid-cols-2 gap-5 border-y border-line py-4 text-[15px] md:grid-cols-4">
+          <div>
+            <dt className="text-[13.5px] font-medium text-muted">Client</dt>
+            <dd>{p.client}{detail.agency ? ` — via ${detail.agency}` : ''}</dd>
           </div>
-          <div className="border-t border-line px-4 py-6 sm:px-7 sm:py-8 lg:border-l lg:border-t-0 lg:pl-12">
-            <p className={`${LABEL} mb-2 text-accent`}>My role</p>
-            <p className="max-w-[760px] text-[14px] leading-[1.5] sm:text-[16px]">
-              {detail.contribution}
-            </p>
+          <div>
+            <dt className="text-[13.5px] font-medium text-muted">Role</dt>
+            <dd>{p.role}</dd>
           </div>
-        </div>
-      </section>
+          <div>
+            <dt className="text-[13.5px] font-medium text-muted">Year</dt>
+            <dd>{p.date || p.year}</dd>
+          </div>
+          <div>
+            <dt className="text-[13.5px] font-medium text-muted">Tools</dt>
+            <dd>{detail.tools.join(', ')}</dd>
+          </div>
+        </dl>
 
-      {/* The work itself — unlabelled; the sections speak for it. Its own
-          padding would stack on top of the first section's, leaving a gap over
-          the opening text that no other text block has. */}
-      <section>
+        <section className="max-w-[62ch]">
+          <h2 className="text-[22px] font-semibold tracking-[-0.01em]">My role</h2>
+          <p className="mt-1.5 text-muted">{detail.contribution}</p>
+        </section>
+
         {visible.map((sec, i) => (
-          <CaseSection key={i} section={sec} />
+          <div key={i} className="mt-14">
+            <h2 className="text-[22px] font-semibold tracking-[-0.01em]">{sec.title}</h2>
+            <CaseSection section={sec} />
+          </div>
         ))}
 
         {archive.length > 0 && (
-          <details className="group/archive mt-10 border-y border-line sm:mt-12">
-            <summary className="group/archive-trigger relative grid min-h-[116px] cursor-pointer list-none grid-cols-[minmax(0,1fr)_64px] overflow-hidden [&::-webkit-details-marker]:hidden sm:min-h-[180px] sm:grid-cols-[minmax(0,1fr)_150px]">
-              <span className="absolute inset-0 origin-left scale-x-0 bg-accent transition-transform duration-700 ease-out group-hover/archive-trigger:scale-x-100" />
-              <span className="relative z-10 flex min-w-0 items-center overflow-hidden px-5 py-7 sm:px-7 sm:py-8">
-                <span className="font-display text-[clamp(24px,7vw,30px)] font-semibold uppercase leading-[0.88] tracking-[-0.045em] transition-all duration-500 group-hover/archive-trigger:translate-x-2 group-hover/archive-trigger:text-accent-ink sm:text-[clamp(30px,6vw,88px)] sm:leading-[0.82] sm:tracking-[-0.065em]">
-                  {archiveLabel}
-                </span>
-              </span>
-              <span className="relative z-10 flex items-center justify-center border-l border-line transition-colors duration-500 group-hover/archive-trigger:border-accent-ink/45">
-                <span className="relative flex h-10 w-10 items-center justify-center border border-line transition-all duration-500 group-hover/archive-trigger:rotate-90 group-hover/archive-trigger:border-accent-ink group-hover/archive-trigger:text-accent-ink group-open/archive:rotate-45 sm:h-20 sm:w-20">
-                  <span className="absolute left-1/2 top-1/2 h-px w-5 -translate-x-1/2 -translate-y-1/2 bg-current sm:w-7" />
-                  <span className="absolute left-1/2 top-1/2 h-5 w-px -translate-x-1/2 -translate-y-1/2 bg-current sm:h-7" />
-                </span>
-              </span>
+          <details className="group mt-14 border-y border-line">
+            <summary className="flex cursor-pointer list-none items-center justify-between py-6 text-[clamp(20px,2.6vw,28px)] font-semibold tracking-[-0.02em] transition-colors hover:text-accent [&::-webkit-details-marker]:hidden">
+              {archiveLabel}
+              <span className="text-muted transition-transform group-open:rotate-45">+</span>
             </summary>
-            <div className="border-t border-line pb-10 sm:pb-12">
+            <div className="pb-10">
               {archive.map((sec, i) => (
-                <CaseSection key={i} section={sec} />
+                <div key={i} className="mt-10">
+                  <h3 className="text-[19px] font-semibold tracking-[-0.01em]">{sec.title}</h3>
+                  <CaseSection section={sec} />
+                </div>
               ))}
             </div>
           </details>
         )}
 
         {p.id === 'the-syndicate' && (
-          <p className="px-5 pt-10 font-display text-[clamp(28px,4vw,54px)] font-semibold uppercase leading-[0.92] tracking-[-0.045em] sm:px-7 sm:pt-12">
+          <p className="mt-14 text-[clamp(22px,3vw,32px)] font-medium tracking-[-0.02em]">
             Want to see more?{' '}
-            <a
-              href={`mailto:${SITE_TEXT.contact.email}`}
-              className="text-accent underline decoration-2 underline-offset-[0.14em] transition-colors hover:text-text"
-            >
-              Contact me.
+            <a href={`mailto:${SITE_TEXT.contact.email}`} className="text-accent underline underline-offset-4 hover:text-text">
+              Get in touch.
             </a>
           </p>
         )}
-      </section>
 
-      {/* The way on in both directions — back to the previous project on the
-          left, forward to the next on the right. */}
-      <nav className="mt-10 grid grid-cols-2 border-y border-line sm:mt-12">
-        <Link
-          href={`/work/${prev.id}`}
-          className="group/prev relative flex min-h-[180px] min-w-0 flex-col justify-between overflow-hidden px-3 py-5 sm:min-h-[300px] sm:px-7 sm:py-8"
-        >
-          <span className="absolute inset-0 origin-right scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover/prev:scale-x-100" />
-          <span className={`${LABEL} relative z-10 text-[9px] leading-none transition-colors group-hover/prev:text-accent-ink sm:text-[inherit]`}>
-            Previous project
-          </span>
-          <span className="relative z-10 flex min-w-0 items-end justify-between gap-2 sm:gap-5">
-            <span className="min-w-0 max-w-[8ch] break-words text-[clamp(18px,5.5vw,24px)] font-semibold uppercase leading-[0.9] tracking-[-0.045em] transition-colors group-hover/prev:text-accent-ink sm:max-w-[10ch] sm:text-[clamp(32px,4.5vw,68px)] sm:leading-[0.86] sm:tracking-[-0.06em]">
-              {prev.title}
+        <nav aria-label="More projects" className="mt-[72px] grid grid-cols-2 gap-4 border-y border-line py-6">
+          <Link href={`/work/${prev.id}`} className="group">
+            <span className="block text-[15px] text-muted">Previous project</span>
+            <span className="text-[clamp(20px,3vw,32px)] font-semibold tracking-[-0.02em] transition-colors group-hover:text-accent">
+              ← {prev.title}
             </span>
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-line text-lg transition-all group-hover/prev:-translate-x-1 group-hover/prev:border-accent-ink group-hover/prev:text-accent-ink sm:h-14 sm:w-14 sm:text-2xl">
-              ←
+          </Link>
+          <Link href={`/work/${next.id}`} className="group text-right">
+            <span className="block text-[15px] text-muted">Next project</span>
+            <span className="text-[clamp(20px,3vw,32px)] font-semibold tracking-[-0.02em] transition-colors group-hover:text-accent">
+              {next.title} →
             </span>
-          </span>
-        </Link>
-
-        <Link
-          href={`/work/${next.id}`}
-          className="group/next relative flex min-h-[180px] min-w-0 flex-col justify-between overflow-hidden border-l border-line px-3 py-5 text-right sm:min-h-[300px] sm:px-7 sm:py-8"
-        >
-          <span className="absolute inset-0 origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover/next:scale-x-100" />
-          <span className={`${LABEL} relative z-10 text-[9px] leading-none transition-colors group-hover/next:text-accent-ink sm:text-[inherit]`}>
-            Next project
-          </span>
-          <span className="relative z-10 flex min-w-0 flex-row-reverse items-end justify-between gap-2 sm:gap-5">
-            <span className="min-w-0 max-w-[8ch] break-words text-[clamp(18px,5.5vw,24px)] font-semibold uppercase leading-[0.9] tracking-[-0.045em] transition-colors group-hover/next:text-accent-ink sm:max-w-[10ch] sm:text-[clamp(32px,4.5vw,68px)] sm:leading-[0.86] sm:tracking-[-0.06em]">
-              {next.title}
-            </span>
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-line text-lg transition-all group-hover/next:translate-x-1 group-hover/next:border-accent-ink group-hover/next:text-accent-ink sm:h-14 sm:w-14 sm:text-2xl">
-              →
-            </span>
-          </span>
-        </Link>
-      </nav>
+          </Link>
+        </nav>
+      </main>
 
       <PageFooter />
     </div>

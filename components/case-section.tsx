@@ -54,7 +54,7 @@ export function CaseSection({ section }: { section: Section }) {
   return (
     <section className="pt-10 lg:pt-12">
       {/* Media — full width, aligned to the same edges as the home rows. */}
-      <div className="px-5 sm:px-7">
+      <div className="case-media">
       {/* Render based on layout type */}
       {section.layout?.type === 'mixed' ? (
         <MixedLayout rows={section.layout.rows} allImages={allImages} onLightbox={show} indexOf={indexOfImage} />

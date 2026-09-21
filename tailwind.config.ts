@@ -10,24 +10,24 @@ const config: Config = {
     extend: {
       colors: {
         // Light editorial palette: white paper, black type, warm-gray rules.
-        bg: '#FFFFFF',
-        panel: '#F7F7F5',
-        'panel-2': '#F1F1EF',
+        bg: '#FBFBF9',
+        panel: '#EFEEE9',
+        'panel-2': '#EFEEE9',
         elev: '#F5F5F3',
         'elev-hi': '#ECECEA',
-        text: '#111111',
-        muted: '#6E6E6A',
+        text: '#141414',
+        muted: '#6F6F6A',
         'muted-2': '#9A9A95',
-        line: '#E4E1DF',
+        line: '#E6E5E0',
 
         // Header / chrome — white with black type and warm-gray rules.
         paneldark: '#FFFFFF',
         panelfg: '#111111',
         paneldim: '#6E6E6A',
-        panelline: '#E4E1DF',
+        panelline: '#E6E5E0',
 
         // Primary interaction accent.
-        accent: '#FF3B1F',
+        accent: '#E0401C',
         'accent-ink': '#FFFFFF',
 
         // Legacy gradient tokens, repointed to the accent/neutral family so
@@ -41,8 +41,8 @@ const config: Config = {
         amber: '#FF3B1F',
       },
       fontFamily: {
-        display: ['Inter', 'system-ui', 'sans-serif'],
-        ui: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['DM Sans', 'system-ui', 'sans-serif'],
+        ui: ['DM Sans', 'system-ui', 'sans-serif'],
       },
       animation: {
         spin: 'spin 5s linear infinite',
