@@ -10,9 +10,9 @@ export default function HomePage() {
     <div className="min-h-screen bg-bg text-[17px] leading-[1.6] text-text">
       <SiteHeader />
 
-      <main className="mx-auto max-w-[1120px] px-6">
+      <main className="w-full px-5 sm:px-8">
         <section className="pb-9 pt-16">
-          <h1 className="max-w-[22ch] text-[clamp(30px,4.6vw,54px)] font-medium leading-[1.12] tracking-[-0.025em]">
+          <h1 className="max-w-[26ch] text-[clamp(30px,4.6vw,64px)] font-medium leading-[1.12] tracking-[-0.025em]">
             Graphic &amp; motion designer{' '}
             <span className="text-muted">
               — campaigns, social &amp; identity for music, entertainment, food &amp; tech.

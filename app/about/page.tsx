@@ -23,7 +23,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-bg text-[17px] leading-[1.6] text-text">
       <SiteHeader />
 
-      <main className="mx-auto max-w-[1120px] px-6">
+      <main className="w-full px-5 sm:px-8">
         <div className="grid items-start gap-12 pt-16 md:grid-cols-[1.3fr_1fr]">
           <div>
             <h1 className="mb-5 text-[clamp(28px,3.6vw,42px)] font-medium leading-[1.18] tracking-[-0.02em]">

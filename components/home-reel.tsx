@@ -26,7 +26,7 @@ export function HomeReel({ projects }: { projects: Project[] }) {
   if (!projects.length) return null;
 
   return (
-    <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] bg-[#111] sm:aspect-[16/8]">
+    <div className="relative -mx-5 aspect-[4/3] overflow-hidden bg-[#111] sm:-mx-8 sm:aspect-auto sm:h-[min(82vh,56vw)]">
       {projects.map((project, i) => (
         <video
           key={project.id}

@@ -5,7 +5,7 @@ const T = SITE_TEXT;
 /** Every page closes the same way: the email, set large, and two links. */
 export function PageFooter() {
   return (
-    <footer className="mx-auto mt-24 max-w-[1120px] px-6">
+    <footer className="mt-24 w-full px-5 sm:px-8">
       <div className="border-t border-line pb-14 pt-12">
         <a
           href={`mailto:${T.contact.email}`}

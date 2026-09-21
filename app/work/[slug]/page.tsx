@@ -338,7 +338,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     <div className="min-h-screen bg-bg text-[17px] leading-[1.6] text-text">
       <SiteHeader />
 
-      <main className="mx-auto max-w-[1120px] px-6">
+      <main className="w-full px-5 sm:px-8">
         <Link href="/#work" className="mt-10 inline-block text-[15px] text-muted transition-colors hover:text-text">
           ← All work
         </Link>

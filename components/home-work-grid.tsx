@@ -4,7 +4,7 @@ import type { Project } from '@/lib/projects';
 /** Two-column list of projects: image, name, one line. */
 export function HomeWorkGrid({ projects }: { projects: Project[] }) {
   return (
-    <div className="grid grid-cols-1 gap-x-7 gap-y-11 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-x-5 gap-y-11 md:grid-cols-2 sm:gap-x-8">
       {projects.map((project) => (
         <Link key={project.id} href={`/work/${project.id}`} className="group block">
           <div className="relative aspect-[4/3] overflow-hidden rounded-[12px] bg-panel">
