@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { PageFooter } from '@/components/page-footer';
 import { SiteHeader } from '@/components/site-header';
 import { SITE_TEXT } from '@/lib/site-text';
+import { BLOCK_PT, BLOCK_T, GAP, GUTTER_X, LABEL, STACK, TIGHT } from '@/lib/spacing';
 
 const T = SITE_TEXT;
 
@@ -23,18 +24,19 @@ export default function AboutPage() {
     <div className="min-h-screen bg-bg text-[17px] leading-[1.6] text-text">
       <SiteHeader />
 
-      <main className="w-full px-5 sm:px-8">
-        <div className="grid items-start gap-12 pt-16 md:grid-cols-[1.3fr_1fr]">
+      <main className={`w-full ${GUTTER_X}`}>
+        <div className={`grid items-start ${GAP} ${BLOCK_PT} md:grid-cols-[1.3fr_1fr] md:gap-x-16`}>
           <div>
-            <h1 className="mb-5 text-[clamp(28px,3.6vw,42px)] font-medium leading-[1.18] tracking-[-0.02em]">
+            <h1 className="text-[clamp(28px,3.6vw,42px)] font-medium leading-[1.18] tracking-[-0.02em]">
               {lead}
             </h1>
             {rest.map((paragraph) => (
-              <p key={paragraph} className="mb-4 max-w-[58ch]">{paragraph}</p>
+              <p key={paragraph} className={`${STACK} max-w-[58ch]`}>{paragraph}</p>
             ))}
 
-            <div className="mt-8">
-              <h2 className="mb-1.5 text-[15px] font-medium text-muted">Experience</h2>
+            <div className={BLOCK_T}>
+              <h2 className={LABEL}>Experience</h2>
+              <div className={TIGHT}>
               {T.home.masthead.previously.map((line) => {
                 const [role, place] = splitRole(line);
                 return (
@@ -47,6 +49,7 @@ export default function AboutPage() {
               <div className="flex justify-between gap-4 border-t border-line py-3 text-[16px]">
                 <span>BFA Graphic Design, minor in Photography</span>
                 <span className="text-right text-muted">RIT</span>
+              </div>
               </div>
             </div>
           </div>

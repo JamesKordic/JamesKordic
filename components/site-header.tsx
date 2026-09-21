@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SITE_TEXT } from '@/lib/site-text';
+import { GUTTER_X } from '@/lib/spacing';
 
 const T = SITE_TEXT;
 
@@ -15,7 +16,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
-      <div className="flex h-16 w-full items-center justify-between gap-4 px-5 sm:px-8">
+      <div className={`flex h-16 w-full items-center justify-between gap-5 ${GUTTER_X}`}>
         <Link href="/" className="text-[18px] font-semibold tracking-[-0.01em]">
           {T.artist.name}
         </Link>

@@ -52,7 +52,7 @@ export function CaseSection({ section }: { section: Section }) {
   const indexOfImage = (m: Media) => allImages.indexOf(m);
 
   return (
-    <section className="pt-10 lg:pt-12">
+    <section className="pt-5">
       {/* Media — full width, aligned to the same edges as the home rows. */}
       <div className="case-media">
       {/* Render based on layout type */}
@@ -155,7 +155,7 @@ function UniformLayout({
   }
 
   return (
-    <div className={`grid gap-3 lg:gap-4 items-start ${colClasses(cols)}`}>
+    <div className={`grid gap-5 sm:gap-8 items-start ${colClasses(cols)}`}>
       {media.map((m, i) => (
         <MediaTile
           key={i}
@@ -227,7 +227,7 @@ function CarouselLayout({
       let v: number = visible;
       if (w < 640) v = 2;
       else if (w < 1024) v = Math.min(3, visible);
-      const gap = 12; // matches gap-3 in Tailwind
+      const gap = window.innerWidth < 640 ? 20 : 32; // matches gap-5 sm:gap-8 (lib/spacing GAP)
       // Slight peek: subtract a little so the next card hints itself,
       // matching the live site's carousel where you can see a sliver of
       // the next item. (visible + 0.1) is the trick.
@@ -259,7 +259,8 @@ function CarouselLayout({
   const scrollByOne = (direction: 1 | -1) => {
     const track = trackRef.current;
     if (!track || cardWidth == null) return;
-    track.scrollBy({ left: direction * (cardWidth + 12), behavior: 'smooth' });
+    const gap = window.innerWidth < 640 ? 20 : 32;
+    track.scrollBy({ left: direction * (cardWidth + gap), behavior: 'smooth' });
   };
 
   return (
@@ -274,7 +275,7 @@ function CarouselLayout({
        *  scroll instead of moving the carousel sideways. */}
       <div
         ref={trackRef}
-        className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 [&::-webkit-scrollbar]:hidden"
+        className="flex gap-5 sm:gap-8 overflow-x-auto snap-x snap-mandatory pb-2 [&::-webkit-scrollbar]:hidden"
         style={{ scrollbarWidth: 'none' }}
       >
         {media.map((m, i) => (
@@ -335,7 +336,7 @@ function MixedLayout({
   indexOf: (m: Media) => number;
 }) {
   return (
-    <div className="space-y-3 lg:space-y-4">
+    <div className="space-y-5 sm:space-y-8">
       {rows.map((row, i) => {
         // Single item in a multi-col row → center with max width constraint,
         // same logic as UniformLayout to avoid huge vertical media on desktop
@@ -356,7 +357,7 @@ function MixedLayout({
         }
 
         return (
-          <div key={i} className={`grid gap-3 lg:gap-4 items-start ${colClasses(row.cols)}`}>
+          <div key={i} className={`grid gap-5 sm:gap-8 items-start ${colClasses(row.cols)}`}>
             {row.media.map((m, j) => (
               <MediaTile
                 key={j}
@@ -386,7 +387,7 @@ function LegacyLayout({
   indexOf: (m: Media) => number;
 }) {
   return (
-    <div className={`grid gap-3 lg:gap-4 items-start ${colClasses(cols)}`}>
+    <div className={`grid gap-5 sm:gap-8 items-start ${colClasses(cols)}`}>
       {media.map((m, i) => (
         <MediaTile
           key={i}

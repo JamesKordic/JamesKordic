@@ -5,6 +5,7 @@ import { CaseSection } from '@/components/case-section';
 import { SiteHeader } from '@/components/site-header';
 import { PageFooter } from '@/components/page-footer';
 import { SITE_TEXT } from '@/lib/site-text';
+import { BLOCK_PT, BLOCK_T, GAP, GUTTER_X, RULE_PY, SECTION_T, STACK, TIGHT } from '@/lib/spacing';
 
 type ProjectDetail = {
   agency?: string;
@@ -338,16 +339,16 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     <div className="min-h-screen bg-bg text-[17px] leading-[1.6] text-text">
       <SiteHeader />
 
-      <main className="w-full px-5 sm:px-8">
-        <Link href="/#work" className="mt-10 inline-block text-[15px] text-muted transition-colors hover:text-text">
+      <main className={`w-full ${GUTTER_X} ${BLOCK_PT}`}>
+        <Link href="/#work" className="inline-block text-[15px] text-muted transition-colors hover:text-text">
           ← All work
         </Link>
-        <h1 className="mt-3.5 text-[clamp(34px,5.4vw,62px)] font-semibold leading-[1.05] tracking-[-0.03em]">
+        <h1 className={`${STACK} text-[clamp(34px,5.4vw,62px)] font-semibold leading-[1.05] tracking-[-0.03em]`}>
           {p.title}
         </h1>
-        <p className="mt-4 max-w-[60ch] text-[clamp(18px,1.9vw,21px)] leading-[1.5]">{summary}</p>
+        <p className={`${STACK} max-w-[60ch] text-[clamp(18px,1.9vw,21px)] leading-[1.5]`}>{summary}</p>
 
-        <dl className="my-8 grid grid-cols-2 gap-5 border-y border-line py-4 text-[15px] md:grid-cols-4">
+        <dl className={`${BLOCK_T} grid grid-cols-2 ${GAP} border-y border-line ${RULE_PY} text-[15px] md:grid-cols-4`}>
           <div>
             <dt className="text-[13.5px] font-medium text-muted">Client</dt>
             <dd>{p.client}{detail.agency ? ` — via ${detail.agency}` : ''}</dd>
@@ -366,27 +367,27 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </div>
         </dl>
 
-        <section className="max-w-[62ch]">
+        <section className={`${BLOCK_T} max-w-[62ch]`}>
           <h2 className="text-[22px] font-semibold tracking-[-0.01em]">My role</h2>
-          <p className="mt-1.5 text-muted">{detail.contribution}</p>
+          <p className={`${TIGHT} text-muted`}>{detail.contribution}</p>
         </section>
 
         {visible.map((sec, i) => (
-          <div key={i} className="mt-14">
+          <div key={i} className={BLOCK_T}>
             <h2 className="text-[22px] font-semibold tracking-[-0.01em]">{sec.title}</h2>
             <CaseSection section={sec} />
           </div>
         ))}
 
         {archive.length > 0 && (
-          <details className="group mt-14 border-y border-line">
-            <summary className="flex cursor-pointer list-none items-center justify-between py-6 text-[clamp(20px,2.6vw,28px)] font-semibold tracking-[-0.02em] transition-colors hover:text-accent [&::-webkit-details-marker]:hidden">
+          <details className={`group ${BLOCK_T} border-y border-line`}>
+            <summary className="flex cursor-pointer list-none items-center justify-between py-5 sm:py-6 text-[clamp(20px,2.6vw,28px)] font-semibold tracking-[-0.02em] transition-colors hover:text-accent [&::-webkit-details-marker]:hidden">
               {archiveLabel}
               <span className="text-muted transition-transform group-open:rotate-45">+</span>
             </summary>
-            <div className="pb-10">
+            <div className="pb-12 sm:pb-16">
               {archive.map((sec, i) => (
-                <div key={i} className="mt-10">
+                <div key={i} className={BLOCK_T}>
                   <h3 className="text-[19px] font-semibold tracking-[-0.01em]">{sec.title}</h3>
                   <CaseSection section={sec} />
                 </div>
@@ -396,7 +397,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         )}
 
         {p.id === 'the-syndicate' && (
-          <p className="mt-14 text-[clamp(22px,3vw,32px)] font-medium tracking-[-0.02em]">
+          <p className={`${BLOCK_T} text-[clamp(22px,3vw,32px)] font-medium tracking-[-0.02em]`}>
             Want to see more?{' '}
             <a href={`mailto:${SITE_TEXT.contact.email}`} className="text-accent underline underline-offset-4 hover:text-text">
               Get in touch.
@@ -404,7 +405,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </p>
         )}
 
-        <nav aria-label="More projects" className="mt-[72px] grid grid-cols-2 gap-4 border-y border-line py-6">
+        <nav aria-label="More projects" className={`${SECTION_T} grid grid-cols-2 ${GAP} border-y border-line ${RULE_PY}`}>
           <Link href={`/work/${prev.id}`} className="group">
             <span className="block text-[15px] text-muted">Previous project</span>
             <span className="text-[clamp(20px,3vw,32px)] font-semibold tracking-[-0.02em] transition-colors group-hover:text-accent">
