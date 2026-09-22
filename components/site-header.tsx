@@ -8,12 +8,11 @@ import { GUTTER_X } from '@/lib/spacing';
 
 const T = SITE_TEXT;
 
-/** Shared header: name on the left, four links on the right. Below the
+/** Shared header: name on the left, three links on the right. Below the
  *  `sm` breakpoint the links fold into a menu button. */
 export function SiteHeader() {
   const pathname = usePathname() ?? '/';
   const onWork = pathname === '/' || pathname.startsWith('/work');
-  const onAbout = pathname.startsWith('/about');
   const [open, setOpen] = useState(false);
 
   useEffect(() => setOpen(false), [pathname]);
@@ -31,7 +30,6 @@ export function SiteHeader() {
 
   const links = [
     { label: 'Work', href: '/', active: onWork, external: false },
-    { label: 'About', href: '/about', active: onAbout, external: false },
     { label: 'Resume', href: T.contact.resumeUrl, active: false, external: true },
     { label: 'Contact', href: `mailto:${T.contact.email}`, active: false, external: false },
   ];
