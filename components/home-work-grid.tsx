@@ -25,7 +25,7 @@ export function HomeWorkGrid({ projects }: { projects: Project[] }) {
           </div>
 
           <div className="mt-4 border-t border-line pt-3">
-            <h3 className="text-[19px] font-semibold leading-snug tracking-[-0.01em]">
+            <h3 className="text-[19px] font-semibold leading-snug tracking-[-0.01em] transition-colors duration-300 group-hover:text-accent">
               <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_1px]">
                 {project.title}
               </span>

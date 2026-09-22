@@ -41,7 +41,7 @@ p {
 
 /* Text selection — hot accent. */
 ::selection {
-  background: #e0401c;
+  background: #ff3b1f;
   color: #ffffff;
 }
 

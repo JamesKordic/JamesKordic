@@ -340,7 +340,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <SiteHeader />
 
       <main className={`w-full ${GUTTER_X} ${BLOCK_PT}`}>
-        <Link href="/#work" className="inline-block text-[15px] text-muted transition-colors hover:text-text">
+        <Link href="/#work" className="inline-block text-[15px] text-muted transition-colors hover:text-accent">
           ← All work
         </Link>
         <h1 className={`${STACK} text-[clamp(34px,5.4vw,62px)] font-semibold leading-[1.05] tracking-[-0.03em]`}>

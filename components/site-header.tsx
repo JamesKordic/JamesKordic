@@ -55,13 +55,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
       <div className={`flex h-16 w-full items-center justify-between gap-5 ${GUTTER_X}`}>
-        <Link href="/" className="text-[18px] font-semibold tracking-[-0.01em]">
+        <Link href="/" className="text-[18px] font-semibold tracking-[-0.01em] transition-colors hover:text-accent">
           {T.artist.name}
         </Link>
 
         <nav aria-label="Primary" className="hidden gap-7 text-[16px] text-muted sm:flex">
           {links.map((l) =>
-            renderLink(l, `transition-colors hover:text-text ${l.active ? 'text-text' : ''}`),
+            renderLink(l, `transition-colors hover:text-accent ${l.active ? 'text-text' : ''}`),
           )}
         </nav>
 

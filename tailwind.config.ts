@@ -27,7 +27,7 @@ const config: Config = {
         panelline: '#E6E5E0',
 
         // Primary interaction accent.
-        accent: '#E0401C',
+        accent: '#FF3B1F',
         'accent-ink': '#FFFFFF',
 
         // Legacy gradient tokens, repointed to the accent/neutral family so
