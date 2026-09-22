@@ -3,23 +3,30 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Project } from '@/lib/projects';
 
-/** The homepage reel: each project's clip plays once, then hands off to the
- *  next, fading between them. Under reduced motion it holds on the first
- *  frame of the first clip. */
+/** The homepage reel: autoplays muted, each project's clip plays once and
+ *  hands off to the next, fading between them. No poster image — the frame
+ *  stays dark until the first clip's first frame is ready. */
 export function HomeReel({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState(0);
   const refs = useRef<Array<HTMLVideoElement | null>>([]);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     refs.current.forEach((video, i) => {
       if (!video) return;
-      if (i === active) {
-        video.currentTime = projects[i]?.carouselStartAt ?? 0;
-        video.play().catch(() => undefined);
-      } else {
+      if (i !== active) {
         video.pause();
+        return;
       }
+      // React doesn't write `muted` as an attribute; browsers only allow
+      // autoplay on muted video, so set the property directly.
+      video.muted = true;
+      const start = projects[i]?.carouselStartAt ?? 0;
+      const go = () => {
+        if (start && Math.abs(video.currentTime - start) > 0.25) video.currentTime = start;
+        video.play().catch(() => undefined);
+      };
+      if (video.readyState >= 1) go();
+      else video.addEventListener('loadedmetadata', go, { once: true });
     });
   }, [active, projects]);
 
@@ -32,8 +39,8 @@ export function HomeReel({ projects }: { projects: Project[] }) {
           key={project.id}
           ref={(el) => { refs.current[i] = el; }}
           src={project.carouselVideo ?? project.coverVideo}
-          poster={project.cover}
           muted
+          autoPlay={i === 0}
           playsInline
           preload={i === 0 ? 'auto' : 'metadata'}
           onEnded={() => setActive((i + 1) % projects.length)}
