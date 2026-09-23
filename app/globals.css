@@ -20,8 +20,8 @@ body {
 }
 
 body {
-  background: #fbfbf9;
-  color: #141414;
+  background: #0a0a0a;
+  color: #ededed;
   font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.6;
   overflow-x: clip;
@@ -69,13 +69,13 @@ video {
   width: 12px;
 }
 .scrollbar-styled::-webkit-scrollbar-thumb {
-  background: #c9c7c4;
+  background: #3a3a3a;
   border-radius: 10px;
   border: 3px solid transparent;
   background-clip: padding-box;
 }
 .scrollbar-styled::-webkit-scrollbar-thumb:hover {
-  background: #a9a7a4;
+  background: #555555;
   background-clip: padding-box;
 }
 .scrollbar-styled::-webkit-scrollbar-track {
@@ -86,7 +86,7 @@ video {
   width: 8px;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #c9c7c4;
+  background: #3a3a3a;
   border-radius: 8px;
 }
 .scrollbar-thin::-webkit-scrollbar-track {
@@ -220,3 +220,18 @@ video {
 .reel-clip { opacity: 0; transition: opacity .6s ease; }
 .reel-clip.is-on { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .reel-clip { transition: none; } }
+
+/* Scroll cue in the corner of the homepage reel — the arrow drifts down and
+   fades, like it's falling toward the work below. */
+@keyframes scrollNudge {
+  0% { transform: translateY(-2px); opacity: 0.35; }
+  45% { transform: translateY(4px); opacity: 1; }
+  100% { transform: translateY(-2px); opacity: 0.35; }
+}
+.scroll-cue-arrow {
+  animation: scrollNudge 1.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue-arrow { animation: none; }
+}
+

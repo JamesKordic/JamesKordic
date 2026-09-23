@@ -1,6 +1,10 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  // Hover styles only apply on devices that can actually hover. Without this,
+  // a tap on a phone leaves the tapped row/button in its hover state until
+  // you tap elsewhere.
+  future: { hoverOnlyWhenSupported: true },
   content: [
     './app/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -9,35 +13,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Light editorial palette: white paper, black type, warm-gray rules.
-        bg: '#FBFBF9',
-        panel: '#EFEEE9',
-        'panel-2': '#EFEEE9',
-        elev: '#F5F5F3',
-        'elev-hi': '#ECECEA',
-        text: '#141414',
-        muted: '#6F6F6A',
-        'muted-2': '#9A9A95',
-        line: '#E6E5E0',
+        // Dark cinematic palette: near-black page, off-white type, rules and
+        // secondary text as white at low opacity (flattened to hex here so
+        // they match the homepage's white/xx values exactly).
+        bg: '#0A0A0A',
+        panel: '#141414', // media placeholders
+        'panel-2': '#141414',
+        elev: '#111111',
+        'elev-hi': '#1A1A1A',
+        text: '#EDEDED',
+        muted: '#8C8C8C', // ≈ white/55
+        'muted-2': '#5E5E5E', // ≈ white/35
+        line: '#232323', // ≈ white/10
 
-        // Header / chrome — white with black type and warm-gray rules.
-        paneldark: '#FFFFFF',
-        panelfg: '#111111',
-        paneldim: '#6E6E6A',
-        panelline: '#E6E5E0',
+        // Header / chrome — the same ink, with the same rules.
+        paneldark: '#0A0A0A',
+        panelfg: '#EDEDED',
+        paneldim: '#8C8C8C',
+        panelline: '#232323',
 
         // Primary interaction accent.
         accent: '#FF3B1F',
+        'accent-deep': '#E0301A', // hover on red buttons
         'accent-ink': '#FFFFFF',
 
         // Legacy gradient tokens, repointed to the accent/neutral family so
         // any lingering reference stays cohesive rather than neon.
         magenta: '#FF3B1F',
         'magenta-deep': '#C72D14',
-        cyan: '#6E6E6A',
-        'cyan-deep': '#8A8A85',
-        violet: '#9A9A95',
-        'violet-deep': '#7A7A75',
+        cyan: '#8C8C8C',
+        'cyan-deep': '#A3A3A3',
+        violet: '#5E5E5E',
+        'violet-deep': '#6F6F6F',
         amber: '#FF3B1F',
       },
       fontFamily: {

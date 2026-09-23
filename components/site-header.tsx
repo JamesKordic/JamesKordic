@@ -13,6 +13,7 @@ const T = SITE_TEXT;
 export function SiteHeader() {
   const pathname = usePathname() ?? '/';
   const onWork = pathname === '/' || pathname.startsWith('/work');
+  const onContact = pathname.startsWith('/contact');
   const [open, setOpen] = useState(false);
 
   useEffect(() => setOpen(false), [pathname]);
@@ -29,14 +30,33 @@ export function SiteHeader() {
   }, [open]);
 
   const links = [
-    { label: 'Work', href: '/', active: onWork, external: false },
+    // Straight to the project list, not the top of the homepage.
+    { label: 'Work', href: '/#work', active: onWork, external: false },
     { label: 'Resume', href: T.contact.resumeUrl, active: false, external: true },
-    { label: 'Contact', href: `mailto:${T.contact.email}`, active: false, external: false },
+    { label: 'Contact', href: '/contact', active: onContact, external: false },
   ];
+
+  /** Close the menu on click as well as on route change: "Work" can be a
+   *  jump within the homepage, which doesn't change the pathname. The open
+   *  menu also locks page scroll, which would swallow that jump — so on the
+   *  same page, scroll once the lock has been released. */
+  const follow = (href: string) => () => {
+    setOpen(false);
+    const [path, hash] = href.split('#');
+    if (hash && (path || '/') === pathname) {
+      window.setTimeout(() => document.getElementById(hash)?.scrollIntoView());
+    }
+  };
 
   const renderLink = (l: (typeof links)[number], className: string) =>
     l.href.startsWith('/') ? (
-      <Link key={l.label} href={l.href} className={className} aria-current={l.active ? 'page' : undefined}>
+      <Link
+        key={l.label}
+        href={l.href}
+        onClick={follow(l.href)}
+        className={className}
+        aria-current={l.active ? 'page' : undefined}
+      >
         {l.label}
       </Link>
     ) : (
@@ -51,13 +71,13 @@ export function SiteHeader() {
     );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-line bg-bg/70 backdrop-blur-md">
       <div className={`flex h-16 w-full items-center justify-between gap-5 ${GUTTER_X}`}>
-        <Link href="/" className="text-[18px] font-semibold tracking-[-0.01em] transition-colors hover:text-accent">
+        <Link href="/" className="text-[17px] font-medium tracking-[-0.01em] transition-colors hover:text-accent">
           {T.artist.name}
         </Link>
 
-        <nav aria-label="Primary" className="hidden gap-7 text-[16px] text-muted sm:flex">
+        <nav aria-label="Primary" className="hidden gap-7 text-[17px] text-muted sm:flex">
           {links.map((l) =>
             renderLink(l, `transition-colors hover:text-accent ${l.active ? 'text-text' : ''}`),
           )}

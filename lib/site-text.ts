@@ -164,6 +164,18 @@ export const SITE_TEXT = {
     },
   },
 
+  /* ---- CONTACT PAGE ---- */
+  contactPage: {
+    /** Page name — the browser tab and the header link */
+    title: 'Contact',
+    /** Opening line */
+    headline: 'Let’s work together.',
+    /** Line under it */
+    intro: 'Send a message below, or reach me directly by email or phone.',
+    /** Shown in place of the form once a message has gone through */
+    sent: 'Thanks — your message is on its way. I’ll get back to you soon.',
+  },
+
   /* ---- SEARCH / BROWSE WORK PAGE ---- */
   search: {
     /** Page heading (also used in the top bar when on this page) */
@@ -288,9 +300,14 @@ export const SITE_TEXT = {
      *  is designed to be public, so it's safe to keep here in the repo. */
     formspreeEndpoint: 'https://formspree.io/f/mwlearky',
 
-    /** Resume — Google Drive shareable link */
+    /** Resume — Google Drive shareable link (opens the viewer) */
     resumeUrl:
       'https://drive.google.com/file/d/19NG_IWgLOZMpsoZrlccHL0BLN64NBU-K/view?usp=sharing',
+    /** The same file as a direct PDF download (JamesKordic_Resume.pdf). If
+     *  the résumé is replaced in Drive, keep the same file so this ID stays
+     *  valid — or update both links. */
+    resumeDownloadUrl:
+      'https://drive.google.com/uc?export=download&id=19NG_IWgLOZMpsoZrlccHL0BLN64NBU-K',
   },
 
   /* ---- FOOTER ---- */
@@ -305,7 +322,7 @@ export const SITE_TEXT = {
 
   /* ---- META (browser tab title + meta description) ---- */
   meta: {
-    title: 'James Kordic Portfolio',
+    title: 'James Kordic — Graphic & Motion Designer',
     description:
       'New York-based Graphic & Motion Designer. Work for Taco Bell, FX, MNRK Heavy, Consensus, and The Syndicate.',
   },

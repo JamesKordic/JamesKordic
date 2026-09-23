@@ -333,7 +333,7 @@ export function VideoPlayer({
 
       {/* Loading shimmer */}
       {!thumbnailReady && (
-        <div className="absolute inset-0 flex items-center justify-center text-muted-2 text-[12px] font-mono">
+        <div className="absolute inset-0 flex items-center justify-center text-muted text-[13px]">
           {SITE_TEXT.videoPlayer.loadingLabel}
         </div>
       )}
@@ -341,11 +341,11 @@ export function VideoPlayer({
       {/* Center play button when paused */}
       {!playing && thumbnailReady && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-bg/80 backdrop-blur-md flex items-center justify-center shadow-[0_8px_24px_-6px_rgba(0,0,0,0.6)]">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-accent flex items-center justify-center shadow-[0_8px_24px_-6px_rgba(0,0,0,0.6)]">
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-7 h-7 sm:w-8 sm:h-8 text-text"
+              className="w-7 h-7 sm:w-8 sm:h-8 text-accent-ink"
             >
               {/* Centred on the triangle's centroid — (8+8+19)/3 lands at
                   11.67, so the whole shape shifts a third of a unit right to
@@ -454,7 +454,7 @@ export function VideoPlayer({
               )}
             </button>
 
-            <span className="text-[11px] sm:text-[12px] font-mono tabular-nums text-white/90">
+            <span className="text-[12px] sm:text-[13px] tabular-nums text-white/90">
               {fmt(currentTime)} <span className="text-white/40">/</span>{' '}
               {fmt(duration)}
             </span>

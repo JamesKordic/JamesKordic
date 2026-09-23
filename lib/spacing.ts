@@ -21,6 +21,7 @@ export const BLOCK_PB = 'pb-12 sm:pb-16';
 export const BLOCK_GAP_Y = 'gap-y-12 sm:gap-y-16';
 
 export const SECTION_T = 'mt-16 sm:mt-24';
+export const SECTION_PT = 'pt-16 sm:pt-24';
 
 /** Bordered rows (facts, prev/next, archive toggle) share one inner padding. */
 export const RULE_PY = 'py-5 sm:py-6';

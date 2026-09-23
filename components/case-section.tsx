@@ -52,7 +52,7 @@ export function CaseSection({ section }: { section: Section }) {
   const indexOfImage = (m: Media) => allImages.indexOf(m);
 
   return (
-    <section className="pt-5">
+    <section>
       {/* Media — full width, aligned to the same edges as the home rows. */}
       <div className="case-media">
       {/* Render based on layout type */}
@@ -298,7 +298,7 @@ function CarouselLayout({
         onClick={() => scrollByOne(-1)}
         disabled={atStart}
         aria-label="Previous"
-        className={`absolute top-1/2 -translate-y-1/2 left-2 w-10 h-10 rounded-full bg-elev-hi/80 backdrop-blur flex items-center justify-center transition-colors hover:text-accent ${
+        className={`absolute top-1/2 -translate-y-1/2 left-2 w-10 h-10 rounded-full bg-accent text-accent-ink shadow-[0_4px_14px_-2px_rgba(0,0,0,0.5)] flex items-center justify-center transition-[background-color,opacity] hover:bg-accent-deep ${
           atStart ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
@@ -312,7 +312,7 @@ function CarouselLayout({
         onClick={() => scrollByOne(1)}
         disabled={atEnd}
         aria-label="Next"
-        className={`absolute top-1/2 -translate-y-1/2 right-2 w-10 h-10 rounded-full bg-elev-hi/80 backdrop-blur flex items-center justify-center transition-colors hover:text-accent ${
+        className={`absolute top-1/2 -translate-y-1/2 right-2 w-10 h-10 rounded-full bg-accent text-accent-ink shadow-[0_4px_14px_-2px_rgba(0,0,0,0.5)] flex items-center justify-center transition-[background-color,opacity] hover:bg-accent-deep ${
           atEnd ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
@@ -489,8 +489,10 @@ function MediaTile({
   if (aspect || media.aspect) {
     return (
       <button
+        type="button"
         onClick={onLightbox}
-        className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in group block"
+        aria-label="View image full screen"
+        className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in block"
         style={aspectStyle(media.aspect || aspect)}
       >
         <Image
@@ -498,7 +500,7 @@ function MediaTile({
           alt=""
           fill
           sizes="(max-width:600px) 100vw, (max-width:1200px) 50vw, 800px"
-          className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+          className="object-cover"
           unoptimized
         />
       </button>
@@ -508,8 +510,10 @@ function MediaTile({
   /* Legacy fallback — natural aspect from the source. */
   return (
     <button
+      type="button"
       onClick={onLightbox}
-      className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in group block"
+      aria-label="View image full screen"
+      className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in block"
     >
       <Image
         src={media.src}

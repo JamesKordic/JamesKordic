@@ -5,8 +5,14 @@ import type { Project } from '@/lib/projects';
 
 /** The homepage reel: autoplays muted, each project's clip plays once and
  *  hands off to the next, fading between them. No poster image — the frame
- *  stays dark until the first clip's first frame is ready. */
-export function HomeReel({ projects }: { projects: Project[] }) {
+ *  stays dark until the first clip's first frame is ready.
+ *
+ *  `className` replaces the default frame (full-bleed, 4:3 on phones, up to
+ *  82vh tall) — pass it to size the reel to a parent instead. */
+const FRAME =
+  'relative -mx-5 aspect-[4/3] overflow-hidden bg-[#111] sm:-mx-8 sm:aspect-auto sm:h-[min(82vh,56vw)]';
+
+export function HomeReel({ projects, className = FRAME }: { projects: Project[]; className?: string }) {
   const [active, setActive] = useState(0);
   const refs = useRef<Array<HTMLVideoElement | null>>([]);
 
@@ -33,7 +39,7 @@ export function HomeReel({ projects }: { projects: Project[] }) {
   if (!projects.length) return null;
 
   return (
-    <div className="relative -mx-5 aspect-[4/3] overflow-hidden bg-[#111] sm:-mx-8 sm:aspect-auto sm:h-[min(82vh,56vw)]">
+    <div className={className}>
       {projects.map((project, i) => (
         <video
           key={project.id}

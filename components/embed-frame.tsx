@@ -57,10 +57,10 @@ export function EmbedFrame({
             </svg>
           </div>
           <div className="relative text-center">
-            <div className="font-display text-[24px] tracking-[-0.5px]">
+            <div className="text-[24px] font-medium tracking-[-0.02em]">
               Click to open the book
             </div>
-            <div className="text-[11px] tracking-[0.14em] uppercase text-muted mt-2">
+            <div className="mt-1 text-[15px] text-muted">
               Interactive preview · FlipHTML5
             </div>
           </div>
@@ -73,7 +73,7 @@ export function EmbedFrame({
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
-        className="absolute top-3 right-3 z-10 text-[10px] tracking-[0.14em] uppercase bg-bg/85 backdrop-blur-md text-text px-3 py-1.5 rounded-full hover:bg-accent hover:text-accent-ink transition-colors"
+        className="absolute top-3 right-3 z-10 text-[13px] bg-bg/85 backdrop-blur-md text-text px-3 py-1.5 rounded-full hover:bg-accent hover:text-accent-ink transition-colors"
       >
         {label}
       </a>

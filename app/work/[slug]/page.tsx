@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { PROJECTS, getProject, ARTIST, type Project, type Section } from '@/lib/projects';
+import { PROJECTS, getProject, type Project, type Section } from '@/lib/projects';
 import { CaseSection } from '@/components/case-section';
 import { SiteHeader } from '@/components/site-header';
 import { PageFooter } from '@/components/page-footer';
 import { SITE_TEXT } from '@/lib/site-text';
-import { BLOCK_PT, BLOCK_T, GAP, GUTTER_X, RULE_PY, SECTION_T, STACK, TIGHT } from '@/lib/spacing';
+import { BLOCK_PB, BLOCK_PT, BLOCK_T, GUTTER_X, LABEL, RULE_PY, SECTION_T, STACK, TIGHT } from '@/lib/spacing';
+import { NAME, TITLE } from '@/lib/type';
 
 type ProjectDetail = {
   agency?: string;
@@ -302,6 +303,38 @@ function editorialSections(project: Project): { visible: Section[]; archive: Sec
   return { visible: sections, archive: [] };
 }
 
+/** Splits a section after its first row of media, so the page can open on
+ *  one line of work and continue below the Overview / My role row. Grids
+ *  break at their column count and mixed layouts at their first row; a
+ *  feature grid or carousel already reads as a single line, as does any
+ *  grid with only one row, so those come back whole with nothing after. */
+function splitFirstLine(section: Section): [Section, Section | null] {
+  const layout = section.layout;
+
+  if (layout?.type === 'mixed') {
+    const [first, ...rest] = layout.rows;
+    return rest.length
+      ? [
+          { ...section, layout: { ...layout, rows: [first] } },
+          { ...section, layout: { ...layout, rows: rest } },
+        ]
+      : [section, null];
+  }
+
+  const cols =
+    layout?.type === 'uniform' || layout?.type === 'legacy'
+      ? layout.cols
+      : !layout
+        ? section.cols
+        : undefined;
+
+  if (!cols || section.media.length <= cols) return [section, null];
+  return [
+    { ...section, media: section.media.slice(0, cols) },
+    { ...section, media: section.media.slice(cols) },
+  ];
+}
+
 export async function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.id }));
 }
@@ -310,7 +343,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const p = getProject(params.slug);
   if (!p) return {};
   return {
-    title: `${p.title} — ${ARTIST}`,
+    title: p.title,
     description: p.desc.slice(0, 160),
   };
 }
@@ -332,6 +365,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
   const detail = PROJECT_DETAILS[p.id];
   const { visible, archive } = editorialSections(p);
+  // The page opens on the first line of work; the Overview / My role row
+  // follows it, then the rest of the work.
+  const [firstLine, firstRest] = visible.length ? splitFirstLine(visible[0]) : [null, null];
+  const afterIntro = [...(firstRest ? [firstRest] : []), ...visible.slice(1)];
   const summary = p.brief?.lead || p.desc;
   const archiveLabel = p.id === 'adults' ? 'What I worked on' : 'View full campaign archive';
 
@@ -340,55 +377,47 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <SiteHeader />
 
       <main className={`w-full ${GUTTER_X} ${BLOCK_PT}`}>
-        <Link href="/#work" className="inline-block text-[15px] text-muted transition-colors hover:text-accent">
+        <Link href="/#work" className="-my-2 block w-fit py-2 text-[15px] leading-none text-muted transition-colors hover:text-accent">
           ← All work
         </Link>
-        <h1 className={`${STACK} text-[clamp(34px,5.4vw,62px)] font-semibold leading-[1.05] tracking-[-0.03em]`}>
+        <h1 className={`${STACK} ${NAME}`}>
           {p.title}
         </h1>
-        <p className={`${STACK} max-w-[60ch] text-[clamp(18px,1.9vw,21px)] leading-[1.5]`}>{summary}</p>
+        {firstLine && (
+          <div className={BLOCK_T}>
+            <CaseSection section={firstLine} />
+          </div>
+        )}
 
-        <dl className={`${BLOCK_T} grid grid-cols-2 ${GAP} border-y border-line ${RULE_PY} text-[15px] md:grid-cols-4`}>
-          <div>
-            <dt className="text-[13.5px] font-medium text-muted">Client</dt>
-            <dd>{p.client}{detail.agency ? ` — via ${detail.agency}` : ''}</dd>
-          </div>
-          <div>
-            <dt className="text-[13.5px] font-medium text-muted">Role</dt>
-            <dd>{p.role}</dd>
-          </div>
-          <div>
-            <dt className="text-[13.5px] font-medium text-muted">Year</dt>
-            <dd>{p.date || p.year}</dd>
-          </div>
-          <div>
-            <dt className="text-[13.5px] font-medium text-muted">Tools</dt>
-            <dd>{detail.tools.join(', ')}</dd>
-          </div>
-        </dl>
+        {/* Overview and My role side by side, split by a rule — the same
+            two-column pattern as the previous / next links at the foot of the
+            page. Stacked on phones, divided by the row's own rule. */}
+        <div className={`${BLOCK_T} grid grid-cols-1 border-y border-line lg:grid-cols-2`}>
+          <section className={`${RULE_PY} lg:border-r lg:border-line lg:pr-8`}>
+            <h2 className={LABEL}>Overview</h2>
+            <p className={`${TIGHT} max-w-[62ch]`}>{summary}</p>
+          </section>
+          <section className={`${RULE_PY} border-t border-line lg:border-t-0 lg:pl-8`}>
+            <h2 className={LABEL}>My role</h2>
+            <p className={`${TIGHT} max-w-[62ch]`}>{detail.contribution}</p>
+          </section>
+        </div>
 
-        <section className={`${BLOCK_T} max-w-[62ch]`}>
-          <h2 className="text-[22px] font-semibold tracking-[-0.01em]">My role</h2>
-          <p className={`${TIGHT} text-muted`}>{detail.contribution}</p>
-        </section>
-
-        {visible.map((sec, i) => (
+        {afterIntro.map((sec, i) => (
           <div key={i} className={BLOCK_T}>
-            <h2 className="text-[22px] font-semibold tracking-[-0.01em]">{sec.title}</h2>
             <CaseSection section={sec} />
           </div>
         ))}
 
         {archive.length > 0 && (
           <details className={`group ${BLOCK_T} border-y border-line`}>
-            <summary className="flex cursor-pointer list-none items-center justify-between py-5 sm:py-6 text-[clamp(20px,2.6vw,28px)] font-semibold tracking-[-0.02em] transition-colors hover:text-accent [&::-webkit-details-marker]:hidden">
+            <summary className={`flex cursor-pointer list-none items-center justify-between ${RULE_PY} ${TITLE} transition-colors hover:text-accent [&::-webkit-details-marker]:hidden`}>
               {archiveLabel}
               <span className="text-muted transition-transform group-open:rotate-45">+</span>
             </summary>
-            <div className="pb-12 sm:pb-16">
+            <div className={BLOCK_PB}>
               {archive.map((sec, i) => (
-                <div key={i} className={BLOCK_T}>
-                  <h3 className="text-[19px] font-semibold tracking-[-0.01em]">{sec.title}</h3>
+                <div key={i} className={i === 0 ? STACK : BLOCK_T}>
                   <CaseSection section={sec} />
                 </div>
               ))}
@@ -405,17 +434,28 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </p>
         )}
 
-        <nav aria-label="More projects" className={`${SECTION_T} grid grid-cols-2 ${GAP} border-y border-line ${RULE_PY}`}>
-          <Link href={`/work/${prev.id}`} className="group">
-            <span className="block text-[15px] text-muted">Previous project</span>
-            <span className="text-[clamp(20px,3vw,32px)] font-semibold tracking-[-0.02em] transition-colors group-hover:text-accent">
-              ← {prev.title}
+        <nav
+          aria-label="More projects"
+          className={`${SECTION_T} grid grid-cols-1 border-y border-line lg:grid-cols-2`}
+        >
+          <Link
+            href={`/work/${prev.id}`}
+            className={`group block ${RULE_PY} lg:border-r lg:border-line lg:pr-8`}
+          >
+            <span className={`block ${LABEL}`}>Previous project</span>
+            <span className={`${TIGHT} flex items-baseline gap-4 ${TITLE} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-2 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0`}>
+              <span aria-hidden className="text-muted-2 transition-colors group-hover:text-accent">←</span>
+              {prev.title}
             </span>
           </Link>
-          <Link href={`/work/${next.id}`} className="group text-right">
-            <span className="block text-[15px] text-muted">Next project</span>
-            <span className="text-[clamp(20px,3vw,32px)] font-semibold tracking-[-0.02em] transition-colors group-hover:text-accent">
-              {next.title} →
+          <Link
+            href={`/work/${next.id}`}
+            className={`group block border-t border-line text-right ${RULE_PY} lg:border-t-0 lg:pl-8`}
+          >
+            <span className={`block ${LABEL}`}>Next project</span>
+            <span className={`${TIGHT} flex items-baseline justify-end gap-4 ${TITLE} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0`}>
+              {next.title}
+              <span aria-hidden className="text-muted-2 transition-colors group-hover:text-accent">→</span>
             </span>
           </Link>
         </nav>
