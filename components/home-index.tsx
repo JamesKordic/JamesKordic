@@ -61,13 +61,13 @@ export function HomeIndex({ projects }: { projects: Project[] }) {
                     column of its own. */}
                 <div className={`mt-3 ${META} xl:hidden`}>
                   <p>{project.blurb}</p>
-                  <p className="mt-1 text-muted">{project.tags.slice(0, 3).join(', ')}</p>
+                  <p className="mt-1 whitespace-nowrap text-muted">{project.work ?? project.tags.slice(0, 3).join(', ')}</p>
                 </div>
               </div>
 
               <div className={`hidden ${META} xl:block`}>
                 <p>{project.blurb}</p>
-                <p className="mt-1 text-muted">{project.tags.slice(0, 3).join(', ')}</p>
+                <p className="mt-1 whitespace-nowrap text-muted">{project.work ?? project.tags.slice(0, 3).join(', ')}</p>
               </div>
 
               <svg

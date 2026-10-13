@@ -2,117 +2,121 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SITE_TEXT } from '@/lib/site-text';
-import { GUTTER_X } from '@/lib/spacing';
+import '@/app/chrome.css';
 
 const T = SITE_TEXT;
 
-/** Shared header: name on the left, three links on the right. Below the
- *  `sm` breakpoint the links fold into a menu button. */
-export function SiteHeader() {
+/** Shared navigation contracts as the work takes over the screen. */
+export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   const pathname = usePathname() ?? '/';
-  const onWork = pathname === '/' || pathname.startsWith('/work');
-  const onContact = pathname.startsWith('/contact');
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [time, setTime] = useState('');
+  const dialog = useRef<HTMLDialogElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const closeButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 80);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+
+  useEffect(() => {
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit', hour12: true,
+    });
+    const update = () => setTime(formatter.format(new Date()));
+    update();
+    const interval = window.setInterval(update, 30_000);
+    return () => window.clearInterval(interval);
+  }, []);
 
   useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
-    window.addEventListener('keydown', onKey);
+    const element = dialog.current;
+    if (!element) return;
+    if (!open) {
+      if (element.open) element.close();
+      return;
+    }
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    element.showModal();
+    closeButton.current?.focus();
     return () => {
-      window.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
+      if (element.open) element.close();
+      document.body.style.overflow = previousOverflow;
+      trigger.current?.focus({ preventScroll: true });
     };
   }, [open]);
 
   const links = [
-    // Straight to the project list, not the top of the homepage.
-    { label: 'Work', href: '/#work', active: onWork, external: false },
-    { label: 'Resume', href: T.contact.resumeUrl, active: false, external: true },
-    { label: 'Contact', href: '/contact', active: onContact, external: false },
+    { label: 'Work', href: '/#work', external: false },
+    { label: 'About', href: '/#about', external: false },
+    { label: 'Contact', href: '/contact', external: false },
+    { label: 'Résumé', href: T.contact.resumeUrl, external: true },
   ];
 
-  /** Close the menu on click as well as on route change: "Work" can be a
-   *  jump within the homepage, which doesn't change the pathname. The open
-   *  menu also locks page scroll, which would swallow that jump — so on the
-   *  same page, scroll once the lock has been released. */
-  const follow = (href: string) => () => {
+  const follow = (href: string) => {
     setOpen(false);
     const [path, hash] = href.split('#');
     if (hash && (path || '/') === pathname) {
-      window.setTimeout(() => document.getElementById(hash)?.scrollIntoView());
+      window.setTimeout(() => document.getElementById(hash)?.scrollIntoView(), 0);
     }
   };
-
-  const renderLink = (l: (typeof links)[number], className: string) =>
-    l.href.startsWith('/') ? (
-      <Link
-        key={l.label}
-        href={l.href}
-        onClick={follow(l.href)}
-        className={className}
-        aria-current={l.active ? 'page' : undefined}
-      >
-        {l.label}
-      </Link>
-    ) : (
-      <a
-        key={l.label}
-        href={l.href}
-        className={className}
-        {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      >
-        {l.label}
-      </a>
-    );
+  const pageLabel = pathname.startsWith('/contact') ? 'Contact' : pathname.startsWith('/work/') ? 'Work' : 'Home';
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bg/70 backdrop-blur-md">
-      <div className={`flex h-16 w-full items-center justify-between gap-5 ${GUTTER_X}`}>
-        <Link href="/" className="text-[17px] font-medium tracking-[-0.01em] transition-colors hover:text-accent">
-          {T.artist.name}
+    <>
+      {!overlay && <div className="jk-header-spacer" aria-hidden="true" />}
+      <header className={`jk-header${overlay ? ' jk-header--overlay' : ''}${scrolled ? ' jk-header--compact' : ''}`}>
+        <Link href="/" className="jk-wordmark" aria-label={`${T.artist.name}, home`}>
+          James Kordic
         </Link>
-
-        <nav aria-label="Primary" className="hidden gap-7 text-[17px] text-muted sm:flex">
-          {links.map((l) =>
-            renderLink(l, `transition-colors hover:text-accent ${l.active ? 'text-text' : ''}`),
-          )}
+        <nav className="jk-header-nav" aria-label="Primary">
+          {links.map((item) => item.external ? (
+            <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer">{item.label}<span aria-hidden="true"> ↗</span></a>
+          ) : (
+            <Link key={item.label} href={item.href} onClick={() => follow(item.href)}>{item.label}</Link>
+          ))}
         </nav>
-
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          className="-mr-2 flex h-11 w-11 items-center justify-center sm:hidden"
-        >
-          <span className="relative block h-3.5 w-6" aria-hidden="true">
-            <span className={`absolute left-0 top-0 h-px w-full bg-current transition-transform duration-300 ${open ? 'translate-y-[7px] rotate-45' : ''}`} />
-            <span className={`absolute bottom-0 left-0 h-px w-full bg-current transition-transform duration-300 ${open ? '-translate-y-[7px] -rotate-45' : ''}`} />
-          </span>
-        </button>
-      </div>
-
-      <nav
-        id="mobile-menu"
-        aria-label="Mobile"
-        hidden={!open}
-        className={`absolute inset-x-0 top-full h-[calc(100dvh-4rem)] overflow-y-auto bg-bg sm:hidden ${GUTTER_X}`}
-      >
-        <div className="flex flex-col border-t border-line">
-          {links.map((l) =>
-            renderLink(
-              l,
-              `border-b border-line py-5 text-[28px] font-medium tracking-[-0.02em] ${l.active ? 'text-text' : 'text-muted'}`,
-            ),
-          )}
+        <div className="jk-header-actions">
+          <span className="jk-header-clock" aria-label={time ? `New York, ${time}` : 'New York'}>NYC <span>{time || '—:—'}</span></span>
+          <button ref={trigger} type="button" className="jk-menu-trigger" aria-haspopup="dialog" aria-expanded={open} aria-controls="jk-navigation-dialog" aria-label="Open navigation menu" onClick={() => setOpen(true)}>
+            <span className="jk-menu-page">{pageLabel}</span>
+            <span className="jk-menu-label">Menu</span>
+            <span className="jk-menu-plus" aria-hidden="true">+</span>
+          </button>
         </div>
-      </nav>
-    </header>
+      </header>
+      <dialog ref={dialog} id="jk-navigation-dialog" className="jk-menu-dialog" aria-label="Site navigation" onCancel={(event) => { event.preventDefault(); setOpen(false); }} onClose={() => setOpen(false)}>
+        <div className="jk-menu-top">
+          <Link href="/" className="jk-wordmark" onClick={() => setOpen(false)}>James Kordic</Link>
+          <button ref={closeButton} type="button" className="jk-menu-close" onClick={() => setOpen(false)}>Close <span aria-hidden="true">×</span></button>
+        </div>
+        <div className="jk-menu-body">
+          <nav className="jk-menu-links" aria-label="Expanded navigation">
+            {links.map((item, index) => {
+              const contents = <><span className="jk-menu-index">0{index + 1}</span><span>{item.label}</span><span className="jk-menu-arrow" aria-hidden="true">↗</span></>;
+              return item.external ? (
+                <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>{contents}</a>
+              ) : (
+                <Link key={item.label} href={item.href} onClick={() => follow(item.href)}>{contents}</Link>
+              );
+            })}
+          </nav>
+          <div className="jk-menu-info">
+            <p className="jk-chrome-label">New York, NY<br />Graphic &amp; Motion Design</p>
+            <div><p className="jk-chrome-label">Have something in mind?</p><a className="jk-menu-email" href={`mailto:${T.contact.email}`}>{T.contact.email} ↗</a></div>
+            <a className="jk-chrome-label jk-chrome-link" href={T.contact.linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          </div>
+        </div>
+      </dialog>
+    </>
   );
 }

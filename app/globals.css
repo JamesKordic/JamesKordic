@@ -39,10 +39,15 @@ p {
   text-wrap: pretty;
 }
 
-/* Text selection — hot accent. */
+/* The same signal yellow carries through navigation, controls and selection. */
 ::selection {
-  background: #ff3b1f;
-  color: #ffffff;
+  background: #fff34a;
+  color: #0a0a0a;
+}
+
+:focus-visible {
+  outline: 2px solid #fff34a;
+  outline-offset: 5px;
 }
 
 a {

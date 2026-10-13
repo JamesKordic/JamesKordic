@@ -491,13 +491,13 @@ function MediaTile({
       <button
         type="button"
         onClick={onLightbox}
-        aria-label="View image full screen"
+        aria-label={media.alt ? `View ${media.alt} full screen` : 'View image full screen'}
         className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in block"
         style={aspectStyle(media.aspect || aspect)}
       >
         <Image
           src={media.src}
-          alt=""
+          alt={media.alt || ''}
           fill
           sizes="(max-width:600px) 100vw, (max-width:1200px) 50vw, 800px"
           className="object-cover"
@@ -512,12 +512,12 @@ function MediaTile({
     <button
       type="button"
       onClick={onLightbox}
-      aria-label="View image full screen"
+      aria-label={media.alt ? `View ${media.alt} full screen` : 'View image full screen'}
       className="relative w-full bg-panel-2 overflow-hidden cursor-zoom-in block"
     >
       <Image
         src={media.src}
-        alt=""
+        alt={media.alt || ''}
         width={1600}
         height={1000}
         sizes="(max-width:600px) 100vw, (max-width:1200px) 50vw, 800px"

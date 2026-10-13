@@ -3,7 +3,7 @@
 
 /* ============ MEDIA TYPES ============ */
 export type Media =
-  | { type: 'image'; src: string; aspect?: AspectRatio }
+  | { type: 'image'; src: string; aspect?: AspectRatio; alt?: string }
   | {
       type: 'video';
       src: string;
@@ -126,6 +126,9 @@ export type Project = {
   year: string;
   len: number;
   blurb: string;
+  /** The homepage row's second line: the kinds of design the project covers,
+   *  kept short enough to sit on one line in the row's narrowest column. */
+  work?: string;
   desc: string;
   /** When true, section headers render without their description text. */
   hideSectionText?: boolean;
@@ -161,6 +164,7 @@ const PROJECT_CATALOG: Project[] = [
     year: '2024–25',
     len: 86,
     blurb: 'Social Video & Motion',
+    work: 'Motion Design, Video Editing',
     desc:
       "High-impact social video and motion content created with The Syndicate to connect Guns N' Roses with more than 9 million Instagram followers.",
     brief: {
@@ -221,6 +225,7 @@ const PROJECT_CATALOG: Project[] = [
     year: '2024–25',
     len: 262,
     blurb: 'Music & Entertainment Marketing',
+    work: 'Graphic Design, Motion Design',
     desc: "The Syndicate is a music and entertainment marketing agency based in Weehawken, NJ. During my internship, and freelance contract with them, I designed for indie and major label artists as well as TV, film, and comedy clients. I created digital assets, tour and promotional visuals, event materials, and more.",
     /* Empty scaffolding, ready for copy. A section with nothing written in it
      * is skipped on the page, so each heading appears as soon as it's filled. */
@@ -337,6 +342,7 @@ const PROJECT_CATALOG: Project[] = [
     year: '2025',
     len: 268,
     blurb: 'Interactive Music Festival Concept',
+    work: 'Brand Identity, Interactive Design',
     desc: "WWIMF, the World Wide Interactive Music Festival, is a conceptual festival I built as my senior capstone at RIT. It started with a question: what would a festival look like if the audience became more than just spectators? Over a year, I answered that by building the complete brand: identity, stage environments, wearable tech, merchandise, marketing, motion, and a printed art book. I treated the festival as if it were real and designed everything it would need.",
     brief: {
       eyebrow: 'The Brief',
@@ -559,6 +565,7 @@ const PROJECT_CATALOG: Project[] = [
     year: '2024–25',
     len: 188,
     blurb: 'Feed the Beat Campaign',
+    work: 'Social Design, Motion Design',
     desc: "Feed The Beat is Taco Bell's program for spotlighting emerging musicians. I designed promotional materials for the lineup, as well as vertical reels that showed off every band and artist that made the cut.",
     brief: {
       eyebrow: 'The Brief',
@@ -908,6 +915,7 @@ const PROJECT_CATALOG: Project[] = [
     year: '2024–25',
     len: 177,
     blurb: 'Suds and Sounds Event',
+    work: 'Experiential, Motion Design',
     desc: "A music-driven launch activation for FX's Adults that transformed neighborhood laundromats in New York City and Los Angeles into community pop-ups by day and live events by night.",
     brief: {
       eyebrow: 'The Brief',
@@ -1072,154 +1080,194 @@ const PROJECT_CATALOG: Project[] = [
     ],
   },
   {
-    id: 'voltage',
-    kind: 'personal',    title: 'Voltage',
-    cover: '/covers/voltage.jpg',
-    heroImage: '/projects/voltage/hero.png',
-    coverVideo: '/projects/voltage/hero.mp4',
-    themeColor: '#7a6a0e',
-    tags: ['Concept Work', 'Branding', 'Packaging'],
-    client: 'Rochester Institute of Technology',
-    industry: '',
-    date: '2024–2025',
-    role: 'Graphic Design, Motion Design, 3D Design',
-    year: '2024–25',
-    len: 189,
-    blurb: 'Beverage Brand & 3D Packaging',
-    desc: "Voltage is a conceptual beverage brand that is a cross between lemonade and an energy drink. The idea came about during my research phase, when I found out that a lemon can generate around 0.5 to 1.0 volts of electricity. From there, I built the entire brand, from naming and identity to packaging, 3D product renders, and marketing. The goal was to fill a gap on the shelf and create something that would stand out against its competitors, as well as to prove I could develop a brand from scratch.",
-    brief: {
-      eyebrow: 'The Brief',
-      lead: "Voltage is a self-initiated beverage brand merging lemonade with energy-drink intensity. The project is part identity exercise, part 3D challenge, and part marketing studio, built to prove the whole product cycle from logo to billboard.",
-      body: [
-        "The opportunity: a brand category (energy drinks) where the design language is loud, masculine, and visually exhausting. Voltage carves out a different position (bright, citrus-led, electric) and a different aesthetic (clean type, a custom circuit-board pattern, color-coded flavors).",
-        "Output spanned identity (logo, type, color), packaging (four flavor labels), 3D production (Blender renders + animated rotations + process documentation), and marketing (posters, OOH mockups, promotional video). One brand, top to bottom.",
-      ],
-    },
-    approach: {
-      eyebrow: 'The Approach',
-      intro: "Voltage was built as a vertical pipeline where every stage feeds the next. Identity locks the visual rules, packaging applies them to the product, 3D production turns the product into renders, and marketing pushes the renders into the world. Each stage proves the one before it.",
-      steps: [
-        { label: 'Step 01', title: 'Brand', body: 'Logo, type, color, circuit-board pattern. Lock the identity before anything else.' },
-        { label: 'Step 02', title: 'Label', body: 'Apply the identity to four flavor labels, color-coded for instant shelf recognition.' },
-        { label: 'Step 03', title: '3D', body: 'Build the can in Blender, render each flavor, animate looping product rotations.' },
-        { label: 'Step 04', title: 'Market', body: 'Compose marketing posters using the 3D renders as the product hero.' },
-        { label: 'Step 05', title: 'Pitch', body: 'Visualize the brand in real-world urban environments and close with a promo video.' },
-      ],
-    },
-    recap: {
-      eyebrow: 'The Recap',
-      headline: 'A full beverage brand, designed inside-out.',
-      stats: [
-        { value: '04', label: 'Flavor labels' },
-        { value: '04', label: '3D Blender renders' },
-        { value: '04', label: 'Marketing posters' },
-        { value: '01', label: 'Promo video' },
-      ],
-    },
-    sections: [
-      {
-        eyebrow: '01',
-        title: 'Visual Identity',
-        context:
-          "Voltage’s visual identity is built to reflect the bold, high-energy personality of the drink itself. The logotype features heavy geometric letterforms with sharp angles and strong contrast, evoking power and clarity. The custom wordmark is paired with an electric bolt icon integrated into the letter “L,” a subtle nod to the energy theme and the lemon-powered origin of the brand.",
-        body:
-          "Azo Sans and Azo Sans Uber serve as the primary typefaces, balancing approachability with impact. These fonts create a clear hierarchy across packaging, ads, and merchandise while maintaining a playful, high-contrast presence.\n\nThe color palette is inspired by four core flavors: Strawberry, Blueberry, Peach, and Lemon, each assigned a bold, vibrant hue. These colors work across packaging and marketing to distinguish flavor profiles while reinforcing a bright, energetic tone.\n\nSupporting the identity is a stylized circuit board pattern, used as a background graphic element. This pattern ties directly into the concept of voltage and electricity, adding a layer of tech-inspired texture that reinforces the brand’s core message: “Shockingly Refreshing.”",
-        // Tall 9:16 brand sheet — single column
-        media: [{ type: 'image', src: img('JE4wdFyL0g8XA0wKwjzvL7Fr6Kw', 1800) }],
-        layout: { type: 'uniform', cols: 1, aspect: '9/16' },
-      },
-      {
-        eyebrow: '02',
-        title: 'Can Labels',
-        context:
-          "Each Voltage flavor features a fully custom label design that combines bold typography, vibrant color palettes, and an electrified visual theme rooted in the concept of energy and citrus power. Inspired by the fact that lemons can generate electricity, the label design incorporates a stylized circuit board pattern that runs throughout the packaging, visually reinforcing the brand’s high-voltage personality.",
-        body:
-          "The layout emphasizes strong hierarchy and clarity, with key brand elements like the vertical Voltage wordmark and the flavor block anchored against a textured black-and-yellow background. Each flavor (Strawberry, Blueberry, Peach, and Lemon) is color-coded to ensure instant recognition, while maintaining consistency across the system.\n\nMessaging is playful and energetic, with phrases like “Shockingly Refreshing!” and a callout of the drink’s caffeine content designed to catch attention and communicate the brand’s core promise. The overall design balances retro-tech inspiration with modern energy drink aesthetics, positioning Voltage as both flavorful and functional.",
-        // 4 labels at 4:3 landscape
-        media: [
-          { type: 'image', src: img('b0RISJkOQ06NfekAq9PGK7niGY', 1600) },
-          { type: 'image', src: img('ugnmRQVWw3CWozlQbyR55DGsv0', 1600) },
-          { type: 'image', src: img('BlYdM6ZKjZiJsbZyeZctpvL0Uuo', 1600) },
-          { type: 'image', src: img('jcHMRddOVC9QjKlsc7tv0eFpeQ', 1600) },
-        ],
-        layout: { type: 'uniform', cols: 2, aspect: '4/3' },
-      },
-      {
-        eyebrow: '03',
-        title: '3D Can Models',
-        context:
-          "To bring the Voltage brand to life in a realistic, product-ready form, I created a full set of 3D can models using Blender. Each render showcases a different flavor: Lemonade, Strawberry Lemonade, Blueberry Lemonade, and Peach Lemonade, highlighting the distinct color palette and unified circuit-inspired label design.",
-        body:
-          "This 3D execution serves as both a proof of concept and a high-fidelity visualization tool, extending the Voltage identity beyond flat design into fully realized packaging.",
-        // 4 Blender renders at 16:9
-        media: [
-          { type: 'image', src: img('DQoikkO2pmXgGZqK0C4JXpTXjY4', 1600) },
-          { type: 'image', src: img('Ae5O0G0pqUGLMwDJwXCyFkWCIo', 1600) },
-          { type: 'image', src: img('ixUsn96PqPUOQxPypggvH1hY2s', 1600) },
-          { type: 'image', src: img('KVXSJK40riHyu7o3HrJWOc8no', 1600) },
-        ],
-        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
-      },
-      {
-        eyebrow: '04',
-        title: '3D Model Process',
-        context:
-          "Screenshots from inside Blender, showing my visualization and process.",
-        // 4 Blender screenshots — 16:9 close enough (4064×2334 ≈ 16:9.2)
-        media: [
-          { type: 'image', src: img('KUvAzmVSKQrKSfNJ68gGGnY3W1g', 1800) },
-          { type: 'image', src: img('beqAjn3BjrgHM8zEyckPaytyDzw', 1800) },
-          { type: 'image', src: img('81whZzcoHGxIRSiltaiQzOwaKb0', 1800) },
-          { type: 'image', src: img('9A34yn7ONpdUb0xICguoU7pQcc', 1800) },
-        ],
-        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
-      },
-      {
-        eyebrow: '05',
-        title: '3D Animations',
-        context:
-          "To further elevate the Voltage brand presentation, I created a set of animated 3D can rotations using Blender. These looping animations showcase each flavor from all angles, highlighting the detailed label designs, bold typography, and metallic finish of the can surfaces.",
-        body:
-          "These animations bring an extra layer of energy and polish to the project, reinforcing Voltage’s bold, tech-forward aesthetic while demonstrating motion design and 3D production skills.",
-        // 4 looping GIFs at 1:1
-        media: [
-          { type: 'image', src: gif('6idmvhzQMhJJb5FmolwQjv0Uk') },
-          { type: 'image', src: gif('59FXvX8bHcz6aiYEV5VFhLsuMPc') },
-          { type: 'image', src: gif('oZaJB5BOn9vdJrwj5dwKAAUg4') },
-          { type: 'image', src: gif('dTUDXX9UJw9CA4Vr6hVEyPiFX6g') },
-        ],
-        layout: { type: 'uniform', cols: 4, aspect: '1/1' },
-      },
-      {
-        eyebrow: '06',
-        title: 'Marketing',
-        context:
-          "This series of promotional posters was designed to energize the Voltage brand through bold, stylized visuals that act as marketing assets. Each poster features a dynamic arrangement of 3D can renders layered over a custom circuit-board pattern, reinforcing the brand’s high-voltage identity.",
-        // 4 tall posters at 2:3 (3300×5100)
-        media: [
-          { type: 'image', src: jpg('E8Yv14zoATUufB8yRHLhbxXD0', 1400) },
-          { type: 'image', src: jpg('EqdZfJalSYUE7xatLqGFI9E1yrw', 1400) },
-          { type: 'image', src: jpg('wuZV97Vl9FmsIR6e0nFmxrtuZwY', 1400) },
-          { type: 'image', src: jpg('X1ibuLh4fLYjxyDyBDOKk6dRAw', 1400) },
-        ],
-        layout: { type: 'uniform', cols: 4, aspect: '2/3' },
-      },
-      {
-        eyebrow: '07',
-        title: 'Marketing Visualization',
-        context:
-          "These mockups visualize how Voltage promotional posters would appear in real-world environments, ranging from urban sidewalks and subway stations to cafés and outdoor walls. Each setting was chosen to emphasize the brand’s high-impact visibility in both high-traffic public spaces and more intimate, social venues.",
-        // 4 mockups in a 2x2 grid at 16:9
-        // Note: the last image is natively 4:3 but renders cleanly cover-cropped to 16:9
-        media: [
-          { type: 'image', src: img('IpI82P0dP2tZgXSG9I6Mks1IJtE', 1600) },
-          { type: 'image', src: img('zbcLbTwFqnwn06TRxdXhryWLLo', 1600) },
-          { type: 'image', src: img('4GlJStWiYO5TRCWEog9C5UOq0', 1600) },
-          { type: 'image', src: img('B0dJI8FyWq9UYskJ7JsR3oWxVgI', 1800) },
-        ],
-        layout: { type: 'uniform', cols: 2, aspect: '16/9' },
-      },
+    "id": "voltage",
+    "kind": "personal",
+    "title": "Voltage",
+    "cover": "/projects/voltage/citrus-distortion-4k/01-campaign-hero.png",
+    "heroImage": "/projects/voltage/citrus-distortion-4k/01-campaign-hero.png",
+    "themeColor": "#0647F7",
+    "tags": [
+      "Branding",
+      "Packaging",
+      "Campaign"
     ],
+    "client": "Self-initiated",
+    "industry": "Energy Lemonade",
+    "date": "2026",
+    "role": "Brand Direction, Packaging Concepts, Campaign Art Direction",
+    "year": "2026",
+    "len": 189,
+    "blurb": "Feel the Voltage — Energy Lemonade",
+    "work": "Branding, Packaging, Campaign",
+    "desc": "Voltage is an energy lemonade concept built around distorted citrus, electric flavor color and an oversized cream wordmark. The Citrus Distortion campaign connects four-flavor packaging with outdoor, social, merchandise, retail and a proposed sampling experience.",
+    "brief": {
+      "eyebrow": "The Concept",
+      "lead": "Voltage brings the sharp refreshment of lemonade into the energy-drink category. The Citrus Distortion identity turns a citrus cross-section into a charged optical wave, pairing electric flavor color with an oversized cream wordmark. “Feel the Voltage” introduces the brand; “Shockingly Refreshing” connects its energy to the drink itself.",
+      "body": [
+        "One packaging structure carries Original, Strawberry, Blueberry and Peach Lemonade. The wordmark, category line and flavor name stay in consistent positions while the color palette distinguishes the range.",
+        "The campaign extends the same graphic language into outdoor, social, discovery packaging, merchandise, retail and a proposed sampling experience."
+      ]
+    },
+    "sections": [
+      {
+        "title": "Feel the Voltage",
+        "media": [
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/01-campaign-hero.png",
+            "alt": "Four Voltage energy lemonade cans against a yellow and blue citrus wave with Feel the Voltage headline."
+          }
+        ],
+        "layout": {
+          "type": "uniform",
+          "cols": 1,
+          "aspect": "3/2"
+        }
+      },
+      {
+        "title": "Citrus Distortion — The Identity",
+        "media": [
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/11-citrus-macro.png",
+            "alt": "Close-up of cold yellow and blue Voltage cans beside translucent lemon pulp."
+          },
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/02-flavor-lineup.png",
+            "alt": "Original, Strawberry, Blueberry and Peach cans with a shared cream vertical wordmark and distorted citrus pattern."
+          }
+        ],
+        "layout": {
+          "type": "uniform",
+          "cols": 1,
+          "aspect": "3/2"
+        }
+      },
+      {
+        "title": "Shockingly Refreshing — Four Flavors",
+        "media": [
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/03-original-poster.png",
+            "alt": "Yellow Original Voltage can with lemon wedges on an electric blue platform."
+          },
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/04-strawberry-poster.png",
+            "alt": "Coral Strawberry Voltage can with strawberries and lemon against a burgundy citrus wave."
+          },
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/05-blueberry-poster.png",
+            "alt": "Blue Blueberry Voltage can with blueberries and lemon against a yellow and blue citrus wave."
+          },
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/06-peach-poster.png",
+            "alt": "Orange Peach Voltage can with peach slices against a magenta citrus wave."
+          }
+        ],
+        "layout": {
+          "type": "uniform",
+          "cols": 2,
+          "aspect": "4/5"
+        }
+      },
+      {
+        "title": "The Outdoor Campaign",
+        "media": [
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/07-street-takeover.png",
+            "alt": "Four coordinated Voltage flavor posters on an urban wall."
+          },
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/08-billboard.png",
+            "alt": "Illuminated Voltage billboard carrying the launch headline and four-flavor range."
+          }
+        ],
+        "layout": {
+          "type": "uniform",
+          "cols": 1,
+          "aspect": "3/2"
+        }
+      },
+      {
+        "title": "Discovery Packaging and Merchandise",
+        "media": [
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/09-discovery-pack.png",
+            "alt": "Yellow and blue Voltage gift packaging displaying the four flavors."
+          },
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/10-merchandise.png",
+            "alt": "Voltage graphic T-shirt, blue cap, yellow tote, stickers and an Original can."
+          }
+        ],
+        "layout": {
+          "type": "uniform",
+          "cols": 1,
+          "aspect": "3/2"
+        }
+      },
+      {
+        "title": "Retail and Sampling",
+        "media": [
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/13-retail.png",
+            "alt": "Four color-coded Voltage flavor blocks on a refrigerated shelf with a branded shelf strip."
+          },
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/14-sampling-activation.png",
+            "alt": "A yellow and blue Voltage kiosk with branded signage, cans and adult visitors."
+          }
+        ],
+        "layout": {
+          "type": "uniform",
+          "cols": 2,
+          "aspect": "3/2"
+        }
+      },
+      {
+        "title": "Pick Your Voltage — Social",
+        "media": [
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/12-launch-story.png",
+            "alt": "Vertical Pick Your Voltage creative presenting all four flavors.",
+            "aspect": "9/16"
+          },
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/16-flavor-flatlay.png",
+            "alt": "Overhead view of the four Voltage flavors on bold colored stripes with fresh fruit.",
+            "aspect": "1/1"
+          }
+        ],
+        "cols": 2
+      },
+      {
+        "title": "The Brand in Hand",
+        "media": [
+          {
+            "type": "image",
+            "src": "/projects/voltage/citrus-distortion-4k/15-lifestyle.png",
+            "alt": "Three adults at an outdoor basketball court with Voltage cans and Feel the Voltage headline."
+          }
+        ],
+        "layout": {
+          "type": "uniform",
+          "cols": 1,
+          "aspect": "3/2"
+        }
+      }
+    ]
   },
 ];
 
@@ -1231,6 +1279,7 @@ const PROJECT_ORDER = [
   'adults',
   'the-syndicate',
   'wwimf',
+  'voltage',
 ];
 
 export const PROJECTS: Project[] = PROJECT_ORDER.map((id) => {

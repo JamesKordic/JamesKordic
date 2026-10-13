@@ -103,7 +103,7 @@ export function Lightbox() {
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={it.src}
-            alt=""
+            alt={it.alt || ''}
             className="max-w-[96vw] max-h-[90vh] shadow-[0_24px_60px_-14px_rgba(0,0,0,0.7)]"
           />
         ) : null}

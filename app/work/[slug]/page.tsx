@@ -6,7 +6,8 @@ import { SiteHeader } from '@/components/site-header';
 import { PageFooter } from '@/components/page-footer';
 import { SITE_TEXT } from '@/lib/site-text';
 import { BLOCK_PB, BLOCK_PT, BLOCK_T, GUTTER_X, LABEL, RULE_PY, SECTION_T, STACK, TIGHT } from '@/lib/spacing';
-import { NAME, TITLE } from '@/lib/type';
+import { TITLE } from '@/lib/type';
+import '@/app/case-study.css';
 
 type ProjectDetail = {
   agency?: string;
@@ -50,9 +51,9 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       'Created modular motion assets adapting the conference identity across speakers, dates, sponsors, locations, and programming.',
   },
   voltage: {
-    tools: ['Blender', 'After Effects', 'Photoshop', 'Illustrator'],
+    tools: ['AI-assisted image generation', 'Art direction'],
     contribution:
-      'Built a beverage brand from the naming and circuit-board identity through packaging, 3D product visualization, motion, and campaign applications.',
+      'Developed the Citrus Distortion direction into a coordinated identity and campaign: four-flavor packaging, product portraits, outdoor advertising, social, merchandise and a sampling concept. The same wordmark, optical citrus graphic and flavor palette connect every application. Visuals were developed with AI-assisted image generation and refined through art direction and curation.',
   },
   'mnrk-heavy': {
     agency: 'The Syndicate',
@@ -373,18 +374,26 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const archiveLabel = p.id === 'adults' ? 'What I worked on' : 'View full campaign archive';
 
   return (
-    <div className="min-h-screen bg-bg text-[17px] leading-[1.6] text-text">
+    <div className="case-study-page min-h-screen bg-bg text-[17px] leading-[1.6] text-text">
       <SiteHeader />
 
-      <main className={`w-full ${GUTTER_X} ${BLOCK_PT}`}>
-        <Link href="/#work" className="-my-2 block w-fit py-2 text-[15px] leading-none text-muted transition-colors hover:text-accent">
-          ← All work
-        </Link>
-        <h1 className={`${STACK} ${NAME}`}>
-          {p.title}
-        </h1>
+      <main className={`case-study-main w-full ${GUTTER_X} ${BLOCK_PT} ${p.id === 'voltage' ? 'mx-auto max-w-[1920px]' : ''}`}>
+        <section className="case-study-masthead" aria-labelledby="project-title">
+          <div className="case-study-topline">
+            <p className="case-study-label">Selected work / {String(idx + 1).padStart(2, '0')}</p>
+            <Link href="/#work" className="case-study-back case-study-label">← All work</Link>
+          </div>
+          <h1 id="project-title" className="case-study-title">{p.title}</h1>
+          <div className="case-study-caption">
+            <p className="case-study-blurb">{p.blurb}</p>
+            <dl className="case-study-metadata">
+              <div><dt className="case-study-label">Role</dt><dd>{p.role}</dd></div>
+              <div><dt className="case-study-label">Year</dt><dd>{p.year}</dd></div>
+            </dl>
+          </div>
+        </section>
         {firstLine && (
-          <div className={BLOCK_T}>
+          <div className={`case-study-first-media ${BLOCK_T}`}>
             <CaseSection section={firstLine} />
           </div>
         )}
@@ -392,7 +401,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         {/* Overview and My role side by side, split by a rule — the same
             two-column pattern as the previous / next links at the foot of the
             page. Stacked on phones, divided by the row's own rule. */}
-        <div className={`${BLOCK_T} grid grid-cols-1 border-y border-line lg:grid-cols-2`}>
+        <div className={`case-study-overview ${BLOCK_T} grid grid-cols-1 border-y border-line lg:grid-cols-2`}>
           <section className={`${RULE_PY} lg:border-r lg:border-line lg:pr-8`}>
             <h2 className={LABEL}>Overview</h2>
             <p className={`${TIGHT} max-w-[62ch]`}>{summary}</p>
@@ -404,7 +413,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </div>
 
         {afterIntro.map((sec, i) => (
-          <div key={i} className={BLOCK_T}>
+          <div key={i} className={`case-study-gallery ${BLOCK_T}`}>
             <CaseSection section={sec} />
           </div>
         ))}
@@ -425,6 +434,13 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </details>
         )}
 
+        {p.id === 'voltage' && (
+          <p className={`${BLOCK_T} max-w-[75ch] text-[14px] leading-relaxed text-muted`}>
+            Self-initiated concept · 2026 · AI-assisted imagery. Packaging, merchandise
+            and campaign placements are proposed design visualizations.
+          </p>
+        )}
+
         {p.id === 'the-syndicate' && (
           <p className={`${BLOCK_T} text-[clamp(22px,3vw,32px)] font-medium tracking-[-0.02em]`}>
             Want to see more?{' '}
@@ -436,24 +452,24 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
         <nav
           aria-label="More projects"
-          className={`${SECTION_T} grid grid-cols-1 border-y border-line lg:grid-cols-2`}
+          className={`case-study-pagination ${SECTION_T} grid grid-cols-2 border-y border-line`}
         >
           <Link
             href={`/work/${prev.id}`}
-            className={`group block ${RULE_PY} lg:border-r lg:border-line lg:pr-8`}
+            className={`group block min-w-0 border-r border-line pr-4 ${RULE_PY} sm:pr-8`}
           >
             <span className={`block ${LABEL}`}>Previous project</span>
-            <span className={`${TIGHT} flex items-baseline gap-4 ${TITLE} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-2 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0`}>
+            <span className={`${TIGHT} flex items-baseline gap-2 sm:gap-4 ${TITLE} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-2 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0`}>
               <span aria-hidden className="text-muted-2 transition-colors group-hover:text-accent">←</span>
               {prev.title}
             </span>
           </Link>
           <Link
             href={`/work/${next.id}`}
-            className={`group block border-t border-line text-right ${RULE_PY} lg:border-t-0 lg:pl-8`}
+            className={`group block min-w-0 pl-4 text-right ${RULE_PY} sm:pl-8`}
           >
             <span className={`block ${LABEL}`}>Next project</span>
-            <span className={`${TIGHT} flex items-baseline justify-end gap-4 ${TITLE} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0`}>
+            <span className={`${TIGHT} flex items-baseline justify-end gap-2 sm:gap-4 ${TITLE} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0`}>
               {next.title}
               <span aria-hidden className="text-muted-2 transition-colors group-hover:text-accent">→</span>
             </span>

@@ -33,9 +33,9 @@ const config: Config = {
         panelline: '#232323',
 
         // Primary interaction accent.
-        accent: '#FF3B1F',
-        'accent-deep': '#E0301A', // hover on red buttons
-        'accent-ink': '#FFFFFF',
+        accent: '#FFF34A',
+        'accent-deep': '#E7DC3F',
+        'accent-ink': '#0A0A0A',
 
         // Legacy gradient tokens, repointed to the accent/neutral family so
         // any lingering reference stays cohesive rather than neon.
