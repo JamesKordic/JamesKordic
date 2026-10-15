@@ -98,8 +98,6 @@ export const SITE_TEXT = {
     /** Subheading for Side B */
     sideBSubheading: 'Concepts, capstones, and self-initiated explorations.',
 
-    /** "View all →" link in the Featured row */
-    viewAllLink: 'View all →',
 
     /* ---- HOME CTA PANEL (bottom of home page) ---- */
     cta: {

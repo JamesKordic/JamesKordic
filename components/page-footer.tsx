@@ -1,30 +1,10 @@
+'use client';
 import Link from 'next/link';
+import { useRef, useState } from 'react';
 import { SITE_TEXT } from '@/lib/site-text';
 import '@/app/chrome.css';
-
-const T = SITE_TEXT;
-
-export function PageFooter() {
-  return (
-    <footer className="jk-footer">
-      <div className="jk-footer-intro">
-        <p className="jk-chrome-label jk-footer-availability"><span aria-hidden="true" />Available for freelance &amp; full-time</p>
-        <p className="jk-chrome-label">A good idea starts with a conversation.</p>
-      </div>
-      <div className="jk-footer-main">
-        <h2>Let’s make<br />something move.</h2>
-        <Link href="/contact" className="jk-footer-contact" aria-label="Get in touch"><span aria-hidden="true">↗</span></Link>
-      </div>
-      <div className="jk-footer-details">
-        <a className="jk-footer-email" href={`mailto:${T.contact.email}`}>{T.contact.email}<span aria-hidden="true"> ↗</span></a>
-        <nav className="jk-footer-links jk-chrome-label" aria-label="Footer">
-          <a href={T.contact.linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-          <a href={T.contact.resumeUrl} target="_blank" rel="noopener noreferrer">Résumé ↗</a>
-          <a href="#">Back to top ↑</a>
-        </nav>
-      </div>
-      <div className="jk-footer-bottom jk-chrome-label"><p>© {new Date().getFullYear()} {T.artist.name}</p><p>Independent designer. New York, NY.</p></div>
-      <p className="jk-footer-wordmark" aria-hidden="true">James Kordic</p>
-    </footer>
-  );
-}
+export function PageFooter({minimal=false,contactPage=false}:{minimal?:boolean;contactPage?:boolean}){const dialog=useRef<HTMLDialogElement>(null);const[panel,setPanel]=useState('');const show=(name:string)=>{setPanel(name);dialog.current?.showModal();};return <footer className={`jk-footer ${minimal?'is-minimal':''} ${contactPage?'is-contact-page':''}`}>
+  {!minimal&&<><div className="jk-footer-heading"><h2>Contact</h2><p>Projects and opportunities</p></div><div className="jk-footer-rows"><div><h3>Projects + Media</h3><p><span className="jk-footer-description">For design, motion, and collaborations.</span><a href={`mailto:${SITE_TEXT.contact.email}`}>{SITE_TEXT.contact.email}</a></p></div><div><h3>Opportunities</h3><p><span className="jk-footer-description">Available for freelance and full-time.</span><Link href="/contact">Work with me</Link></p></div><div><h3>Channels</h3><p><a href={SITE_TEXT.contact.linkedinUrl} target="_blank" rel="noreferrer">LinkedIn</a><br/><a href={SITE_TEXT.contact.resumeUrl} target="_blank" rel="noreferrer">Résumé</a><br/><a href={`mailto:${SITE_TEXT.contact.email}`}>Email</a></p></div></div></>}
+  <div className="jk-footer-bottom"><span>© {new Date().getFullYear()} James Kordic</span><div><button onClick={()=>show('Privacy Policy')}>Privacy Policy</button><button onClick={()=>show('Terms of Use')}>Terms of Use</button><button onClick={()=>show('Cookies')}>Cookies</button></div><Link href="/" aria-label="James Kordic home" className="jk-footer-mark">JK</Link></div>
+  <dialog className="jk-info-dialog" aria-labelledby="footer-info-title" ref={dialog} onClick={e=>{if(e.target===e.currentTarget)dialog.current?.close();}}><div><button className="jk-info-close" aria-label="Close information" onClick={()=>dialog.current?.close()}>×</button><h2 id="footer-info-title">{panel}</h2>{panel==='Privacy Policy'?<p>This portfolio presents the work of James Kordic. Contact details you send through the contact form are processed by Formspree to deliver your message. Email links open your email app. External links have their own privacy policies.</p>:panel==='Terms of Use'?<p>Project images and motion work are presented for portfolio review. Client names and marks belong to their respective owners. Please contact James Kordic about use of any portfolio material.</p>:<p>This portfolio does not set advertising or analytics cookies. Embedded media and external services may apply their own cookie settings. Your browser’s reduced motion preference is respected.</p>}</div></dialog>
+</footer>;}

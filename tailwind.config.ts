@@ -33,9 +33,9 @@ const config: Config = {
         panelline: '#232323',
 
         // Primary interaction accent.
-        accent: '#FFF34A',
-        'accent-deep': '#E7DC3F',
-        'accent-ink': '#0A0A0A',
+        accent: '#FF3B1F',
+        'accent-deep': '#E0301A', // hover on red buttons
+        'accent-ink': '#FFFFFF',
 
         // Legacy gradient tokens, repointed to the accent/neutral family so
         // any lingering reference stays cohesive rather than neon.
@@ -48,8 +48,10 @@ const config: Config = {
         amber: '#FF3B1F',
       },
       fontFamily: {
-        display: ['Inter', 'system-ui', 'sans-serif'],
-        ui: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)'],
+        mono: ['var(--font-ui)'],
+        display: ['var(--font-display)'],
+        ui: ['var(--font-ui)'],
       },
       animation: {
         spin: 'spin 5s linear infinite',

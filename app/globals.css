@@ -4,6 +4,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --color-bg: #0a0a0a;
+  --color-panel: #141414;
+  --color-text: #ededed;
+  --color-muted: #8c8c8c;
+  --color-muted-secondary: #5e5e5e;
+  --color-line: #232323;
+  --color-accent: #ff3b1f;
+  --color-accent-hover: #e0301a;
+  --color-accent-ink: #ffffff;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -19,11 +34,20 @@ body {
   min-height: 100%;
 }
 
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+.lenis :is(.case-study-sidebar, .case-study-media-carousel, dialog) {
+  overscroll-behavior: contain;
+}
+
 body {
-  background: #0a0a0a;
-  color: #ededed;
-  font-family: 'Inter', system-ui, sans-serif;
-  line-height: 1.6;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.25;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
@@ -32,21 +56,21 @@ body {
 h1,
 h2,
 h3 {
-  text-wrap: balance;
+  text-wrap: wrap;
 }
 
 p {
-  text-wrap: pretty;
+  text-wrap: wrap;
 }
 
-/* The same signal yellow carries through navigation, controls and selection. */
+/* Original portfolio accent, shared by selection and keyboard focus. */
 ::selection {
-  background: #fff34a;
-  color: #0a0a0a;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
 }
 
 :focus-visible {
-  outline: 2px solid #fff34a;
+  outline: 2px solid var(--color-accent);
   outline-offset: 5px;
 }
 
@@ -240,3 +264,6 @@ video {
   .scroll-cue-arrow { animation: none; }
 }
 
+
+/* The reference scales its rem-based layout on wide displays. */
+@media (min-width: 1728px) { html { font-size: .925926vw; } }

@@ -1,340 +1,14 @@
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { PROJECTS, getProject, type Project, type Section } from '@/lib/projects';
-import { CaseSection } from '@/components/case-section';
+import { PROJECTS, getProject } from '@/lib/projects';
+import { getProjectPresentation } from '@/lib/project-presentation';
+import { CASE_STUDY_SECTIONS, getCaseStudyStory } from '@/lib/case-study-stories';
+import { CaseStudyOverview } from '@/components/case-study-overview';
+import { CaseStudyGallery, CaseStudyMedia } from '@/components/case-study-media';
+import { CaseStudyNavigation } from '@/components/case-study-navigation';
+import { NextProject } from '@/components/next-project';
 import { SiteHeader } from '@/components/site-header';
-import { PageFooter } from '@/components/page-footer';
 import { SITE_TEXT } from '@/lib/site-text';
-import { BLOCK_PB, BLOCK_PT, BLOCK_T, GUTTER_X, LABEL, RULE_PY, SECTION_T, STACK, TIGHT } from '@/lib/spacing';
-import { TITLE } from '@/lib/type';
 import '@/app/case-study.css';
-
-type ProjectDetail = {
-  agency?: string;
-  tools: string[];
-  contribution: string;
-};
-
-const PROJECT_DETAILS: Record<string, ProjectDetail> = {
-  'guns-n-roses': {
-    agency: 'The Syndicate',
-    tools: ['After Effects', 'Photoshop', 'Premiere Pro'],
-    contribution:
-      "I edited dynamic, platform-ready social videos and created promotional motion graphics, blending pacing, visual energy, and storytelling to amplify the band's presence and deepen fan engagement. My work also included sourcing and editing clips from live performances, adding captions to reels, and polishing existing edits. Whether the content promoted a tour or celebrated a milestone, the goal was always the same: build excitement and keep fans coming back.",
-  },
-  'taco-bell': {
-    agency: 'The Syndicate',
-    tools: ['After Effects', 'Photoshop', 'Illustrator'],
-    contribution:
-      "Working within Taco Bell's Feed The Beat brand system, I designed lineup promotional assets and built reusable vertical templates that could flex across dozens of artists. I sourced and placed artist photography, adapted color and typography to each release, animated motion pieces, and prepared platform-ready exports. The goal was to keep every post distinct to the artist while making the full campaign feel cohesive at scroll speed.",
-  },
-  adults: {
-    agency: 'The Syndicate',
-    tools: ['After Effects', 'Photoshop', 'Illustrator'],
-    contribution:
-      "Working directly within the show's brand system alongside Sarah Whitty and Molly Brooks, I designed event creative across physical and digital touchpoints. I also played a key role in production—setting up files, applying finishing touches, assembling pre-production materials, and preparing stakeholder-ready deliverables.",
-  },
-  'the-syndicate': {
-    tools: ['After Effects', 'Photoshop', 'Illustrator'],
-    contribution:
-      'Working alongside the creative team, I designed and animated assets for clients including MNRK Heavy, Consensus by CoinDesk, Craig Ferguson, Indie Week, and Killphonic Records. My work included editing social clips, building modular campaign systems, creating speaker and sponsor graphics, adapting assets across platforms, and preparing files for production. I often took projects from rough content through polished, ready-to-publish deliverables.',
-  },
-  wwimf: {
-    tools: ['After Effects', 'Illustrator', 'Photoshop', 'Figma'],
-    contribution:
-      'I led every part of the project from concept through final exhibition. I developed the strategy and visual identity, designed stage environments and participatory interactions, created the campaign and motion system, produced merchandise and physical touchpoints, and brought the full experience together for the 2025 RIT Graphic Design Capstone Show. The goal was to make a fictional festival feel detailed, cohesive, and believable enough to exist.',
-  },
-  consensus: {
-    agency: 'The Syndicate',
-    tools: ['After Effects', 'Photoshop', 'Illustrator'],
-    contribution:
-      'Created modular motion assets adapting the conference identity across speakers, dates, sponsors, locations, and programming.',
-  },
-  voltage: {
-    tools: ['AI-assisted image generation', 'Art direction'],
-    contribution:
-      'Developed the Citrus Distortion direction into a coordinated identity and campaign: four-flavor packaging, product portraits, outdoor advertising, social, merchandise and a sampling concept. The same wordmark, optical citrus graphic and flavor palette connect every application. Visuals were developed with AI-assisted image generation and refined through art direction and curation.',
-  },
-  'mnrk-heavy': {
-    agency: 'The Syndicate',
-    tools: ['After Effects', 'Photoshop', 'Illustrator'],
-    contribution:
-      'Built a flexible social toolkit that translated each artist’s release artwork into label-consistent announcements, platform variants, and motion pieces.',
-  },
-};
-
-function limitSection(section: Section, limit = 6): Section {
-  if (section.layout?.type !== 'mixed') {
-    return { ...section, media: section.media.slice(0, limit) };
-  }
-
-  let remaining = limit;
-  const rows = section.layout.rows
-    .map((row) => {
-      const media = row.media.slice(0, remaining);
-      remaining -= media.length;
-      return { ...row, media };
-    })
-    .filter((row) => row.media.length);
-
-  return { ...section, layout: { ...section.layout, rows } };
-}
-
-function editorialSections(project: Project): { visible: Section[]; archive: Section[] } {
-  if (project.id === 'taco-bell') {
-    const [lineup, firstSet, secondSet, thirdSet, ...rest] = project.sections;
-    const featuredSet: Section = {
-      ...firstSet,
-      media: [firstSet.media[14], secondSet.media[2], thirdSet.media[0]],
-      layout: { type: 'uniform', cols: 3, aspect: '9/16' },
-    };
-    const archivedFirstSet: Section = {
-      ...firstSet,
-      title: 'Additional Artist Executions',
-      media: firstSet.media.filter((_, index) => index !== 14),
-    };
-    const archivedSecondSet: Section = {
-      ...secondSet,
-      media: secondSet.media.filter((_, index) => index !== 2),
-    };
-    const archivedThirdSet: Section = {
-      ...thirdSet,
-      media: thirdSet.media.slice(1),
-    };
-
-    return {
-      visible: [limitSection(lineup, 3), featuredSet],
-      archive: [archivedFirstSet, archivedSecondSet, archivedThirdSet, ...rest],
-    };
-  }
-
-  if (project.id === 'adults') {
-    const [campaignFilm, eventPhotography] = project.sections;
-
-    return {
-      visible: [campaignFilm, eventPhotography],
-      archive: [],
-    };
-  }
-
-  let sections = project.sections.map((section) => (
-    project.id === 'guns-n-roses' ? section : limitSection(section)
-  ));
-  if (project.id === 'the-syndicate') {
-    const removedItems = new Set([
-      6, 7, 8, 9, 10, 11, 12, 13, 14,
-      21, 22, 23, 24,
-      27, 30, 32, 34, 35,
-    ]);
-    let itemNumber = 0;
-
-    sections = sections
-      .map((section) => {
-        if (section.layout?.type === 'mixed') {
-          const rows = section.layout.rows
-            .map((row) => ({
-              ...row,
-              media: row.media.filter(() => {
-                itemNumber += 1;
-                return !removedItems.has(itemNumber);
-              }),
-            }))
-            .filter((row) => row.media.length > 0);
-
-          return { ...section, layout: { ...section.layout, rows } };
-        }
-
-        return {
-          ...section,
-          media: section.media.filter(() => {
-            itemNumber += 1;
-            return !removedItems.has(itemNumber);
-          }),
-        };
-      })
-      .filter((section) => (
-        section.layout?.type === 'mixed'
-          ? section.layout.rows.some((row) => row.media.length > 0)
-          : section.media.length > 0
-      ));
-
-    const motionIndex = sections.findIndex((section) => section.title === 'Consensus — Motion Graphics');
-    const speakerIndex = sections.findIndex((section) => section.title === 'Consensus — Speaker Announcements');
-    if (motionIndex >= 0 && speakerIndex >= 0) {
-      sections[motionIndex] = {
-        ...sections[motionIndex],
-        media: [...sections[motionIndex].media, ...sections[speakerIndex].media],
-      };
-      sections = sections.filter((_, index) => index !== speakerIndex);
-    }
-
-    const craigIndex = sections.findIndex((section) => section.title === 'Craig Ferguson');
-    const killphonicIndex = sections.findIndex((section) => section.title === 'Killphonic Records');
-    if (craigIndex >= 0 && killphonicIndex >= 0 && craigIndex > killphonicIndex) {
-      const [craigSection] = sections.splice(craigIndex, 1);
-      sections.splice(killphonicIndex, 0, craigSection);
-    }
-
-    if (project.carouselVideo) {
-      sections = [
-        {
-          title: 'The Syndicate Sizzle Reel',
-          media: [
-            {
-              type: 'video',
-              src: project.carouselVideo,
-              aspect: '16/9',
-              poster: '/posters/the-syndicate-sizzle-reel.jpg',
-            },
-          ],
-          layout: { type: 'uniform', cols: 1, aspect: '16/9' },
-        },
-        ...sections,
-      ];
-    }
-
-    const removedVisibleItems = new Set([
-      3, 5, 9, 11, 12, 13, 14, 15, 16, 17, 19,
-    ]);
-    let visibleItemNumber = 0;
-
-    sections = sections
-      .map((section) => {
-        if (section.layout?.type === 'mixed') {
-          const rows = section.layout.rows
-            .map((row) => ({
-              ...row,
-              media: row.media.filter(() => {
-                visibleItemNumber += 1;
-                return !removedVisibleItems.has(visibleItemNumber);
-              }),
-            }))
-            .filter((row) => row.media.length > 0);
-
-          return { ...section, layout: { ...section.layout, rows } };
-        }
-
-        return {
-          ...section,
-          media: section.media.filter(() => {
-            visibleItemNumber += 1;
-            return !removedVisibleItems.has(visibleItemNumber);
-          }),
-        };
-      })
-      .filter((section) => (
-        section.layout?.type === 'mixed'
-          ? section.layout.rows.some((row) => row.media.length > 0)
-          : section.media.length > 0
-      ));
-
-    const remainingMedia = sections.flatMap((section) => (
-      section.layout?.type === 'mixed'
-        ? section.layout.rows.flatMap((row) => row.media)
-        : section.media
-    ));
-    const finalPair = remainingMedia.slice(7).map((media, index) => ({
-      ...media,
-      aspect: index === 0 ? '16/9' as const : '1/1' as const,
-    }));
-    const socialVideos = remainingMedia.slice(1, 4);
-    [socialVideos[0], socialVideos[1]] = [socialVideos[1], socialVideos[0]];
-
-    sections = [
-      {
-        title: 'The Syndicate Sizzle Reel',
-        media: remainingMedia.slice(0, 1),
-        layout: { type: 'uniform', cols: 1, aspect: '16/9' },
-      },
-      {
-        title: 'Social Video',
-        media: socialVideos,
-        layout: { type: 'feature-grid', featuredIndex: 2 },
-      },
-      {
-        title: 'Social Campaigns',
-        media: remainingMedia.slice(4, 7),
-        layout: { type: 'uniform', cols: 3, aspect: '9/16' },
-      },
-      {
-        title: 'MNRK Heavy Mockups',
-        media: [
-          {
-            type: 'image',
-            src: '/projects/the-syndicate/mnrk-heavy-social-mockup.png',
-            aspect: '4/3',
-          },
-          {
-            type: 'image',
-            src: '/projects/the-syndicate/mnrk-heavy-band-mockup.png',
-            aspect: '4/3',
-          },
-        ],
-        layout: { type: 'uniform', cols: 2, aspect: '4/3' },
-      },
-      {
-        title: 'Conference Creative',
-        media: finalPair,
-        layout: { type: 'feature-grid', featuredIndex: 0 },
-      },
-    ].filter((section) => section.media.length > 0) as Section[];
-  }
-
-  if (project.id === 'wwimf') {
-    const byTitle = new Map(sections.map((section) => [section.title, section]));
-    const chapter = (title: string, eyebrow: string) => {
-      const section = byTitle.get(title);
-      return section ? { ...section, eyebrow } : null;
-    };
-    const arranged: Array<Section | null> = [
-      chapter('Visual Identity', '01 / The System'),
-      chapter('Stage Designs', '02 / The Festival'),
-      chapter('Interactive Elements', '02 / The Festival'),
-      chapter('Instagram Posts', '03 / The Campaign'),
-      chapter('Marketing', '03 / The Campaign'),
-      chapter('Marketing Visualization', '03 / The Campaign'),
-      chapter('Animations', '03 / The Campaign'),
-      chapter('Merchandise', '04 / The Experience'),
-      chapter('Capstone Show Setup', '04 / The Experience'),
-      chapter('WWIMF Book', '04 / The Experience'),
-    ];
-    sections = arranged.filter((section): section is Section => section !== null);
-  }
-
-  return { visible: sections, archive: [] };
-}
-
-/** Splits a section after its first row of media, so the page can open on
- *  one line of work and continue below the Overview / My role row. Grids
- *  break at their column count and mixed layouts at their first row; a
- *  feature grid or carousel already reads as a single line, as does any
- *  grid with only one row, so those come back whole with nothing after. */
-function splitFirstLine(section: Section): [Section, Section | null] {
-  const layout = section.layout;
-
-  if (layout?.type === 'mixed') {
-    const [first, ...rest] = layout.rows;
-    return rest.length
-      ? [
-          { ...section, layout: { ...layout, rows: [first] } },
-          { ...section, layout: { ...layout, rows: rest } },
-        ]
-      : [section, null];
-  }
-
-  const cols =
-    layout?.type === 'uniform' || layout?.type === 'legacy'
-      ? layout.cols
-      : !layout
-        ? section.cols
-        : undefined;
-
-  if (!cols || section.media.length <= cols) return [section, null];
-  return [
-    { ...section, media: section.media.slice(0, cols) },
-    { ...section, media: section.media.slice(cols) },
-  ];
-}
 
 export async function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.id }));
@@ -362,122 +36,70 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   if (!p) notFound();
 
   const idx = PROJECTS.findIndex((x) => x.id === p.id);
-  const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
-  const detail = PROJECT_DETAILS[p.id];
-  const { visible, archive } = editorialSections(p);
-  // The page opens on the first line of work; the Overview / My role row
-  // follows it, then the rest of the work.
-  const [firstLine, firstRest] = visible.length ? splitFirstLine(visible[0]) : [null, null];
-  const afterIntro = [...(firstRest ? [firstRest] : []), ...visible.slice(1)];
-  const summary = p.brief?.lead || p.desc;
+  const story = getCaseStudyStory(p);
+  const { hero, gallerySections, archive } = getProjectPresentation(p);
+  const nextHero = getProjectPresentation(next).hero;
   const archiveLabel = p.id === 'adults' ? 'What I worked on' : 'View full campaign archive';
 
+  const category = p.industry || p.tags[0];
+  const sectionLinks = [
+    ...CASE_STUDY_SECTIONS.map(({ id, title }) => ({ id, title })),
+    ...gallerySections.map((section, index) => ({ id: `project-section-${index + 1}`, title: section.title })),
+    ...(archive.length ? [{ id: 'campaign-archive', title: 'Campaign archive' }] : []),
+  ];
+
   return (
-    <div className="case-study-page min-h-screen bg-bg text-[17px] leading-[1.6] text-text">
-      <SiteHeader />
-
-      <main className={`case-study-main w-full ${GUTTER_X} ${BLOCK_PT} ${p.id === 'voltage' ? 'mx-auto max-w-[1920px]' : ''}`}>
-        <section className="case-study-masthead" aria-labelledby="project-title">
-          <div className="case-study-topline">
-            <p className="case-study-label">Selected work / {String(idx + 1).padStart(2, '0')}</p>
-            <Link href="/#work" className="case-study-back case-study-label">← All work</Link>
+    <div className="case-study-page">
+      <SiteHeader overlay />
+      <main className="case-study-layout">
+        <CaseStudyNavigation title={p.title} blurb={p.blurb} category={category} year={p.year} sections={sectionLinks} />
+        <div className="case-study-content">
+          <CaseStudyMedia media={hero} hero />
+          <div className="case-study-mobile-title">
+            <h1>{p.title}</h1>
+            <p>{p.blurb}</p>
+            <div className="case-study-tags"><span>{category}</span><i aria-hidden="true" /><span>{p.year}</span></div>
           </div>
-          <h1 id="project-title" className="case-study-title">{p.title}</h1>
-          <div className="case-study-caption">
-            <p className="case-study-blurb">{p.blurb}</p>
-            <dl className="case-study-metadata">
-              <div><dt className="case-study-label">Role</dt><dd>{p.role}</dd></div>
-              <div><dt className="case-study-label">Year</dt><dd>{p.year}</dd></div>
-            </dl>
-          </div>
-        </section>
-        {firstLine && (
-          <div className={`case-study-first-media ${BLOCK_T}`}>
-            <CaseSection section={firstLine} />
-          </div>
-        )}
+          <CaseStudyOverview project={p} story={story} />
 
-        {/* Overview and My role side by side, split by a rule — the same
-            two-column pattern as the previous / next links at the foot of the
-            page. Stacked on phones, divided by the row's own rule. */}
-        <div className={`case-study-overview ${BLOCK_T} grid grid-cols-1 border-y border-line lg:grid-cols-2`}>
-          <section className={`${RULE_PY} lg:border-r lg:border-line lg:pr-8`}>
-            <h2 className={LABEL}>Overview</h2>
-            <p className={`${TIGHT} max-w-[62ch]`}>{summary}</p>
-          </section>
-          <section className={`${RULE_PY} border-t border-line lg:border-t-0 lg:pl-8`}>
-            <h2 className={LABEL}>My role</h2>
-            <p className={`${TIGHT} max-w-[62ch]`}>{detail.contribution}</p>
-          </section>
-        </div>
+          {gallerySections.map((section, index) => (
+            <section key={`${section.title}-${index}`} id={`project-section-${index + 1}`} className="case-study-section">
+              <div className={`case-study-text-section${section.context || section.body || section.role ? '' : ' case-study-text-section--compact'}`}>
+                <div className="case-study-text-label"><h2 className="case-study-overline">{section.title}</h2></div>
+                {(section.context || section.body || section.role) && (
+                  <div className="case-study-text-body">
+                    {section.context && <p>{section.context}</p>}
+                    {section.body && section.body.split('\n\n').map((paragraph, paragraphIndex) => <p key={paragraphIndex}>{paragraph}</p>)}
+                    {section.role && <p>{section.role}</p>}
+                  </div>
+                )}
+              </div>
+              <CaseStudyGallery section={section} />
+            </section>
+          ))}
 
-        {afterIntro.map((sec, i) => (
-          <div key={i} className={`case-study-gallery ${BLOCK_T}`}>
-            <CaseSection section={sec} />
-          </div>
-        ))}
-
-        {archive.length > 0 && (
-          <details className={`group ${BLOCK_T} border-y border-line`}>
-            <summary className={`flex cursor-pointer list-none items-center justify-between ${RULE_PY} ${TITLE} transition-colors hover:text-accent [&::-webkit-details-marker]:hidden`}>
-              {archiveLabel}
-              <span className="text-muted transition-transform group-open:rotate-45">+</span>
-            </summary>
-            <div className={BLOCK_PB}>
-              {archive.map((sec, i) => (
-                <div key={i} className={i === 0 ? STACK : BLOCK_T}>
-                  <CaseSection section={sec} />
-                </div>
+          {archive.length > 0 && (
+            <details id="campaign-archive" className="case-study-archive">
+              <summary><span>{archiveLabel}</span><span aria-hidden="true">+</span></summary>
+              {archive.map((section, index) => (
+                <section key={`${section.title}-${index}`} className="case-study-section">
+                  <div className="case-study-text-section case-study-text-section--compact"><h2 className="case-study-overline">{section.title}</h2></div>
+                  <CaseStudyGallery section={section} />
+                </section>
               ))}
-            </div>
-          </details>
-        )}
+            </details>
+          )}
 
-        {p.id === 'voltage' && (
-          <p className={`${BLOCK_T} max-w-[75ch] text-[14px] leading-relaxed text-muted`}>
-            Self-initiated concept · 2026 · AI-assisted imagery. Packaging, merchandise
-            and campaign placements are proposed design visualizations.
-          </p>
-        )}
-
-        {p.id === 'the-syndicate' && (
-          <p className={`${BLOCK_T} text-[clamp(22px,3vw,32px)] font-medium tracking-[-0.02em]`}>
-            Want to see more?{' '}
-            <a href={`mailto:${SITE_TEXT.contact.email}`} className="text-accent underline underline-offset-4 hover:text-text">
-              Get in touch.
-            </a>
-          </p>
-        )}
-
-        <nav
-          aria-label="More projects"
-          className={`case-study-pagination ${SECTION_T} grid grid-cols-2 border-y border-line`}
-        >
-          <Link
-            href={`/work/${prev.id}`}
-            className={`group block min-w-0 border-r border-line pr-4 ${RULE_PY} sm:pr-8`}
-          >
-            <span className={`block ${LABEL}`}>Previous project</span>
-            <span className={`${TIGHT} flex items-baseline gap-2 sm:gap-4 ${TITLE} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-2 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0`}>
-              <span aria-hidden className="text-muted-2 transition-colors group-hover:text-accent">←</span>
-              {prev.title}
-            </span>
-          </Link>
-          <Link
-            href={`/work/${next.id}`}
-            className={`group block min-w-0 pl-4 text-right ${RULE_PY} sm:pl-8`}
-          >
-            <span className={`block ${LABEL}`}>Next project</span>
-            <span className={`${TIGHT} flex items-baseline justify-end gap-2 sm:gap-4 ${TITLE} transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0`}>
-              {next.title}
-              <span aria-hidden className="text-muted-2 transition-colors group-hover:text-accent">→</span>
-            </span>
-          </Link>
-        </nav>
+          {p.id === 'voltage' && (
+            <p className="case-study-disclosure">Self-initiated concept · 2026 · AI-assisted imagery. Packaging, merchandise and campaign placements are proposed design visualizations.</p>
+          )}
+          {p.id === 'the-syndicate' && (
+            <p className="case-study-further">Want to see more? <a href={`mailto:${SITE_TEXT.contact.email}`}>Get in touch.</a></p>
+          )}
+        </div>
       </main>
-
-      <PageFooter />
+      <NextProject id={next.id} title={next.title} blurb={next.blurb} hero={nextHero} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 # James Kordic — Portfolio
 
-A graphic and motion design portfolio built with Next.js 14, React, TypeScript, and Tailwind CSS. The design takes inspiration from Koto’s cinematic media, compact navigation, editorial typography, and scrolling project presentations while using James’s own identity and work.
+A graphic and motion design portfolio built with Next.js 14, React, TypeScript, and Tailwind CSS. The interface pairs Koto-inspired layouts, navigation, and scrolling project presentations with James’s original Inter typography and red-and-neutral palette. Projects are listed on the homepage and open into individual case studies; older Work listing URLs redirect to the homepage’s work section. Navigation contains Work, About, and Contact. Retired Services, Latest, and Careers URLs redirect to About, homepage projects, and Contact respectively.
 
 ## Development
 
@@ -15,13 +15,14 @@ Open http://localhost:3000. `npm run build` creates a static export in `out/`; s
 
 - `lib/projects.ts`: project metadata, imagery, case studies, and editorial ordering.
 - `lib/site-text.ts`: biography, contact details, résumé links, and availability.
-- `components/portfolio-home.tsx`: cinematic reel, scrolling selected-work gallery, and biography.
+- `components/portfolio-home.tsx`: static introduction and scrolling project gallery.
+- `components/about-portfolio.tsx`: about page template.
 - `components/site-header.tsx` / `components/page-footer.tsx`: shared navigation and contact section.
 - `app/work/[slug]/page.tsx`: case-study layout and editorial media selection.
 - `app/portfolio.css`, `app/chrome.css`, `app/case-study.css`: scoped presentation styles.
 - `public/`: local images and motion assets; some case-study media still uses the original Framer CDN.
 
-The homepage loads nearby project clips on demand, pauses offscreen motion, and respects reduced-motion preferences. Visitors can pause decorative motion, open a reel player, use keyboard-accessible navigation, and follow project links to full case studies. Contact retains the configured Formspree integration; avoid submitting test messages to the live endpoint.
+The homepage loads nearby project clips on demand, pauses offscreen motion, and respects reduced-motion preferences. Visitors can pause individual project previews, use keyboard-accessible navigation, and follow project links to full case studies. Contact retains the configured Formspree integration; avoid submitting test messages to the live endpoint.
 
 ## Validation and publication
 

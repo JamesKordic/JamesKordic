@@ -1279,7 +1279,6 @@ const PROJECT_ORDER = [
   'adults',
   'the-syndicate',
   'wwimf',
-  'voltage',
 ];
 
 export const PROJECTS: Project[] = PROJECT_ORDER.map((id) => {
