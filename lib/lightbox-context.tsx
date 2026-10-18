@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode, useCallback, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import type { Media } from './projects';
 
 type LbCtx = {
@@ -15,6 +16,7 @@ type LbCtx = {
 const LightboxContext = createContext<LbCtx | null>(null);
 
 export function LightboxProvider({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
   const [items, setItems] = useState<Media[]>([]);
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
@@ -26,6 +28,12 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const close = useCallback(() => setOpen(false), []);
+
+  useEffect(() => {
+    close();
+    window.addEventListener('popstate', close);
+    return () => window.removeEventListener('popstate', close);
+  }, [pathname, close]);
 
   const step = useCallback(
     (d: number) => {
@@ -42,10 +50,11 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
       if (e.key === 'ArrowRight') step(1);
     };
     document.addEventListener('keydown', onKey);
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => {
       document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
+      document.body.style.overflow = previousOverflow;
     };
   }, [open, close, step]);
 

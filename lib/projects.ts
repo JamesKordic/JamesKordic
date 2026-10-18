@@ -183,7 +183,7 @@ const PROJECT_CATALOG: Project[] = [
     sections: [
       {
         eyebrow: '01 / Motion System',
-        title: 'Tour & Fan Engagement',
+        title: 'Social Media Reels',
         context:
           "A set of vertical reels designed to promote Guns N' Roses tours, music, and fan engagement while keeping the band recognizable within seconds.",
         fieldNote:
@@ -599,7 +599,7 @@ const PROJECT_CATALOG: Project[] = [
     sections: [
       // Lead section — lineup promotion posts
       {
-        title: 'Lineup Promotion Posts',
+        title: 'Vertical Reels and Posts',
         context:
           'Social media content built to generate hype and drive engagement for the Feed The Beat program, spanning the full "Class of 2025" lineup, a "Coming Soon" reel, and promotional packaging photography.',
         media: [],
@@ -624,7 +624,7 @@ const PROJECT_CATALOG: Project[] = [
       //
       // Carousel 1: sets 1 + 4 merged (16 images)
       {
-        title: 'Vertical Reel Set 1',
+        title: 'Additional Artist Executions',
         context:
           'The first set of featured artists and bands, adapted to a vertical format for digital platforms. I built the reusable template system and populated each piece with artist names and photography.',
         media: [
@@ -948,7 +948,7 @@ const PROJECT_CATALOG: Project[] = [
     },
     sections: [
       {
-        title: 'Campaign Films',
+        title: 'Campaign Film',
         media: [
           {
             type: 'video',

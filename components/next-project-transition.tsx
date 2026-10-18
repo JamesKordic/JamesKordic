@@ -80,6 +80,68 @@ function delay(transition: ProjectTransition, milliseconds: number) {
   });
 }
 
+/** Seek before playback, then wait until the browser has painted that video. */
+function prepareVideoFrame(video: HTMLVideoElement, time: number, playing: boolean, transition: ProjectTransition) {
+  return new Promise<boolean>((resolve) => {
+    let complete = false;
+    let prepared = false;
+    let presenting = false;
+    let videoFrame = 0;
+    let paintFrame = 0;
+    const finish = (ready: boolean) => {
+      if (complete) return;
+      complete = true;
+      window.clearTimeout(timer);
+      if (videoFrame) video.cancelVideoFrameCallback(videoFrame);
+      window.cancelAnimationFrame(paintFrame);
+      video.removeEventListener('loadedmetadata', prepare);
+      video.removeEventListener('loadeddata', present);
+      video.removeEventListener('seeked', present);
+      video.removeEventListener('error', failed);
+      transition.cleanups.delete(cancel);
+      resolve(ready);
+    };
+    const cancel = () => finish(false);
+    const failed = () => finish(false);
+    const afterPaint = () => {
+      if (complete) return;
+      paintFrame = window.requestAnimationFrame(() => {
+        paintFrame = window.requestAnimationFrame(() => finish(true));
+      });
+    };
+    const present = () => {
+      if (complete || presenting || !prepared || video.seeking || video.readyState < 2) return;
+      presenting = true;
+      if (playing) {
+        if (typeof video.requestVideoFrameCallback === 'function') {
+          videoFrame = video.requestVideoFrameCallback(() => finish(true));
+        }
+        void video.play().then(() => { if (!videoFrame) afterPaint(); }, afterPaint);
+      } else {
+        video.pause();
+        afterPaint();
+      }
+    };
+    const prepare = () => {
+      if (complete || prepared || video.readyState < 1) return;
+      prepared = true;
+      video.muted = true;
+      video.pause();
+      try {
+        if (Number.isFinite(time) && Math.abs(video.currentTime - time) > .001) video.currentTime = time;
+      } catch { /* A decoded frame is still usable when seeking is unavailable. */ }
+      present();
+    };
+    const timer = window.setTimeout(() => finish(prepared && video.readyState >= 2 && !video.seeking), 2000);
+    transition.cleanups.add(cancel);
+    video.addEventListener('loadedmetadata', prepare);
+    video.addEventListener('loadeddata', present);
+    video.addEventListener('seeked', present);
+    video.addEventListener('error', failed);
+    prepare();
+  });
+}
+
 /** Keep the selected live preview above both routes until the hero is ready. */
 export function NextProjectTransition() {
   const router = useRouter();
@@ -175,6 +237,14 @@ export function NextProjectTransition() {
       });
       await Promise.all([ready, transition.mode === 'home' ? delay(transition, window.innerWidth >= 1194 ? 800 : 733) : Promise.resolve()]);
       if (active.current !== transition) return;
+      if (destination instanceof HTMLVideoElement && transition.media instanceof HTMLVideoElement && mediaSource(destination) === mediaSource(transition.media)) {
+        // Two independently decoded clips must not crossfade over one another.
+        // Hold the last transition frame until the hero has presented it.
+        transition.media.pause();
+        const presented = await prepareVideoFrame(destination, transition.media.currentTime, transition.sourcePlaying, transition);
+        if (active.current !== transition) return;
+        if (presented) transition.visual.style.visibility = 'hidden';
+      }
       const fade = transition.dialog.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 167, easing: 'linear', fill: 'forwards' });
       transition.animations.push(fade);
       await fade.finished.catch(() => undefined);
@@ -241,25 +311,28 @@ export function NextProjectTransition() {
       media.removeAttribute('controls');
       media.setAttribute('aria-hidden', 'true');
       const sourcePlaying = source instanceof HTMLVideoElement && !source.paused && !source.ended;
+      let snapshot: HTMLCanvasElement | null = null;
       if (media instanceof HTMLVideoElement && source instanceof HTMLVideoElement) {
         media.muted = true;
         media.loop = true;
         media.playsInline = true;
-        if (home) {
-          media.poster = source.poster || frame.querySelector('img')?.src || '';
-          try {
-            const canvas = document.createElement('canvas');
-            canvas.width = source.videoWidth;
-            canvas.height = source.videoHeight;
-            const context = canvas.getContext('2d');
-            if (context && canvas.width && canvas.height) {
-              context.drawImage(source, 0, 0);
-              media.poster = canvas.toDataURL('image/jpeg', .9);
-            }
-          } catch { /* Cross-origin or unavailable frames retain the ordinary poster. */ }
-        }
+        media.preload = 'auto';
+        media.poster = source.poster || frame.querySelector('img')?.src || '';
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = source.videoWidth;
+          canvas.height = source.videoHeight;
+          const context = canvas.getContext('2d');
+          if (context && canvas.width && canvas.height) {
+            context.drawImage(source, 0, 0);
+            canvas.setAttribute('aria-hidden', 'true');
+            Object.assign(canvas.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', objectFit: 'cover' });
+            snapshot = canvas;
+          }
+        } catch { /* Unavailable frames retain the ordinary poster. */ }
       }
       visual.append(media);
+      if (snapshot) visual.append(snapshot);
       dialog.append(visual);
       // Top-layer media must not cover the fixed header on narrow layouts.
       const header = home ? cloneHeader(homePage?.querySelector<HTMLElement>('.jk-header') ?? null) : null;
@@ -270,10 +343,13 @@ export function NextProjectTransition() {
       catch { dialog.remove(); document.documentElement.classList.remove('has-project-transition'); return; }
 
       event.preventDefault();
+      if (source instanceof HTMLVideoElement && !source.muted) source.pause();
       const originalVisibility = frame.style.visibility;
       const originalOverflow = document.body.style.overflow;
       frame.style.visibility = 'hidden';
-      document.body.style.overflow = 'hidden';
+      // Keep sticky homepage text anchored to the viewport during the fade.
+      // overflow:hidden on body creates a new scroll ancestor when Lenis stops.
+      document.body.style.overflow = 'clip';
       let navigated = false;
       let timeout = 0;
       const transition: ProjectTransition = {
@@ -312,13 +388,10 @@ export function NextProjectTransition() {
       dialog.addEventListener('cancel', cancel);
       transition.cleanups.add(() => dialog.removeEventListener('cancel', cancel));
       if (media instanceof HTMLVideoElement && source instanceof HTMLVideoElement) {
-        const initialTime = source.currentTime;
-        const synchronize = () => { if (active.current !== transition) return; try { media.currentTime = initialTime; } catch { /* Metadata may still be loading. */ } };
-        if (media.readyState) synchronize();
-        else media.addEventListener('loadedmetadata', synchronize, { once: true });
-        transition.cleanups.add(() => media.removeEventListener('loadedmetadata', synchronize));
-        if (sourcePlaying) void media.play().catch(() => undefined);
-        else { media.preload = 'auto'; media.pause(); }
+        void prepareVideoFrame(media, source.currentTime, sourcePlaying, transition).then((presented) => {
+          if (active.current !== transition || !presented) return;
+          snapshot?.remove();
+        });
       }
       try { router.prefetch(href.pathname); } catch { /* Navigation still works without prefetch. */ }
 
@@ -362,7 +435,8 @@ export function NextProjectTransition() {
   }, [router]);
 
   return <style>{`
-    html.has-project-transition { scrollbar-gutter: stable; }
+    html.has-project-transition,
+    html.has-project-transition.lenis.lenis-stopped { overflow: hidden; scrollbar-gutter: stable; }
     .next-project-transition { position: fixed; inset: 0; width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; overflow: hidden; border: 0; background: transparent; outline: none; }
     .next-project-transition::backdrop { background: transparent; }
     .next-project-transition-visual { position: absolute; overflow: hidden; background: var(--color-panel); transform-origin: bottom right; will-change: width, height, left, top, transform; }

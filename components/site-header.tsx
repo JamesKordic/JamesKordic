@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { SITE_TEXT } from '@/lib/site-text';
 import '@/app/chrome.css';
 
-const LINKS = [ ['Work','/#work','Explore case studies'], ['About','/about','Meet the designer'], ['Contact','/contact','Reach out'] ];
+const LINKS = [ ['Work','/#work','Explore case studies'], ['Contact','/contact','Reach out'] ];
 const CHANNELS = [
   { label:'LinkedIn', href:SITE_TEXT.contact.linkedinUrl, description:'Connect with me', external:true },
   { label:'Résumé', href:SITE_TEXT.contact.resumeUrl, description:'View experience', external:true },

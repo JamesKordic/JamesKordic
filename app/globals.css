@@ -38,7 +38,7 @@ body:has(dialog[open]) {
   overflow: hidden;
 }
 
-.lenis :is(.case-study-sidebar, .case-study-media-carousel, dialog) {
+.lenis :is(.case-study-sidebar, dialog) {
   overscroll-behavior: contain;
 }
 

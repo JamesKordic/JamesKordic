@@ -1,4 +1,5 @@
 import type { Media, Project, Section } from './projects';
+import { getProjectPreview } from './project-preview';
 
 function limitSection(section: Section, limit = 6): Section {
   if (section.layout?.type !== 'mixed') {
@@ -20,14 +21,26 @@ function limitSection(section: Section, limit = 6): Section {
 function editorialSections(project: Project): { visible: Section[]; archive: Section[] } {
   if (project.id === 'taco-bell') {
     const [lineup, firstSet, secondSet, thirdSet, ...rest] = project.sections;
-    const featuredSet: Section = {
-      ...firstSet,
-      media: [firstSet.media[14], secondSet.media[2], thirdSet.media[0]],
-      layout: { type: 'uniform', cols: 3, aspect: '9/16' },
+    const featuredLineup = limitSection(lineup, 3);
+    const featuredCampaign: Section = {
+      ...featuredLineup,
+      media: [],
+      layout: {
+        type: 'mixed',
+        rows: [
+          ...(featuredLineup.layout?.type === 'mixed'
+            ? featuredLineup.layout.rows
+            : [{ cols: 3 as const, aspect: '4/5' as const, media: featuredLineup.media }]),
+          {
+            cols: 3,
+            aspect: '9/16',
+            media: [firstSet.media[14], secondSet.media[2], thirdSet.media[0]],
+          },
+        ],
+      },
     };
     const archivedFirstSet: Section = {
       ...firstSet,
-      title: 'Additional Artist Executions',
       media: firstSet.media.filter((_, index) => index !== 14),
     };
     const archivedSecondSet: Section = {
@@ -40,7 +53,7 @@ function editorialSections(project: Project): { visible: Section[]; archive: Sec
     };
 
     return {
-      visible: [limitSection(lineup, 3), featuredSet],
+      visible: [featuredCampaign],
       archive: [archivedFirstSet, archivedSecondSet, archivedThirdSet, ...rest],
     };
   }
@@ -287,12 +300,11 @@ export function getProjectPresentation(project: Project): ProjectPresentation {
   const singleOpeningMedia = firstLine && firstLine.layout?.type !== 'mixed' && firstLine.media.length === 1 && firstLine.media[0].type !== 'embed'
     ? firstLine.media[0]
     : null;
-  const hero: Media = singleOpeningMedia ?? (project.carouselVideo || project.coverVideo
-    ? { type: 'video', src: project.carouselVideo ?? project.coverVideo!, poster: project.heroImage ?? project.cover, aspect: '16/9' }
-    : { type: 'image', src: project.heroImage ?? project.cover, alt: `${project.title} campaign` });
-  // A single opening visual becomes the hero itself. Multi-image openings
-  // keep their entire original section after the introduction.
-  const gallerySections = singleOpeningMedia ? afterIntro : visible;
+  const hero = getProjectPreview(project);
+  // Omit an opening item only when the hero already shows that exact media.
+  // A different campaign film or image still belongs in the gallery.
+  const openingIsHero = singleOpeningMedia?.type === hero.type && singleOpeningMedia.src === hero.src;
+  const gallerySections = openingIsHero ? afterIntro : visible;
 
   return { hero, gallerySections, archive };
 }

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import type { Media } from '@/lib/projects';
 import { getMediaPreviewSrc } from '@/lib/media-preview';
+import { useLightbox } from '@/lib/lightbox-context';
 
 type Props = { id: string; title: string; blurb: string; hero: Media };
 
@@ -11,8 +12,15 @@ export function NextProject({ id, title, blurb, hero }: Props) {
   const shell = useRef<HTMLDivElement>(null);
   const panel = useRef<HTMLElement>(null);
   const mediaFrame = useRef<HTMLDivElement>(null);
-  const video = useRef<HTMLVideoElement>(null);
-  const [ready, setReady] = useState(false);
+  const [readySrc, setReadySrc] = useState<string | null>(null);
+  const { open: lightboxOpen } = useLightbox();
+  const lightboxState = useRef(lightboxOpen);
+  const playback = useRef<(() => void) | null>(null);
+
+  useEffect(() => {
+    lightboxState.current = lightboxOpen;
+    playback.current?.();
+  }, [lightboxOpen]);
 
   useEffect(() => {
     const track = shell.current;
@@ -30,14 +38,16 @@ export function NextProject({ id, title, blurb, hero }: Props) {
     let frame = 0;
 
     const synchronizeVideo = () => {
-      const clip = video.current;
+      const clip = mediaFrame.current?.querySelector('video');
       const bounds = mediaFrame.current?.getBoundingClientRect();
-      if (!clip || !bounds) return;
+      if (!clip || !bounds || !clip.getAttribute('src')) return;
       const visible = enabled ? progress > 0 : bounds.bottom > 0 && bounds.top < window.innerHeight;
-      if (visible && !document.hidden && !reducedMotion.matches) {
+      if (visible && !document.hidden && !reducedMotion.matches && !lightboxState.current) {
+        clip.muted = true;
         if (clip.paused) void clip.play().catch(() => undefined);
       } else clip.pause();
     };
+    playback.current = synchronizeVideo;
 
     const reset = () => {
       page.classList.remove('is-next-revealing');
@@ -66,26 +76,34 @@ export function NextProject({ id, title, blurb, hero }: Props) {
     };
     const schedule = () => { if (!frame) frame = window.requestAnimationFrame(update); };
     const measure = () => {
-      reset();
+      const wasRevealing = enabled && progress > 0;
+      const previousProgress = progress;
       enabled = desktop.matches && !reducedMotion.matches;
-      progress = 0;
       if (enabled) {
+        // Keep the spacer in flow while measuring, otherwise the temporarily
+        // shorter document can clamp the browser's scroll position.
         const rem = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
         distance = Math.max(1, main.offsetWidth - 23 * rem);
         track.style.setProperty('--case-next-width', `${distance}px`);
         track.classList.add('is-reveal-enabled');
         start = track.getBoundingClientRect().top + window.scrollY - window.innerHeight;
+        if (wasRevealing) {
+          window.scrollTo({ top: start + previousProgress * distance, behavior: 'instant' });
+        }
+      } else {
+        reset();
+        progress = 0;
       }
       update();
     };
 
     const preload = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setReady(true); preload.disconnect(); }
+      if (entry.isIntersecting) { setReadySrc(hero.src); preload.disconnect(); }
     }, { rootMargin: '100% 0px' });
     preload.observe(track);
     const resize = new ResizeObserver(measure);
     resize.observe(main);
-    const clip = video.current;
+    const clip = mediaFrame.current?.querySelector('video');
     clip?.addEventListener('loadeddata', synchronizeVideo);
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', measure);
@@ -105,6 +123,7 @@ export function NextProject({ id, title, blurb, hero }: Props) {
       desktop.removeEventListener('change', measure);
       reducedMotion.removeEventListener('change', measure);
       document.removeEventListener('visibilitychange', synchronizeVideo);
+      if (playback.current === synchronizeVideo) playback.current = null;
       reset();
     };
   }, [id, hero.src]);
@@ -122,17 +141,21 @@ export function NextProject({ id, title, blurb, hero }: Props) {
             <div className="case-study-next-links"><Link href="/contact">Get in touch ↗</Link></div>
           </div>
           <div className="case-study-next-media-column">
-            <Link href={`/work/${id}`} className="case-study-next-visual" aria-label={`View ${title}`} data-no-route-transition data-next-project-link={id} data-project-title={title}>
+            <div className={`case-study-next-visual${hero.type === 'video' ? ' case-study-next-visual--video' : ''}`}>
               <div ref={mediaFrame} className="case-study-next-frame" data-next-project-frame>
-                {hero.type === 'video' ? (
-                  <video ref={video} src={ready ? hero.src : undefined} poster={hero.poster ? getMediaPreviewSrc(hero.poster) : undefined} muted loop playsInline preload="auto" />
-                ) : hero.type === 'image' ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={getMediaPreviewSrc(hero.src)} alt="" loading="lazy" decoding="async" onError={(event) => { if (event.currentTarget.getAttribute('src') !== hero.src) event.currentTarget.src = hero.src; }} />
-                ) : null}
+                {hero.type !== 'embed' && (
+                  <Link href={`/work/${id}`} className="case-study-next-media-link" aria-label={`View ${title}`} data-no-route-transition data-next-project-link={id} data-project-title={title}>
+                    {hero.type === 'video' ? (
+                      <video src={readySrc === hero.src ? hero.src : undefined} poster={hero.poster ? getMediaPreviewSrc(hero.poster) : undefined} muted loop playsInline preload="auto" aria-hidden="true" />
+                    ) : (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={getMediaPreviewSrc(hero.src)} alt="" loading="lazy" decoding="async" onError={(event) => { if (event.currentTarget.getAttribute('src') !== hero.src) event.currentTarget.src = hero.src; }} />
+                    )}
+                  </Link>
+                )}
               </div>
-              <span className="case-study-next-open" aria-hidden="true">↗</span>
-            </Link>
+              <Link href={`/work/${id}`} className="case-study-next-open" aria-label={`Open ${title} project`} data-no-route-transition data-next-project-link={id} data-project-title={title}><span aria-hidden="true">↗</span></Link>
+            </div>
           </div>
         </div>
       </section>

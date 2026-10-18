@@ -1,7 +1,109 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, type CSSProperties } from 'react';
+import { usePathname } from 'next/navigation';
+import { useLightbox } from '@/lib/lightbox-context';
 import { SITE_TEXT } from '@/lib/site-text';
+
+/** Project films wait for the visitor to play them with audio enabled. */
+export function ProjectVideo({
+  src,
+  poster,
+  priority = false,
+  pauseForLightbox = true,
+  className,
+  style,
+}: {
+  src: string;
+  poster?: string;
+  priority?: boolean;
+  pauseForLightbox?: boolean;
+  className?: string;
+  style?: CSSProperties;
+}) {
+  const video = useRef<HTMLVideoElement>(null);
+  const { open: lightboxOpen } = useLightbox();
+  const [ready, setReady] = useState(priority);
+
+  useEffect(() => {
+    const clip = video.current;
+    if (!clip) return;
+    const preload = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setReady(true);
+        preload.disconnect();
+      }
+    }, { rootMargin: '400px' });
+    const playback = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) clip.pause();
+    });
+    const pauseWhenHidden = () => {
+      if (document.hidden) clip.pause();
+    };
+    preload.observe(clip);
+    playback.observe(clip);
+    document.addEventListener('visibilitychange', pauseWhenHidden);
+    return () => {
+      preload.disconnect();
+      playback.disconnect();
+      document.removeEventListener('visibilitychange', pauseWhenHidden);
+      clip.pause();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (lightboxOpen && pauseForLightbox) video.current?.pause();
+  }, [lightboxOpen, pauseForLightbox]);
+
+  return (
+    <video
+      ref={video}
+      src={ready ? src : undefined}
+      poster={poster}
+      controls
+      playsInline
+      preload="metadata"
+      data-project-video=""
+      className={className}
+      style={style}
+      onLoadedMetadata={(event) => {
+        const clip = event.currentTarget;
+        // Decode a nearby frame for clips without a supplied cover. Only
+        // near-viewport clips load metadata; this never starts playback.
+        if (!poster && clip.paused && clip.currentTime === 0 && Number.isFinite(clip.duration) && clip.duration > 0) {
+          try { clip.currentTime = Math.min(0.05, clip.duration / 2); } catch { /* Keep the browser's initial frame if seeking is unavailable. */ }
+        }
+      }}
+      onPlay={(event) => {
+        const clip = event.currentTarget;
+        document.querySelectorAll<HTMLVideoElement>('video[data-project-video]').forEach((other) => {
+          if (other !== clip) other.pause();
+        });
+      }}
+      onKeyDown={(event) => {
+        // Keep native seeking keys inside the player when it is in a gallery.
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') event.stopPropagation();
+      }}
+    />
+  );
+}
+
+type VideoPlayerProps = {
+  src: string;
+  aspect?: string;
+  poster?: string;
+  fit?: 'contain' | 'cover';
+};
+
+export function VideoPlayer(props: VideoPlayerProps) {
+  const pathname = usePathname();
+  if (!pathname?.startsWith('/work/')) return <LegacyVideoPlayer {...props} />;
+  return (
+    <div className="relative w-full bg-black overflow-hidden" style={{ aspectRatio: props.aspect ?? '16/9' }}>
+      <ProjectVideo key={props.src} src={props.src} poster={props.poster} className="absolute inset-0 w-full h-full" style={{ objectFit: props.fit ?? 'contain' }} />
+    </div>
+  );
+}
 
 /**
  * Custom video player used inside case-study sections.
@@ -31,17 +133,12 @@ import { SITE_TEXT } from '@/lib/site-text';
  *  - poster: optional poster image URL
  *  - fit: 'contain' (no cropping, may letterbox) or 'cover' (crop to fill)
  */
-export function VideoPlayer({
+function LegacyVideoPlayer({
   src,
   aspect = '16/9',
   poster,
   fit = 'contain',
-}: {
-  src: string;
-  aspect?: string;
-  poster?: string;
-  fit?: 'contain' | 'cover';
-}) {
+}: VideoPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const scrubRef = useRef<HTMLDivElement>(null);

@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
-const NESTED_SCROLLERS = '.case-study-sidebar, .case-study-media-carousel';
+const NESTED_SCROLLERS = '.case-study-sidebar';
 const SCROLL_KEYS = new Set(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ', 'Tab']);
 
 /** Ease wheel input while keeping native touch, anchors, and history restoration. */
@@ -50,8 +50,8 @@ export function SmoothScroll() {
     };
     const onControlClick = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      const control = event.target instanceof Element ? event.target.closest('a[href], button') : null;
-      if (control instanceof HTMLButtonElement) { cancelInertia(); return; }
+      const control = event.target instanceof Element ? event.target.closest('a[href], button, summary') : null;
+      if (control instanceof HTMLButtonElement || control?.tagName === 'SUMMARY') { cancelInertia(); return; }
       const anchor = control instanceof HTMLAnchorElement ? control : null;
       if (!anchor || anchor.hasAttribute('download') || (anchor.target && anchor.target !== '_self')) return;
       const destination = new URL(anchor.href, window.location.href);

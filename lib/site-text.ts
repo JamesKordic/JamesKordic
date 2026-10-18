@@ -169,7 +169,7 @@ export const SITE_TEXT = {
     /** Opening line */
     headline: 'Let’s work together.',
     /** Line under it */
-    intro: 'Send a message below, or reach me directly by email or phone.',
+    intro: 'Send a message, or reach me directly by email or phone.',
     /** Shown in place of the form once a message has gone through */
     sent: 'Thanks — your message is on its way. I’ll get back to you soon.',
   },

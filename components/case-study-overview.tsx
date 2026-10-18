@@ -1,27 +1,19 @@
 import type { Project } from '@/lib/projects';
-import { CASE_STUDY_SECTIONS, type CaseStudyStory } from '@/lib/case-study-stories';
+import { getProjectIntroduction } from '@/lib/project-introduction';
 
-export function CaseStudyOverview({ project, story }: { project: Project; story: CaseStudyStory }) {
+export function CaseStudyOverview({ project }: { project: Project }) {
+  const introduction = getProjectIntroduction(project);
+
   return (
-    <>
-      <div id="introduction" className="case-study-project-details">
-        <dl className="case-study-overview-details">
-          <div>
-            <dt>Date</dt>
-            <dd>{project.date || project.year}</dd>
-          </div>
-          <div>
-            <dt>My role</dt>
-            <dd>{project.role}</dd>
-          </div>
-        </dl>
-      </div>
-      {CASE_STUDY_SECTIONS.map(({ id, title, key }) => (
-        <section key={id} id={id} className="case-study-section case-study-overview-section" aria-labelledby={`${id}-heading`}>
-          <h2 id={`${id}-heading`}>{title}</h2>
-          <p>{story[key]}</p>
-        </section>
-      ))}
-    </>
+    <div id="introduction" className="case-study-overview">
+      <section className="case-study-text-body" aria-labelledby="overview-heading">
+        <h2 id="overview-heading" className="case-study-overline">Overview</h2>
+        <p>{introduction.overview}</p>
+      </section>
+      <section className="case-study-text-body" aria-labelledby="role-heading">
+        <h2 id="role-heading" className="case-study-overline">My role</h2>
+        <p>{introduction.role}</p>
+      </section>
+    </div>
   );
 }
