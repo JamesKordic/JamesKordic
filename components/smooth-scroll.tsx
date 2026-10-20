@@ -16,8 +16,8 @@ export function SmoothScroll() {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
     let lenis: Lenis | null = null;
 
-    const syncPause = () => {
-      if (document.hidden || document.querySelector('dialog[open]')) lenis?.stop();
+    const syncDialogLock = () => {
+      if (document.querySelector('dialog[open]')) lenis?.stop();
       else lenis?.start();
     };
 
@@ -38,7 +38,7 @@ export function SmoothScroll() {
           || (node.matches(NESTED_SCROLLERS)
             && (node.scrollHeight > node.clientHeight || node.scrollWidth > node.clientWidth)),
       });
-      syncPause();
+      syncDialogLock();
     };
 
     // Native focus, keyboard, and control-driven scrolling must not fight inertia.
@@ -59,10 +59,13 @@ export function SmoothScroll() {
     };
 
     configure();
-    const dialogs = new MutationObserver(syncPause);
+    const dialogs = new MutationObserver(syncDialogLock);
     dialogs.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['open'] });
     preference.addEventListener('change', configure);
-    document.addEventListener('visibilitychange', syncPause);
+    // stop() clips the root scroll container. Changing that on tab switches
+    // can flash the page at the top before the browser restores its position.
+    // Cancel pending inertia instead; the browser suspends background RAFs.
+    document.addEventListener('visibilitychange', cancelInertia);
     document.addEventListener('keydown', onKeyDown, true);
     document.addEventListener('click', onControlClick, true);
     window.addEventListener('popstate', cancelInertia);
@@ -70,7 +73,7 @@ export function SmoothScroll() {
     return () => {
       dialogs.disconnect();
       preference.removeEventListener('change', configure);
-      document.removeEventListener('visibilitychange', syncPause);
+      document.removeEventListener('visibilitychange', cancelInertia);
       document.removeEventListener('keydown', onKeyDown, true);
       document.removeEventListener('click', onControlClick, true);
       window.removeEventListener('popstate', cancelInertia);

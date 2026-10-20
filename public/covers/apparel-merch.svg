@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Apparel &amp; Merch Design</title>
+  <desc id="desc">Artwork coming soon.</desc>
+  <rect width="1600" height="900" fill="#141414"/>
+  <path d="M520 280H1080M520 550H1080" stroke="#353535"/>
+  <g fill="#ededed" font-family="Inter, Helvetica, Arial, sans-serif" font-size="88" font-weight="500" text-anchor="middle" letter-spacing="-3">
+    <text x="800" y="390">APPAREL</text>
+    <text x="800" y="490">&amp; MERCH</text>
+  </g>
+  <text x="800" y="602" fill="#a1a1a1" font-family="Inter, Helvetica, Arial, sans-serif" font-size="22" text-anchor="middle" letter-spacing="2">ARTWORK COMING SOON</text>
+</svg>

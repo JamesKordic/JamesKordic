@@ -320,7 +320,7 @@ export const SITE_TEXT = {
 
   /* ---- META (browser tab title + meta description) ---- */
   meta: {
-    title: 'James Kordic — Graphic & Motion Designer',
+    title: "James Kordic's Portfolio",
     description:
       'New York-based Graphic & Motion Designer. Work for Taco Bell, FX, MNRK Heavy, Consensus, and The Syndicate.',
   },

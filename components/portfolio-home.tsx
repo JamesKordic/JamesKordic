@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import type { Project } from '@/lib/projects';
-import { getProjectPreview, getProjectPreviewPoster } from '@/lib/project-preview';
+import { getProjectPreview } from '@/lib/project-preview';
 import { SiteHeader } from './site-header';
 import { PageFooter } from './page-footer';
 import '@/app/portfolio.css';
 
-export type PortfolioProject = Pick<Project, 'id' | 'title' | 'cover' | 'carouselVideo' | 'themeColor' | 'blurb' | 'work' | 'desc' | 'year' | 'industry'>;
+export type PortfolioProject = Pick<Project, 'id' | 'title' | 'cover' | 'coverAlt' | 'coverFit' | 'carouselVideo' | 'themeColor' | 'blurb' | 'work' | 'desc'>;
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={diagonal ? 'M5 19 19 5M5 5h14v14' : 'M4 12h16m-7-7 7 7-7 7'} stroke="currentColor" strokeWidth="1.5" /></svg>;
@@ -69,7 +69,7 @@ function ProjectVisual({ project, motion, suspended, priority = false }: { proje
   return <div className="project-visual" ref={ref} style={{ backgroundColor: source ? 'var(--color-bg)' : project.themeColor }}>
     <Link href={`/work/${project.id}`} className="project-link" data-home-project-link={project.id} data-project-title={project.title} data-no-route-transition aria-label={`Explore ${project.title}`} onPointerMove={movePointerLabel}>
     {/* eslint-disable-next-line @next/next/no-img-element */}
-    {(!source || failed) && <img src={poster} alt={`${project.title} — ${project.blurb}`} loading="lazy" width="1600" height="1000" />}
+    {(!source || failed) && <img src={poster} alt={project.coverAlt ?? `${project.title} — ${project.blurb}`} style={{ objectFit: project.coverFit ?? 'cover', backgroundColor: preview.type === 'image' ? preview.background : undefined }} loading="lazy" width="1600" height="1000" />}
     {source && near && !failed && <video ref={videoRef} src={source} autoPlay={priority} muted loop playsInline preload="auto" aria-hidden="true" onLoadedData={() => setReady(true)} onPlaying={() => { setReady(true); setBlocked(false); }} onError={() => setFailed(true)} className={priority || ready ? 'is-ready' : ''} />}
     <span className="project-view" aria-hidden="true">View project <Arrow diagonal /></span></Link>
     {source && !failed && <button className="project-pause" aria-label={effectiveMotion && !blocked ? `Pause ${project.title} preview` : `Play ${project.title} preview`} onClick={()=>{if(blocked){setBlocked(false);videoRef.current?.play().catch(()=>setBlocked(true));}else setManualMotion(!effectiveMotion);}}>{effectiveMotion && !blocked?'Ⅱ':'▷'}</button>}
@@ -130,18 +130,12 @@ function FeaturedWork({ projects, motion, suspended }: { projects: PortfolioProj
         <div className="work-story-copy">{projects.map((project, index) =>
           <div key={project.id} aria-hidden={index !== active} className={`work-story-layer${index === active ? ' is-active' : ''}`}><p>{project.desc}</p></div>
         )}</div>
-        <div className="work-story-meta-stack">{projects.map((project, index) =>
-          <Link key={project.id} href={`/work/${project.id}`} data-home-project-link={project.id} data-project-title={project.title} data-no-route-transition aria-hidden={index !== active} tabIndex={index === active ? 0 : -1} className={`work-story-meta work-story-layer${index === active ? ' is-active' : ''}`}>
-            <img src={getProjectPreviewPoster(project)} alt="" />
-            <div><p>{project.blurb}</p><span>{project.year}, {project.industry || 'Design'}</span></div>
-          </Link>
-        )}</div>
       </aside>
     </div>
     <div className="work-gallery" ref={gallery}>{projects.map((project, index) =>
       <article key={project.id} data-project data-project-id={project.id} id={`selected-${project.id}`} className={`work-project${index === active ? ' is-active' : ''}`}>
         <ProjectVisual project={project} motion={motion} suspended={suspended} priority={index === 0}/>
-        <div className="project-mobile-info"><Link href={`/work/${project.id}`} data-home-project-link={project.id} data-project-title={project.title} data-no-route-transition><h3>{project.title}</h3><p>{project.blurb}</p><Arrow diagonal /></Link><span>{project.year}, {project.industry || 'Design'}</span></div>
+        <div className="project-mobile-info"><Link href={`/work/${project.id}`} data-home-project-link={project.id} data-project-title={project.title} data-no-route-transition><h3>{project.title}</h3><p>{project.blurb}</p><Arrow diagonal /></Link></div>
       </article>
     )}</div>
   </section>;
@@ -171,7 +165,7 @@ export function PortfolioHome({ projects }: { projects: PortfolioProject[] }) {
           <p>Graphic &amp; Motion Designer</p>
         </div>
         <div className="portfolio-intro-copy">
-          <p>I create motion graphics, social campaigns, and visual identities for music, entertainment, and brands.</p>
+          <p>I create motion graphics, social campaigns, merchandise, and visual identities for music, entertainment, and brands.</p>
           <p className="portfolio-intro-credit">Selected work for Guns N’ Roses, Taco Bell, FX, and more. Based in New York.</p>
         </div>
       </section>

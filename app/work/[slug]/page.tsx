@@ -60,13 +60,18 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     <div className="case-study-page">
       <SiteHeader overlay />
       <main className="case-study-layout">
-        <CaseStudyNavigation title={p.title} blurb={p.blurb} category={category} year={p.year} sections={sectionLinks} />
+        <CaseStudyNavigation title={p.title} blurb={p.blurb} category={category} sections={sectionLinks} />
         <div className="case-study-content">
-          <CaseStudyMedia media={hero} hero />
+          {p.comingSoon ? (
+            <div className="case-study-media-tile case-study-hero">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={hero.src} alt={`${p.title} — artwork coming soon`} fetchPriority="high" />
+            </div>
+          ) : <CaseStudyMedia media={hero} hero />}
           <div className="case-study-mobile-title">
             <h1>{p.title}</h1>
             <p>{p.blurb}</p>
-            <div className="case-study-tags"><span>{category}</span><i aria-hidden="true" /><span>{p.year}</span></div>
+            <div className="case-study-tags"><span>{category}</span></div>
           </div>
           <CaseStudyOverview project={p} />
 
@@ -90,7 +95,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           )}
 
           {p.id === 'voltage' && (
-            <p className="case-study-disclosure">Self-initiated concept · 2026 · AI-assisted imagery. Packaging, merchandise and campaign placements are proposed design visualizations.</p>
+            <p className="case-study-disclosure">Self-initiated concept · AI-assisted imagery. Packaging, merchandise and campaign placements are proposed design visualizations.</p>
           )}
           {p.id === 'the-syndicate' && (
             <p className="case-study-further">Want to see more? <a href={`mailto:${SITE_TEXT.contact.email}`}>Get in touch.</a></p>

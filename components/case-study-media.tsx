@@ -61,11 +61,12 @@ export function CaseStudyMedia({ media, aspect, hero = false, imageSet }: { medi
   // The matching JPGs are page previews; the lightbox keeps the original 4K media.
   const preview = getMediaPreviewSrc(media.src);
   return (
-    <button type="button" className={`case-study-media-tile case-study-image${hero ? ' case-study-hero' : ''}${ratio ? ' case-study-image-fixed' : ''}`} style={!hero && ratio ? { aspectRatio: ratio } : undefined} onClick={() => show(images, Math.max(0, images.indexOf(media)))} aria-label={media.alt ? `View ${media.alt} full screen` : 'View image full screen'}>
+    <button type="button" className={`case-study-media-tile case-study-image${hero ? ' case-study-hero' : ''}${ratio ? ' case-study-image-fixed' : ''}`} style={{ aspectRatio: !hero ? ratio : undefined, backgroundColor: media.background }} onClick={() => show(images, Math.max(0, images.indexOf(media)))} aria-label={media.alt ? `View ${media.alt} full screen` : 'View image full screen'}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={preview}
         alt={media.alt ?? ''}
+        style={{ objectFit: media.fit ?? 'cover', backgroundColor: media.background }}
         loading={hero ? 'eager' : 'lazy'}
         fetchPriority={hero ? 'high' : undefined}
         decoding="async"

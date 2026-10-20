@@ -35,7 +35,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   const home=pathname==='/', casePage=pathname.startsWith('/work');
   const compact=!home||scrolled;
   const pageLabel=home?'Home':pathname.split('/')[1];
-  const projectLabel:Record<string,string>={'guns-n-roses':"Guns N’ Roses",'taco-bell':'Taco Bell',adults:'Adults on FX','the-syndicate':'The Syndicate',wwimf:'WWIMF',voltage:'Voltage'};
+  const projectLabel:Record<string,string>={'guns-n-roses':"Guns N’ Roses",'taco-bell':'Taco Bell',adults:'Adults on FX','the-syndicate':'The Syndicate',wwimf:'WWIMF',voltage:'Voltage','apparel-merch':'Apparel & Merch'};
   const breadcrumb=pathname.startsWith('/work/')?projectLabel[pathname.split('/')[2]]:undefined;
   useEffect(()=>{const sync=()=>setScrolled(window.scrollY>24);sync();window.addEventListener('scroll',sync,{passive:true});return()=>window.removeEventListener('scroll',sync);},[]);
   useEffect(()=>{setOpen(false);setHoverHeld(false);},[pathname]);

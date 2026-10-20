@@ -141,7 +141,7 @@ export function NextProject({ id, title, blurb, hero }: Props) {
             <div className="case-study-next-links"><Link href="/contact">Get in touch ↗</Link></div>
           </div>
           <div className="case-study-next-media-column">
-            <div className={`case-study-next-visual${hero.type === 'video' ? ' case-study-next-visual--video' : ''}`}>
+            <div className={`case-study-next-visual${hero.type === 'video' ? ' case-study-next-visual--video' : ''}`} style={{ backgroundColor: hero.type === 'image' ? hero.background : undefined }}>
               <div ref={mediaFrame} className="case-study-next-frame" data-next-project-frame>
                 {hero.type !== 'embed' && (
                   <Link href={`/work/${id}`} className="case-study-next-media-link" aria-label={`View ${title}`} data-no-route-transition data-next-project-link={id} data-project-title={title}>
@@ -149,7 +149,7 @@ export function NextProject({ id, title, blurb, hero }: Props) {
                       <video src={readySrc === hero.src ? hero.src : undefined} poster={hero.poster ? getMediaPreviewSrc(hero.poster) : undefined} muted loop playsInline preload="auto" aria-hidden="true" />
                     ) : (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={getMediaPreviewSrc(hero.src)} alt="" loading="lazy" decoding="async" onError={(event) => { if (event.currentTarget.getAttribute('src') !== hero.src) event.currentTarget.src = hero.src; }} />
+                      <img src={getMediaPreviewSrc(hero.src)} alt="" style={{ objectFit: hero.fit ?? 'cover', backgroundColor: hero.background ?? (hero.fit === 'contain' ? 'var(--color-panel)' : undefined) }} loading="lazy" decoding="async" onError={(event) => { if (event.currentTarget.getAttribute('src') !== hero.src) event.currentTarget.src = hero.src; }} />
                     )}
                   </Link>
                 )}

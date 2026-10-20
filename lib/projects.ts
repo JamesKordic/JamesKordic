@@ -3,7 +3,7 @@
 
 /* ============ MEDIA TYPES ============ */
 export type Media =
-  | { type: 'image'; src: string; aspect?: AspectRatio; alt?: string }
+  | { type: 'image'; src: string; aspect?: AspectRatio; alt?: string; fit?: 'contain' | 'cover'; background?: 'transparent' }
   | {
       type: 'video';
       src: string;
@@ -99,6 +99,10 @@ export type Project = {
   kind: ProjectKind;
   title: string;
   cover: string;
+  coverAlt?: string;
+  coverFit?: 'contain' | 'cover';
+  /** A prepared project page awaiting artwork. */
+  comingSoon?: boolean;
   /** Optional still image shown as the project-page hero only. When set, the
    *  project page uses this instead of `cover`; `cover` is still used
    *  everywhere else (homepage card, thumbnails, prev/next, search, etc.). */
@@ -146,7 +150,212 @@ const jpg = (id: string, w = 1200) => `${FRAMER}/images/${id}.jpg?width=${w}`;
 const gif = (id: string, w = 540) => `${FRAMER}/images/${id}.gif?width=${w}`;
 const vid = (id: string) => `${FRAMER}/assets/${id}.mp4`;
 
+const WHISPER_SHIRT: Extract<Media, { type: 'image' }> = {
+  type: 'image',
+  src: '/projects/apparel-merch/whisper-t-shirt.png',
+  alt: 'Washed black T-shirt with a distressed white graphic and orange whisper lettering',
+  aspect: '1/1',
+  fit: 'contain',
+  background: 'transparent',
+};
+
 const PROJECT_CATALOG: Project[] = [
+  {
+    id: 'apparel-merch',
+    kind: 'personal',
+    title: 'Apparel & Merch Design',
+    cover: WHISPER_SHIRT.src,
+    coverAlt: WHISPER_SHIRT.alt,
+    coverFit: 'contain',
+    coverVideo: '/projects/apparel-merch/merch-hero-loop.mp4',
+    carouselVideo: '/projects/apparel-merch/merch-hero-loop.mp4',
+    themeColor: 'transparent',
+    tags: ['Graphic Design', 'Merchandise Design', 'Music'],
+    client: '',
+    industry: 'Music & Entertainment',
+    date: '',
+    role: 'I developed apparel graphics and merchandise concepts, working with artist imagery, typography, color, and texture to shape each design. The goal was to keep each piece distinct to the artist while balancing the graphics, placement, and garment color.',
+    year: '',
+    len: 0,
+    blurb: 'Music & Artist Merchandise',
+    work: 'Graphic Design, Merchandise Design',
+    desc: 'Music and merch design for artists including Ally Evenson, Oleka, Underscores, and more. The work brings each artist’s visual identity into apparel through imagery, typography, and graphic treatments, connecting the designs to the music behind them.',
+    sections: [
+      {
+        title: 'Orange Portrait T-Shirt',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/orange-portrait-t-shirt.png',
+          alt: 'Black T-shirt with a distressed orange and red portrait and bold lettering across the lower front',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Orange Collage T-Shirt',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/orange-collage-t-shirt.png',
+          alt: 'Black T-shirt with an orange and red collage of a helmeted portrait, a small figure, and bold lettering',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Trophy Graphic T-Shirt',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/trophy-graphic-t-shirt.png',
+          alt: 'Black T-shirt with a tall distressed orange and red trophy graphic',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'See the World T-Shirt — Black',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/see-the-world-black-t-shirt.png',
+          alt: 'Black T-shirt with two offset monochrome photographic prints and See the World and Sunshine When It Rains lettering',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Sun & Umbrella T-Shirt — Black',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/sun-umbrella-black-t-shirt.png',
+          alt: 'Black T-shirt with a bright orange, yellow, and blue sun graphic curving toward a figure holding an umbrella',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Layered Sphere T-Shirt — Black',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/layered-sphere-black-t-shirt.png',
+          alt: 'Black T-shirt with a grainy exploded sphere graphic in orange, yellow, and vivid blue',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'See the World T-Shirt — White',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/see-the-world-white-t-shirt.png',
+          alt: 'White T-shirt with two offset photographic prints and See the World and Sunshine When It Rains lettering',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Sun & Umbrella T-Shirt — White',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/sun-umbrella-white-t-shirt.png',
+          alt: 'White T-shirt with a monochrome sun graphic curving toward a figure holding an umbrella',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Layered Sphere T-Shirt — White',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/layered-sphere-white-t-shirt.png',
+          alt: 'White T-shirt with a grainy exploded sphere graphic in shades of blue',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Underscores T-Shirt',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/underscores-t-shirt.png',
+          alt: 'Black T-shirt with layered multicolor underscores lettering across the chest',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Layered Graphic T-Shirt',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/layered-graphic-back.png',
+          alt: 'Back of a black T-shirt with a distressed multicolor circular graphic',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Portrait Graphic T-Shirt',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/portrait-graphic-back.png',
+          alt: 'Back of a black T-shirt with a monochrome figure over a layered multicolor graphic',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Graphic Long Sleeve',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/graphic-long-sleeve.png',
+          alt: 'Black long-sleeve shirt with large white silhouettes and pale blue outlined graphics',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Milano Cortina T-Shirt',
+        media: [{
+          type: 'image',
+          src: '/projects/apparel-merch/milano-cortina-t-shirt.png',
+          alt: 'Black T-shirt with Milano Cortina 2026 lettering, Olympic rings, and a pale pink graphic at the hem',
+          aspect: '1/1',
+          fit: 'contain',
+          background: 'transparent',
+        }],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+      {
+        title: 'Whisper T-Shirt',
+        media: [WHISPER_SHIRT],
+        layout: { type: 'uniform', cols: 1, aspect: '1/1' },
+      },
+    ],
+  },
   {
     id: 'guns-n-roses',
     kind: 'professional',
@@ -1271,10 +1480,10 @@ const PROJECT_CATALOG: Project[] = [
   },
 ];
 
-/** Editorial order: lead with recognizable, range-heavy client work, then
- * establish entertainment experience before the self-directed projects. */
+/** Display order shared by the homepage and next-project navigation. */
 const PROJECT_ORDER = [
   'guns-n-roses',
+  'apparel-merch',
   'taco-bell',
   'adults',
   'the-syndicate',

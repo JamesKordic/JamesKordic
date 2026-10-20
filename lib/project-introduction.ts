@@ -11,7 +11,7 @@ const CONTRIBUTIONS: Record<string, string> = {
   'the-syndicate':
     'Working alongside the creative team, I designed and animated assets for clients including MNRK Heavy, Consensus by CoinDesk, Craig Ferguson, Indie Week, and Killphonic Records. My work included editing social clips, building modular campaign systems, creating speaker and sponsor graphics, adapting assets across platforms, and preparing files for production. I often took projects from rough content through polished, ready-to-publish deliverables.',
   wwimf:
-    'I led every part of the project from concept through final exhibition. I developed the strategy and visual identity, designed stage environments and participatory interactions, created the campaign and motion system, produced merchandise and physical touchpoints, and brought the full experience together for the 2025 RIT Graphic Design Capstone Show. The goal was to make a fictional festival feel detailed, cohesive, and believable enough to exist.',
+    'I led every part of the project from concept through final exhibition. I developed the strategy and visual identity, designed stage environments and participatory interactions, created the campaign and motion system, produced merchandise and physical touchpoints, and brought the full experience together for the RIT Graphic Design Capstone Show. The goal was to make a fictional festival feel detailed, cohesive, and believable enough to exist.',
 };
 
 export function getProjectIntroduction(project: Project) {

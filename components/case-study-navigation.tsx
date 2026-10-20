@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 type SectionLink = { id: string; title: string };
-type Props = { title: string; blurb: string; category: string; year: string; sections: SectionLink[] };
+type Props = { title: string; blurb: string; category: string; sections: SectionLink[] };
 type ReadingPosition = { x: number; y: number };
 type SectionHistory = { id: string; page: string; expanded: string[]; position?: ReadingPosition };
 const SECTION_HISTORY_KEY = '__jkCaseStudyNavigation';
@@ -21,7 +21,7 @@ function scrollToSection(element: HTMLElement, behavior: ScrollBehavior) {
   window.scrollTo({ top: window.scrollY + element.getBoundingClientRect().top - revealOffset - margin, behavior });
 }
 
-export function CaseStudyNavigation({ title, blurb, category, year, sections }: Props) {
+export function CaseStudyNavigation({ title, blurb, category, sections }: Props) {
   const [active, setActive] = useState(sections[0]?.id ?? '');
   const [open, setOpen] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -270,7 +270,7 @@ export function CaseStudyNavigation({ title, blurb, category, year, sections }: 
         <div className="case-study-sidebar-title">
           <h1>{title}</h1>
           <p>{blurb}</p>
-          <div className="case-study-tags"><span>{category}</span><i aria-hidden="true" /><span>{year}</span></div>
+          <div className="case-study-tags"><span>{category}</span></div>
         </div>
         <nav className="case-study-anchor-nav" aria-label="Project sections">{links()}</nav>
       </aside>
@@ -280,7 +280,7 @@ export function CaseStudyNavigation({ title, blurb, category, year, sections }: 
       <dialog ref={dialog} id="case-study-mobile-navigation" className="case-study-mobile-navigation" aria-label="Project sections" onCancel={(event) => { event.preventDefault(); setOpen(false); }}>
         <div className="case-study-sidebar-title">
           <p className="case-study-mobile-name">{title}</p><p>{blurb}</p>
-          <div className="case-study-tags"><span>{category}</span><i aria-hidden="true" /><span>{year}</span></div>
+          <div className="case-study-tags"><span>{category}</span></div>
         </div>
         <nav className="case-study-anchor-nav" aria-label="Mobile project sections">{links()}</nav>
         <button type="button" className="case-study-mobile-close" onClick={() => setOpen(false)}>Close <span aria-hidden="true">×</span></button>

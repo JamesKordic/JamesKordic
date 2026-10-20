@@ -304,6 +304,9 @@ export function NextProjectTransition() {
       place(visual, { left: start.left, top: start.top, width: start.width, height: start.height, borderRadius: getComputedStyle(frame).borderRadius });
       const sourceClip = getComputedStyle(frame).clipPath;
       visual.style.clipPath = sourceClip;
+      if (source instanceof HTMLImageElement && source.style.backgroundColor) {
+        visual.style.backgroundColor = source.style.backgroundColor;
+      }
       const media = source.cloneNode(true) as HTMLImageElement | HTMLVideoElement;
       media.removeAttribute('id');
       media.removeAttribute('loading');

@@ -15,9 +15,9 @@ const EMPTY: Fields = { name: '', company: '', phone: '', email: '', message: ''
 
 /**
  * The contact form: name and message required, company, phone and email
- * optional. It posts to the Formspree endpoint in `contact.formspreeEndpoint`,
- * which forwards each message to James's inbox — send a test through it now
- * and then to make sure messages are still arriving.
+ * optional. It posts to the Formspree endpoint in `contact.formspreeEndpoint`.
+ * Fields stay read-only while sending so a successful response cannot discard
+ * newer edits that were not included in the request.
  */
 export function ContactForm() {
   const [fields, setFields] = useState<Fields>(EMPTY);
@@ -76,22 +76,23 @@ export function ContactForm() {
     );
   }
 
+  const sending = status.state === 'sending';
   const input =
     'mt-2 w-full rounded-none border-b border-line bg-transparent pb-3 text-[17px] text-text outline-none transition-colors placeholder:text-muted-2 focus:border-text';
 
   return (
-    <form onSubmit={send} className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2">
+    <form onSubmit={send} aria-busy={sending} className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2">
       <Field label="Name" required className="sm:col-span-2">
-        <input value={fields.name} onChange={set('name')} name="name" autoComplete="name" required className={input} />
+        <input value={fields.name} onChange={set('name')} name="name" autoComplete="name" required readOnly={sending} className={input} />
       </Field>
       <Field label="Company">
-        <input value={fields.company} onChange={set('company')} name="company" autoComplete="organization" className={input} />
+        <input value={fields.company} onChange={set('company')} name="company" autoComplete="organization" readOnly={sending} className={input} />
       </Field>
       <Field label="Phone">
-        <input value={fields.phone} onChange={set('phone')} name="phone" type="tel" autoComplete="tel" className={input} />
+        <input value={fields.phone} onChange={set('phone')} name="phone" type="tel" autoComplete="tel" readOnly={sending} className={input} />
       </Field>
       <Field label="Email" className="sm:col-span-2">
-        <input value={fields.email} onChange={set('email')} name="email" type="email" autoComplete="email" className={input} />
+        <input value={fields.email} onChange={set('email')} name="email" type="email" autoComplete="email" readOnly={sending} className={input} />
       </Field>
       <Field label="Message" required className="sm:col-span-2">
         <textarea
@@ -100,6 +101,7 @@ export function ContactForm() {
           name="message"
           rows={6}
           required
+          readOnly={sending}
           className={`${input} resize-y`}
         />
       </Field>
@@ -110,7 +112,7 @@ export function ContactForm() {
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:col-span-2">
         <button
           type="submit"
-          disabled={status.state === 'sending'}
+          disabled={sending}
           className="rounded-full bg-accent px-7 py-3.5 text-[17px] font-medium text-accent-ink transition-colors hover:bg-accent-deep disabled:opacity-60"
         >
           {status.state === 'sending' ? 'Sending…' : 'Send message'}

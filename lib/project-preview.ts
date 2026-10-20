@@ -10,9 +10,9 @@ export function getProjectPreviewPoster(project: Pick<Project, 'id' | 'cover'>):
 }
 
 /** Keep homepage cards, project heroes, and next-project previews on the same media. */
-export function getProjectPreview(project: Pick<Project, 'id' | 'title' | 'cover' | 'carouselVideo'>): Media {
+export function getProjectPreview(project: Pick<Project, 'id' | 'title' | 'cover' | 'coverAlt' | 'coverFit' | 'carouselVideo' | 'themeColor'>): Media {
   const poster = getProjectPreviewPoster(project);
   return project.carouselVideo
     ? { type: 'video', src: project.carouselVideo, poster, aspect: '16/9' }
-    : { type: 'image', src: poster, alt: `${project.title} campaign` };
+    : { type: 'image', src: poster, alt: project.coverAlt ?? `${project.title} campaign`, fit: project.coverFit, aspect: '16/9', background: project.themeColor === 'transparent' ? 'transparent' : undefined };
 }

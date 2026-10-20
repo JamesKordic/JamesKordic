@@ -19,6 +19,17 @@ function limitSection(section: Section, limit = 6): Section {
 }
 
 function editorialSections(project: Project): { visible: Section[]; archive: Section[] } {
+  if (project.id === 'apparel-merch') {
+    return {
+      visible: [{
+        title: 'Music & Merchandise',
+        media: project.sections.flatMap((section) => section.media),
+        layout: { type: 'uniform', cols: 3, aspect: '1/1' },
+      }],
+      archive: [],
+    };
+  }
+
   if (project.id === 'taco-bell') {
     const [lineup, firstSet, secondSet, thirdSet, ...rest] = project.sections;
     const featuredLineup = limitSection(lineup, 3);
@@ -301,9 +312,10 @@ export function getProjectPresentation(project: Project): ProjectPresentation {
     ? firstLine.media[0]
     : null;
   const hero = getProjectPreview(project);
-  // Omit an opening item only when the hero already shows that exact media.
-  // A different campaign film or image still belongs in the gallery.
-  const openingIsHero = singleOpeningMedia?.type === hero.type && singleOpeningMedia.src === hero.src;
+  // Keep a differently framed artwork view in the gallery, even when its
+  // source also serves as the widescreen project preview.
+  const openingIsHero = singleOpeningMedia?.type === hero.type && singleOpeningMedia.src === hero.src
+    && (!singleOpeningMedia.aspect || singleOpeningMedia.aspect === hero.aspect);
   const gallerySections = openingIsHero ? afterIntro : visible;
 
   return { hero, gallerySections, archive };
