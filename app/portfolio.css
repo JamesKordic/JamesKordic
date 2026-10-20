@@ -34,11 +34,11 @@
 
 /* The story stays in its reading position while the gallery scrolls into it. */
 .work-story{margin-top:-100svh;opacity:var(--story-reveal,0)}
-.work-story-titles{position:relative;overflow:hidden}
-.work-story h3.work-story-title{position:absolute;bottom:0;left:0;width:100%;transform:translateY(100%);transition:transform 133ms cubic-bezier(.75,0,.85,1)}
-.work-story h3.work-story-title:first-child{position:relative}
-.work-story h3.work-story-title.is-before{transform:translateY(-100%)}
-.work-story h3.work-story-title.is-active{transform:translateY(0);transition-duration:333ms;transition-timing-function:cubic-bezier(0,0,0,1)}
+/* Shared rows fit wrapped names; completed exits stop painting at the clip edge. */
+.work-story-titles{position:relative;display:grid;overflow:hidden}
+.work-story h3.work-story-title{position:relative;grid-area:1/1;align-self:stretch;min-width:0;width:100%;visibility:hidden;transform:translateY(calc(100% + 2px));transition:transform 133ms cubic-bezier(.75,0,.85,1),visibility 0s linear 133ms}
+.work-story h3.work-story-title.is-before{transform:translateY(calc(-100% - 2px))}
+.work-story h3.work-story-title.is-active{visibility:visible;transform:translateY(0);transition:transform 333ms cubic-bezier(0,0,0,1),visibility 0s}
 .work-story-copy{position:relative}
 .work-story-layer{position:absolute;bottom:0;left:0;width:100%;opacity:0;pointer-events:none;transition:opacity 167ms linear}
 .work-story-layer:first-child{position:relative}
@@ -48,7 +48,7 @@
   .work-project.is-active,.work-project:focus-within{opacity:1}
 }
 @media(prefers-reduced-motion:reduce){
-  .work-story h3.work-story-title,.work-story-layer,.work-project{transition:none}
+  .work-story h3.work-story-title,.work-story h3.work-story-title.is-active,.work-story-layer,.work-project{transition:none}
 }
 /* Keep long descriptions clear of the heading on short desktop windows. */
 @media(min-width:74.625rem) and (max-height:43.75rem){
