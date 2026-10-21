@@ -107,13 +107,15 @@
 .case-study-page .is-reveal-enabled .case-study-next-frame { clip-path: inset(var(--case-next-clip, 89%) 0 0 var(--case-next-clip, 89%) round 0.25rem); }
 .case-study-page .is-reveal-enabled .case-study-next-open { opacity: var(--case-next-copy-opacity, 0); }
 .case-study-page .case-study-mobile-trigger { display: none; }
-.case-study-page .case-study-mobile-navigation { position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 2.5rem 1rem 6.25rem; overflow-y: auto; overscroll-behavior: contain; border: 0; color: var(--color-text); background: #0a0a0af2; backdrop-filter: blur(2.5rem); }
+.case-study-page .case-study-mobile-navigation { position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; overflow: hidden; border: 0; color: var(--color-text); background: #0a0a0af2; backdrop-filter: blur(2.5rem); }
+.case-study-page .case-study-mobile-navigation-scroll { height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: 2.5rem 1rem 6.25rem; }
 .case-study-page .case-study-mobile-navigation::backdrop { background: var(--color-bg); }
 .case-study-page .case-study-mobile-navigation .case-study-mobile-name { color: var(--color-text); }
 .case-study-page .case-study-mobile-navigation .case-study-anchor-nav { margin-top: 2.25rem; padding-left: 0.75rem; }
-.case-study-page .case-study-mobile-close { position: fixed; left: 50%; bottom: 0.625rem; display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; transform: translateX(-50%); padding: 1rem; border-radius: 0.125rem; color: var(--color-text); background: var(--color-panel); font-family: var(--font-ui, monospace); font-size: 0.6875rem; line-height: 0.6875rem; text-transform: uppercase; }
+.case-study-page .case-study-mobile-close { position: absolute; left: 50%; bottom: 0.625rem; display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; transform: translateX(-50%); padding: 1rem; border-radius: 0.125rem; color: var(--color-text); background: var(--color-panel); font-family: var(--font-ui, monospace); font-size: 0.6875rem; line-height: 0.6875rem; text-transform: uppercase; }
 .case-study-page .case-study-mobile-close span { font-size: 1.25rem; }
 @media (max-width: 52.0625rem) {
+  .case-study-page .case-study-embed { min-height: 24rem; }
   .case-study-page { --case-next-gap: 1.75rem; --case-section-offset: clamp(4.375rem, 30svh, 12rem); }
   .case-study-page .case-study-layout { display: block; padding: 0 0.5rem; }
   .case-study-page .case-study-sidebar { display: none; }

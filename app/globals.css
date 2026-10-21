@@ -74,6 +74,22 @@ p {
   outline-offset: 5px;
 }
 
+/* Dialog autofocus can inherit a keyboard ring after a touch on mobile.
+   Suppress it only for pointer-operated menus; Tab restores native focus styles. */
+html[data-input-modality='pointer'] :is(
+  .jk-menu-dialog,
+  .jk-menu-dialog a,
+  .jk-menu-dialog button,
+  .jk-menu-trigger,
+  .jk-mobile-menu-trigger,
+  .case-study-mobile-navigation,
+  .case-study-mobile-navigation a,
+  .case-study-mobile-navigation button,
+  .case-study-mobile-trigger
+):focus {
+  outline: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;

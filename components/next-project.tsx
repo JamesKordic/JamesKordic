@@ -29,7 +29,9 @@ export function NextProject({ id, title, blurb, hero }: Props) {
     const main = page?.querySelector<HTMLElement>('.case-study-layout');
     if (!track || !section || !page || !main) return;
 
-    const desktop = window.matchMedia('(min-width: 1194px)');
+    // The fixed reveal needs room for its heading, preview and contact link.
+    // Short windows use the normal flowing panel so every control stays reachable.
+    const desktop = window.matchMedia('(min-width: 1194px) and (min-height: 640px)');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let enabled = false;
     let start = 0;
@@ -52,6 +54,7 @@ export function NextProject({ id, title, blurb, hero }: Props) {
     const reset = () => {
       page.classList.remove('is-next-revealing');
       track.classList.remove('is-reveal-enabled');
+      main.inert = false;
       section.inert = false;
       for (const name of ['--case-reveal-x', '--case-reveal-y', '--case-reveal-opacity']) main.style.removeProperty(name);
       for (const name of ['--case-next-width', '--case-next-clip', '--case-next-scale', '--case-next-copy-opacity', '--case-next-contact-x']) track.style.removeProperty(name);
@@ -70,7 +73,13 @@ export function NextProject({ id, title, blurb, hero }: Props) {
         track.style.setProperty('--case-next-scale', String(.5 + .5 * progress));
         track.style.setProperty('--case-next-contact-x', `${distance - travel}px`);
         track.style.setProperty('--case-next-copy-opacity', String(Math.min(1, Math.max(0, (progress - .7) / .3))));
-        section.inert = progress < .7;
+        const nextInteractive = progress >= .7;
+        const handOffFocus = nextInteractive && !main.inert && main.contains(document.activeElement);
+        section.inert = !nextInteractive;
+        // Once the incoming project is usable, skip the outgoing links that
+        // have slid offscreen. Scrolling back restores their normal tab order.
+        main.inert = nextInteractive;
+        if (handOffFocus) section.querySelector<HTMLAnchorElement>('.case-study-next-title')?.focus({ preventScroll: true });
       }
       synchronizeVideo();
     };

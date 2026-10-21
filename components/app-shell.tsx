@@ -5,6 +5,7 @@ import { Lightbox } from './lightbox';
 import { RouteTransitions } from './route-transitions';
 import { SmoothScroll } from './smooth-scroll';
 import { NextProjectTransition } from './next-project-transition';
+import { InputModality } from './input-modality';
 
 /**
  * Site shell. Every page — home, project, contact and the 404 — brings its
@@ -18,6 +19,7 @@ import { NextProjectTransition } from './next-project-transition';
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <>
+      <InputModality />
       <SmoothScroll />
       <RouteTransitions />
       <NextProjectTransition />

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SITE_TEXT } from '@/lib/site-text';
 import { META } from '@/lib/type';
 
@@ -22,6 +22,17 @@ const EMPTY: Fields = { name: '', company: '', phone: '', email: '', message: ''
 export function ContactForm() {
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [status, setStatus] = useState<Status>({ state: 'idle' });
+  const confirmation = useRef<HTMLDivElement>(null);
+  const nameInput = useRef<HTMLInputElement>(null);
+  const returningToForm = useRef(false);
+
+  useEffect(() => {
+    if (status.state === 'sent') confirmation.current?.focus();
+    else if (status.state === 'idle' && returningToForm.current) {
+      returningToForm.current = false;
+      nameInput.current?.focus();
+    }
+  }, [status.state]);
 
   const set = (key: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setFields((f) => ({ ...f, [key]: e.target.value }));
@@ -61,13 +72,16 @@ export function ContactForm() {
 
   if (status.state === 'sent') {
     return (
-      <div role="status" className="border-t border-line pt-6">
+      <div ref={confirmation} role="status" tabIndex={-1} className="border-t border-line pt-6">
         <p className="text-[clamp(22px,2.2vw,28px)] font-medium leading-snug tracking-[-0.02em]">
           {T.contactPage.sent}
         </p>
         <button
           type="button"
-          onClick={() => setStatus({ state: 'idle' })}
+          onClick={() => {
+            returningToForm.current = true;
+            setStatus({ state: 'idle' });
+          }}
           className="mt-4 text-muted transition-colors hover:text-accent"
         >
           Send another message
@@ -83,7 +97,7 @@ export function ContactForm() {
   return (
     <form onSubmit={send} aria-busy={sending} className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2">
       <Field label="Name" required className="sm:col-span-2">
-        <input value={fields.name} onChange={set('name')} name="name" autoComplete="name" required readOnly={sending} className={input} />
+        <input ref={nameInput} value={fields.name} onChange={set('name')} name="name" autoComplete="name" required readOnly={sending} className={input} />
       </Field>
       <Field label="Company">
         <input value={fields.company} onChange={set('company')} name="company" autoComplete="organization" readOnly={sending} className={input} />

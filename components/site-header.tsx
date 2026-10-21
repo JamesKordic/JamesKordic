@@ -70,7 +70,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
       <nav className="jk-header-nav" aria-label="Primary">{LINKS.map(([label,href])=><Link href={href} key={href}>{label}</Link>)}</nav>
       <button ref={mobileTrigger} className="jk-mobile-menu-trigger" aria-label="Open navigation menu" aria-haspopup="dialog" aria-expanded={open} onClick={()=>setOpen(true)}>Menu</button>
     </header>
-    <dialog ref={menuRef} className="jk-menu-dialog" aria-label="Site navigation" onCancel={()=>setOpen(false)} onClose={()=>{setOpen(false);(window.innerWidth<834?mobileTrigger:trigger).current?.focus();}} onClick={e=>{if(e.target===e.currentTarget)setOpen(false);}}>
+    <dialog ref={menuRef} className="jk-menu-dialog" aria-label="Site navigation" onCancel={()=>setOpen(false)} onClose={()=>{setOpen(false);(window.innerWidth<834?mobileTrigger:trigger).current?.focus({preventScroll:true});}} onClick={e=>{if(e.target===e.currentTarget)setOpen(false);}}>
       <button type="button" className="jk-menu-top" aria-label="Close navigation menu" onPointerDown={event=>{closeWithMouse.current=event.pointerType==='mouse';}} onClick={event=>{
         setHoverHeld(event.detail>0&&closeWithMouse.current&&window.matchMedia('(min-width: 52.125rem) and (hover: hover) and (pointer: fine)').matches);
         closeWithMouse.current=false;

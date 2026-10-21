@@ -278,11 +278,13 @@ export function CaseStudyNavigation({ title, blurb, category, sections }: Props)
         <span>{title}</span><span>{sections.find((section) => section.id === active)?.title ?? sections[0]?.title}</span><span aria-hidden="true">⌃</span>
       </button>
       <dialog ref={dialog} id="case-study-mobile-navigation" className="case-study-mobile-navigation" aria-label="Project sections" onCancel={(event) => { event.preventDefault(); setOpen(false); }}>
-        <div className="case-study-sidebar-title">
-          <p className="case-study-mobile-name">{title}</p><p>{blurb}</p>
-          <div className="case-study-tags"><span>{category}</span></div>
+        <div className="case-study-mobile-navigation-scroll">
+          <div className="case-study-sidebar-title">
+            <p className="case-study-mobile-name">{title}</p><p>{blurb}</p>
+            <div className="case-study-tags"><span>{category}</span></div>
+          </div>
+          <nav className="case-study-anchor-nav" aria-label="Mobile project sections">{links()}</nav>
         </div>
-        <nav className="case-study-anchor-nav" aria-label="Mobile project sections">{links()}</nav>
         <button type="button" className="case-study-mobile-close" onClick={() => setOpen(false)}>Close <span aria-hidden="true">×</span></button>
       </dialog>
     </>
