@@ -57,7 +57,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   ];
 
   return (
-    <div className="case-study-page">
+    <div className="case-study-page" data-project={p.id}>
       <SiteHeader overlay />
       <main className="case-study-layout">
         <CaseStudyNavigation title={p.title} blurb={p.blurb} category={category} sections={sectionLinks} />

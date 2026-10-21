@@ -137,6 +137,8 @@
   .case-study-page .case-study-feature-grid > .case-study-image-fixed img { position: static; height: auto; }
   .case-study-page .case-study-media-grid { grid-template-columns: repeat(var(--case-mobile-columns, 1), minmax(0,1fr)); }
   .case-study-page .case-study-media-carousel > * { flex-basis: calc(60% - 0.5rem); }
+  .case-study-page:is([data-project='taco-bell'], [data-project='the-syndicate']) .case-study-media-grid,
+  .case-study-page:is([data-project='taco-bell'], [data-project='the-syndicate']) .case-study-media-carousel { display: grid; grid-template-columns: minmax(0, 1fr); overflow: visible; scroll-snap-type: none; }
   .case-study-page .case-study-archive > summary { padding: 1.5rem 0; font-size: 1.4375rem; }
   .case-study-page .case-study-next-up { gap: 1.5rem; padding: 1.5rem 0.5rem 6.25rem; }
   .case-study-page .case-study-next-heading,
