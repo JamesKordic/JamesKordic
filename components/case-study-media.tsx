@@ -39,7 +39,7 @@ function HeroMotionTile({ media }: { media: Extract<Media, { type: 'video' }> })
 
   return (
     <div ref={frame} className="case-study-media-tile case-study-motion case-study-hero">
-      <video ref={video} src={media.src} poster={media.poster} muted loop playsInline preload="auto" style={{ objectFit: 'cover' }} />
+      <video ref={video} src={media.src} poster={media.poster} data-background-video="" muted loop playsInline preload="auto" aria-hidden="true" style={{ objectFit: 'cover' }} />
     </div>
   );
 }

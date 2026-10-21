@@ -109,6 +109,12 @@ video {
   max-width: 100%;
 }
 
+/* Decorative hero loops stay free of native mobile playback overlays. */
+video[data-background-video] { pointer-events: none; }
+video[data-background-video]::-webkit-media-controls { display: none !important; }
+video[data-background-video]::-webkit-media-controls-start-playback-button { display: none !important; }
+video[data-background-video]::-webkit-media-controls-overlay-play-button { display: none !important; }
+
 /* Custom scrollbars — warm, subtle. */
 .scrollbar-styled::-webkit-scrollbar {
   width: 12px;

@@ -155,7 +155,7 @@ export function NextProject({ id, title, blurb, hero }: Props) {
                 {hero.type !== 'embed' && (
                   <Link href={`/work/${id}`} className="case-study-next-media-link" aria-label={`View ${title}`} data-no-route-transition data-next-project-link={id} data-project-title={title}>
                     {hero.type === 'video' ? (
-                      <video src={readySrc === hero.src ? hero.src : undefined} poster={hero.poster ? getMediaPreviewSrc(hero.poster) : undefined} muted loop playsInline preload="auto" aria-hidden="true" />
+                      <video src={readySrc === hero.src ? hero.src : undefined} poster={hero.poster ? getMediaPreviewSrc(hero.poster) : undefined} data-background-video="" muted loop playsInline preload="auto" aria-hidden="true" />
                     ) : (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={getMediaPreviewSrc(hero.src)} alt="" style={{ objectFit: hero.fit ?? 'cover', backgroundColor: hero.background ?? (hero.fit === 'contain' ? 'var(--color-panel)' : undefined) }} loading="lazy" decoding="async" onError={(event) => { if (event.currentTarget.getAttribute('src') !== hero.src) event.currentTarget.src = hero.src; }} />

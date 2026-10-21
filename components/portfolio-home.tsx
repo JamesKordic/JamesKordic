@@ -29,10 +29,6 @@ function ProjectVisual({ project, motion, suspended, priority = false }: { proje
   const [visible, setVisible] = useState(false);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
-  const [blocked, setBlocked] = useState(false);
-  const [manualMotion,setManualMotion]=useState<boolean|null>(null);
-  const effectiveMotion=manualMotion??motion;
-  useEffect(()=>setManualMotion(null),[motion]);
   const preview = getProjectPreview(project);
   const source = preview.type === 'video' ? preview.src : undefined;
   const poster = preview.type === 'video' ? preview.poster : preview.src;
@@ -52,27 +48,26 @@ function ProjectVisual({ project, motion, suspended, priority = false }: { proje
     if (!video) return;
     const sync = () => {
       // On refresh, preference and observer state have not caught up yet.
-      const wantsMotion = manualMotion ?? !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const wantsMotion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const bounds = video.getBoundingClientRect();
       const inView = bounds.bottom > 0 && bounds.top < window.innerHeight;
       if (!wantsMotion) video.autoplay = false;
       if (wantsMotion && inView && !suspended && !document.hidden) {
         video.muted = true;
-        video.play().catch(error => { if (error.name === 'NotAllowedError') setBlocked(true); });
+        video.play().catch(() => undefined);
       } else video.pause();
     };
     sync();
     document.addEventListener('visibilitychange', sync);
     return () => document.removeEventListener('visibilitychange', sync);
-  }, [motion, manualMotion, visible, near, suspended]);
+  }, [motion, visible, near, suspended]);
 
   return <div className="project-visual" ref={ref} style={{ backgroundColor: source ? 'var(--color-bg)' : project.themeColor }}>
     <Link href={`/work/${project.id}`} className="project-link" data-home-project-link={project.id} data-project-title={project.title} data-no-route-transition aria-label={`Explore ${project.title}`} onPointerMove={movePointerLabel}>
     {/* eslint-disable-next-line @next/next/no-img-element */}
     {(!source || failed) && <img src={poster} alt={project.coverAlt ?? `${project.title} — ${project.blurb}`} style={{ objectFit: project.coverFit ?? 'cover', backgroundColor: preview.type === 'image' ? preview.background : undefined }} loading="lazy" width="1600" height="1000" />}
-    {source && near && !failed && <video ref={videoRef} src={source} autoPlay={priority} muted loop playsInline preload="auto" aria-hidden="true" onLoadedData={() => setReady(true)} onPlaying={() => { setReady(true); setBlocked(false); }} onError={() => setFailed(true)} className={priority || ready ? 'is-ready' : ''} />}
+    {source && near && !failed && <video ref={videoRef} src={source} poster={poster} data-background-video="" autoPlay={priority} muted loop playsInline preload="auto" aria-hidden="true" onLoadedData={() => setReady(true)} onPlaying={() => setReady(true)} onError={() => setFailed(true)} className={priority || ready ? 'is-ready' : ''} />}
     <span className="project-view" aria-hidden="true">View project <Arrow diagonal /></span></Link>
-    {source && !failed && <button className="project-pause" aria-label={effectiveMotion && !blocked ? `Pause ${project.title} preview` : `Play ${project.title} preview`} onClick={()=>{if(blocked){setBlocked(false);videoRef.current?.play().catch(()=>setBlocked(true));}else setManualMotion(!effectiveMotion);}}>{effectiveMotion && !blocked?'Ⅱ':'▷'}</button>}
   </div>;
 }
 
